@@ -5,16 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AccueilComponent } from './accueil/accueil.component';
 import { StatistiqueComponent } from './statistique/statistique.component';
-import { ConfigurationComponent } from './configuration/configuration.component';
 import { MonProfilComponent } from './mon-profil/mon-profil.component';
-import { ListesQuizzComponent } from './listes-quizz/listes-quizz.component';
-import { ConfigVisionComponent } from './config-vision/config-vision.component';
-import { ConfigAttentionComponent } from './config-attention/config-attention.component';
-import { CreerQuizzComponent } from './creer-quizz/creer-quizz.component';
-import { AccueilQuizzComponent } from './accueil-quizz/accueil-quizz.component';
-import { ModifQuizzComponent } from './modif-quizz/modif-quizz.component';
-import { ResultatQuizzComponent } from './resultat-quizz/resultat-quizz.component';
-import { JouerQuizzComponent } from './jouer-quizz/jouer-quizz.component';
+import { ConfigurationComponent } from './config/configuration/configuration.component';
+import { ConfigAttentionComponent } from './config/config-attention/config-attention.component';
+import { ConfigVisionComponent } from "./config/config-vision/config-vision.component";
+import { AccueilQuizzComponent} from "./quizz/accueil-quizz/accueil-quizz.component";
+import { CreerQuizzComponent} from "./quizz/creer-quizz/creer-quizz.component";
+import { ListesQuizzComponent} from "./quizz/listes-quizz/listes-quizz.component";
+import { ModifQuizzComponent} from "./quizz/modif-quizz/modif-quizz.component";
+import {ResultatQuizzComponent} from "./quizz/resultat-quizz/resultat-quizz.component";
 
 @NgModule({
   declarations: [
@@ -23,14 +22,13 @@ import { JouerQuizzComponent } from './jouer-quizz/jouer-quizz.component';
     StatistiqueComponent,
     ConfigurationComponent,
     MonProfilComponent,
-    ListesQuizzComponent,
-    ConfigVisionComponent,
     ConfigAttentionComponent,
-    CreerQuizzComponent,
+    ConfigVisionComponent,
     AccueilQuizzComponent,
+    CreerQuizzComponent,
+    ListesQuizzComponent,
     ModifQuizzComponent,
-    ResultatQuizzComponent,
-    JouerQuizzComponent
+    ResultatQuizzComponent
   ],
   imports: [
     BrowserModule,
