@@ -5,6 +5,8 @@ import {AccueilComponent} from './accueil/accueil.component'
 import {ConfigurationComponent} from "./config/configuration/configuration.component";
 import {MonProfilComponent} from "./mon-profil/mon-profil.component";
 import {ListesQuizzComponent} from "./quizz/listes-quizz/listes-quizz.component";
+import {ConfigAttentionComponent} from "./config/config-attention/config-attention.component";
+import {ConfigVisionComponent} from "./config/config-vision/config-vision.component";
 
 
 const routes: Routes = [
@@ -13,7 +15,9 @@ const routes: Routes = [
   { path: 'configuration', component: ConfigurationComponent},
   { path: 'mon-profil', component: MonProfilComponent},
   { path: 'statistiques', component: MonProfilComponent},
-  { path: 'liste-quizz', component: ListesQuizzComponent}
+  { path: 'liste-quizz', component: ListesQuizzComponent},
+  { path: 'configurationAttention', component: ConfigAttentionComponent},
+  { path: 'configurationVision', component: ConfigVisionComponent},
 ];
 
 @NgModule({
