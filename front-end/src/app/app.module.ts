@@ -14,7 +14,7 @@ import { CreerQuizzComponent} from "./quizz/creer-quizz/creer-quizz.component";
 import { ListesQuizzComponent} from "./quizz/listes-quizz/listes-quizz.component";
 import { ModifQuizzComponent} from "./quizz/modif-quizz/modif-quizz.component";
 import {ResultatQuizzComponent} from "./quizz/resultat-quizz/resultat-quizz.component";
-import { ModelButtonComponent } from './bouton/model-button/model-button.component';
+import { BtnClickableBackgroundComponent } from './bouton/btn-clickable-background/btn-clickable-background.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import { ModelButtonComponent } from './bouton/model-button/model-button.compone
     ListesQuizzComponent,
     ModifQuizzComponent,
     ResultatQuizzComponent,
-    ModelButtonComponent
+    BtnClickableBackgroundComponent
   ],
   imports: [
     BrowserModule,
