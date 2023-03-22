@@ -15,6 +15,7 @@ import { ListesQuizzComponent} from "./quizz/listes-quizz/listes-quizz.component
 import { ModifQuizzComponent} from "./quizz/modif-quizz/modif-quizz.component";
 import {ResultatQuizzComponent} from "./quizz/resultat-quizz/resultat-quizz.component";
 import { BtnClickableBackgroundComponent } from './bouton/btn-clickable-background/btn-clickable-background.component';
+import { BtnClickableFrameBackgroundComponent } from './bouton/btn-clickable-frame-background/btn-clickable-frame-background.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { BtnClickableBackgroundComponent } from './bouton/btn-clickable-backgrou
     ListesQuizzComponent,
     ModifQuizzComponent,
     ResultatQuizzComponent,
-    BtnClickableBackgroundComponent
+    BtnClickableBackgroundComponent,
+    BtnClickableFrameBackgroundComponent
   ],
   imports: [
     BrowserModule,
