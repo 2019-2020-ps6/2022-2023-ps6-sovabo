@@ -1,12 +1,17 @@
+<link rel="stylesheet" href="accueil.component.scss">
 
 <div class="container">
 
-    <h1>Bienvenue dans POLYQUIZZ !</h1>
+  <div class="leftContainer">
+  <h1>PolyQuiz</h1>
+  <app-model-button class="navigation" id="jouer"[routerLink]="['/liste-quizz']">JOUER</app-model-button>
+  </div>
 
+  <div class="rightContainer">
+    <app-model-button class="navigation" [routerLink]="['/configuration']">CONFIGURATION</app-model-button>
+    <app-model-button class="navigation" [routerLink]="['/mon-profil']">MON PROFIL</app-model-button>
+    <app-model-button class="navigation" [routerLink]="['/statistiques']">STATISTIQUE</app-model-button>
+  </div>
 
-    <button class="navigation" [routerLink]="['/liste-quizz']">Jouer</button>
-    <button class="navigation" [routerLink]="['/configuration']">Configuration</button>
-    <button class="navigation" [routerLink]="['/mon-profil']">Mon profil</button>
-    <button class="navigation" [routerLink]="['/statistiques']">Statistiques</button>
 
 </div>
