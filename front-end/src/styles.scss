@@ -1,11 +1,16 @@
+@font-face {
+  font-family: 'DynaPuff';
+  src: url('../../front-end/src/assets/Fonts/dynapuff/fonts/variable/DynaPuff[wdth,wght].ttf');
+}
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+
+
 body{
-  display: flex;
   background: linear-gradient(90deg, #7C65A9 0%, #96D4CA 100%);
-  height: 97vh;
-  width: 97vw;
-  align-items: center;
 }
 
 app-root{
   width: 100%;
 }
+
