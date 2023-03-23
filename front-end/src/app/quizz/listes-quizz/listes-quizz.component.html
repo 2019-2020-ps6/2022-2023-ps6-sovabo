@@ -1,1 +1,13 @@
-<p>listes-quizz works!</p>
+<div class="container">
+    <div class="titrePage"></div>
+    <p class="titreStyle"> Liste des quizz</p>
+    <div class="quiz-list ">
+        
+        <div class="quiz" *ngFor="let quiz of quizList">
+            <app-quiz-element [quiz]="quiz"></app-quiz-element>
+        </div>
+      </div>
+
+
+
+</div>
