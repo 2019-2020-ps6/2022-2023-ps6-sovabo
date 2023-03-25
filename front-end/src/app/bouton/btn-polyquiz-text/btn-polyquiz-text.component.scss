@@ -1,0 +1,37 @@
+@font-face {
+  font-family: 'DynaPuff';
+  src: url('../../../assets/Fonts/dynapuff/fonts/variable/DynaPuff[wdth,wght].ttf');
+}
+
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.container:hover {
+  cursor: pointer;
+}
+
+#polyquiz {
+
+  padding: 10px;
+
+  font-family: DynaPuff;
+  font-size: 3vw;
+  font-weight: 700;
+  color: #FFFDF8;
+  text-shadow: 0.5vw 1vh 0 #1E1E1E;
+  text-decoration: none;
+}
+
+img {
+  display: flex;
+  align-self: center;
+  width: 3.3vw;
+  height: 100%;
+  filter: drop-shadow(0.5vw 1vh 0px #000000);
+}

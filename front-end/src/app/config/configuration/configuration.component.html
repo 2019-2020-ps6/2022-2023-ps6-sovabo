@@ -1,8 +1,15 @@
 <div class="container">
 
-  <p>configuration works!</p>
-  <button class="navigation" [routerLink]="['/configurationAttention']">Configuration Attention</button>
-  <button class="navigation" [routerLink]="['/configurationVision']">Configuration Vision</button>
-  <button class="navigation" [routerLink]="['/accueil']">Retour</button>
+  <h1>PolyQuiz</h1>
+
+  <div id="container parametre">
+    <app-btn-clickable-frame-background class="navigation" [routerLink]="['/configurationVision']">PARAMETRE <br>
+      VISION</app-btn-clickable-frame-background>
+
+    <app-btn-clickable-frame-background class="navigation" [routerLink]="['/configurationAttention']">PARAMETRE <br>
+      ATTENTION</app-btn-clickable-frame-background>
+  </div>
+
+  <app-btn-clickable-frame-background class="navigation" id="retour" [routerLink]="['/accueil']">RETOUR</app-btn-clickable-frame-background>
 
 </div>
