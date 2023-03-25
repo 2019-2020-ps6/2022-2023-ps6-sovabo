@@ -15,16 +15,19 @@ h1{
 .container{
   display: flex;
   flex-direction: row;
+  height: 100%;
+  min-height: 100vh;
+
   justify-content: space-around;
-  align-content: center;
 }
+
 
 .leftContainer{
   display: flex;
   flex-direction: column;
 
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .rightContainer{
@@ -32,12 +35,14 @@ h1{
   flex-direction: column;
   background: rgba(217, 217, 217, 0.25);
   border-radius: 59px;
+  align-self: center;
   align-items: center;
   justify-content: space-around;
   height: 70vh;
 }
 
-#jouer{
-  display: flex;
-  justify-content: center;
+body {
+  height: 100%;
+  margin: 0;
 }
+
