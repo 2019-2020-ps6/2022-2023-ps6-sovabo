@@ -1,22 +1,26 @@
-<p>config-attention works!</p>
-<h1>PolyQuiz</h1>
-<div class="animateurContainer">
-  <p>Animateur</p>
-  <button>ON/OFF</button>
-  <div class="slidecontainer">
-    <input type="range" min="1" max="100" value="50" class="slider">
+<header>
+  <h1>PolyQuiz</h1>
+  <app-btn-clickable-background id="abcd" [routerLink]="['/configuration']">RETOUR</app-btn-clickable-background>
+</header>
+
+<div class="container">
+
+  <div class="animateurContainer">
+    <p>Animateur</p>
+    <app-btn-on-off></app-btn-on-off>
+    <app-slider></app-slider>
   </div>
-</div>
 
-<div class="animationContainer">
-  <p>Animation</p>
-  <button>ON/OFF</button>
-  <p>Vitesse Animations</p>
-  <div class="slidecontainer">
-    <input type="range" min="1" max="100" value="50" class="slider">
+  <div class="animationContainer">
+    <p>Animations</p>
+    <app-btn-on-off></app-btn-on-off>
+    <p>Vitesse <br> Animations</p>
+    <app-slider></app-slider>
   </div>
+
+  <div class="couleurContainer">
+    <p>Jeux de <br> couleurs</p>
+    <app-btn-on-off></app-btn-on-off>
+  </div>
+
 </div>
-
-<button class="navigation" [routerLink]="['/configuration']">Retour</button>
-
-
