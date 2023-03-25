@@ -16,6 +16,15 @@ export class QuizService {
     getData() {
       return this.quizzes;
     }
+
+    getQuizById(id: string): Quiz {
+      const quiz = QUIZ_LIST.find(quiz => quiz.id === id);
+      if (!quiz) {
+        throw new Error(`Quiz with id ${id} not found`);
+      }
+      return quiz;
+    }
+    
     
     
 

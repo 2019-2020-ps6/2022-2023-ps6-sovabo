@@ -7,6 +7,7 @@ import {MonProfilComponent} from "./mon-profil/mon-profil.component";
 import {ListesQuizzComponent} from "./quizz/listes-quizz/listes-quizz.component";
 import {ConfigAttentionComponent} from "./config/config-attention/config-attention.component";
 import {ConfigVisionComponent} from "./config/config-vision/config-vision.component";
+import {AccueilQuizzComponent} from "./quizz/accueil-quizz/accueil-quizz.component"
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'mon-profil', component: MonProfilComponent},
   { path: 'statistiques', component: MonProfilComponent},
   { path: 'liste-quizz', component: ListesQuizzComponent},
+  {path: 'accueil-quiz/:id', component: AccueilQuizzComponent},
   { path: 'configurationAttention', component: ConfigAttentionComponent},
   { path: 'configurationVision', component: ConfigVisionComponent},
 ];

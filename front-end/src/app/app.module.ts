@@ -18,14 +18,11 @@ import { CreerQuizzComponent} from "./quizz/creer-quizz/creer-quizz.component";
 import { ListesQuizzComponent} from "./quizz/listes-quizz/listes-quizz.component";
 import { ModifQuizzComponent} from "./quizz/modif-quizz/modif-quizz.component";
 import {ResultatQuizzComponent} from "./quizz/resultat-quizz/resultat-quizz.component";
-<<<<<<< HEAD
-import { ModelButtonComponent } from './bouton/model-button/model-button.component';
+//import { ModelButtonComponent } from '. ./bouton/model-button/model-button.component';
 import { QuizElementComponent } from './quizz/listes-quizz/quiz-element/quiz-element.component';
-=======
 import { BtnClickableBackgroundComponent } from './bouton/btn-clickable-background/btn-clickable-background.component';
 import { BtnClickableFrameBackgroundComponent } from './bouton/btn-clickable-frame-background/btn-clickable-frame-background.component';
 import { BtnPolyquizTextComponent } from './bouton/btn-polyquiz-text/btn-polyquiz-text.component';
->>>>>>> d8e1fb19cd4db62389c5fae80e3f233ec24d62dd
 
 @NgModule({
   declarations: [
@@ -41,14 +38,11 @@ import { BtnPolyquizTextComponent } from './bouton/btn-polyquiz-text/btn-polyqui
     ListesQuizzComponent,
     ModifQuizzComponent,
     ResultatQuizzComponent,
-<<<<<<< HEAD
-    ModelButtonComponent,
-    QuizElementComponent
-=======
+   // ModelButtonComponent,
+    QuizElementComponent,
     BtnClickableBackgroundComponent,
     BtnClickableFrameBackgroundComponent,
     BtnPolyquizTextComponent
->>>>>>> d8e1fb19cd4db62389c5fae80e3f233ec24d62dd
   ],
   imports: [
     BrowserModule,

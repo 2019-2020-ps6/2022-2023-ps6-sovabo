@@ -4,7 +4,7 @@
     <div class="quiz-list ">
         
         <div class="quiz" *ngFor="let quiz of quizList">
-            <app-quiz-element [quiz]="quiz"></app-quiz-element>
+            <app-quiz-element [quiz]="quiz" routerLink="/accueil-quiz/{{quiz.id}}"></app-quiz-element>
         </div>
       </div>
 
