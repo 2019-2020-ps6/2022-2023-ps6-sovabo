@@ -1,0 +1,21 @@
+
+.titreStyle {
+    font-family: DynaPuff;
+    font-size: 5vw;
+    font-weight: 700;
+    color: #FFFDF8;
+    text-align: center;
+    text-shadow: 8px 8px 0 #1E1E1E;
+  }
+
+ .quiz-list{
+    display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+ }
+
+ .quiz{
+    margin-top: 2%;
+    width: 30%;
+  margin-bottom: 20px;
+ }

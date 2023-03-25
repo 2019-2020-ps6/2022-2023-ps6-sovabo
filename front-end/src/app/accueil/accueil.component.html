@@ -1,10 +1,13 @@
 <link rel="stylesheet" href="accueil.component.scss">
 
-<div class="container">
+<body>
+
+
+<div class="container accueilSite">
 
   <div class="leftContainer">
-    <h1>PolyQuiz</h1>
-    <app-btn-clickable-frame-background class="navigation" id="jouer"[routerLink]="['/liste-quizz']">JOUER</app-btn-clickable-frame-background>
+    <h1 class="titreStyle">PolyQuiz</h1>
+    <app-model-button class="navigation" id="jouer"[routerLink]="['/liste-quizz']">JOUER</app-model-button>
   </div>
 
   <div class="rightContainer">
@@ -13,4 +16,7 @@
     <app-btn-clickable-background class="navigation" [routerLink]="['/statistiques']">STATISTIQUE</app-btn-clickable-background>
   </div>
 
+
 </div>
+
+</body>

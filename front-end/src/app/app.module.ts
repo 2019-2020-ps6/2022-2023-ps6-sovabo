@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +18,8 @@ import { CreerQuizzComponent} from "./quizz/creer-quizz/creer-quizz.component";
 import { ListesQuizzComponent} from "./quizz/listes-quizz/listes-quizz.component";
 import { ModifQuizzComponent} from "./quizz/modif-quizz/modif-quizz.component";
 import {ResultatQuizzComponent} from "./quizz/resultat-quizz/resultat-quizz.component";
+//import { ModelButtonComponent } from '. ./bouton/model-button/model-button.component';
+import { QuizElementComponent } from './quizz/listes-quizz/quiz-element/quiz-element.component';
 import { BtnClickableBackgroundComponent } from './bouton/btn-clickable-background/btn-clickable-background.component';
 import { BtnClickableFrameBackgroundComponent } from './bouton/btn-clickable-frame-background/btn-clickable-frame-background.component';
 import { BtnPolyquizTextComponent } from './bouton/btn-polyquiz-text/btn-polyquiz-text.component';
@@ -34,6 +40,8 @@ import { BtnONOFFComponent } from './bouton/btn-on-off/btn-on-off.component';
     ListesQuizzComponent,
     ModifQuizzComponent,
     ResultatQuizzComponent,
+   // ModelButtonComponent,
+    QuizElementComponent,
     BtnClickableBackgroundComponent,
     BtnClickableFrameBackgroundComponent,
     BtnPolyquizTextComponent,
@@ -42,7 +50,10 @@ import { BtnONOFFComponent } from './bouton/btn-on-off/btn-on-off.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    ReactiveFormsModule,
+    AppRoutingModule,
+    FontAwesomeModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
