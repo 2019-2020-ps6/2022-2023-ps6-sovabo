@@ -1,3 +1,10 @@
+@font-face
+{
+  font-variation-settings: "wght" 100, "ital" 0;
+  font-family: DynaPuff;
+  src: url("~src/assets/Fonts/dynapuff/fonts/variable/DynaPuff[wdth,wght].ttf");
+}
+
 .container.accueilQuiz {
     display: flex;
     flex-direction: column;
@@ -12,3 +19,25 @@
 .containerButton{
     margin-top: 5%;
 }
+
+.titreStyle {
+  font-family: DynaPuff;
+}
+
+.animations .titreStyle {
+  font-family: DynaPuff;
+  animation: DynaPuff 1.5s infinite;
+}
+
+@keyframes DynaPuff {
+  0% {
+    font-variation-settings: "wght" 100, "ital" 0;
+  }
+  50% {
+    font-variation-settings: "wght" 900, "ital" 0;
+  }
+  100% {
+    font-variation-settings: "wght" 100, "ital" 0;
+  }
+}
+

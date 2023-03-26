@@ -7,20 +7,20 @@
 
   <div class="animateurContainer">
     <p>Animateur</p>
-    <app-btn-on-off></app-btn-on-off>
+    <app-btn-on-off-animateur (click)="toggleAnimateur()"></app-btn-on-off-animateur>
     <app-slider></app-slider>
   </div>
 
   <div class="animationContainer">
     <p>Animations</p>
-    <app-btn-on-off></app-btn-on-off>
+    <app-btn-on-off-animations (click)="toggleAnimations()"></app-btn-on-off-animations>
     <p>Vitesse <br> Animations</p>
     <app-slider></app-slider>
   </div>
 
   <div class="couleurContainer">
     <p>Jeux de <br> couleurs</p>
-    <app-btn-on-off></app-btn-on-off>
+    <app-btn-on-off-jeux-couleurs (click)="toggleJeuxCouleurs()"></app-btn-on-off-jeux-couleurs>
   </div>
 
 </div>
