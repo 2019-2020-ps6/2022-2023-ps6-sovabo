@@ -23,6 +23,9 @@ import { QuizElementComponent } from './quizz/listes-quizz/quiz-element/quiz-ele
 import { BtnClickableBackgroundComponent } from './bouton/btn-clickable-background/btn-clickable-background.component';
 import { BtnClickableFrameBackgroundComponent } from './bouton/btn-clickable-frame-background/btn-clickable-frame-background.component';
 import { BtnPolyquizTextComponent } from './bouton/btn-polyquiz-text/btn-polyquiz-text.component';
+import { SliderComponent } from './slider/slider.component';
+import { BtnONOFFComponent } from './bouton/btn-on-off/btn-on-off.component';
+import { BtnListQuizComponent } from './bouton/btn-list-quiz/btn-list-quiz.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,10 @@ import { BtnPolyquizTextComponent } from './bouton/btn-polyquiz-text/btn-polyqui
     QuizElementComponent,
     BtnClickableBackgroundComponent,
     BtnClickableFrameBackgroundComponent,
-    BtnPolyquizTextComponent
+    BtnPolyquizTextComponent,
+    SliderComponent,
+    BtnONOFFComponent,
+    BtnListQuizComponent
   ],
   imports: [
     BrowserModule,

@@ -7,8 +7,8 @@ import {MonProfilComponent} from "./mon-profil/mon-profil.component";
 import {ListesQuizzComponent} from "./quizz/listes-quizz/listes-quizz.component";
 import {ConfigAttentionComponent} from "./config/config-attention/config-attention.component";
 import {ConfigVisionComponent} from "./config/config-vision/config-vision.component";
-import {AccueilQuizzComponent} from "./quizz/accueil-quizz/accueil-quizz.component"
-
+import {AccueilQuizzComponent} from "./quizz/accueil-quizz/accueil-quizz.component";
+import {CreerQuizzComponent} from "./quizz/creer-quizz/creer-quizz.component";
 
 const routes: Routes = [
   { path: '',redirectTo:'/accueil', pathMatch:'full'},
@@ -20,6 +20,7 @@ const routes: Routes = [
   {path: 'accueil-quiz/:id', component: AccueilQuizzComponent},
   { path: 'configurationAttention', component: ConfigAttentionComponent},
   { path: 'configurationVision', component: ConfigVisionComponent},
+  { path: 'creer-quizz', component: CreerQuizzComponent},
 ];
 
 @NgModule({

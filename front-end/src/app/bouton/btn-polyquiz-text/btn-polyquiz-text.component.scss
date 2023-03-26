@@ -4,12 +4,10 @@
 }
 
 .container {
-  position: absolute;
-  top: 0;
-  left: 0;
-
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .container:hover {
@@ -17,7 +15,6 @@
 }
 
 #polyquiz {
-
   padding: 10px;
 
   font-family: DynaPuff;
@@ -29,9 +26,7 @@
 }
 
 img {
-  display: flex;
-  align-self: center;
   width: 3.3vw;
-  height: 100%;
+  height: 3vw;
   filter: drop-shadow(0.5vw 1vh 0px #000000);
 }

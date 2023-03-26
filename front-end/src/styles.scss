@@ -7,7 +7,9 @@
 
 
 body{
+  display: flex;
   background: linear-gradient(90deg, #7C65A9 0%, #96D4CA 100%);
+  overflow: hidden;
 }
 
 app-root{
