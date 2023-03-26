@@ -1,0 +1,42 @@
+@font-face {
+  font-family: "Roboto Mono";
+  src: url("~src/assets/Fonts/Roboto_Mono/static/RobotoMono-Bold.ttf");
+}
+
+button {
+  width: 9vw;
+  height: fit-content;
+  border: none;
+  padding: 1vh 1.7vw;
+
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 3vw;
+  line-height: 5vw;
+
+  color: #FFFFFF;
+
+  text-shadow: 5px 4px 1px #7C66A9;
+
+  border-radius: 100px;
+  transition: all 0.3s ease-in-out;
+}
+button.active {
+  background: linear-gradient(
+      261.58deg,
+      rgba(106, 169, 101, 0.5) -77.61%,
+      rgba(145, 192, 196, 0.5) 143.35%
+  );
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25),
+  -4px -4px 4px rgba(255, 255, 255, 0.17);
+}
+button:not(.active) {
+  background: linear-gradient(
+      261.58deg,
+      rgba(178, 0, 0, 0.5) -77.61%,
+      rgba(124, 101, 169, 0.5) 143.35%
+  );
+  box-shadow: inset 5px 5px 16px rgba(0, 0, 0, 0.25),
+  inset -4px -3px 16px rgba(255, 255, 255, 0.32);
+}

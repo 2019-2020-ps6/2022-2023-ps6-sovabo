@@ -18,14 +18,15 @@ import { CreerQuizzComponent} from "./quizz/creer-quizz/creer-quizz.component";
 import { ListesQuizzComponent} from "./quizz/listes-quizz/listes-quizz.component";
 import { ModifQuizzComponent} from "./quizz/modif-quizz/modif-quizz.component";
 import {ResultatQuizzComponent} from "./quizz/resultat-quizz/resultat-quizz.component";
-//import { ModelButtonComponent } from '. ./bouton/model-button/model-button.component';
 import { QuizElementComponent } from './quizz/listes-quizz/quiz-element/quiz-element.component';
 import { BtnClickableBackgroundComponent } from './bouton/btn-clickable-background/btn-clickable-background.component';
 import { BtnClickableFrameBackgroundComponent } from './bouton/btn-clickable-frame-background/btn-clickable-frame-background.component';
 import { BtnPolyquizTextComponent } from './bouton/btn-polyquiz-text/btn-polyquiz-text.component';
 import { SliderComponent } from './slider/slider.component';
-import { BtnONOFFComponent } from './bouton/btn-on-off/btn-on-off.component';
 import { BtnListQuizComponent } from './bouton/btn-list-quiz/btn-list-quiz.component';
+import { BtnOnOffAnimationsComponent } from './bouton/btn-on-off/btn-on-off-animations/btn-on-off-animations.component';
+import { BtnOnOffAnimateurComponent } from './bouton/btn-on-off/btn-on-off-animateur/btn-on-off-animateur.component';
+import { BtnOnOffJeuxCouleursComponent } from './bouton/btn-on-off/btn-on-off-jeux-couleurs/btn-on-off-jeux-couleurs.component';
 
 @NgModule({
   declarations: [
@@ -47,8 +48,10 @@ import { BtnListQuizComponent } from './bouton/btn-list-quiz/btn-list-quiz.compo
     BtnClickableFrameBackgroundComponent,
     BtnPolyquizTextComponent,
     SliderComponent,
-    BtnONOFFComponent,
-    BtnListQuizComponent
+    BtnListQuizComponent,
+    BtnOnOffAnimationsComponent,
+    BtnOnOffAnimateurComponent,
+    BtnOnOffJeuxCouleursComponent
   ],
   imports: [
     BrowserModule,
