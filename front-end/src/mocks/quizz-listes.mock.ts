@@ -24,13 +24,59 @@ export const QUESTION_ACTOR: Question = {
     ]
 };
 
+export const QUESTION_US: Question = {
+    id: '2',
+    label: 'Qui était le président des États-Unis en 2020 ?',
+    answers: [
+        {
+            value: 'Joe Biden',
+            isCorrect: false,
+        },
+        {
+            value: 'Barack Obama',
+            isCorrect: false,
+        },
+        {
+            value: 'Donald Trump',
+            isCorrect: true,
+        },
+        {
+            value: 'George W. Bush',
+            isCorrect: false,
+        }
+    ]
+};
+
+export const QUESTION_FR: Question = {
+    id: '2',
+    label: 'Qui est la présdient de popo actuellement ?',
+    answers: [
+        {
+            value: 'Joe Biden',
+            isCorrect: false,
+        },
+        {
+            value: 'Barack Obama',
+            isCorrect: false,
+        },
+        {
+            value: 'CAMINADA',
+            isCorrect: true,
+        },
+        {
+            value: 'George W. Bush',
+            isCorrect: false,
+        }
+    ]
+};
+
 export const QUIZ_LIST: Quiz[] = [
     {
         id: '1',
         name: 'Les présidents', // What's happening if I change this value..?
         theme: 'President',
         desc: 'Vous allez pouvoir tester vos connaissances sur les présidents actuels du monde !',
-        questions: [QUESTION_ACTOR],
+        questions: [QUESTION_ACTOR, QUESTION_US],
     },
     {
         id: '2',

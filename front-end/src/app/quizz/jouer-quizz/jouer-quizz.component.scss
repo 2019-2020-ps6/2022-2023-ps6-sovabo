@@ -1,0 +1,37 @@
+.question-bubble {
+    background-color: rgba(226, 226, 226, 0.359); /* rendre le fond semi-transparent à 70% */
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 50px;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+  }
+
+  .answers-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 5%;
+  }
+  
+  .answer{
+    width: 50%;
+    box-sizing: border-box;
+    padding: 5px;
+    margin-top: 3%;
+  }
+
+  .buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* Ajouter une marge en haut pour l'espace */
+  }
+  
+  .buttons-container button {
+    margin: 0 10px; /* Ajouter une marge à gauche et à droite pour séparer les boutons */
+  }
