@@ -1,0 +1,24 @@
+@font-face {
+  font-family: "Roboto Mono";
+  src: url('~src/assets/Fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf');
+}
+
+.my-button{
+  font-family: "Roboto Mono";
+  font-style: normal;
+  font-weight: 700;
+  color: #5E6081;
+  letter-spacing: -0.03em;
+
+  padding: 10px 20px;
+
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  border: none;
+}
+
+.my-button:hover{
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: none;
+}
