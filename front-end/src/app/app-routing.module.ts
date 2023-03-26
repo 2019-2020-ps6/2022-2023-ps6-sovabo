@@ -9,6 +9,13 @@ import {ConfigAttentionComponent} from "./config/config-attention/config-attenti
 import {ConfigVisionComponent} from "./config/config-vision/config-vision.component";
 import {AccueilQuizzComponent} from "./quizz/accueil-quizz/accueil-quizz.component";
 import {CreerQuizzComponent} from "./quizz/creer-quizz/creer-quizz.component";
+import {JouerQuizzComponent} from "./quizz/jouer-quizz/jouer-quizz.component";
+import {ResultatQuizzComponent} from "./quizz/resultat-quizz/resultat-quizz.component";
+
+
+
+
+JouerQuizzComponent
 
 const routes: Routes = [
   { path: '',redirectTo:'/accueil', pathMatch:'full'},
@@ -16,8 +23,11 @@ const routes: Routes = [
   { path: 'configuration', component: ConfigurationComponent},
   { path: 'mon-profil', component: MonProfilComponent},
   { path: 'statistiques', component: MonProfilComponent},
+  { path: 'resultat-quizz', component: ResultatQuizzComponent},
+
   { path: 'liste-quizz', component: ListesQuizzComponent},
   {path: 'accueil-quiz/:id', component: AccueilQuizzComponent},
+  {path: 'jouer-quiz/:id', component: JouerQuizzComponent},
   { path: 'configurationAttention', component: ConfigAttentionComponent},
   { path: 'configurationVision', component: ConfigVisionComponent},
   { path: 'creer-quizz', component: CreerQuizzComponent},
