@@ -22,8 +22,9 @@
             <p>Mauvaise réponse, la bonne réponse est {{ currentQuestion.answers[questionCorrectIndex].value }}</p> <!-- Utilisation de la propriété value de la réponse correcte -->
             </div>
             <button *ngIf="isAnswerCorrect==true && currentQuestionIndex != quiz.questions.length " [disabled]="isQuizFinished == true" (click)="goToNextQuestion()">Question suivante</button> <!-- Utilisation de goToNextQuestion() pour passer à la prochaine question -->
-            <button *ngIf="isQuizFinished" routerLink="/resultat-quizz">Voir les résultats !</button> <!-- Utilisation de goToNextQuestion() pour passer à la prochaine question -->
+            <button *ngIf="isQuizFinished" [routerLink]="['/resultat-quizz']" [queryParams]="{ score: score }">Voir les résultats !</button>
 
+            
         </div>
     </div>
 
