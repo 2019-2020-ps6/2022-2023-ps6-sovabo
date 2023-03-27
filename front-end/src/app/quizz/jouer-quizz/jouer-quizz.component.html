@@ -24,11 +24,11 @@
             <button *ngIf="isAnswerCorrect==true && currentQuestionIndex != quiz.questions.length " [disabled]="isQuizFinished == true" (click)="goToNextQuestion()">Question suivante</button> <!-- Utilisation de goToNextQuestion() pour passer à la prochaine question -->
             <button *ngIf="isQuizFinished" [routerLink]="['/resultat-quizz']" [queryParams]="{ score: score }">Voir les résultats !</button>
 
-            
+
         </div>
     </div>
 
-  <app-image-animateur></app-image-animateur>
+  <app-image-animateur *ngIf="getAnimateur()"></app-image-animateur>
 
 </div>
 

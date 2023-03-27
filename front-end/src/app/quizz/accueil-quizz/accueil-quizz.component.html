@@ -4,7 +4,7 @@
       <p class="titreStyle autre-font" *ngIf="animations">{{quiz.name}}</p>
     </div>
 
-    <app-image-animateur></app-image-animateur>
+    <app-image-animateur *ngIf="getAnimateur()"></app-image-animateur>
 
     <div class="imageContainer">
 

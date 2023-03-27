@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { QuizService } from '../../../service/quizz.service';
 import { Quiz } from '../../../models/quizz.model';
 import {AnimationsService} from "../../../service/animations.service";
+import {AnimateurService} from "../../../service/animateur.service";
 
 
 @Component({
@@ -16,8 +17,7 @@ export class AccueilQuizzComponent {
 
   public quiz!: Quiz;
 
-  constructor(private route: ActivatedRoute, private quizService: QuizService, private animationsService: AnimationsService) {
-    //this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
+  constructor(private animateurService: AnimateurService, private route: ActivatedRoute, private quizService: QuizService, private animationsService: AnimationsService) {
   }
 
   ngOnInit(): void {
@@ -27,8 +27,7 @@ export class AccueilQuizzComponent {
     console.log(this.animations)
   }
 
-
-
-
-
+  getAnimateur() {
+    return this.animateurService.getAnimateur();
+  }
 }

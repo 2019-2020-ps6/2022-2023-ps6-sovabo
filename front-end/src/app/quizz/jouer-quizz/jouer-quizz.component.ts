@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { QuizService } from '../../../service/quizz.service';
 import { Quiz } from '../../../models/quizz.model';
 import { Question, Answer } from '../../../models/question.model';
+import {AnimateurService} from "../../../service/animateur.service";
 
 @Component({
   selector: 'app-jouer-quizz',
@@ -23,7 +24,7 @@ export class JouerQuizzComponent implements OnInit {
   public isQuizFinished: boolean = false;
   public score: number = 0;
 
-  constructor(private route: ActivatedRoute, private quizService: QuizService) {}
+  constructor(private route: ActivatedRoute, private quizService: QuizService, private animateurService: AnimateurService) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id') ?? '';
@@ -74,5 +75,9 @@ export class JouerQuizzComponent implements OnInit {
       }
     }
     return 0;
+  }
+
+  getAnimateur() {
+    return this.animateurService.getAnimateur();
   }
 }
