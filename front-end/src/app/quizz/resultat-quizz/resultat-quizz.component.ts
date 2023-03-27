@@ -12,8 +12,10 @@ export class ResultatQuizzComponent {
 
   constructor(private route: ActivatedRoute) { }
 
-  ngOnInit() {
-    //this.score = this.route.snapshot.queryParamMap.get('score');
+  ngOnInit(): void {
+    const scoreString = this.route.snapshot.queryParamMap.get('score');
+    this.score = scoreString ? parseInt(scoreString, 10) : 0;
+    console.log(this.score);
   }
 
 }
