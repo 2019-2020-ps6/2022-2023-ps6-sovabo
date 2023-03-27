@@ -14,10 +14,14 @@
   .imageContainer{
 
     max-width: 60%;
-}
+  }
+
+  .img-fluid {
+    border-radius: 100px;
+  }
 
 .containerButton{
-    margin-top: 5%;
+    margin-top: 3%;
 }
 
 .titreStyle {
@@ -27,6 +31,12 @@
 .animations .titreStyle {
   font-family: DynaPuff;
   animation: DynaPuff 1.5s infinite;
+}
+
+#retour{
+  position: absolute;
+  right: 2vw;
+  bottom: 2vw;
 }
 
 @keyframes DynaPuff {
