@@ -4,6 +4,8 @@
       <p class="titreStyle autre-font" *ngIf="animations">{{quiz.name}}</p>
     </div>
 
+    <app-image-animateur></app-image-animateur>
+
     <div class="imageContainer">
 
         <img src="https://mdbootstrap.com/img/Photos/Horizontal/Food/8-col/img (5).jpg" class="img-fluid" />
@@ -11,9 +13,10 @@
     </div>
 
     <div class="containerButton">
-        <button routerLink="/jouer-quiz/{{quiz.id}}">JOUER</button>
-
+      <app-btn-clickable-background routerLink="/jouer-quiz/{{quiz.id}}">JOUER</app-btn-clickable-background>
     </div>
+
+    <app-btn-clickable-frame-background class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
 
 
 
