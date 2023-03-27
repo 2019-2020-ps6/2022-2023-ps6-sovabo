@@ -19,11 +19,6 @@ import { CreerQuizzComponent} from "./quizz/creer-quizz/creer-quizz.component";
 import { ListesQuizzComponent} from "./quizz/listes-quizz/listes-quizz.component";
 import { ModifQuizzComponent} from "./quizz/modif-quizz/modif-quizz.component";
 import {ResultatQuizzComponent} from "./quizz/resultat-quizz/resultat-quizz.component";
-<<<<<<< HEAD
-
-//import { ModelButtonComponent } from '. ./bouton/model-button/model-button.component';
-=======
->>>>>>> 90a3dae84446853021fe239e3dac649157c1d7d4
 import { QuizElementComponent } from './quizz/listes-quizz/quiz-element/quiz-element.component';
 import { BtnClickableBackgroundComponent } from './bouton/btn-clickable-background/btn-clickable-background.component';
 import { BtnClickableFrameBackgroundComponent } from './bouton/btn-clickable-frame-background/btn-clickable-frame-background.component';
