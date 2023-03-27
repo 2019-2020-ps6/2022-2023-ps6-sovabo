@@ -1,14 +1,23 @@
 .question-bubble {
     background-color: rgba(226, 226, 226, 0.359); /* rendre le fond semi-transparent à 70% */
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     padding: 10px;
     border-radius: 50px;
     top: 100%;
-    left: 0;
-    right: 0;
     margin: auto;
-    width: 100%;
     text-align: center;
+
+    padding-left: 3%;
+    padding-right: 3%;
+
+    width: fit-content;
+    height: fit-content;
+}
+
+  .question-bubble p {
+    font-size: 1.5em;
+    font-weight: bold;
+    align-items: center;
   }
 
   .answers-container{
@@ -25,13 +34,13 @@
     margin-top: 3%;
   }
 
-  .buttons-container {
+  .check-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 20px; /* Ajouter une marge en haut pour l'espace */
   }
   
-  .buttons-container button {
+  .check-container button {
     margin: 0 10px; /* Ajouter une marge à gauche et à droite pour séparer les boutons */
   }
