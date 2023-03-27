@@ -4,7 +4,7 @@
     <div class="quizz-container">
         <div class="titrePage">
             <p class="titreStyle"> {{quiz.name}}</p>
-            
+
             </div>
         <div class="question-bubble">
         <p>{{ currentQuestion.label}}</p> <!-- Utilisation de l'opérateur de navigation sécurisé pour éviter l'erreur -->
@@ -23,9 +23,11 @@
             </div>
             <button *ngIf="isAnswerCorrect==true && currentQuestionIndex != quiz.questions.length " [disabled]="isQuizFinished == true" (click)="goToNextQuestion()">Question suivante</button> <!-- Utilisation de goToNextQuestion() pour passer à la prochaine question -->
             <button *ngIf="isQuizFinished" routerLink="/resultat-quizz">Voir les résultats !</button> <!-- Utilisation de goToNextQuestion() pour passer à la prochaine question -->
-            
+
         </div>
     </div>
+
+  <app-image-animateur></app-image-animateur>
 
 </div>
 
