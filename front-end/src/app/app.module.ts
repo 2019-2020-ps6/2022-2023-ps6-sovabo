@@ -46,8 +46,6 @@ import {ImageAnimateurComponent} from "./image-animateur/image-animateur.compone
     ModifQuizzComponent,
     ResultatQuizzComponent,
     JouerQuizzComponent,
-    ImageAnimateurComponent,
-   // ModelButtonComponent,
     QuizElementComponent,
     BtnClickableBackgroundComponent,
     BtnClickableFrameBackgroundComponent,
