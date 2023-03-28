@@ -22,7 +22,7 @@
             <button (click)="validateAnswer()" [disabled]="selectedAnswerIndex == null || isAnswerCorrect!=null || isQuizFinished==true">Valider</button>
             <div *ngIf="isAnswerCorrect==false && selectedAnswerIndex != questionCorrectIndex" class="wrong-answer"> <!-- Utilisation de questionCorrectIndex pour obtenir l'index de la réponse correcte -->
                 <p>Mauvaise réponse, la bonne réponse est {{ currentQuestion.answers[questionCorrectIndex].value }}</p> <!-- Utilisation de la propriété value de la réponse correcte -->
-                <button (click)="goToNextQuestion()">Question suivante</button> <!-- Utilisation de goToNextQuestion() pour passer à la prochaine question -->
+                <button (click)="goToNextQuestion()" class="next_btn">Question suivante</button> <!-- Utilisation de goToNextQuestion() pour passer à la prochaine question -->
             </div>
             <button *ngIf="isAnswerCorrect!=null && currentQuestionIndex != quiz.questions.length -1" [disabled]="isQuizFinished == true" (click)="goToNextQuestion()">Question suivante</button> <!-- Utilisation de goToNextQuestion() pour passer à la prochaine question -->
             <button *ngIf="isQuizFinished" [routerLink]="['/resultat-quizz']" >Voir les résultats !</button>
@@ -30,8 +30,6 @@
             
         </div>
     </div>
-
-  <app-image-animateur></app-image-animateur>
 
 </div>
 
