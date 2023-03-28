@@ -28,6 +28,8 @@ import { BtnListQuizComponent } from './bouton/btn-list-quiz/btn-list-quiz.compo
 import { BtnOnOffAnimationsComponent } from './bouton/btn-on-off/btn-on-off-animations/btn-on-off-animations.component';
 import { BtnOnOffAnimateurComponent } from './bouton/btn-on-off/btn-on-off-animateur/btn-on-off-animateur.component';
 import { BtnOnOffJeuxCouleursComponent } from './bouton/btn-on-off/btn-on-off-jeux-couleurs/btn-on-off-jeux-couleurs.component';
+import {ImageAnimateurComponent} from "./image-animateur/image-animateur.component"
+
 
 @NgModule({
   declarations: [
