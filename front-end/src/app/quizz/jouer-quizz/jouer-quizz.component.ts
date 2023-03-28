@@ -75,4 +75,5 @@ export class JouerQuizzComponent implements OnInit {
     }
     return 0;
   }
+
 }
