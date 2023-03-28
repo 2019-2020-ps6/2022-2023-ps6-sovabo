@@ -81,3 +81,22 @@
   .check-container button {
     margin: 0 10px; /* Ajouter une marge à gauche et à droite pour séparer les boutons */
   }
+
+  .check_btn{
+    background-color: #1eff0081;
+    border: 2px solid #ccc;
+    border-radius: 50px;
+    padding: 10px;
+    padding-left: 2%;
+    padding-right: 2%;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
+  }
+
+  .wrong_answer{
+    background-color: #ff1e1e;
+  }
