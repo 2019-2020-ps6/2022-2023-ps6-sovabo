@@ -54,7 +54,8 @@ import {ImageAnimateurComponent} from "./image-animateur/image-animateur.compone
     BtnListQuizComponent,
     BtnOnOffAnimationsComponent,
     BtnOnOffAnimateurComponent,
-    BtnOnOffJeuxCouleursComponent
+    BtnOnOffJeuxCouleursComponent,
+    ImageAnimateurComponent
   ],
   imports: [
     BrowserModule,

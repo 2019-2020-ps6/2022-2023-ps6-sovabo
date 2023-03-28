@@ -98,17 +98,34 @@
   }
 
   .wrong-answer{
-    color: #ff1e1e;
+    color: #c00000;
+    font-size: 25px;
     width: fit-content;
     margin-right: auto;
     margin-left: auto;
     text-align: center;
     font-weight: bold;
 
-    border: 2px solid #ccc;
     border-radius: 50px;
     padding: 10px;
     padding-top: 20px;
     padding-left: 2%;
     padding-right: 2%;
+  }
+
+  .next_btn{
+    font-weight: bold;
+    font-size: 30px;
+    color: #FFFFFF;
+    text-shadow: -1px 4px 1px #7C66A9;
+  
+    padding: 20px 30px;
+  
+    width: fit-content;
+    height: fit-content;
+    background: rgba(207, 207, 207, 0.4);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 1px 1px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+    border: none;
+    transition: box-shadow 0.3s ease-in;
   }
