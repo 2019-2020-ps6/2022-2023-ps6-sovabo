@@ -4,7 +4,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { Quiz } from '../models/quizz.model';
 import { QUIZ_LIST } from '../mocks/quizz-listes.mock';
 import { Question } from '../models/question.model';
-import { serverUrl, httpOptionsBase } from '../config/server.config'   
+import { serverUrl, httpOptionsBase } from '../config/server.config'
 
 @Injectable({
   providedIn: 'root'
@@ -18,15 +18,15 @@ export class QuizService {
     }
 
     getQuizById(id: string): Quiz {
-      const quiz = QUIZ_LIST.find(quiz => quiz.id === id);
+      const quiz = QUIZ_LIST.find(quiz => quiz.id === id); //Le quiz dans find n'est pas le même que celui de const quiz
       if (!quiz) {
         throw new Error(`Quiz with id ${id} not found`);
       }
       return quiz;
     }
-    
-    
-    
 
-    
+
+
+
+
 }
