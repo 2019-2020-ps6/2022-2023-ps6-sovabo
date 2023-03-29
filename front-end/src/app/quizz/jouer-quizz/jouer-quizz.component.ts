@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { QuizService } from '../../../service/quizz.service';
 import { Quiz } from '../../../models/quizz.model';
 import { Question, Answer } from '../../../models/question.model';
 import {AnimateurService} from "../../../service/animateur.service";
+
 
 @Component({
   selector: 'app-jouer-quizz',
@@ -13,25 +14,32 @@ import {AnimateurService} from "../../../service/animateur.service";
 export class JouerQuizzComponent implements OnInit {
   public quiz!: Quiz;
 
-  public questionCorrectIndex : number = 0;
+  public questionCorrectIndex: number = 0;
+
+  public isLastQuestion: boolean = false;
 
   public currentQuestionIndex: number = 0;
-  public currentQuestion: Question = { id:"0",label: '', answers: [] };
+  public currentQuestion: Question = { id: "0", label: '', answers: [] };
   public selectedAnswerIndex: number | null = null;
 
   public isAnswerCorrect: boolean | null = null;
 
   public isQuizFinished: boolean = false;
-  public score: number = 0;
 
-  constructor(private route: ActivatedRoute, private quizService: QuizService, private animateurService: AnimateurService) {}
+  constructor(private route: ActivatedRoute, private quizService: QuizService, private router: Router, private animateurService: AnimateurService) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id') ?? '';
-    this.quiz = this.quizService.getQuizById(id);
+    this.quiz = this.quizService.getQuizCourant();
     this.currentQuestion = this.quiz.questions[this.currentQuestionIndex];
     this.questionCorrectIndex = this.getCorrectAnswerIndex(this.currentQuestion);
-    console.log(this.currentQuestion.answers[this.questionCorrectIndex]);
+  }
+
+  checkWin(){
+    if (this.currentQuestionIndex === this.quiz.questions.length - 1) {
+      console.log("finishh");
+      console.log(this.currentQuestionIndex);
+      this.isQuizFinished = true;
+    }
   }
 
   selectAnswer(answerIndex: number) {
@@ -50,22 +58,28 @@ export class JouerQuizzComponent implements OnInit {
 
     this.isAnswerCorrect = selectedAnswer.isCorrect;
     if (selectedAnswer.isCorrect) {
-      this.score++;
+      this.quizService.addScore();
     }
 
     this.selectedAnswerIndex = null;
+
+    if(this.currentQuestionIndex == this.quiz.questions.length-2){
+      this.isLastQuestion = true;
+    }
+
+    this.checkWin();
   }
 
+
+
   goToNextQuestion() {
-    if (this.currentQuestionIndex === this.quiz.questions.length - 1) {
-      this.isQuizFinished = true;
-    } else {
+
       this.currentQuestionIndex++;
       console.log(this.currentQuestionIndex);
       this.currentQuestion = this.quiz.questions[this.currentQuestionIndex];
       this.questionCorrectIndex = this.getCorrectAnswerIndex(this.currentQuestion);
       this.isAnswerCorrect = null;
-    }
+
   }
 
   getCorrectAnswerIndex(question: Question): number {

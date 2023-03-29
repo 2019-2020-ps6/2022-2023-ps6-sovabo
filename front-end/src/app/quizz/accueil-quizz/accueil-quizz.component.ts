@@ -25,6 +25,8 @@ export class AccueilQuizzComponent {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id') ?? '';
     this.quiz = this.quizService.getQuizById(id);
+    this.quizService.setQuizCourant(this.quiz);
+    console.log(this.quizService.getQuizCourant());
     this.animations = this.animationsService.getAnimations();
     this.animationDuration = this.animationsService.duration;
     console.log(this.animationsService.duration);
