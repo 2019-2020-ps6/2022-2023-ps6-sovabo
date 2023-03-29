@@ -11,11 +11,9 @@ import {AccueilQuizzComponent} from "./quizz/accueil-quizz/accueil-quizz.compone
 import {CreerQuizzComponent} from "./quizz/creer-quizz/creer-quizz.component";
 import {JouerQuizzComponent} from "./quizz/jouer-quizz/jouer-quizz.component";
 import {ResultatQuizzComponent} from "./quizz/resultat-quizz/resultat-quizz.component";
+import {ImageAnimateurComponent} from "./image-animateur/image-animateur.component"
 
 
-
-
-JouerQuizzComponent
 
 const routes: Routes = [
   { path: '',redirectTo:'/accueil', pathMatch:'full'},
