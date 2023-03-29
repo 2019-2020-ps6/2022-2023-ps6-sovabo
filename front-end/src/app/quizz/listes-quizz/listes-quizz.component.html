@@ -1,4 +1,4 @@
-<div class="container">
+<div class="page">
 
   <div class="titrePage">
       <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
@@ -6,16 +6,26 @@
 
       <div class="btnCreerConfig">
           <app-btn-list-quiz id="creerQuizz" [routerLink]="['/creer-quizz']">Créer mon quizz</app-btn-list-quiz>
-          <app-btn-list-quiz id="configQuizz" [routerLink]="['/configuration']">Paramètres<br>des quizz</app-btn-list-quiz>
+          <app-btn-list-quiz id="configQuizz" [routerLink]="['/configuration']">
+            <div class="settingsContainer">
+              <img src="../../../assets/Images/settings.png" alt="image settings" class="imageSettings">
+              <span id="settingsText">Paramètres<br>des quizz</span>
+            </div>
+          </app-btn-list-quiz>
       </div>
   </div>
+  <div class="selectionQuiz">
+    <div class="recherche"><span id="rechercheText">Recherche …</span></div>
+    <div class="catégorie"><span id="catégorieText">Choisissez une catégorie</span></div>
+  </div>
 
+  <div class="quiz-list-container">
     <div class="quiz-list ">
         <div class="quiz" *ngFor="let quiz of quizList">
             <app-quiz-element [quiz]="quiz" routerLink="/accueil-quiz/{{quiz.id}}"></app-quiz-element>
         </div>
     </div>
-
+  </div>
 
 
 </div>

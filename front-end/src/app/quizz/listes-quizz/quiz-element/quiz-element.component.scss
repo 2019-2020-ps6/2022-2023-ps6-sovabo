@@ -3,5 +3,29 @@
 }
 .containerButton {
     text-align: center;
-  }
-  
+}
+
+.card {
+  background: rgba(217, 217, 217, 0.4);
+  border-radius: 50px;
+  border: 1px solid white;
+  overflow: hidden;
+  transition: box-shadow 0.5s ease-in-out;
+}
+
+.card:hover{
+  cursor: pointer;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.5s ease-in-out;
+}
+
+.card:hover::after{
+  box-shadow: 0 0 0px rgba(0, 0, 0, 0);
+  transition: box-shadow 0.5s ease-in-out;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
