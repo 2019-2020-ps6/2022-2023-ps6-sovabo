@@ -4,6 +4,7 @@ import { QuizService } from '../../../service/quizz.service';
 import { Quiz } from '../../../models/quizz.model';
 import { Question, Answer } from '../../../models/question.model';
 import {AnimateurService} from "../../../service/animateur.service";
+import {AnimationsService} from "../../../service/animations.service";
 
 
 @Component({
@@ -25,13 +26,20 @@ export class JouerQuizzComponent implements OnInit {
   public isAnswerCorrect: boolean | null = null;
 
   public isQuizFinished: boolean = false;
+  public animations: boolean | undefined;
+  public animationDuration: string | undefined;
 
-  constructor(private route: ActivatedRoute, private quizService: QuizService, private router: Router, private animateurService: AnimateurService) {}
+  constructor(private route: ActivatedRoute, private quizService: QuizService, private router: Router, private animateurService: AnimateurService, private animationService: AnimationsService) {}
 
   ngOnInit(): void {
     this.quiz = this.quizService.getQuizCourant();
     this.currentQuestion = this.quiz.questions[this.currentQuestionIndex];
     this.questionCorrectIndex = this.getCorrectAnswerIndex(this.currentQuestion);
+    this.animations = this.animationService.getAnimations();
+    this.animationDuration = this.animationService.duration;
+    console.log(this.animations);
+    console.log(this.animationService.duration);
+
   }
 
   checkWin(){
