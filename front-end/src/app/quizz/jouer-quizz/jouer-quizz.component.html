@@ -6,28 +6,31 @@
             <p class="titreStyle"> {{quiz.name}}</p>
         </div>
         <div class="question-bubble" >
-            <p>Q{{currentQuestion.id}} : {{currentQuestion.label}}</p> <!-- Utilisation de l'opérateur de navigation sécurisé pour éviter l'erreur -->
+            <p [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}">Q{{currentQuestion.id}} : {{currentQuestion.label}}</p> <!-- Utilisation de l'opérateur de navigation sécurisé pour éviter l'erreur -->
         </div>
         <div class="answers-container" >
             <div *ngFor="let answer of currentQuestion?.answers; let i = index" class="answer">
                 <input type="radio" name="answer" id="answer{{ i }}" [(ngModel)]="selectedAnswerIndex" [value]="i">
-                <label for="answer{{ i }}">{{ answer.value }}</label> <!-- Utilisation de la propriété value de la réponse -->
+                <label [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}" for="answer{{ i }}">{{ answer.value }}</label> <!-- Utilisation de la propriété value de la réponse -->
                 <!-- <span *ngIf="i % 2 == 1" class="divider"></span> -->
             </div>
         </div>
         <div class="check-container">
-            <button (click)="validateAnswer()" [disabled]="selectedAnswerIndex == null" class="check_btn">Valider</button>            
+            <button (click)="validateAnswer()" [disabled]="selectedAnswerIndex == null" class="check_btn">Valider</button>
         </div>
         <div class="buttons-container">
             <div *ngIf="isAnswerCorrect==false && selectedAnswerIndex != questionCorrectIndex" class="wrong-answer"> <!-- Utilisation de questionCorrectIndex pour obtenir l'index de la réponse correcte -->
                 <p>Mauvaise réponse, la bonne réponse est {{ currentQuestion.answers[questionCorrectIndex].value }}</p> <!-- Utilisation de la propriété value de la réponse correcte -->
             </div>
             <button *ngIf="isAnswerCorrect!=null && currentQuestionIndex != quiz.questions.length -1" [disabled]="isQuizFinished == true" (click)="goToNextQuestion()" (click)="goToNextQuestion()" class="next_btn">Question suivante</button> <!-- Utilisation de goToNextQuestion() pour passer à la prochaine question -->
-           
+
             <button *ngIf="isQuizFinished" [routerLink]="['/resultat-quizz']" class="next_btn" >Voir les résultats !</button>
 
-            
+
         </div>
     </div>
 
+  <app-image-animateur *ngIf="getAnimateur()"></app-image-animateur>
+
 </div>
+
