@@ -12,7 +12,7 @@ import {CreerQuizzComponent} from "./quizz/creer-quizz/creer-quizz.component";
 import {JouerQuizzComponent} from "./quizz/jouer-quizz/jouer-quizz.component";
 import {ResultatQuizzComponent} from "./quizz/resultat-quizz/resultat-quizz.component";
 import {ImageAnimateurComponent} from "./image-animateur/image-animateur.component"
-
+import {ModifQuizzComponent} from "./quizz/modif-quizz/modif-quizz.component";
 
 
 const routes: Routes = [
@@ -29,6 +29,7 @@ const routes: Routes = [
   { path: 'configurationAttention', component: ConfigAttentionComponent},
   { path: 'configurationVision', component: ConfigVisionComponent},
   { path: 'creer-quizz', component: CreerQuizzComponent},
+  { path: 'modif-quizz', component: ModifQuizzComponent},
 ];
 
 @NgModule({

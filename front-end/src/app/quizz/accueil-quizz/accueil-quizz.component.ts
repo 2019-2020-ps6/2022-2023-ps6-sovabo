@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { QuizService } from '../../../service/quizz.service';
 import { Quiz } from '../../../models/quizz.model';
 import {AnimationsService} from "../../../service/animations.service";
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -15,6 +16,8 @@ export class AccueilQuizzComponent {
   animations: boolean = false;
 
   public quiz!: Quiz;
+
+  quizStar = faStar;
 
   constructor(private route: ActivatedRoute, private quizService: QuizService, private animationsService: AnimationsService) {
     //this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);

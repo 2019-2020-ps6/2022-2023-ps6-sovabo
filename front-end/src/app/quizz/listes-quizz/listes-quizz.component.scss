@@ -47,8 +47,8 @@
  }
 
  .imageSettings {
-   width: 30px;
-   height: 30px;
+   width: 35px;
+   height: 35px;
  }
 
  .settingsContainer {
@@ -60,33 +60,6 @@
 
  #settingsText {
    margin-left: 1vw;
- }
-
- .recherche {
-   background: rgba(217, 217, 217, 0.4);
-   width: 57vw;
-   border-radius: 5px;
-   border: 1px solid white;
- }
-
- #rechercheText {
-   margin-left: 0.5vw;
-   color: rgba(217, 217, 217, 0.8);
-   font-size: 1.5vw;
- }
-
- .catégorie {
-   background: rgba(217, 217, 217, 0.4);
-   width: fit-content;
-   border-radius: 5px;
-   height: 2.8vw;
- }
-
- #catégorieText {
-   margin-left: 1vw;
-   margin-right: 1vw;
-   color: rgba(50, 50, 50, 0.8);
-   font-size: 1vw;
  }
 
  .selectionQuiz {
