@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Quiz } from '../../../models/quizz.model';
+import { QuizService } from '../../../service/quizz.service';
+
 
 @Component({
   selector: 'app-resultat-quizz',
@@ -9,11 +12,14 @@ import { ActivatedRoute } from '@angular/router';
 export class ResultatQuizzComponent {
 
   score!: number;
+  public quiz!: Quiz;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private quizService: QuizService) {
+  }
 
   ngOnInit() {
-    //this.score = this.route.snapshot.queryParamMap.get('score');
+    this.quiz = this.quizService.getQuizCourant();
+    this.score = this.quizService.getScore();
   }
 
 }
