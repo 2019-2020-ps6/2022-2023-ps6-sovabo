@@ -14,20 +14,24 @@ import {AnimateurService} from "../../../service/animateur.service";
 })
 export class AccueilQuizzComponent {
   animations: boolean = false;
+  public animationDuration: string | undefined;
 
   public quiz!: Quiz;
 
   constructor(private animateurService: AnimateurService, private route: ActivatedRoute, private quizService: QuizService, private animationsService: AnimationsService) {
+      this.animationDuration = this.animationsService.duration;
   }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id') ?? '';
     this.quiz = this.quizService.getQuizById(id);
     this.animations = this.animationsService.getAnimations();
-    console.log(this.animations)
+    this.animationDuration = this.animationsService.duration;
+    console.log(this.animationsService.duration);
   }
 
   getAnimateur() {
     return this.animateurService.getAnimateur();
   }
+
 }

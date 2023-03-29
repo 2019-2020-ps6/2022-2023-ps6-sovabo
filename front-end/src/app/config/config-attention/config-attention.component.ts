@@ -13,6 +13,7 @@ export class ConfigAttentionComponent {
   animateur: boolean = false;
   jeuxCouleurs: boolean = false;
 
+
   constructor(private animationsService: AnimationsService, private animateurService: AnimateurService, private jeuxCouleursService: JeuxCouleursService) {
   }
 
@@ -35,4 +36,5 @@ export class ConfigAttentionComponent {
     this.jeuxCouleurs = !this.jeuxCouleurs;
     this.jeuxCouleursService.setJeuxCouleurs(this.jeuxCouleurs);
   }
+
 }

@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class AnimateurService {
   private animateur = false;
+  duration: string | undefined;
 
   constructor() { }
 

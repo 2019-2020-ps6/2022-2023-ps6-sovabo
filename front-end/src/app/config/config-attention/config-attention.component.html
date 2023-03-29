@@ -8,7 +8,7 @@
   <div class="animateurContainer">
     <p>Animateur</p>
     <app-btn-on-off-animateur (click)="toggleAnimateur()"></app-btn-on-off-animateur>
-    <app-slider></app-slider>
+    <app-slider-animateur-speed class="app-slider"></app-slider-animateur-speed>
     <img *ngIf="animateur" src="./assets/Images/Animateur_image.png" alt="Image animateur" id="imageAnimateur">
   </div>
 
@@ -16,7 +16,7 @@
     <p>Animations</p>
     <app-btn-on-off-animations (click)="toggleAnimations()"></app-btn-on-off-animations>
     <p>Vitesse <br> Animations</p>
-    <app-slider></app-slider>
+    <app-sliderAnimationDuration class="app-slider"></app-sliderAnimationDuration>
   </div>
 
   <div class="couleurContainer">
