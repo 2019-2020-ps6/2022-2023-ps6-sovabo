@@ -13,7 +13,7 @@ export class BtnOnOffAnimationsComponent {
   }
 
   ngOnInit() {
-    this.isOn = this.animationsService.getAnimations();
+    this.isOn = this.animationsService.isAnimated;
   }
 
   toggleState() {

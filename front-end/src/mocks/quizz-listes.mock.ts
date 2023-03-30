@@ -83,6 +83,7 @@ export const QUIZ_LIST: Quiz[] = [
       statQuiz : STAT_QUIZ,
       desc: 'Vous allez pouvoir tester vos connaissances sur les présidents actuels du monde !',
       questions: [QUESTION_ACTOR, QUESTION_US],
+      hovered: undefined,
     },
     {
       id: '2',
@@ -91,6 +92,7 @@ export const QUIZ_LIST: Quiz[] = [
       statQuiz : STAT_QUIZ,
       desc: 'Les bons films beaufs des années 80, on les aime',
         questions: [],
+      hovered: undefined,
     },
      {
       id: '3',
@@ -99,7 +101,8 @@ export const QUIZ_LIST: Quiz[] = [
       statQuiz : STAT_QUIZ,
       desc:'Quel est le poids de cet aliment ? Un quizz assez sympa à faire en famille',
       questions: [],
-    }
+    hovered: undefined,
+  }
 
 ];
 

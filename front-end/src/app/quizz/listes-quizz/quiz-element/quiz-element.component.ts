@@ -18,6 +18,7 @@ export class QuizElementComponent {
   }
 
   ngOnInit(): void {
+    console.log(this.quiz.hovered)
   }
 
 }

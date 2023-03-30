@@ -10,9 +10,6 @@ export class AnimationsService {
 
   constructor() { }
 
-  getAnimations(): boolean {
-    return this.isAnimated;
-  }
 
   setAnimations(value: boolean) {
     this.isAnimated = value;

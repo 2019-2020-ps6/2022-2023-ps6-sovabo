@@ -28,6 +28,7 @@ export class JouerQuizzComponent implements OnInit {
   public selectedAnswerIndex: number | null = null;
 
   public isAnswerCorrect: boolean | null = null;
+
   public isQuizFinished: boolean = false;
   public animations: boolean | undefined;
   public animationDuration: string | undefined;
@@ -37,18 +38,18 @@ export class JouerQuizzComponent implements OnInit {
   public startTime: number = -1; // Nouvelle variable startTime
   public endTime: number = 0; // Nouvelle variable endTime
   public firstTime: boolean = true;
-  
+
   constructor(private route: ActivatedRoute, private quizService: QuizService, private statistiquesService: StatistiqueService,private router: Router, private animateurService: AnimateurService, private animationService: AnimationsService) {}
 
   ngOnInit(): void {
     this.quiz = this.quizService.getQuizCourant();
     this.currentQuestion = this.quiz.questions[this.currentQuestionIndex];
     this.questionCorrectIndex = this.getCorrectAnswerIndex(this.currentQuestion);
+    this.animations = this.animationService.isAnimated;
 
     //Gérer la moyenne de temps des réponses
     this.startTime = Date.now();
     this.valueTime = [];
-    this.animations = this.animationService.getAnimations();
     this.animationDuration = this.animationService.duration;
     console.log(this.animations);
     console.log(this.animationService.duration);
@@ -111,12 +112,12 @@ export class JouerQuizzComponent implements OnInit {
       this.startTime = Date.now();
 
     }
-  
+
     this.currentQuestionIndex++;
     this.currentQuestion = this.quiz.questions[this.currentQuestionIndex];
     this.questionCorrectIndex = this.getCorrectAnswerIndex(this.currentQuestion);
     this.isAnswerCorrect = null;
-      
+
   }
 
   getCorrectAnswerIndex(question: Question): number {
