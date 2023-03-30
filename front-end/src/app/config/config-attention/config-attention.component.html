@@ -1,27 +1,29 @@
-<header>
-  <h1>PolyQuiz</h1>
-  <app-btn-clickable-background onclick="history.go(-1);">RETOUR</app-btn-clickable-background>
-</header>
-
 <div class="container">
+  <header>
+    <h1>PolyQuiz</h1>
+    <app-btn-clickable-background onclick="history.go(-1);">RETOUR</app-btn-clickable-background>
+  </header>
 
-  <div class="animateurContainer">
-    <p>Animateur</p>
-    <app-btn-on-off-animateur (click)="toggleAnimateur()"></app-btn-on-off-animateur>
-    <app-slider-animateur-speed class="app-slider"></app-slider-animateur-speed>
-    <img *ngIf="animateur" src="./assets/Images/Animateur_image.png" alt="Image animateur" id="imageAnimateur">
+  <div class="containerReglage">
+
+    <div class="animateurContainer">
+      <p>Animateur</p>
+      <app-btn-on-off-animateur (click)="toggleAnimateur()"></app-btn-on-off-animateur>
+      <app-slider-animateur-speed id="sliderAnimateur" class="app-slider"></app-slider-animateur-speed>
+      <img *ngIf="animateur" src="./assets/Images/Animateur_image.png" alt="Image animateur" id="imageAnimateur">
+    </div>
+
+    <div class="animationContainer">
+      <p>Animations</p>
+      <app-btn-on-off-animations (click)="toggleAnimations()"></app-btn-on-off-animations>
+      <p *ngIf="animations">Vitesse <br> Animations</p>
+      <app-sliderAnimationDuration *ngIf="animations" class="app-slider"></app-sliderAnimationDuration>
+    </div>
+
+    <div class="couleurContainer">
+      <p>Jeux de <br> couleurs</p>
+      <app-btn-on-off-jeux-couleurs (click)="toggleJeuxCouleurs()"></app-btn-on-off-jeux-couleurs>
+    </div>
+
   </div>
-
-  <div class="animationContainer">
-    <p>Animations</p>
-    <app-btn-on-off-animations (click)="toggleAnimations()"></app-btn-on-off-animations>
-    <p>Vitesse <br> Animations</p>
-    <app-sliderAnimationDuration class="app-slider"></app-sliderAnimationDuration>
-  </div>
-
-  <div class="couleurContainer">
-    <p>Jeux de <br> couleurs</p>
-    <app-btn-on-off-jeux-couleurs (click)="toggleJeuxCouleurs()"></app-btn-on-off-jeux-couleurs>
-  </div>
-
 </div>
