@@ -35,7 +35,7 @@ export class JouerQuizzComponent implements OnInit {
     this.quiz = this.quizService.getQuizCourant();
     this.currentQuestion = this.quiz.questions[this.currentQuestionIndex];
     this.questionCorrectIndex = this.getCorrectAnswerIndex(this.currentQuestion);
-    this.animations = this.animationService.getAnimations();
+    this.animations = this.animationService.isAnimated;
     this.animationDuration = this.animationService.duration;
     console.log(this.animations);
     console.log(this.animationService.duration);

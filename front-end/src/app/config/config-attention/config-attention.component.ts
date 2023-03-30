@@ -18,7 +18,7 @@ export class ConfigAttentionComponent {
   }
 
   ngOnInit(): void {
-    this.animations = this.animationsService.getAnimations();
+    this.animations = this.animationsService.isAnimated;
     this.animateur = this.animateurService.getAnimateur();
     this.jeuxCouleurs = this.jeuxCouleursService.getJeuxCouleurs();
   }

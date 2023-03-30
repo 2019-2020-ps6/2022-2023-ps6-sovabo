@@ -27,7 +27,7 @@ export class AccueilQuizzComponent {
     this.quiz = this.quizService.getQuizById(id);
     this.quizService.setQuizCourant(this.quiz);
     console.log(this.quizService.getQuizCourant());
-    this.animations = this.animationsService.getAnimations();
+    this.animations = this.animationsService.isAnimated;
     this.animationDuration = this.animationsService.duration;
     console.log(this.animationsService.duration);
   }
