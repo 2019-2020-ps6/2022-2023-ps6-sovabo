@@ -27,11 +27,8 @@ export class AccueilQuizzComponent {
     this.quiz = this.quizService.getQuizById(id);
     this.quizService.setQuizCourant(this.quiz);
     this.animations = this.animationsService.getAnimations();
-<<<<<<< HEAD
-=======
     this.animationDuration = this.animationsService.duration;
     console.log(this.animationsService.duration);
->>>>>>> 563542a314ba7089786d85052b549e2be0ef06ad
   }
 
   getAnimateur() {
