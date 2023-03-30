@@ -46,9 +46,10 @@ export class QuizService {
       this.score = 0;
     }
     
+    public getTimeResponses(): number[] | undefined {
+      return this.quizCourant?.statQuiz?.timeResponses;
+    }
     
-
-
 
 
 
