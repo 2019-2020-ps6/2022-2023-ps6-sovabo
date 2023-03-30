@@ -7,6 +7,8 @@ import { faL } from '@fortawesome/free-solid-svg-icons';
 import { StatistiqueService } from 'src/service/statistique.service';
 import { StatQuizz } from 'src/models/quizz.stat.model';
 
+import {AnimateurService} from "../../../service/animateur.service";
+import {AnimationsService} from "../../../service/animations.service";
 
 
 @Component({
@@ -27,14 +29,16 @@ export class JouerQuizzComponent implements OnInit {
 
   public isAnswerCorrect: boolean | null = null;
   public isQuizFinished: boolean = false;
+  public animations: boolean | undefined;
+  public animationDuration: string | undefined;
 
 
   public valueTime: number[] = [];
   public startTime: number = -1; // Nouvelle variable startTime
   public endTime: number = 0; // Nouvelle variable endTime
   public firstTime: boolean = true;
-
-  constructor(private route: ActivatedRoute, private quizService: QuizService, private statistiquesService: StatistiqueService,private router: Router) { }
+  
+  constructor(private route: ActivatedRoute, private quizService: QuizService, private statistiquesService: StatistiqueService,private router: Router, private animateurService: AnimateurService, private animationService: AnimationsService) {}
 
   ngOnInit(): void {
     this.quiz = this.quizService.getQuizCourant();
@@ -44,6 +48,11 @@ export class JouerQuizzComponent implements OnInit {
     //Gérer la moyenne de temps des réponses
     this.startTime = Date.now();
     this.valueTime = [];
+    this.animations = this.animationService.getAnimations();
+    this.animationDuration = this.animationService.duration;
+    console.log(this.animations);
+    console.log(this.animationService.duration);
+
   }
 
   checkWin(){
@@ -88,7 +97,7 @@ export class JouerQuizzComponent implements OnInit {
     this.checkWin();
   }
 
-  
+
 
   goToNextQuestion() {
     //gestion du temps, si c'est pas la première question alors on reset le timer quand on va a la prochaine question
@@ -130,4 +139,7 @@ export class JouerQuizzComponent implements OnInit {
     return parseFloat(moyenne.toFixed(2));
   }
 
+  getAnimateur() {
+    return this.animateurService.getAnimateur();
+  }
 }

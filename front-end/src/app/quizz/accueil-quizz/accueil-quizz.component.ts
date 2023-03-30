@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { QuizService } from '../../../service/quizz.service';
 import { Quiz } from '../../../models/quizz.model';
 import {AnimationsService} from "../../../service/animations.service";
+import {AnimateurService} from "../../../service/animateur.service";
 
 
 @Component({
@@ -13,11 +14,12 @@ import {AnimationsService} from "../../../service/animations.service";
 })
 export class AccueilQuizzComponent {
   animations: boolean = false;
+  public animationDuration: string | undefined;
 
   public quiz!: Quiz;
 
-  constructor(private route: ActivatedRoute, private quizService: QuizService, private animationsService: AnimationsService) {
-    //this.quizService.quizSelected$.subscribe((quiz) => this.quiz = quiz);
+  constructor(private animateurService: AnimateurService, private route: ActivatedRoute, private quizService: QuizService, private animationsService: AnimationsService) {
+      this.animationDuration = this.animationsService.duration;
   }
 
   ngOnInit(): void {
@@ -25,10 +27,15 @@ export class AccueilQuizzComponent {
     this.quiz = this.quizService.getQuizById(id);
     this.quizService.setQuizCourant(this.quiz);
     this.animations = this.animationsService.getAnimations();
+<<<<<<< HEAD
+=======
+    this.animationDuration = this.animationsService.duration;
+    console.log(this.animationsService.duration);
+>>>>>>> 563542a314ba7089786d85052b549e2be0ef06ad
   }
 
-
-
-
+  getAnimateur() {
+    return this.animateurService.getAnimateur();
+  }
 
 }
