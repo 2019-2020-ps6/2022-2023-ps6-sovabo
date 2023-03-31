@@ -1,0 +1,23 @@
+.generalContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    background: rgba(255, 255, 255, 0.42);
+    border-radius: 45px;
+}
+
+.setupContainer{
+    width: fit-content;
+    margin: 1%;
+    display: flex;
+    flex-direction: line;
+    align-items: center;
+}
+
+.btnContainer{
+    display: flex;
+    flex-direction: line;
+    justify-content: space-around;
+    align-items: center;
+}

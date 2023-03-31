@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class ConfigVisionComponent {
 
+  ngInit() {
+    console.log('ConfigVisionComponent');
+  }
+
+  
+
 }
