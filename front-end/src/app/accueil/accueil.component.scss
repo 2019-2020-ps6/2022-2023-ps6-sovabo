@@ -48,7 +48,76 @@ h1{
   height: 70vh;
 }
 
-body {
-  height: 100%;
-  margin: 0;
+.bubble {
+  background: rgba(217, 217, 217, 0.5);
+  border-radius: 50%;
+}
+
+#bubble1 {
+  position: absolute;
+  top: 61vh;
+  left: 6vw;
+  height: 1vw;
+  width: 1vw;
+}
+
+#bubble2 {
+  position: absolute;
+  top: 55vh;
+  left: 3.5vw;
+  height: 1.5vw;
+  width: 1.5vw;
+}
+
+#bubble3 {
+  position: absolute;
+  top: 47vh;
+  left: 2vw;
+  height: 2vw;
+  width: 2vw;
+}
+
+#bubble4 {
+  position: absolute;
+  top: 38vh;
+  left: 2.3vw;
+  height: 2.5vw;
+  width: 2.5vw;
+}
+
+#bubble5 {
+  position: absolute;
+  top: 28vh;
+  left: 5vw;
+  height: 3vw;
+  width: 3vw;
+}
+
+#bubble6 {
+  position: absolute;
+  top: 21vh;
+  left: 10vw;
+  height: 3.5vw;
+  width: 3.5vw;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  border-radius: 40px;
+  top: 10vh;
+  left: 16.5vw;
+  height: fit-content;
+  width: fit-content;
+  font-size: 1.3vw;
+  padding: 5vh 3vw 5vh 3vw;
+  color: #FFFDF8;
+  text-shadow: 2px 2px 2px #1E1E1E;
+}
+
+span {
+  margin-top: -2vh;
+  margin-bottom: -2vh;
 }
