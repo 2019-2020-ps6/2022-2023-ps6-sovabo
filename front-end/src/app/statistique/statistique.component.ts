@@ -5,6 +5,8 @@ import { QuizService } from '../../service/quizz.service';
 import { StatistiqueService } from 'src/service/statistique.service';
 import { StatQuizz } from 'src/models/quizz.stat.model';
 
+declare function createChart(): any;
+
 @Component({
   selector: 'app-statistique',
   templateUrl: './statistique.component.html',
@@ -23,7 +25,18 @@ export class StatistiqueComponent {
     this.quiz = this.quizService.getQuizCourant();
     this.statQuiz = this.quiz.statQuiz;
     this.moyenneTimeReponse = this.calculerMoyenne();
+    createChart();
     console.log("TIme response enregistré pour le quiz : "+this.quizService.getTimeResponses());
+
+    const openButton = document.getElementById("openButton");
+    if (openButton) {
+      openButton.addEventListener("click", this.openPopup);
+    }
+
+    const closeButton = document.getElementById("closeButton");
+    if (closeButton) {
+      closeButton.addEventListener("click", this.closePopup);
+    }
   }
 
   
@@ -41,4 +54,22 @@ export class StatistiqueComponent {
     const moyenne = total / nbResponses;
     return parseFloat(moyenne.toFixed(2));
   }
+
+  openPopup(): void {
+    console.log("cliiiquerrr");
+    const popupElement = document.getElementById("popup");
+    if (popupElement) {
+      popupElement.style.display = "block";
+    }
+  }
+  closePopup(): void {
+    console.log("cliiiquerrr");
+
+    const popupElement = document.getElementById("popup");
+    if (popupElement) {
+      popupElement.style.display = "none";
+    }
+  }
+  
+  
 }
