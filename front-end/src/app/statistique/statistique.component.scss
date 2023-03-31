@@ -6,3 +6,25 @@
     text-align: center !important;
     text-shadow: 8px 8px 0 #1E1E1E !important;
 }
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 450px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    z-index: 9999;
+    display: none;
+}
+
+.popup .close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
