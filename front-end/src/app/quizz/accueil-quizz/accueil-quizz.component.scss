@@ -111,6 +111,55 @@
   margin-left: 1vw;
 }
 
+.bubble {
+  background: rgba(225, 225, 225, 0.5);
+  border-radius: 50%;
+}
+
+#bubble1 {
+  position: absolute;
+  top: 64.2vh;
+  left: 12vw;
+  height: 1vw;
+  width: 1vw;
+}
+
+#bubble2 {
+  position: absolute;
+  top: 59vh;
+  left: 10.5vw;
+  height: 2vw;
+  width: 2vw;
+}
+
+#bubble3 {
+  position: absolute;
+  top: 52vh;
+  left: 10vw;
+  height: 3vw;
+  width: 3vw;
+}
+
+.textContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 22vh;
+  left: 2vw;
+  width: 27vw;
+  height: 28vh;
+  border-radius: 50%;
+  text-shadow: 2px 2px 2px #1E1E1E;
+  padding-top: 4vh;
+}
+
+.textContainer p {
+  text-align: center;
+  font-size: 1.8vw;
+  color: white;
+}
+
 @keyframes DynaPuff {
   0% {
     font-variation-settings: "wght" 100, "ital" 0;
