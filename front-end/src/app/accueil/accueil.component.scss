@@ -107,17 +107,16 @@ h1{
   align-items: center;
   position: absolute;
   border-radius: 40px;
-  top: 8vh;
+  top: 5vh;
   left: 16.5vw;
   height: fit-content;
   width: fit-content;
   font-size: 1.6vw;
-  padding: 5vh 3vw 5vh 3vw;
+  padding: 5vh 3vw 4vh 3vw;
   color: #FFFDF8;
   text-shadow: 2px 2px 2px #1E1E1E;
 }
 
-span {
-  margin-top: -2vh;
-  margin-bottom: -2vh;
+.textContainer p {
+  text-align: center;
 }
