@@ -1,4 +1,5 @@
-    
+
+  
     <div class="titrePage">
         <p class="titreStyle"> Statistiques du quizz </p>
     </div>
@@ -14,7 +15,7 @@
                         <span class="font-weight-bold ms-1">30 done</span> this month
                       </p>
                     </div>
-                  </div>
+                  </div>  
                 </div>
                 <div class="card-body px-0 pb-2">
                   <div class="table-responsive">
@@ -33,10 +34,11 @@
                                 <img src="../../assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
                               </div>
                               <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">Temps moyen de réponse à une question</h6>
+                                <h6 (click)="openPopup()" class="mb-0 text-sm" title="voir le graphique">Temps moyen de réponse à une question</h6>
                               </div>
                             </div>
                           </td>
+
                           
                           <td class="align-middle text-center text-sm">
                             <span class="text-xs font-weight-bold"> {{moyenneTimeReponse}} secondes </span>
@@ -50,7 +52,7 @@
                                   <img src="../../assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
                                 </div>
                                 <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm">Nombre de cliques hors bouton par question</h6>
+                                  <h6 (click)="openPopup()" class="mb-0 text-sm" title="voir le graphique">Nombre de cliques hors bouton par question</h6>
                                 </div>
                               </div>
                             </td>
@@ -67,7 +69,7 @@
                                   <img src="../../assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
                                 </div>
                                 <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm">Fréquence d'interactions animateur-utilisateur</h6>
+                                  <h6 (click)="openPopup()" class="mb-0 text-sm" title="voir le graphique">Fréquence d'interactions animateur-utilisateur</h6>
                                 </div>
                               </div>
                             </td>
@@ -84,7 +86,7 @@
                                   <img src="../../assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
                                 </div>
                                 <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm">Résultat du quizz</h6>
+                                  <h6 (click)="openPopup()" class="mb-0 text-sm" title="voir le graphique">Résultat du quizz</h6>
                                 </div>
                               </div>
                             </td>
@@ -100,7 +102,42 @@
                 </div>
               </div>
         </div>
+        <div class="popup" id="popup">
+          <span class="close" (click)="closePopup()">&times;</span>
+          <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 (click)="openPopup()" class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                <div class="dropdown no-arrow">
+                    <a class="" role="button" id="dropdownMenuLink"
+                          aria-expanded="false">
+                        <i class="" (click)="closePopup()">&times;</i>
+                    </a>
+              
+                    </div>
+                  </div>
+            <!-- Card Body -->
+                  <div class="card-body">
+                    <div class="chart-area">
+                      <canvas id="myAreaChart"></canvas>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        
+
+
+
+                           
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" defer></script>
+
+<script src="http://cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js" defer></script>
+    <script src="../../assets/js/chart-area-demo.js" defer></script>
 
 
    
