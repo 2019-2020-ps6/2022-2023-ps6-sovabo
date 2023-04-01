@@ -4,15 +4,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AnimationsService {
-  private animations = false;
+  public isAnimated = false;
+  public duration: string | undefined = "5s";
+
 
   constructor() { }
 
-  getAnimations(): boolean {
-    return this.animations;
-  }
 
   setAnimations(value: boolean) {
-    this.animations = value;
+    this.isAnimated = value;
   }
 }

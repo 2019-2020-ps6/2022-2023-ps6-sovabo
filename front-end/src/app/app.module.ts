@@ -23,14 +23,16 @@ import { QuizElementComponent } from './quizz/listes-quizz/quiz-element/quiz-ele
 import { BtnClickableBackgroundComponent } from './bouton/btn-clickable-background/btn-clickable-background.component';
 import { BtnClickableFrameBackgroundComponent } from './bouton/btn-clickable-frame-background/btn-clickable-frame-background.component';
 import { BtnPolyquizTextComponent } from './bouton/btn-polyquiz-text/btn-polyquiz-text.component';
-import { SliderComponent } from './slider/slider.component';
+import { SliderAnimationDurationComponent } from './slider/sliderAnimationDuration/sliderAnimationDuration.component';
 import { BtnListQuizComponent } from './bouton/btn-list-quiz/btn-list-quiz.component';
 import { BtnOnOffAnimationsComponent } from './bouton/btn-on-off/btn-on-off-animations/btn-on-off-animations.component';
 import { BtnOnOffAnimateurComponent } from './bouton/btn-on-off/btn-on-off-animateur/btn-on-off-animateur.component';
 import { BtnOnOffJeuxCouleursComponent } from './bouton/btn-on-off/btn-on-off-jeux-couleurs/btn-on-off-jeux-couleurs.component';
 import {ImageAnimateurComponent} from "./image-animateur/image-animateur.component";
 import { BtnOnOffColorsComponent } from './bouton/btn-on-off/btn-on-off-colors/btn-on-off-colors.component'
-
+import {ImageAnimateurComponent} from "./image-animateur/image-animateur.component";
+import { SliderAnimateurSpeedComponent } from './slider/slider-animateur-speed/slider-animateur-speed.component';
+import { CarouselQuizComponent } from '../app/quizz/listes-quizz/carousel-quiz/carousel-quiz.component';
 
 @NgModule({
   declarations: [
@@ -51,11 +53,14 @@ import { BtnOnOffColorsComponent } from './bouton/btn-on-off/btn-on-off-colors/b
     BtnClickableBackgroundComponent,
     BtnClickableFrameBackgroundComponent,
     BtnPolyquizTextComponent,
-    SliderComponent,
+    SliderAnimationDurationComponent,
     BtnListQuizComponent,
     BtnOnOffAnimationsComponent,
     BtnOnOffAnimateurComponent,
     BtnOnOffJeuxCouleursComponent,
+    ImageAnimateurComponent,
+    SliderAnimateurSpeedComponent,
+    CarouselQuizComponent,
     ImageAnimateurComponent,
     BtnOnOffColorsComponent
   ],

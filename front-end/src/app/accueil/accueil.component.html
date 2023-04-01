@@ -10,7 +10,7 @@
     <app-btn-clickable-frame-background class="navigation" id="jouer"[routerLink]="['/liste-quizz']">JOUER</app-btn-clickable-frame-background>
   </div>
 
-  <app-image-animateur></app-image-animateur>
+  <app-image-animateur *ngIf="getAnimateur()"></app-image-animateur>
 
   <div class="rightContainer">
     <app-btn-clickable-background class="navigation" [routerLink]="['/configuration']">CONFIGURATION</app-btn-clickable-background>

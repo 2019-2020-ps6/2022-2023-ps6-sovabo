@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { JeuxCouleursService } from 'src/service/jeux-couleurs.service';
+import {AnimateurService} from "../../service/animateur.service";
 
 @Component({
   selector: 'app-accueil',
@@ -19,7 +20,7 @@ export class AccueilComponent {
     this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
     this.changeContrast();
   }
-  
+
   changeContrast(){
     console.log('changeContrast Vision');
     let tabContainer = document.querySelectorAll('[id=contrastUpContainer]');
@@ -49,6 +50,14 @@ export class AccueilComponent {
         });
       }
     }
-  }  
+  }
 
+  constructor(private animateurService: AnimateurService) { }
+
+  ngOnInit(): void {
+  }
+
+  getAnimateur() {
+    return this.animateurService.getAnimateur();
+  }
 }

@@ -1,21 +1,10 @@
-body{
-  margin: 0;
-  padding: 0;
-}
-
-.container{
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  padding: 0;
-}
-
 .titrePage{
   display: flex;
   flex-direction: row;
-  height: 22%;
   justify-content: space-between;
   align-items: center;
+  margin-right: 2vw;
+  margin-left: 1vw;
 }
 
 #polyquizHome{
@@ -23,26 +12,28 @@ body{
 }
 
 .btnCreerConfig{
-  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 .titreStyle {
-    font-family: DynaPuff;
-    font-size: 5vw;
-    font-weight: 700;
-    color: #FFFDF8;
-    text-align: center;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
+  font-family: DynaPuff;
+  font-size: 5vw;
+  font-weight: 700;
+  color: #FFFDF8;
+  text-align: center;
+  text-shadow: 8px 8px 0 #1E1E1E;
+  margin-right: 10vw;
 }
 
  .quiz-list{
-    display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   flex-direction: row  ;
+   margin-right: 10vw;
+   margin-left: 10vw;
  }
 
  .quiz{
@@ -50,6 +41,74 @@ body{
    margin-bottom: 20px;
  }
 
- #creerQuizz{
-   text-align: end;
+.hovered {
+  transform: scale(1.05) translateZ(0);
+  transition: transform 0.2s ease-in-out;
+}
+
+.quiz-list .another-hovered {
+  filter: blur(5px);
+}
+
+
+
+
+#creerQuizz{
+   margin-top: 2vh;
+   margin-bottom: 3vh;
  }
+
+ .imageSettings {
+   width: 30px;
+   height: 30px;
+ }
+
+ .settingsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+ }
+
+ #settingsText {
+   margin-left: 1vw;
+ }
+
+ .recherche {
+   background: rgba(217, 217, 217, 0.4);
+   width: 57vw;
+   border-radius: 5px;
+   border: 1px solid white;
+ }
+
+ #rechercheText {
+   margin-left: 0.5vw;
+   color: rgba(217, 217, 217, 0.8);
+   font-size: 1.5vw;
+ }
+
+ .catégorie {
+   background: rgba(217, 217, 217, 0.4);
+   width: fit-content;
+   border-radius: 5px;
+   height: 2.8vw;
+ }
+
+ #catégorieText {
+   margin-left: 1vw;
+   margin-right: 1vw;
+   color: rgba(50, 50, 50, 0.8);
+   font-size: 1vw;
+ }
+
+ .selectionQuiz {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   margin: 1vw 15vw 3vw 11vw;
+ }
+
+
+
+ 

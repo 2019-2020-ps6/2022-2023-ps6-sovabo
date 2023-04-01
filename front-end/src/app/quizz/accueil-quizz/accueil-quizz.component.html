@@ -1,10 +1,9 @@
 <div class="container accueilQuiz" [class.animations]="animations">
     <div class="titrePage">
-      <p class="titreStyle" *ngIf="!animations">{{quiz.name}}</p>
-      <p class="titreStyle autre-font" *ngIf="animations">{{quiz.name}}</p>
+      <p class="titreStyle">{{quiz.name}}</p>
     </div>
 
-    <app-image-animateur></app-image-animateur>
+    <app-image-animateur *ngIf="getAnimateur()"></app-image-animateur>
 
     <div class="imageContainer">
 

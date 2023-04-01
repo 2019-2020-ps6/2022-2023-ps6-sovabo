@@ -11,15 +11,17 @@ import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
 export class ConfigAttentionComponent {
   animations: boolean = false;
   animateur: boolean = false;
+  jeuxCouleurs: boolean = false;
 
   //type de trouble de la vision
   contrasteTroubleEnable: boolean = false;
-  
+
+
   constructor(private animationsService: AnimationsService, private animateurService: AnimateurService, private jeuxCouleursService: JeuxCouleursService) {
   }
 
   ngOnInit(): void {
-    this.animations = this.animationsService.getAnimations();
+    this.animations = this.animationsService.isAnimated;
     this.animateur = this.animateurService.getAnimateur();
     this.contrasteTroubleEnable = this.jeuxCouleursService.getVisionAttentionStatus();
     this.changeContrast();
@@ -40,6 +42,7 @@ export class ConfigAttentionComponent {
     this.jeuxCouleursService.setAttentionColor(this.contrasteTroubleEnable);
     this.changeContrast();
   }
+
 
   changeContrast(){
     console.log('changeContrast');
