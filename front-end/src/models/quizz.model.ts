@@ -10,6 +10,7 @@ export interface Quiz {
     statQuiz: StatQuizz;
     questions: Question[];
     difficulty: number;
+    image: string;
 }
 
 
