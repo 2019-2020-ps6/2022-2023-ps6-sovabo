@@ -1,4 +1,4 @@
-<div class="page">
+<div class="page" >
 
   <div class="titrePage">
       <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
@@ -19,7 +19,7 @@
     <div class="catégorie"><span id="catégorieText">Choisissez une catégorie</span></div>
   </div>
 
-  <div class="quiz-list-container" >
+  <div class="quiz-list-container" *ngIf="animationsService.isAnimated; else carousel"  >
     <div class="quiz-list">
       <div class="quiz"  *ngFor="let quiz of quizList"
            (mouseenter)="quiz.hovered = true"
@@ -31,4 +31,17 @@
     </div>
   </div>
 
+  <ng-template #carousel>
+    
+    
+      <app-carousel-quiz ></app-carousel-quiz>
+
+      
+  </ng-template>
+  
+
+
 </div>
+
+
+
