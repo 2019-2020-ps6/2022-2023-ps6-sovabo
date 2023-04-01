@@ -5,23 +5,23 @@
 
 <div class="container">
 
-  <div class="animateurContainer">
-    <p>Animateur</p>
+  <div id="contrastUpContainer" class="animateurContainer">
+    <p id="contrastUpText">Animateur</p>
     <app-btn-on-off-animateur (click)="toggleAnimateur()"></app-btn-on-off-animateur>
     <app-slider></app-slider>
     <img src="../../../assets/Images/Animateur_image.png" alt="Image animateur" id="imageAnimateur">
   </div>
 
-  <div class="animationContainer">
-    <p>Animations</p>
+  <div  id="contrastUpContainer" class="animationContainer">
+    <p id="contrastUpText">Animations</p>
     <app-btn-on-off-animations (click)="toggleAnimations()"></app-btn-on-off-animations>
-    <p>Vitesse <br> Animations</p>
+    <p id="contrastUpText">Vitesse <br> Animations</p>
     <app-slider></app-slider>
   </div>
-
-  <div class="couleurContainer">
-    <p>Jeux de <br> couleurs</p>
-    <app-btn-on-off-jeux-couleurs (click)="toggleJeuxCouleurs()"></app-btn-on-off-jeux-couleurs>
+  
+  <div  id="contrastUpContainer" class="couleurContainer">
+    <p id="contrastUpText"> Meilleur <br> Contraste </p>
+    <app-btn-on-off-colors (click)="toggleContrastColor($event)"></app-btn-on-off-colors>
   </div>
 
 </div>

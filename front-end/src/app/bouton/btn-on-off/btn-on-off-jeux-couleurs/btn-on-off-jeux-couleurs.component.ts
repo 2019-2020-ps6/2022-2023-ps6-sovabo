@@ -12,11 +12,10 @@ export class BtnOnOffJeuxCouleursComponent {
   constructor(private jeuxCouleursService: JeuxCouleursService) {
   }
 
-  ngOnInit() {
-    this.isOn = this.jeuxCouleursService.getJeuxCouleurs();
-  }
+  ngOnInit() {this.isOn = this.jeuxCouleursService.IsVisionColorActivated();}
 
   toggleState() {
     this.isOn = !this.isOn;
+    this.jeuxCouleursService.setAttentionColor(this.isOn);
   }
 }

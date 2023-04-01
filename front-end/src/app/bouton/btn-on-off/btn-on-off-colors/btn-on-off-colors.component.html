@@ -1,2 +1,3 @@
 <button [class.active]="isOn" (click)="toggleState()">
-  </button>
+  {{ isOn ? 'ON' : 'OFF' }}
+</button>

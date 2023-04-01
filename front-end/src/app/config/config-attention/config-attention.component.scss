@@ -74,5 +74,16 @@ p{
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-fill-color: transparent;
 }
+
+.contrastUpText{
+  background: rgb(0, 0, 0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.contrastUpContainer{
+  background: rgb(200, 200, 200);
+}
+
