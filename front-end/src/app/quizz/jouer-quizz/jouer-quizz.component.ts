@@ -3,6 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { QuizService } from '../../../service/quizz.service';
 import { Quiz } from '../../../models/quizz.model';
 import { Question, Answer } from '../../../models/question.model';
+import { faL } from '@fortawesome/free-solid-svg-icons';
+import { StatistiqueService } from 'src/service/statistique.service';
+import { StatQuizz } from 'src/models/quizz.stat.model';
+
+import {AnimateurService} from "../../../service/animateur.service";
+import {AnimationsService} from "../../../service/animations.service";
 
 
 @Component({
@@ -24,19 +30,36 @@ export class JouerQuizzComponent implements OnInit {
   public isAnswerCorrect: boolean | null = null;
 
   public isQuizFinished: boolean = false;
+  public animations: boolean | undefined;
+  public animationDuration: string | undefined;
 
-  constructor(private route: ActivatedRoute, private quizService: QuizService, private router: Router) { }
+
+  public valueTime: number[] = [];
+  public startTime: number = -1; // Nouvelle variable startTime
+  public endTime: number = 0; // Nouvelle variable endTime
+  public firstTime: boolean = true;
+
+  constructor(private route: ActivatedRoute, private quizService: QuizService, private statistiquesService: StatistiqueService,private router: Router, private animateurService: AnimateurService, private animationService: AnimationsService) {}
 
   ngOnInit(): void {
     this.quiz = this.quizService.getQuizCourant();
     this.currentQuestion = this.quiz.questions[this.currentQuestionIndex];
     this.questionCorrectIndex = this.getCorrectAnswerIndex(this.currentQuestion);
+    this.animations = this.animationService.isAnimated;
+
+    //Gérer la moyenne de temps des réponses
+    this.startTime = Date.now();
+    this.valueTime = [];
+    this.animationDuration = this.animationService.duration;
+    console.log(this.animations);
+    console.log(this.animationService.duration);
+
   }
 
   checkWin(){
     if (this.currentQuestionIndex === this.quiz.questions.length - 1) {
-      console.log("finishh");
-      console.log(this.currentQuestionIndex);
+
+      this.statistiquesService.ajouterMoyenneTimeResponseAuQuizCourant(this.calculerMoyenne());
       this.isQuizFinished = true;
     }
   }
@@ -66,19 +89,35 @@ export class JouerQuizzComponent implements OnInit {
       this.isLastQuestion = true;
     }
 
+    //gestion du temps
+    this.endTime = Date.now();
+    const timeTaken = (this.endTime - this.startTime) / 1000;
+    this.valueTime.push(timeTaken);
+
+    //check win
     this.checkWin();
   }
 
-  
+
 
   goToNextQuestion() {
-    
-      this.currentQuestionIndex++;
-      console.log(this.currentQuestionIndex);
-      this.currentQuestion = this.quiz.questions[this.currentQuestionIndex];
-      this.questionCorrectIndex = this.getCorrectAnswerIndex(this.currentQuestion);
-      this.isAnswerCorrect = null;
-      
+    //gestion du temps, si c'est pas la première question alors on reset le timer quand on va a la prochaine question
+    if(!this.firstTime){
+      this.endTime = Date.now();
+      const timeTaken = (this.endTime - this.startTime) / 1000;
+      this.valueTime.push(timeTaken);
+      this.startTime = Date.now();
+    }else{//si c'est la première question alors il faut commencer le timer quand on va a la prochaine question car quand le component se charge le timer commence
+      this.firstTime = false;
+      this.startTime = Date.now();
+
+    }
+
+    this.currentQuestionIndex++;
+    this.currentQuestion = this.quiz.questions[this.currentQuestionIndex];
+    this.questionCorrectIndex = this.getCorrectAnswerIndex(this.currentQuestion);
+    this.isAnswerCorrect = null;
+
   }
 
   getCorrectAnswerIndex(question: Question): number {
@@ -90,4 +129,18 @@ export class JouerQuizzComponent implements OnInit {
     return 0;
   }
 
+  public calculerMoyenne(): number {
+    const timeResponses = this.valueTime;
+    const nbResponses = timeResponses.length;
+    if (nbResponses === 0) {
+      return 0;
+    }
+    const total = timeResponses.reduce((acc, timeResponse) => acc + timeResponse);
+    const moyenne = total / nbResponses;
+    return parseFloat(moyenne.toFixed(2));
+  }
+
+  getAnimateur() {
+    return this.animateurService.getAnimateur();
+  }
 }

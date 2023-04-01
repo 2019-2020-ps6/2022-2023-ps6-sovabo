@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AnimateurService} from "../../service/animateur.service";
 
 @Component({
   selector: 'app-accueil',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AccueilComponent {
 
+  constructor(private animateurService: AnimateurService) { }
+
+  ngOnInit(): void {
+  }
+
+  getAnimateur() {
+    return this.animateurService.getAnimateur();
+  }
 }

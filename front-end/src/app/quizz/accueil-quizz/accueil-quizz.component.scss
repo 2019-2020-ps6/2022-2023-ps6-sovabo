@@ -78,11 +78,9 @@
 
 .titreStyle {
   font-family: DynaPuff;
-}
-
-.animations .titreStyle {
-  font-family: DynaPuff;
-  animation: DynaPuff 1.5s infinite;
+  font-weight: 550;
+  //space between letters
+  letter-spacing: 0.03em;
 }
 
 #retour{
@@ -171,4 +169,3 @@
     font-variation-settings: "wght" 100, "ital" 0;
   }
 }
-

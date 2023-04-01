@@ -1,4 +1,4 @@
-<div class="page">
+<div class="page" >
 
   <div class="titrePage">
       <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
@@ -44,13 +44,29 @@
     </div>
   </div>
 
-  <div class="quiz-list-container">
-    <div class="quiz-list ">
-        <div class="quiz" *ngFor="let quiz of quizList">
-            <app-quiz-element [quiz]="quiz" routerLink="/accueil-quiz/{{quiz.id}}"></app-quiz-element>
-        </div>
+  <div class="quiz-list-container" *ngIf="!animationsService.isAnimated; else carousel"  >
+    <div class="quiz-list">
+      <div class="quiz"  *ngFor="let quiz of quizList"
+           (mouseenter)="quiz.hovered = true"
+           (mouseleave)="quiz.hovered = false"
+           [ngClass]="{'another-hovered': isAnotherHovered(quiz) && animationsService.isAnimated}"
+           [ngClass]="{'hovered':  quiz.hovered && animationsService.isAnimated}">
+        <app-quiz-element [quiz]="quiz" routerLink="/accueil-quiz/{{quiz.id}}"></app-quiz-element>
+      </div>
     </div>
   </div>
 
+  <ng-template #carousel>
+    
+    
+      <app-carousel-quiz ></app-carousel-quiz>
+
+      
+  </ng-template>
+  
+
 
 </div>
+
+
+

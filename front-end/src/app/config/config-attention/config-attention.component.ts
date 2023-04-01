@@ -13,11 +13,12 @@ export class ConfigAttentionComponent {
   animateur: boolean = false;
   jeuxCouleurs: boolean = false;
 
+
   constructor(private animationsService: AnimationsService, private animateurService: AnimateurService, private jeuxCouleursService: JeuxCouleursService) {
   }
 
   ngOnInit(): void {
-    this.animations = this.animationsService.getAnimations();
+    this.animations = this.animationsService.isAnimated;
     this.animateur = this.animateurService.getAnimateur();
     this.jeuxCouleurs = this.jeuxCouleursService.getJeuxCouleurs();
   }
@@ -35,4 +36,5 @@ export class ConfigAttentionComponent {
     this.jeuxCouleurs = !this.jeuxCouleurs;
     this.jeuxCouleursService.setJeuxCouleurs(this.jeuxCouleurs);
   }
+
 }

@@ -10,7 +10,6 @@
     <app-btn-clickable-frame-background class="navigation" id="jouer"[routerLink]="['/liste-quizz']">JOUER</app-btn-clickable-frame-background>
   </div>
 
-  <app-image-animateur></app-image-animateur>
   <div class="bubble" id="bubble1"></div>
   <div class="bubble" id="bubble2"></div>
   <div class="bubble" id="bubble3"></div>
@@ -20,6 +19,8 @@
   <div class="bubble textContainer">
     <p>Bienvenue sur Polyquiz !<br>Es-tu prêt à tester tes connaissances ?</p>
   </div>
+  <app-image-animateur *ngIf="getAnimateur()"></app-image-animateur>
+
 
   <div class="rightContainer">
     <app-btn-clickable-background class="navigation" [routerLink]="['/configuration']">CONFIGURATION</app-btn-clickable-background>

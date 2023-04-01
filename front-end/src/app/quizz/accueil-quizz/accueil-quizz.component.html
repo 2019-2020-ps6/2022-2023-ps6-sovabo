@@ -31,13 +31,13 @@
     </div>
   </div>
 
-  <app-image-animateur></app-image-animateur>
   <div class="bubble bubble1"></div>
   <div class="bubble bubble2"></div>
   <div class="bubble bubble3"></div>
   <div class="bubble textContainer">
     <p>Alors comme ça, tu penses être incollable sur <span style="text-transform: lowercase;">{{quiz.name}}</span> ?</p>
   </div>
+  <app-image-animateur *ngIf="getAnimateur()"></app-image-animateur>
 
   <div class="bottomPageContainer">
     <div class="imageContainer">
