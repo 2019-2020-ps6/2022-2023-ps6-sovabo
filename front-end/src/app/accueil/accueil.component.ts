@@ -13,7 +13,7 @@ export class AccueilComponent {
   ngInit() {
   }
 
-  constructor(private jeuxCouleursService: JeuxCouleursService) {}
+  constructor(private jeuxCouleursService: JeuxCouleursService,private animateurService: AnimateurService) {}
 
   ngOnInit(): void {
     console.log('ConfigVisionComponent');
@@ -50,11 +50,6 @@ export class AccueilComponent {
         });
       }
     }
-  }
-
-  constructor(private animateurService: AnimateurService) { }
-
-  ngOnInit(): void {
   }
 
   getAnimateur() {
