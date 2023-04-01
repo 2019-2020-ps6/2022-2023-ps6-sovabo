@@ -33,7 +33,8 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "src/assets/js/chart-area-demo.js"
+              "src/assets/js/chart-area-demo.js",
+              "src/assets/js/carousel.js"
             ]
           },
           "configurations": {

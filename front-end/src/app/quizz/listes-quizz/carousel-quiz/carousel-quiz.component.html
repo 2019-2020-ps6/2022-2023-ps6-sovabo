@@ -1,0 +1,41 @@
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+	<div class="container">
+    <div class="row">
+      <div class="col-sm-12" >
+        <div id="customers-testimonials"  class="owl-carousel ">
+
+            <!--TESTIMONIAL 1 -->
+          <div class="item quiz" *ngFor="let quiz of quizList" routerLink="/accueil-quiz/{{quiz.id}}"  
+          (mouseenter)="quiz.hovered = true" 
+          (mouseleave)="quiz.hovered = false"
+          [ngClass]="{'another-hovered': isAnotherHovered(quiz) && animationsService.isAnimated}"
+          [ngClass]="{'hovered':  quiz.hovered && animationsService.isAnimated}">
+              <div class="card">
+              <!-- shadow-effect -->
+                <img src="https://mdbootstrap.com/img/Photos/Horizontal/Food/8-col/img (5).jpg" class="img-fluid" />
+                <div class="card-body">
+                  <h1 class="card-title font-weight-bold"><a>{{quiz.name}}</a></h1>
+                  <ul class="list-unstyled list-inline mb-0">
+                    <li class="list-inline-item me-0">
+                        <fa-icon [icon]="quizStar" ></fa-icon>
+                        <i class="fas fa-star text-warning fa-xs"> </i>
+                    </li>
+                  </ul>
+                  <h4><p class="mb-2">
+                    {{quiz.theme}}
+                  </p></h4>
+                  <p class="card-text">
+                    {{quiz.desc}}
+                  </p>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+    <!-- END OF TESTIMONIALS -->
+
