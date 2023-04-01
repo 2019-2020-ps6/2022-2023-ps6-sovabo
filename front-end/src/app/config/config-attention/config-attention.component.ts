@@ -22,6 +22,7 @@ export class ConfigAttentionComponent {
     this.animations = this.animationsService.getAnimations();
     this.animateur = this.animateurService.getAnimateur();
     this.contrasteTroubleEnable = this.jeuxCouleursService.getVisionAttentionStatus();
+    this.changeContrast();
   }
   toggleAnimations() {
     this.animations = !this.animations;
@@ -37,16 +38,15 @@ export class ConfigAttentionComponent {
     this.contrasteTroubleEnable = !this.contrasteTroubleEnable
     console.log('jeu contraste :'+this.contrasteTroubleEnable);
     this.jeuxCouleursService.setAttentionColor(this.contrasteTroubleEnable);
-
-    this.changeContrast(this.contrasteTroubleEnable);
+    this.changeContrast();
   }
 
-  changeContrast(status: boolean){
+  changeContrast(){
     console.log('changeContrast');
     let tabContainer = document.querySelectorAll('[id=contrastUpContainer]');
     let tabText = document.querySelectorAll('[id=contrastUpText]');
 
-    if(status){
+    if(this.contrasteTroubleEnable){
       if(tabContainer != null){
         tabContainer.forEach(element => {
           element.classList.add('contrastUpContainer');

@@ -12,14 +12,15 @@ export class ConfigVisionComponent {
   AttentionColorStatus: boolean = false;
 
   ngInit() {
-    console.log('ConfigVisionComponent');
   }
 
   constructor(private jeuxCouleursService: JeuxCouleursService) {}
 
   ngOnInit(): void {
+    console.log('ConfigVisionComponent');
     this.jeuxCouleurs = this.jeuxCouleursService.IsVisionColorActivated();
     this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
+    this.changeContrast();
   }
 
   //appel lors du click sur le bouton de choix de vision
@@ -49,8 +50,35 @@ export class ConfigVisionComponent {
     }
   }
 
+  changeContrast(){
+    console.log('changeContrast Vision');
+    let tabContainer = document.querySelectorAll('[id=contrastUpContainer]');
+    let tabText = document.querySelectorAll('[id=contrastUpText]');
 
-
-  
+    if(this.AttentionColorStatus){
+      if(tabContainer != null){
+        tabContainer.forEach(element => {
+          element.classList.add('contrastUpContainer');
+        });
+      }
+      if(tabText != null){
+        tabText.forEach(element => {
+          element.classList.add('contrastUpText');
+        });
+      }
+    }
+    else{
+      if(tabContainer != null){
+        tabContainer.forEach(element => {
+          element.classList.remove('contrastUpContainer');
+        });
+      }
+      if(tabText != null){
+        tabText.forEach(element => {
+          element.classList.remove('contrastUpText');
+        });
+      }
+    }
+  }  
 
 }

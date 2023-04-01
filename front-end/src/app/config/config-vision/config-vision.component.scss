@@ -20,8 +20,6 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-
-    margin-bottom: 5%;
   }
 
   h1{
@@ -30,16 +28,28 @@
     font-weight: 700;
     color: #FFFDF8;
     text-shadow: 8px 8px 0 #1E1E1E;
-    margin: 5% 0 0 22%;
+    margin: 0 0 0 22%;
+  }
   
+  p{
+    font-family: Nunito;
+    font-size: calc((6vh + 10.68vw)/4);
+    font-weight: 900;
+    text-align: center;
+    margin-top: 5vh;
+  
+    background: linear-gradient(90deg, #7D67AA -4.73%, #8791B6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
 //conteneur general
 .generalContainer{
-    width: 75%;
+    width: 80%;
 
     margin: auto;
-    margin-top: 10%;
+    margin-top: 5%;
 
     display: flex;
     flex-direction: column;
@@ -68,15 +78,34 @@
 
 //conteneur des labels
 .labelContainer{
-    width: 25%;
-
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+
+    width: 25%;
+
+    border-right: #1E1E1E;
+    border-width: 10px;
+
+   
 }
 
 //espaces entre les boutons
 app-btn-on-off-colors{
     margin-right: 50%;
+}
+
+
+//SETUP DE CONTRASTE
+.contrastUpText{
+  font-family: Arial, Helvetica, sans-serif;
+  background: rgb(0, 0, 0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.contrastUpContainer{
+  background: rgb(200, 200, 200);
 }
