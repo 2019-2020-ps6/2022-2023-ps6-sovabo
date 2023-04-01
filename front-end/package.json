@@ -33,12 +33,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rxjs": "~7.8.0",
-<<<<<<< HEAD
-    "source-map-support": "^0.5.21",
-=======
     "save": "^2.9.0",
     "startbootstrap-sb-admin-2": "^4.1.4",
->>>>>>> 6aca65ab0f0b338dc487d899e0388ff146157710
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
   },
