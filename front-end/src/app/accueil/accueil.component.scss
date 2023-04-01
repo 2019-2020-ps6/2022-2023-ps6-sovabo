@@ -48,10 +48,24 @@ h1{
   height: 70vh;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .bubble {
   background: rgba(225, 225, 225, 0.5);
   border-radius: 50%;
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
 }
+
 
 #bubble1 {
   position: absolute;
@@ -59,6 +73,7 @@ h1{
   left: 6vw;
   height: 1vw;
   width: 1vw;
+  animation-delay: 0s;
 }
 
 #bubble2 {
@@ -67,6 +82,7 @@ h1{
   left: 3.5vw;
   height: 1.5vw;
   width: 1.5vw;
+  animation-delay: 0.4s;
 }
 
 #bubble3 {
@@ -75,6 +91,7 @@ h1{
   left: 2vw;
   height: 2vw;
   width: 2vw;
+  animation-delay: 0.7s;
 }
 
 #bubble4 {
@@ -83,6 +100,7 @@ h1{
   left: 2.3vw;
   height: 2.5vw;
   width: 2.5vw;
+  animation-delay: 0.9s;
 }
 
 #bubble5 {
@@ -91,6 +109,7 @@ h1{
   left: 5vw;
   height: 3vw;
   width: 3vw;
+  animation-delay: 1.1s;
 }
 
 #bubble6 {
@@ -99,6 +118,7 @@ h1{
   left: 10vw;
   height: 3.5vw;
   width: 3.5vw;
+  animation-delay: 1.4s;
 }
 
 .textContainer {
@@ -115,6 +135,7 @@ h1{
   padding: 5vh 3vw 4vh 3vw;
   color: #FFFDF8;
   text-shadow: 2px 2px 2px #1E1E1E;
+  animation-delay: 1.8s;
 }
 
 .textContainer p {

@@ -28,9 +28,6 @@
   display: flex;
   flex-direction: column;
   align-items: start;
-}
-
-.card-body {
   color: white;
 }
 
@@ -40,14 +37,20 @@
 }
 
 .card-theme {
-  text-shadow: 2px 2px 0 #1E1E1E;
+  text-shadow: 1px 1px 0 white;
+  color: black;
 }
 
 
 .card-text {
-  text-shadow: 1px 1px 0 #1E1E1E;
+  color: black;
 }
 
 .star-icon {
+  color: #FFD700;
+}
+
+.note {
+  font-weight: bold;
   color: #FFD700;
 }

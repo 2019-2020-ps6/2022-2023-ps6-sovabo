@@ -21,12 +21,10 @@
     <div class="difficulty">
       <span id="textDifficulty">DIFFICULTÉ</span>
       <div class="stars">
-        <fa-icon class="yellow-star-icon" [icon]="quizStar" ></fa-icon>
-        <fa-icon class="yellow-star-icon" [icon]="quizStar" ></fa-icon>
-        <fa-icon class="yellow-star-icon" [icon]="quizStar" ></fa-icon>
-        <fa-icon class="yellow-star-icon" [icon]="quizStar" ></fa-icon>
-        <fa-icon class="not-yellow-star-icon" [icon]="quizStar" ></fa-icon>
-        <span class="note">4/5</span>
+
+        <fa-icon class="yellow-star-icon" [icon]="quizStar" *ngFor="let i of [].constructor(quiz.difficulty)"></fa-icon>
+        <fa-icon class="not-yellow-star-icon" [icon]="quizStar" *ngFor="let i of [].constructor(5-quiz.difficulty)"></fa-icon>
+        <span class="note">{{quiz.difficulty}}/5</span>
       </div>
     </div>
   </div>

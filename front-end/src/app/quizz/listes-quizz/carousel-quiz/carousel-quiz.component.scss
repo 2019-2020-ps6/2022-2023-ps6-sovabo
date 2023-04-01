@@ -84,6 +84,33 @@ text-align: center;
   display: flex;
   flex-direction: column;
   align-items: start;
+  color: white;
+}
+
+
+.card-title {
+  text-shadow: 3px 3px 0 #1E1E1E;
+  font-family: DynaPuff;
+}
+
+.card-theme {
+  text-shadow: 1px 1px 0 white;
+  color: black;
+}
+
+
+.card-text {
+  color: black;
+}
+
+.star-icon {
+  color: #FFD700;
+}
+
+.note {
+  font-weight: bold;
+  color: #FFD700;
+  margin-left: 0.3vw;
 }
 
 

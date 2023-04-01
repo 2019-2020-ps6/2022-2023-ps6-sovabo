@@ -9,8 +9,7 @@ export interface Quiz {
     theme?: string;
     statQuiz: StatQuizz;
     questions: Question[];
-
-    
+    difficulty: number;
 }
 
 
