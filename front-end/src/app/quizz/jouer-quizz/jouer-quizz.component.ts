@@ -27,6 +27,8 @@ export class JouerQuizzComponent implements OnInit {
   public currentQuestion: Question = { id: "0", label: '', answers: [] };
   public selectedAnswerIndex: number | null = null;
 
+  public selectedAnswerObject: HTMLElement | null= null;
+
   public isAnswerCorrect: boolean | null = null;
 
   public isQuizFinished: boolean = false;
@@ -64,8 +66,21 @@ export class JouerQuizzComponent implements OnInit {
     }
   }
 
-  selectAnswer(answerIndex: number) {
-    this.selectedAnswerIndex = answerIndex;
+  selectAnswer(event: Event | null) {
+    console.log("coucou");
+    if(event != null){
+      const target = event?.currentTarget as HTMLElement;
+  
+      if(this.selectedAnswerObject != null){
+        this.selectedAnswerObject.classList.remove('selected');
+        this.selectedAnswerObject = target;
+        this.selectedAnswerObject.classList.add('selected');
+      }
+      else{
+        this.selectedAnswerObject = target;
+        this.selectedAnswerObject.classList.add('selected');
+      }
+    }
   }
 
   validateAnswer() {
