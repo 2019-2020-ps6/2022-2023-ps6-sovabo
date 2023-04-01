@@ -16,18 +16,23 @@
             </div>
         </div>
         <div class="check-container">
-            <button (click)="validateAnswer()" [disabled]="selectedAnswerIndex == null" class="check_btn">Valider</button>            
+            <button (click)="validateAnswer()" [disabled]="selectedAnswerIndex == null" class="check_btn">Valider</button>
         </div>
         <div class="buttons-container">
             <div *ngIf="isAnswerCorrect==false && selectedAnswerIndex != questionCorrectIndex" class="wrong-answer"> <!-- Utilisation de questionCorrectIndex pour obtenir l'index de la réponse correcte -->
                 <p>Mauvaise réponse, la bonne réponse est {{ currentQuestion.answers[questionCorrectIndex].value }}</p> <!-- Utilisation de la propriété value de la réponse correcte -->
             </div>
             <button *ngIf="isAnswerCorrect!=null && currentQuestionIndex != quiz.questions.length -1" [disabled]="isQuizFinished == true" (click)="goToNextQuestion()" (click)="goToNextQuestion()" class="next_btn">Question suivante</button> <!-- Utilisation de goToNextQuestion() pour passer à la prochaine question -->
-           
+
             <button *ngIf="isQuizFinished" [routerLink]="['/resultat-quizz']" class="next_btn" >Voir les résultats !</button>
 
-            
+
         </div>
     </div>
+
+  <app-image-animateur></app-image-animateur>
+  <div class="bubble bubble1"></div>
+  <div class="bubble bubble2"></div>
+  <div class="bubble bubble3"></div>
 
 </div>

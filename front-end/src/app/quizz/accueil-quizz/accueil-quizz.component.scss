@@ -116,26 +116,26 @@
   border-radius: 50%;
 }
 
-#bubble1 {
+.bubble1 {
   position: absolute;
-  top: 64.2vh;
-  left: 12vw;
+  top: 59.2%;
+  left: 12%;
   height: 1vw;
   width: 1vw;
 }
 
-#bubble2 {
+.bubble2 {
   position: absolute;
-  top: 59vh;
-  left: 10.5vw;
+  top: 54%;
+  left: 10.5%;
   height: 2vw;
   width: 2vw;
 }
 
-#bubble3 {
+.bubble3 {
   position: absolute;
-  top: 52vh;
-  left: 10vw;
+  top: 46.5%;
+  left: 10%;
   height: 3vw;
   width: 3vw;
 }
@@ -145,8 +145,8 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 22vh;
-  left: 2vw;
+  top: 17%;
+  left: 2%;
   width: 27vw;
   height: 28vh;
   border-radius: 50%;

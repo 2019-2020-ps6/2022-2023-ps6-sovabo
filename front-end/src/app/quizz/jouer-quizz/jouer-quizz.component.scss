@@ -1,17 +1,19 @@
 .question-bubble {
   background-color: rgba(226, 226, 226, 0.359); /* rendre le fond semi-transparent à 70% */
   border: 2px solid #ccc;
-  padding: 10px;
+  padding: 1.5% 3% 1.5% 3%;
   border-radius: 50px;
   top: 100%;
-  margin: auto;
   text-align: center;
-
-  padding-left: 3%;
-  padding-right: 3%;
 
   width: fit-content;
   height: fit-content;
+
+  font-size: 1.5vw;
+  margin-top: 4%;
+
+  font-family: DynaPuff;
+  color: white;
 }
 
 .question-bubble p {
@@ -24,7 +26,8 @@
   display: flex;
 
 
-  margin-top: 5%;
+  margin-top: 2%;
+  margin-left: 15%;
 
   flex-wrap: wrap;
   flex-direction: row;
@@ -37,7 +40,9 @@ input[type=radio] {
 
 label{
   font-weight: bold;
-  font-size: 40px;
+  font-size: 35px;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
 .answer{
@@ -58,7 +63,7 @@ label{
   width: fit-content;
   min-width: 40%;
   height: fit-content;
-  
+
   box-sizing: border-box;
 }
 
@@ -130,4 +135,33 @@ label{
   border-radius: 50px;
   border: none;
   transition: box-shadow 0.3s ease-in;
+}
+
+.bubble {
+  background: rgba(225, 225, 225, 0.5);
+  border-radius: 50%;
+}
+
+.bubble1 {
+  position: absolute;
+  top: 62.2%;
+  left: 12%;
+  height: 1vw;
+  width: 1vw;
+}
+
+.bubble2 {
+  position: absolute;
+  top: 57%;
+  left: 10.5%;
+  height: 2vw;
+  width: 2vw;
+}
+
+.bubble3 {
+  position: absolute;
+  top: 49.5%;
+  left: 10%;
+  height: 3vw;
+  width: 3vw;
 }
