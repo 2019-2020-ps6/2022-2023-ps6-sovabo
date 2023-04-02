@@ -4,15 +4,32 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class JeuxCouleursService {
-  private jeuxCouleurs = false;
+
+  //option trouble de l'attention
+  private attentionColorActivated = false;
+
+  //option torouble de la vision
+  private visionColorActivated = false;
+  private colorSelected :number = 0;
 
   constructor() { }
 
-  getJeuxCouleurs(): boolean {
-    return this.jeuxCouleurs;
+  IsVisionColorActivated(): boolean {return this.visionColorActivated;}
+  IsAttentionColorActivated(): boolean {return this.attentionColorActivated;}
+
+  setAttentionColor(value: boolean){this.attentionColorActivated=value;}
+
+  setVisionColor(value: number) {
+    //console.log('setJeuxCouleurs: ' + value);
+    if(value<0){} // Do nothing
+    else{
+      this.colorSelected=value
+      if(value == 0){this.visionColorActivated = false;}
+      else if(value>0){this.visionColorActivated = true;}
+    }
   }
 
-  setJeuxCouleurs(value: boolean) {
-    this.jeuxCouleurs = value;
-  }
+  getVisionColorSelected(): number {return this.colorSelected;}
+
+  getVisionAttentionStatus(): boolean{return this.attentionColorActivated;}
 }

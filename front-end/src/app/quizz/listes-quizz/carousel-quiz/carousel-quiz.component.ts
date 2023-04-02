@@ -8,7 +8,6 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 declare function carousel(): any;
 
-
 @Component({
   selector: 'app-carousel-quiz',
   templateUrl: './carousel-quiz.component.html',

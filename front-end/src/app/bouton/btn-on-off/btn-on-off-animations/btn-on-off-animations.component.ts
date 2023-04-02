@@ -7,6 +7,7 @@ import {AnimationsService} from "../../../../service/animations.service";
   styleUrls: ['./btn-on-off-animations.component.scss']
 })
 export class BtnOnOffAnimationsComponent {
+  
   isOn: boolean = false;
 
   constructor(private animationsService: AnimationsService) {

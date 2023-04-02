@@ -15,6 +15,7 @@ html, body {
 }
 
 header {
+  padding-top: 4%;
   height: 10%;
   display: flex;
   flex-direction: row;
@@ -23,7 +24,9 @@ header {
 }
 
 .container {
+  padding-top: 1%;
   height: 90%;
+  width: auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -31,9 +34,9 @@ header {
 }
 
 .animateurContainer, .animationContainer, .couleurContainer {
-  width: 30%;
+  min-width: 30%;
   height: 75vh;
-  margin: 1%;
+  padding: 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -73,5 +76,18 @@ p{
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-fill-color: transparent;
 }
+
+.contrastUpText{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 55px;
+  background: rgb(0, 0, 0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.contrastUpContainer{
+  background: rgb(200, 200, 200);
+}
+
