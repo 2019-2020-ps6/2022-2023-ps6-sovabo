@@ -1,7 +1,9 @@
 
-  
+
     <div class="titrePage">
-        <p class="titreStyle"> Statistiques du quizz </p>
+      <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
+      <p class="titreStyle"> Statistiques du quizz </p>
+
     </div>
     <div class="container">
         <div class="row mb-4">
@@ -15,7 +17,7 @@
                         <span class="font-weight-bold ms-1">30 done</span> this month
                       </p>
                     </div>
-                  </div>  
+                  </div>
                 </div>
                 <div class="card-body px-0 pb-2">
                   <div class="table-responsive">
@@ -39,11 +41,11 @@
                             </div>
                           </td>
 
-                          
+
                           <td class="align-middle text-center text-sm">
                             <span class="text-xs font-weight-bold"> {{moyenneTimeReponse}} secondes </span>
                           </td>
-                         
+
                         </tr>
                         <tr>
                             <td>
@@ -56,11 +58,11 @@
                                 </div>
                               </div>
                             </td>
-                            
+
                             <td class="align-middle text-center text-sm">
                               <span class="text-xs font-weight-bold"> 8 </span>
                             </td>
-                           
+
                           </tr>
                           <tr>
                             <td>
@@ -73,11 +75,11 @@
                                 </div>
                               </div>
                             </td>
-                            
+
                             <td class="align-middle text-center text-sm">
                               <span class="text-xs font-weight-bold"> 3/min </span>
                             </td>
-                           
+
                           </tr>
                           <tr>
                             <td>
@@ -90,11 +92,11 @@
                                 </div>
                               </div>
                             </td>
-                            
+
                             <td class="align-middle text-center text-sm">
                               <span class="text-xs font-weight-bold"> 2/2</span>
                             </td>
-                           
+
                           </tr>
                       </tbody>
                     </table>
@@ -114,7 +116,7 @@
                           aria-expanded="false">
                         <i class="" (click)="closePopup()">&times;</i>
                     </a>
-              
+
                     </div>
                   </div>
             <!-- Card Body -->
@@ -125,12 +127,14 @@
                   </div>
             </div>
         </div>
-        
 
 
 
-                           
+
+
     </div>
+
+    <app-btn-clickable-frame-background class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -140,4 +144,3 @@
     <script src="../../assets/js/chart-area-demo.js" defer></script>
 
 
-   

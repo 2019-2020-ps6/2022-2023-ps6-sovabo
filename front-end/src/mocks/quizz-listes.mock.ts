@@ -83,16 +83,20 @@ export const QUIZ_LIST: Quiz[] = [
       statQuiz : STAT_QUIZ,
       desc: 'Vous allez pouvoir tester vos connaissances sur les présidents actuels du monde !',
       questions: [QUESTION_ACTOR, QUESTION_US],
+      difficulty: 4,
       hovered: undefined,
+      image: 'https://i.f1g.fr/media/figaro/1194x804/2017/05/12/XVMcdc579d2-3705-11e7-bae0-7b37d71239eb.jpg'
     },
     {
       id: '2',
       name: 'Les films',
       theme: 'Cinema',
       statQuiz : STAT_QUIZ,
-      desc: 'Les bons films beaufs des années 80, on les aime',
-        questions: [],
+      desc: 'Les bons films beaufs des années 80, on les aime comme le bon vin !',
+      questions: [],
+      difficulty: 3,
       hovered: undefined,
+      image: 'https://thesudercompany.com/wp-content/uploads/2020/01/brian-suder-guide-to-hollywood-1024x683.jpg'
     },
      {
       id: '3',
@@ -101,7 +105,9 @@ export const QUIZ_LIST: Quiz[] = [
       statQuiz : STAT_QUIZ,
       desc:'Quel est le poids de cet aliment ? Un quizz assez sympa à faire en famille',
       questions: [],
-    hovered: undefined,
+       difficulty: 3,
+      hovered: undefined,
+       image: 'https://ichef.bbci.co.uk/news/800/cpsprodpb/1709F/production/_109476349_foodwaste1pile_of_fruit.jpg'
   }
 
 ];

@@ -1,19 +1,53 @@
-<div class="container accueilQuiz" [class.animations]="animations">
-    <div class="titrePage">
-      <p class="titreStyle">{{quiz.name}}</p>
+<div class="accueilQuiz" [class.animations]="animations">
+  <div class="titrePage">
+      <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
+      <p class="titreStyle" *ngIf="!animations">{{quiz.name}}</p>
+      <p class="titreStyle autre-font" *ngIf="animations">{{quiz.name}}</p>
+
+      <div class="btnModifierQuiz">
+        <app-btn-list-quiz id="modifierQuizz" [routerLink]="['/modif-quizz']">
+          <div class="modifyContainer">
+            <img src="../../../assets/Images/modify%20image.png" alt="image modify" class="imageModify">
+            <span id="modifyText">Modifier<br>mon quizz</span>
+          </div>
+        </app-btn-list-quiz>
+      </div>
+  </div>
+
+  <div class="infoQuiz">
+    <div class="nbrTentatives">
+      <span id="textTentative">NOMBRE DE TENTATIVES<br>EFFECTUÉES : 2</span>
     </div>
+    <div class="difficulty">
+      <span id="textDifficulty">DIFFICULTÉ</span>
+      <div class="stars">
 
-    <app-image-animateur *ngIf="getAnimateur()"></app-image-animateur>
+        <fa-icon class="yellow-star-icon" [icon]="quizStar" *ngFor="let i of [].constructor(quiz.difficulty)"></fa-icon>
+        <fa-icon class="not-yellow-star-icon" [icon]="quizStar" *ngFor="let i of [].constructor(5-quiz.difficulty)"></fa-icon>
+        <span class="note">{{quiz.difficulty}}/5</span>
+      </div>
+    </div>
+  </div>
 
+  <div class="bubble bubble1" *ngIf="getAnimateur()"></div>
+  <div class="bubble bubble2" *ngIf="getAnimateur()"></div>
+  <div class="bubble bubble3" *ngIf="getAnimateur()"></div>
+  <div class="bubble textContainer" *ngIf="getAnimateur()">
+    <p>Alors comme ça, tu penses être incollable sur <span style="text-transform: lowercase;">{{quiz.name}}</span> ?</p>
+  </div>
+  <app-image-animateur *ngIf="getAnimateur()"></app-image-animateur>
+
+  <div class="bottomPageContainer">
     <div class="imageContainer">
 
-        <img src="https://mdbootstrap.com/img/Photos/Horizontal/Food/8-col/img (5).jpg" class="img-fluid" />
+        <img [src]="quiz.image" class="img-fluid" />
 
     </div>
 
     <div class="containerButton">
-      <app-btn-clickable-background routerLink="/jouer-quiz/{{quiz.id}}">JOUER</app-btn-clickable-background>
+      <app-btn-clickable-frame-background routerLink="/jouer-quiz/{{quiz.id}}">JOUER</app-btn-clickable-frame-background>
     </div>
+  </div>
 
     <app-btn-clickable-frame-background class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
 
