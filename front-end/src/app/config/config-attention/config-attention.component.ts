@@ -13,6 +13,9 @@ export class ConfigAttentionComponent {
   animateur: boolean = false;
   jeuxCouleurs: boolean = false;
 
+  //type de trouble de la vision
+  contrasteTroubleEnable: boolean = false;
+
 
   constructor(private animationsService: AnimationsService, private animateurService: AnimateurService, private jeuxCouleursService: JeuxCouleursService) {
   }
@@ -20,7 +23,8 @@ export class ConfigAttentionComponent {
   ngOnInit(): void {
     this.animations = this.animationsService.isAnimated;
     this.animateur = this.animateurService.getAnimateur();
-    this.jeuxCouleurs = this.jeuxCouleursService.getJeuxCouleurs();
+    this.contrasteTroubleEnable = this.jeuxCouleursService.getVisionAttentionStatus();
+    this.changeContrast();
   }
   toggleAnimations() {
     this.animations = !this.animations;
@@ -32,9 +36,42 @@ export class ConfigAttentionComponent {
     this.animateurService.setAnimateur(this.animateur);
   }
 
-  toggleJeuxCouleurs() {
-    this.jeuxCouleurs = !this.jeuxCouleurs;
-    this.jeuxCouleursService.setJeuxCouleurs(this.jeuxCouleurs);
+  toggleContrastColor(event: Event | null) {
+    this.contrasteTroubleEnable = !this.contrasteTroubleEnable
+    console.log('jeu contraste :'+this.contrasteTroubleEnable);
+    this.jeuxCouleursService.setAttentionColor(this.contrasteTroubleEnable);
+    this.changeContrast();
   }
 
+
+  changeContrast(){
+    console.log('changeContrast');
+    let tabContainer = document.querySelectorAll('[id=contrastUpContainer]');
+    let tabText = document.querySelectorAll('[id=contrastUpText]');
+
+    if(this.contrasteTroubleEnable){
+      if(tabContainer != null){
+        tabContainer.forEach(element => {
+          element.classList.add('contrastUpContainer');
+        });
+      }
+      if(tabText != null){
+        tabText.forEach(element => {
+          element.classList.add('contrastUpText');
+        });
+      }
+    }
+    else{
+      if(tabContainer != null){
+        tabContainer.forEach(element => {
+          element.classList.remove('contrastUpContainer');
+        });
+      }
+      if(tabText != null){
+        tabText.forEach(element => {
+          element.classList.remove('contrastUpText');
+        });
+      }
+    }
+  }
 }

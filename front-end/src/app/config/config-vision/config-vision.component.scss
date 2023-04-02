@@ -1,0 +1,111 @@
+@font-face {
+    font-family: 'DynaPuff';
+    src: url("~src/assets/Fonts/dynapuff/fonts/variable/DynaPuff[wdth,wght].ttf");
+  }
+  
+  @font-face {
+    font-family: 'Nunito';
+    src: url("~src/assets/Fonts/nunito-main/fonts/variable/Nunito[wght].ttf");
+  }
+  
+  html, body {
+    height: 100%;
+    max-height: 100vh;
+    margin: 0;
+  }
+
+  header {
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  h1{
+    font-family: DynaPuff;
+    font-size: 9vw;
+    font-weight: 700;
+    color: #FFFDF8;
+    text-shadow: 8px 8px 0 #1E1E1E;
+    margin: 0 0 0 22%;
+  }
+  
+  p{
+    font-family: Nunito;
+    font-size: calc((6vh + 10.68vw)/4);
+    font-weight: 900;
+    text-align: center;
+    margin-top: 5vh;
+  
+    background: linear-gradient(90deg, #7D67AA -4.73%, #8791B6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+//conteneur general
+.generalContainer{
+    width: 80%;
+
+    margin: auto;
+    margin-top: 5%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+    background: rgba(255, 255, 255, 0.42);
+    border-radius: 45px;
+}
+
+//generalisation des conteneurs de chaques setups
+.setupContainer{
+    width: 100%;
+    margin: 1%;
+    display: flex;
+    flex-direction: line;
+    align-items: center;
+}
+
+//conteneur des boutons
+.btnContainer{
+    display: flex;
+    flex-direction: line;
+    justify-content: space-between;
+    align-items: center;
+}
+
+//conteneur des labels
+.labelContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 25%;
+
+    border-right: #1E1E1E;
+    border-width: 10px;
+
+   
+}
+
+//espaces entre les boutons
+app-btn-on-off-colors{
+    margin-right: 50%;
+}
+
+
+//SETUP DE CONTRASTE
+.contrastUpText{
+  font-family: Arial, Helvetica, sans-serif;
+  background: rgb(0, 0, 0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.contrastUpContainer{
+  background: rgb(200, 200, 200);
+}

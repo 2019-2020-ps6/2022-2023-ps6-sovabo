@@ -140,6 +140,10 @@ label{
   transition: box-shadow 0.3s ease-in;
 }
 
+.selected{
+  background-color: #ccc;
+}
+
 @keyframes AnimationQuestion{
   0% {
     font-variation-settings: "wght" 700;
