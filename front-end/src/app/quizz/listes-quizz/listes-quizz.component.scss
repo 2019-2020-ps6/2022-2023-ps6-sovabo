@@ -41,18 +41,6 @@
    margin-bottom: 20px;
  }
 
-.hovered {
-  transform: scale(1.05) translateZ(0);
-  transition: transform 0.2s ease-in-out;
-}
-
-.quiz-list .another-hovered {
-  filter: blur(5px);
-}
-
-
-
-
 #creerQuizz{
    margin-top: 2vh;
    margin-bottom: 3vh;

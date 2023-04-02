@@ -7,12 +7,12 @@
         <div id="customers-testimonials"  class="owl-carousel ">
 
             <!--TESTIMONIAL 1 -->
-          <div class="item quiz" *ngFor="let quiz of quizList" routerLink="/accueil-quiz/{{quiz.id}}"
-          (mouseenter)="quiz.hovered = true"
-          (mouseleave)="quiz.hovered = false"
-          [ngClass]="{'another-hovered': isAnotherHovered(quiz) && animationsService.isAnimated}"
-          [ngClass]="{'hovered':  quiz.hovered && animationsService.isAnimated}">
-              <div class="card">
+          <div class="item quiz" *ngFor="let quiz of quizList" routerLink="/accueil-quiz/{{quiz.id}}">
+              <div class="card"
+                   (mouseenter)="quiz.hovered = true"
+                   (mouseleave)="quiz.hovered = false"
+                   [ngClass]="{'another-hovered': isAnotherHovered(quiz) && animationsService.isAnimated}"
+                   [ngClass]="{'hovered':  quiz.hovered && animationsService.isAnimated}">
               <!-- shadow-effect -->
                 <img [src]="quiz.image" class="img-fluid" />
                 <div class="card-body">

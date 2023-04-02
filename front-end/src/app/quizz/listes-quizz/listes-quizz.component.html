@@ -46,11 +46,7 @@
 
   <div class="quiz-list-container" *ngIf="!animationsService.isAnimated; else carousel"  >
     <div class="quiz-list">
-      <div class="quiz"  *ngFor="let quiz of quizList"
-           (mouseenter)="quiz.hovered = true"
-           (mouseleave)="quiz.hovered = false"
-           [ngClass]="{'another-hovered': isAnotherHovered(quiz) && animationsService.isAnimated}"
-           [ngClass]="{'hovered':  quiz.hovered && animationsService.isAnimated}">
+      <div class="quiz"  *ngFor="let quiz of quizList">
         <app-quiz-element [quiz]="quiz" routerLink="/accueil-quiz/{{quiz.id}}"></app-quiz-element>
       </div>
     </div>
