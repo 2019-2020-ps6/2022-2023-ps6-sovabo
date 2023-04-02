@@ -34,7 +34,7 @@
     "react-dom": "^18.2.0",
     "rxjs": "~7.8.0",
     "save": "^2.9.0",
-    "startbootstrap-sb-admin-2": "^4.1.4",
+    "startbootstrap-sb-admin-2": "^3.3.7",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
   },

@@ -4,6 +4,7 @@ import { QuizService } from '../../../service/quizz.service';
 import { Quiz } from '../../../models/quizz.model';
 import {AnimationsService} from "../../../service/animations.service";
 import {AnimateurService} from "../../../service/animateur.service";
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -18,10 +19,11 @@ export class AccueilQuizzComponent {
 
   public quiz!: Quiz;
 
-  constructor(private animateurService: AnimateurService, private route: ActivatedRoute, private quizService: QuizService, private animationsService: AnimationsService) {
-      this.animationDuration = this.animationsService.duration;
-  }
+  quizStar = faStar;
 
+  constructor(private animateurService: AnimateurService, private route: ActivatedRoute, private quizService: QuizService, private animationsService: AnimationsService) {
+    this.animationDuration = this.animationsService.duration;
+  }
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id') ?? '';
     this.quiz = this.quizService.getQuizById(id);
