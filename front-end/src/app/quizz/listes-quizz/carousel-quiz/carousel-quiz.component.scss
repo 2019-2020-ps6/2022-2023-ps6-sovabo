@@ -117,3 +117,11 @@ text-align: center;
 .img-fluid {
   height: 35vh;
 }
+.hovered {
+  transform: scale(1.05) translateZ(0);
+  transition: transform 0.2s ease-in-out;
+}
+
+.another-hovered {
+  filter: blur(5px);
+}
