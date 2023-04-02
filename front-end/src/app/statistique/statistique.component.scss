@@ -1,6 +1,15 @@
+.titrePage{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 22vw;
+  margin-left: 1vw;
+}
+
 .titreStyle {
     font-family: DynaPuff !important;
-    font-size: 5vw !important;
+    font-size: 4vw !important;
     font-weight: 700 !important;
     color: #FFFDF8 !important;
     text-align: center !important;
@@ -27,4 +36,10 @@
     right: 10px;
     font-size: 20px;
     cursor: pointer;
+}
+
+#retour{
+  position: absolute;
+  right: 2vw;
+  bottom: 2vw;
 }
