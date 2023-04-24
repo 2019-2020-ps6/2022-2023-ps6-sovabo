@@ -105,7 +105,7 @@ export const QUIZ_LIST: Quiz[] = [
       statQuiz : STAT_QUIZ,
       desc:'Quel est le poids de cet aliment ? Un quizz assez sympa à faire en famille',
       questions: [],
-       difficulty: 3,
+       difficulty: 1,
       hovered: undefined,
        image: 'https://ichef.bbci.co.uk/news/800/cpsprodpb/1709F/production/_109476349_foodwaste1pile_of_fruit.jpg'
   }
