@@ -11,14 +11,19 @@
   margin: 1% 1% 1% 1%;
 }
 
-
 .infoQuiz{
   min-height: 80vh;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
   grid-template-areas: "leftContainer rightContainer";
+}
 
+.gridWithoutAnimateur{
+  grid-template-columns: 1fr 1fr;
+}
+
+.gridWithAnimateur{
+  grid-template-columns: 2fr 2.5fr 1.5fr;
 }
 
 .leftContainer{
@@ -30,10 +35,9 @@
   align-items: center;
 }
 
-
 .img-fluid {
-  width: 30vw;
-  height: 60vh;
+  width: 25vw;
+  height: 55vh;
   border-radius: 84px;
   box-shadow: 12px 12px 13px rgba(134, 134, 134, 0.25),
   -12px -12px 12px rgba(0, 0, 0, 0.25),
@@ -64,7 +68,7 @@
 
 .rightContainer{
   height: 100%;
-  width: 100%;
+  width: fit-content;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -79,16 +83,14 @@
 .infoComplementaire{
   width: 100%;
   height: 100%;
-
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: start;
-
+  margin-left: 5%;
   font-size: 2vw;
   font-family: Nunito;
   font-weight: 800;
-
 }
 
 .difficulty{
@@ -104,7 +106,6 @@
   width: 15vw;
   margin-right: auto;
   margin-left: 2vw;
-
 }
 
 .difficulty-bar {
@@ -113,7 +114,6 @@
   height: 100%;
   margin-right: 2%;
   border-radius: 2px;
-  //background-color: #ccc;
 }
 
 .note{
@@ -124,3 +124,19 @@
   font-family: 'Nunito';
   src: url("~src/assets/Fonts/nunito-main/fonts/variable/Nunito[wght].ttf");
 }
+
+.animatorContainer{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: end;
+}
+
+.animator-relative {
+  height: 60%;
+  width: 80%;
+  margin: 2%;
+}
+

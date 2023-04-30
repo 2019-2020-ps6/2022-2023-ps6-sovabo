@@ -5,7 +5,8 @@
     <app-btn-clickable-frame-background class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
   </div>
 
-  <div class="infoQuiz">
+  <div class="infoQuiz" [ngClass]="getAnimateur() ? 'gridWithAnimateur' : 'gridWithoutAnimateur'">
+
     <div class="leftContainer">
       <img [src]="quiz.image" class="img-fluid" />
       <div class="btnModifierQuiz">
@@ -19,12 +20,10 @@
 
     <div class="rightContainer">
       <p class="titreStyle">{{quiz.name}}</p>
-
       <div class="infoComplementaire">
         <div class="nbrTentatives">
           <span id="textTentative">NOMBRE DE TENTATIVES<br>EFFECTUÉES : 2</span>
         </div>
-
         <div class="difficulty">
           <span id="textDifficulty">DIFFICULTÉ :</span>
             <div class="difficulty-bars">
@@ -34,7 +33,10 @@
         </div>
       </div>
       <app-btn-clickable-frame-background routerLink="/jouer-quiz/{{quiz.id}}" class="btnJouer">JOUER</app-btn-clickable-frame-background>
+    </div>
 
+    <div class="animatorContainer" *ngIf="getAnimateur()">
+      <img src="../../../assets/Images/Animateur_image.png" alt="Image animateur" class="animator-relative">
     </div>
 
   </div>
