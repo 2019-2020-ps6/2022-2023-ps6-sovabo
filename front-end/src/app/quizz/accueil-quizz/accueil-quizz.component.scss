@@ -140,3 +140,74 @@
   margin: 2%;
 }
 
+$delay: 0.5s;
+$fade-duration: 1s;
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.bubble {
+  background: rgba(225, 225, 225, 0.5);
+  border-radius: 50%;
+  opacity: 0;
+  animation: fadeIn $fade-duration forwards;
+}
+
+.bubble1 {
+  position: absolute;
+  top: 45%;
+  left: 89%;
+  height: 1vw;
+  width: 1vw;
+  animation-delay: $delay * 0;
+}
+
+.bubble2 {
+  position: absolute;
+  top: 33%;
+  left: 87%;
+  height: 2vw;
+  width: 2vw;
+  animation-delay: $delay * 1;
+}
+
+
+.bubble3 {
+  background: rgba(185, 206, 210, 1);
+  position: absolute;
+  top: 20%;
+  left: 82%;
+  height: 3vw;
+  width: 3vw;
+  animation-delay: $delay * 2;
+}
+
+.bubbleTextContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 12vh;
+  width: 100%;
+  border-radius: 25px;
+  margin-right: 5%;
+  margin-left: 5%;
+
+  animation-delay: $delay * 3;
+
+  font-size: 150%;
+  font-family: Nunito;
+  font-weight: 700;
+  text-align: center;
+}
+
+.bubbleTextContainer>p {
+  margin: 0;
+  padding: 0;
+}

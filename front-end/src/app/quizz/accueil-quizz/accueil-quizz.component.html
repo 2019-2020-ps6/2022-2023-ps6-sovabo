@@ -2,6 +2,9 @@
 
   <div class="header">
     <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
+    <div class="bubble bubbleTextContainer" *ngIf="getAnimateur()">
+      <p>Alors comme ça, tu penses être incollable sur <span style="text-transform: lowercase;">{{quiz.name}}</span> ?</p>
+    </div>
     <app-btn-clickable-frame-background class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
   </div>
 
@@ -38,6 +41,12 @@
     <div class="animatorContainer" *ngIf="getAnimateur()">
       <img src="../../../assets/Images/Animateur_image.png" alt="Image animateur" class="animator-relative">
     </div>
-
   </div>
+
+  <div class="bubble bubble1" *ngIf="getAnimateur()"></div>
+  <div class="bubble bubble2" *ngIf="getAnimateur()"></div>
+  <div class="bubble bubble3" *ngIf="getAnimateur()"></div>
+
+
+
 </div>
