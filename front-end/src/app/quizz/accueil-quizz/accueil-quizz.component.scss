@@ -1,115 +1,147 @@
-@font-face
-{
-  font-variation-settings: "wght" 100, "ital" 0;
-  font-family: DynaPuff;
-  src: url("~src/assets/Fonts/dynapuff/fonts/variable/DynaPuff[wdth,wght].ttf");
+.accueilQuiz{
+  min-height: 100vh;
+  width: 100%;
 }
 
-.bottomPageContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-.titrePage {
+.header{
+  height: fit-content;
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-right: 2vw;
-  margin-left: 1vw;
+  margin: 1% 1% 1% 1%;
 }
 
-.infoQuiz {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-right: 4vw;
-  margin-left: 38vw;
-  margin-bottom : 2vh;
-  color: white;
+.infoQuiz{
+  min-height: 80vh;
+  width: 100%;
+  display: grid;
+  grid-template-areas: "leftContainer rightContainer";
 }
 
-.nbrTentatives {
+.gridWithoutAnimateur{
+  grid-template-columns: 1fr 1fr;
+}
+
+.gridWithAnimateur{
+  grid-template-columns: 2fr 2.5fr 1.5fr;
+}
+
+.leftContainer{
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  font-size: 2vw;
-  font-weight: bold;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.difficulty {
+.img-fluid {
+  width: 25vw;
+  height: 55vh;
+  border-radius: 84px;
+  box-shadow: 12px 12px 13px rgba(134, 134, 134, 0.25),
+  -12px -12px 12px rgba(0, 0, 0, 0.25),
+  12px -12px 12px rgba(255, 255, 255, 0.25),
+  -12px 12px 12px rgba(0, 0, 0, 0.25);
+}
+
+.modifyContainer{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#modifyText{
+  font-size: calc(1vw + 1.5vh);
+  padding-top: 2%;
+  padding-bottom: 2%;
+  color: #5E6081;
+  text-shadow: none;
+}
+
+.modifyContainer:hover #modifyText{
+  color: #212529;
+  text-shadow: none;
+}
+
+.rightContainer{
+  height: 100%;
+  width: fit-content;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 2vw;
-  font-weight: bold;
-}
-
-.yellow-star-icon {
-  color: #FFD700;
-}
-
-.not-yellow-star-icon {
-  color: #D3D3D3;
-}
-
-.note {
-  color: #FFD700;
-  margin-left: 1vw;
-  font-weight: bold;
-}
-
-  .imageContainer{
-
-    max-width: 35%;
-  }
-
-  .img-fluid {
-    border-radius: 100px;
-    height: 45vh;
-    width: 35vw;
-  }
-
-.containerButton{
-    margin-top: 3%;
-}
-
-.titreStyle {
-  font-family: DynaPuff;
-  font-weight: 550;
-  //space between letters
-  letter-spacing: 0.03em;
-}
-
-#retour{
-  position: absolute;
-  right: 2vw;
-  bottom: 2vw;
-}
-
-#modifierQuizz {
-  font-size: 1.5vw;
-}
-
-.imageModify {
-  width: 60px;
-  height: 60px;
-}
-
-.modifyContainer {
-  display: flex;
-  flex-direction: row;
+  align-items: start;
   justify-content: space-between;
-  align-items: center;
 }
 
-#modifyText {
-  margin-left: 1vw;
+.btnJouer{
+  align-self: center;
+  margin-bottom: 5%;
 }
+
+.infoComplementaire{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: start;
+  margin-left: 5%;
+  font-size: 2vw;
+  font-family: Nunito;
+  font-weight: 800;
+}
+
+.difficulty{
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.difficulty-bars {
+  display: flex;
+  align-items: center;
+  height: 2vh;
+  width: 15vw;
+  margin-right: auto;
+  margin-left: 2vw;
+}
+
+.difficulty-bar {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  margin-right: 2%;
+  border-radius: 2px;
+}
+
+.note{
+  padding-left: 5%;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url("~src/assets/Fonts/nunito-main/fonts/variable/Nunito[wght].ttf");
+}
+
+.animatorContainer{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: end;
+}
+
+.animator-relative {
+  height: 60%;
+  width: 80%;
+  margin: 2%;
+}
+
+$delay: 0.5s;
+$fade-duration: 1s;
 
 @keyframes fadeIn {
   from {
@@ -124,67 +156,58 @@
   background: rgba(225, 225, 225, 0.5);
   border-radius: 50%;
   opacity: 0;
-  animation-name: fadeIn;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
+  animation: fadeIn $fade-duration forwards;
 }
 
 .bubble1 {
   position: absolute;
-  top: 59.2%;
-  left: 12%;
+  top: 45%;
+  left: 89%;
   height: 1vw;
   width: 1vw;
-  animation-delay: 0s;
+  animation-delay: $delay * 0;
 }
 
 .bubble2 {
   position: absolute;
-  top: 54%;
-  left: 10.5%;
+  top: 33%;
+  left: 87%;
   height: 2vw;
   width: 2vw;
-  animation-delay: 0.5s;
+  animation-delay: $delay * 1;
 }
+
 
 .bubble3 {
+  background: rgba(185, 206, 210, 1);
   position: absolute;
-  top: 46.5%;
-  left: 10%;
+  top: 20%;
+  left: 82%;
   height: 3vw;
   width: 3vw;
-  animation-delay: 1s;
+  animation-delay: $delay * 2;
 }
 
-.textContainer {
+.bubbleTextContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  top: 17%;
-  left: 2%;
-  width: 27vw;
-  height: 28vh;
-  border-radius: 50%;
-  text-shadow: 2px 2px 2px #1E1E1E;
-  padding-top: 4vh;
-  animation-delay: 1.5s;
-}
 
-.textContainer p {
+  height: 12vh;
+  width: 100%;
+  border-radius: 25px;
+  margin-right: 5%;
+  margin-left: 5%;
+
+  animation-delay: $delay * 3;
+
+  font-size: 150%;
+  font-family: Nunito;
+  font-weight: 700;
   text-align: center;
-  font-size: 1.8vw;
-  color: white;
 }
 
-@keyframes DynaPuff {
-  0% {
-    font-variation-settings: "wght" 100, "ital" 0;
-  }
-  50% {
-    font-variation-settings: "wght" 900, "ital" 0;
-  }
-  100% {
-    font-variation-settings: "wght" 100, "ital" 0;
-  }
+.bubbleTextContainer>p {
+  margin: 0;
+  padding: 0;
 }

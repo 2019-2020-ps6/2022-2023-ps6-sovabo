@@ -30,11 +30,27 @@ export class AccueilQuizzComponent {
     this.quizService.setQuizCourant(this.quiz);
     this.animations = this.animationsService.isAnimated;
     this.animationDuration = this.animationsService.duration;
-    console.log(this.animationsService.duration);
   }
 
   getAnimateur() {
     return this.animateurService.getAnimateur();
+  }
+
+  getDifficultyColor(difficulty: number): string {
+    if (difficulty <= 0) {
+      return 'rgba(46,49,54,0.6)'; // Gris
+    }
+    if (difficulty <= 1) {
+      return '#00ff00'; // Vert
+    } else if (difficulty <= 2) {
+      return '#99ff33'; // Vert clair
+    } else if (difficulty <= 3) {
+      return '#ffff00'; // Jaune
+    } else if (difficulty <= 4) {
+      return '#ff6600'; // Orange
+    } else {
+      return '#ff0000'; // Rouge
+    }
   }
 
 }
