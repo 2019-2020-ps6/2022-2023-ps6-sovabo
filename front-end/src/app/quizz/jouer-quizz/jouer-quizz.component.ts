@@ -41,6 +41,9 @@ export class JouerQuizzComponent implements OnInit {
   public endTime: number = 0; // Nouvelle variable endTime
   public firstTime: boolean = true;
 
+  public delay: number = 5000;
+  public timeElapsed: number = 0;
+
   constructor(private route: ActivatedRoute, private quizService: QuizService, private statistiquesService: StatistiqueService,private router: Router, private animateurService: AnimateurService, private animationService: AnimationsService) {}
 
   ngOnInit(): void {
@@ -87,31 +90,48 @@ export class JouerQuizzComponent implements OnInit {
     if (this.selectedAnswerIndex === null) {
       return;
     }
-
+  
     const selectedAnswer = this.currentQuestion?.answers[this.selectedAnswerIndex];
     if (!selectedAnswer) {
       return;
     }
-
-    this.isAnswerCorrect = selectedAnswer.isCorrect;
+  
+    if (selectedAnswer.isCorrect) {
+      this.isAnswerCorrect = true;
+      // la réponse est correcte
+      setTimeout(() => {
+        this.goToNextQuestion();
+      }, this.delay);
+    } else {
+      // la réponse est incorrecte
+      this.isAnswerCorrect = false;
+      setTimeout(() => {
+        this.isAnswerCorrect = null;
+        this.goToNextQuestion();
+      }, this.delay); // afficher la bonne réponse pendant 7 secondes (5 + 2)
+    }
+  
     if (selectedAnswer.isCorrect) {
       this.quizService.addScore();
     }
-
+  
     this.selectedAnswerIndex = null;
-
-    if(this.currentQuestionIndex == this.quiz.questions.length-2){
+  
+    if (this.currentQuestionIndex == this.quiz.questions.length-2) {
       this.isLastQuestion = true;
     }
-
+  
     //gestion du temps
     this.endTime = Date.now();
     const timeTaken = (this.endTime - this.startTime) / 1000;
     this.valueTime.push(timeTaken);
-
+  
+    console.log(selectedAnswer.isCorrect);
     //check win
     this.checkWin();
   }
+  
+  
 
 
 
@@ -127,7 +147,7 @@ export class JouerQuizzComponent implements OnInit {
       this.startTime = Date.now();
 
     }
-
+    this.timeElapsed = 0;
     this.currentQuestionIndex++;
     this.currentQuestion = this.quiz.questions[this.currentQuestionIndex];
     this.questionCorrectIndex = this.getCorrectAnswerIndex(this.currentQuestion);
