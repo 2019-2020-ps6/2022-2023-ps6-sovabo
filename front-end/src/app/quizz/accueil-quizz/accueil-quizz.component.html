@@ -1,24 +1,52 @@
-<div class="container accueilQuiz" [class.animations]="animations">
-    <div class="titrePage">
-      <p class="titreStyle">{{quiz.name}}</p>
+<div class="accueilQuiz">
+
+  <div class="header">
+    <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
+    <div class="bubble bubbleTextContainer" *ngIf="getAnimateur()">
+      <p>Alors comme ça, tu penses être incollable sur <span style="text-transform: lowercase;">{{quiz.name}}</span> ?</p>
     </div>
-
-    <app-image-animateur *ngIf="getAnimateur()"></app-image-animateur>
-
-    <div class="imageContainer">
-
-        <img src="https://mdbootstrap.com/img/Photos/Horizontal/Food/8-col/img (5).jpg" class="img-fluid" />
-
-    </div>
-
-    <div class="containerButton">
-      <app-btn-clickable-background routerLink="/jouer-quiz/{{quiz.id}}">JOUER</app-btn-clickable-background>
-    </div>
-
     <app-btn-clickable-frame-background class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
+  </div>
 
+  <div class="infoQuiz" [ngClass]="getAnimateur() ? 'gridWithAnimateur' : 'gridWithoutAnimateur'">
+
+    <div class="leftContainer">
+      <img [src]="quiz.image" class="img-fluid" />
+      <div class="btnModifierQuiz">
+        <app-btn-list-quiz id="modifierQuizz" [routerLink]="['/modif-quizz']">
+          <div class="modifyContainer">
+            <span id="modifyText">Modifier le quiz</span>
+          </div>
+        </app-btn-list-quiz>
+      </div>
+    </div>
+
+    <div class="rightContainer">
+      <p class="titreStyle">{{quiz.name}}</p>
+      <div class="infoComplementaire">
+        <div class="nbrTentatives">
+          <span id="textTentative">NOMBRE DE TENTATIVES<br>EFFECTUÉES : 2</span>
+        </div>
+        <div class="difficulty">
+          <span id="textDifficulty">DIFFICULTÉ :</span>
+            <div class="difficulty-bars">
+              <span class="difficulty-bar" *ngFor="let i of [1, 2, 3, 4, 5]" [style.backgroundColor]="getDifficultyColor(i <= quiz.difficulty ? quiz.difficulty : 0)"></span>
+              <span class="note">{{quiz.difficulty}}/5</span>
+            </div>
+        </div>
+      </div>
+      <app-btn-clickable-frame-background routerLink="/jouer-quiz/{{quiz.id}}" class="btnJouer">JOUER</app-btn-clickable-frame-background>
+    </div>
+
+    <div class="animatorContainer" *ngIf="getAnimateur()">
+      <img src="../../../assets/Images/Animateur_image.png" alt="Image animateur" class="animator-relative">
+    </div>
+  </div>
+
+  <div class="bubble bubble1" *ngIf="getAnimateur()"></div>
+  <div class="bubble bubble2" *ngIf="getAnimateur()"></div>
+  <div class="bubble bubble3" *ngIf="getAnimateur()"></div>
 
 
 
 </div>
-
