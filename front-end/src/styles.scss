@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'DynaPuff';
+  src: url('../../front-end/src/assets/Fonts/dynapuff/fonts/variable/DynaPuff[wdth,wght].ttf');
+}
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+
+
+body{
+  display: flex;
+  background: linear-gradient(90deg, #7C65A9 0%, #96D4CA 100%);
+  overflow: hidden;
+}
+
+app-root{
+  width: 100%;
+}
+
+.titreStyle {
+  font-family: DynaPuff;
+  font-size: 5vw;
+  font-weight: 700;
+  color: #FFFDF8;
+  text-align: center;
+  text-shadow: 8px 8px 0 #1E1E1E;
+}
+
+

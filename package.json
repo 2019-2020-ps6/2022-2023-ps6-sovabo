@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "react-angular": "^0.4.0",
+    "react-icons": "^4.8.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.31",
+    "@types/react-dom": "^18.0.11"
+  }
+}

@@ -1,0 +1,220 @@
+.question-bubble {
+  background-color: rgba(226, 226, 226, 0.359); /* rendre le fond semi-transparent à 70% */
+  border: 2px solid #ccc;
+  padding: 10px;
+  border-radius: 50px;
+  top: 100%;
+  margin: auto;
+  text-align: center;
+
+  padding-left: 3%;
+  padding-right: 3%;
+
+  width: fit-content;
+  height: fit-content;
+}
+
+.question-bubble p {
+  animation: AnimationQuestion infinite;
+  font-family: Nunito;
+  font-size: 2.3em;
+  font-weight: bold;
+  align-items: center;
+  white-space: nowrap; /* Ajout de la propriété pour forcer le texte sur une seule ligne */
+
+}
+
+.answers-container{
+  display: flex;
+
+
+  margin-top: 5%;
+
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+input[type=radio] {
+  display: none;
+}
+
+label{
+  animation: AnimationAnswer ;
+  animation-delay: 1s;
+  font-family: Nunito;
+
+  font-weight: bold;
+  font-size: 2.8em;
+}
+
+.answer{
+  /*border: 2px solid #ccc;*/
+
+  padding: 10px;
+
+  padding-left: 2%;
+  padding-right: 2%;
+
+  margin: 3%;
+
+  border-radius: 50px;
+
+  text-align: center;
+
+  display: inline-block;
+  width: fit-content;
+  min-width: 40%;
+  height: fit-content;
+
+  box-sizing: border-box;
+}
+
+.answer:hover{
+  background-color: #ccc;
+}
+
+/* A FINIR */
+.answer input:checked ~ .checkmark{
+  background-color: #ccc;
+}
+
+.check-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; /* Ajouter une marge en haut pour l'espace */
+}
+
+.check-container button {
+  margin: 0 10px; /* Ajouter une marge à gauche et à droite pour séparer les boutons */
+}
+
+.check_btn{
+  background-color: #1eff0081;
+  border: 2px solid #ccc;
+  border-radius: 50px;
+  padding: 10px;
+  padding-left: 2%;
+  padding-right: 2%;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+  display: inline-block;
+  width: fit-content;
+  height: fit-content;
+}
+
+.wrong-answer{
+  color: #c00000;
+  font-size: 25px;
+  width: fit-content;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  font-weight: bold;
+
+  border-radius: 50px;
+  padding: 10px;
+  padding-top: 20px;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.good-answer{
+  color: #1eff00;
+  font-size: 25px;
+  width: fit-content;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  font-weight: bold;
+
+  border-radius: 50px;
+  padding: 10px;
+  padding-top: 20px;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.timer {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+.next_btn{
+  display: flex;
+  font-weight: bold;
+  font-size: 30px;
+  color: #FFFFFF;
+  text-shadow: -1px 4px 1px #7C66A9;
+
+  padding: 20px 30px;
+  width: fit-content;
+  margin-right: auto;
+  margin-left: auto;
+
+  background: rgba(207, 207, 207, 0.4);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 1px 1px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 50px;
+  border: none;
+  transition: box-shadow 0.3s ease-in;
+}
+
+.selected{
+  background-color: #ccc;
+}
+
+@keyframes AnimationQuestion{
+  0% {
+    font-variation-settings: "wght" 700;
+    font-size: 2.3em;
+  }
+  25% {
+    font-variation-settings: "wght" 700;
+    font-size: 2.3em;
+  }
+  50% {
+    font-variation-settings: "wght" 900;
+    font-size: 3.2em;
+  }
+  75% {
+    font-variation-settings: "wght" 700;
+    font-size: 2.3em;
+  }
+  100% {
+    font-variation-settings: "wght" 700;
+    font-size: 2.3em;
+  }
+}
+
+@keyframes AnimationAnswer{
+  0% {
+    font-variation-settings: "wght" 700;
+    font-size: 2.8em;
+  }
+  25% {
+    font-variation-settings: "wght" 700;
+    font-size: 2.8em;
+  }
+  50% {
+    font-variation-settings: "wght" 900;
+    font-size: 3.5em;
+  }
+  75% {
+    font-variation-settings: "wght" 700;
+    font-size: 2.8em;
+  }
+  100% {
+    font-variation-settings: "wght" 700;
+    font-size: 2.8em;
+  }
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('~src/assets/Fonts/nunito-main/fonts/variable/Nunito[wght].ttf');
+}

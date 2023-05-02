@@ -1,0 +1,35 @@
+
+  <div class="titrePage">
+    <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
+    <p class="titreStyle">Les présidents</p>
+
+  </div>
+
+<div class="pageContainer">
+  <div class="bubble">
+      <p>Bravo, tu as fini le quizz, ton score est de {{score}}</p>
+      <div id="container" routerLink="/statistiques-quiz">
+        <button class="learn-more">
+      <span class="circle" aria-hidden="true">
+        <span class="icon arrow"></span>
+      </span>
+          <span class="button-text">Voir les stats</span>
+        </button>
+      </div>
+
+
+  </div>
+
+
+
+  <app-image-animateur></app-image-animateur>
+  <div class="containerButtons">
+    <app-btn-clickable-frame-background routerLink="/accueil-quiz/{{quiz.id}}">REJOUER</app-btn-clickable-frame-background>
+    <app-btn-clickable-frame-background routerLink="/liste-quizz">CONTINUER</app-btn-clickable-frame-background>
+  </div>
+
+
+
+
+
+</div>

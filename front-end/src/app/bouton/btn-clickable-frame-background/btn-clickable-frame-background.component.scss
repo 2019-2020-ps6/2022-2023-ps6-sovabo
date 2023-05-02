@@ -1,0 +1,36 @@
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('../../../assets/Fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf');
+}
+.my-button {
+  font-family: "Roboto Mono";
+  font-weight: bold;
+  font-size: 2.8vw;
+  color: #FFFFFF;
+  text-shadow: -1px 4px 1px #7C66A9;
+
+  padding: 20px 30px;
+
+  width: fit-content;
+  height: fit-content;
+  background: rgba(207, 207, 207, 0.4);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 1px 1px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 50px;
+  border: none;
+  transition: box-shadow 0.3s ease-in;
+}
+
+.my-button:hover{
+  box-shadow: inset 5px -5px 4px rgba(0, 0, 0, 0.25),
+              inset -5px 5px 4px rgba(0, 0, 0, 0.25),
+              inset -5px -5px 4px rgba(0, 0, 0, 0.25),
+              inset 5px 5px 4px rgba(0, 0, 0, 0.25);
+}
+
+//SETUP DE CONTRASTE
+.contrastUpContainer{
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+  background: rgb(200, 200, 200);
+  text-shadow: none;
+}
