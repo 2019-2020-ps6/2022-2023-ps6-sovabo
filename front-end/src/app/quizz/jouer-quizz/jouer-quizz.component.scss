@@ -2,13 +2,12 @@
   background-color: rgba(226, 226, 226, 0.359);
   border: 2px solid #ccc;
   border-radius: 50px;
+  margin-top: 2%;
   margin: auto;
   text-align: center;
-
   padding: 10px 3%;
-
   width: auto;
-  height: fit-content;
+  height: 6.2em;
 }
 
 .svg {
@@ -21,7 +20,7 @@
   stroke-width: 2px;
 }
 
-text {
+.question-text {
   font-family: Nunito;
   font-weight: bold;
   font-size: 3.2em;
@@ -60,10 +59,10 @@ text {
 
 .answers-container{
   display: flex;
-  margin-top: 5%;
+  margin-top: 2%;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 input[type=radio] {
@@ -81,13 +80,15 @@ input[type=radio] {
 
 
 label {
-  animation: AnimationAnswer 13s infinite;
-  animation-delay: 2s;
-  animation-duration: 13s;
-
   font-family: Nunito;
   font-weight: bold;
   font-size: 2.8em;
+}
+
+.animated-label {
+  animation: AnimationAnswer 13s infinite;
+  animation-delay: 2s;
+  animation-duration: 13s;
 }
 
 
@@ -99,7 +100,7 @@ label {
   padding-left: 2%;
   padding-right: 2%;
 
-  margin: 3%;
+  margin: 2%;
 
   border-radius: 50px;
 
@@ -140,7 +141,7 @@ label {
   padding: 10px;
   padding-left: 2%;
   padding-right: 2%;
-  font-size: 1.5em;
+  font-size: 2em;
   font-weight: bold;
   text-align: center;
   display: inline-block;
@@ -214,4 +215,13 @@ label {
 @font-face {
   font-family: 'Nunito';
   src: url('~src/assets/Fonts/nunito-main/fonts/variable/Nunito[wght].ttf');
+}
+
+img {
+  transform: scaleX(-1);
+  position: absolute;
+  height: 35%;
+  width: 16%;
+  left: 1%;
+  //bottom: -3%;
 }
