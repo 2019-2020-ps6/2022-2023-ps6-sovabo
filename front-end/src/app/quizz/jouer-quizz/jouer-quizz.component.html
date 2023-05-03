@@ -7,7 +7,7 @@
 
     <div class="question-bubble">
       <svg class="text-line" *ngIf="animations">
-        <text class="question-text" x="50%" y="40%" text-anchor="middle" dominant-baseline="middle">{{ currentQuestion.label }}</text>
+        <text [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}" class="question-text" x="50%" y="40%" text-anchor="middle" dominant-baseline="middle">{{ currentQuestion.label }}</text>
       </svg>
       <div class="question-text" *ngIf="!animations">{{ currentQuestion.label }}</div>
     </div>
