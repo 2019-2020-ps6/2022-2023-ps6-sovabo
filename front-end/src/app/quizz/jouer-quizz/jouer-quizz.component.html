@@ -1,36 +1,38 @@
 <div class="container">
-    <div class="quizz-container">
-      <div class="titrePage">
-        <p class="titreStyle">{{quiz.name}}</p>
-      </div>
-      <div class="question-bubble">
-        <p [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}">Q{{currentQuestion.id}} : {{currentQuestion.label}}</p>
-        <div class="timer">{{ timeElapsed | number: '1.0-1' }} s</div>
+  <div class="quizz-container">
+    <div class="titrePage">
+      <p class="titreStyle">{{quiz.name}}</p>
+    </div>
+    <div class="timer">{{ timeElapsed | number: '1.0-1' }} s</div>
 
-      </div>
-      <div class="answers-container">
-        <div *ngFor="let answer of currentQuestion?.answers; let i = index" class="answer" (click)="selectAnswer($event)">
-          <input type="radio" name="answer" id="answer{{ i }}" [(ngModel)]="selectedAnswerIndex" [value]="i" (click)="selectAnswer($event)">
-          <label [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}" for="answer{{ i }}">{{ answer.value }}</label>
-        </div>
-      </div>
-      <div class="check-container">
-        <button (click)="validateAnswer()" [disabled]="selectedAnswerIndex == null" class="check_btn">Valider</button>
-      </div>
-      <div class="buttons-container">
-        <div *ngIf="isAnswerCorrect == false && selectedAnswerIndex != questionCorrectIndex" class="wrong-answer">
-          <p>Mauvaise réponse, la bonne réponse est {{ currentQuestion.answers[questionCorrectIndex].value }}</p>
-        </div>
-        <div *ngIf="isAnswerCorrect == true && selectedAnswerIndex != questionCorrectIndex" class="good-answer">
-            <p>Bonne réponse ! </p>
-          </div>
-        <button *ngIf="isAnswerCorrect != null && currentQuestionIndex != quiz.questions.length -1" [disabled]="isQuizFinished == true" (click)="goToNextQuestion()" class="next_btn">Question suivante</button>
-        <button *ngIf="isQuizFinished" [routerLink]="['/resultat-quizz']" class="next_btn">Voir les résultats !</button>
+    <div class="question-bubble">
+      <svg class="text-line">
+        <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle">{{ currentQuestion.label }}</text>
+      </svg>
+    </div>
+
+    <div class="answers-container">
+      <div *ngFor="let answer of currentQuestion?.answers; let i = index" class="answer" (click)="selectAnswer($event)">
+        <input type="radio" name="answer" id="answer{{ i }}" [(ngModel)]="selectedAnswerIndex" [value]="i" (click)="selectAnswer($event)">
+        <label [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}" for="answer{{ i }}">{{ answer.value }}</label>
       </div>
     </div>
-    <div class="bubble bubble1"></div>
-    <div class="bubble bubble2"></div>
-    <div class="bubble bubble3"></div>
-    <app-image-animateur *ngIf="getAnimateur()"></app-image-animateur>
+    <div class="check-container">
+      <button (click)="validateAnswer()" [disabled]="selectedAnswerIndex == null" class="check_btn">Valider</button>
+    </div>
+    <div class="buttons-container">
+      <div *ngIf="isAnswerCorrect == false && selectedAnswerIndex != questionCorrectIndex" class="wrong-answer">
+        <p>Mauvaise réponse, la bonne réponse est {{ currentQuestion.answers[questionCorrectIndex].value }}</p>
+      </div>
+      <div *ngIf="isAnswerCorrect == true && selectedAnswerIndex != questionCorrectIndex" class="good-answer">
+        <p>Bonne réponse ! </p>
+      </div>
+      <button *ngIf="isAnswerCorrect != null && currentQuestionIndex != quiz.questions.length -1" [disabled]="isQuizFinished == true" (click)="goToNextQuestion()" class="next_btn">Question suivante</button>
+      <button *ngIf="isQuizFinished" [routerLink]="['/resultat-quizz']" class="next_btn">Voir les résultats !</button>
+    </div>
   </div>
-  
+  <div class="bubble bubble1"></div>
+  <div class="bubble bubble2"></div>
+  <div class="bubble bubble3"></div>
+  <app-image-animateur *ngIf="getAnimateur()"></app-image-animateur>
+</div>
