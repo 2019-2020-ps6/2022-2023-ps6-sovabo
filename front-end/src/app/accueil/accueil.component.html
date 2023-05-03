@@ -19,8 +19,9 @@
   <div class="bubble textContainer" *ngIf="getAnimateur()">
     <p>Bienvenue sur Polyquiz !<br>Es-tu prêt à tester tes connaissances ?</p>
   </div>
-  <app-image-animateur *ngIf="getAnimateur()"></app-image-animateur>
-
+  <div class="animatorContainer" *ngIf="getAnimateur()">
+    <img src="../../assets/Images/Animateur_image.png" alt="Image animateur" class="animator-relative">
+  </div>
 
   <div class="rightContainer">
     <app-btn-clickable-background class="navigation" [routerLink]="['/configuration']">CONFIGURATION</app-btn-clickable-background>
