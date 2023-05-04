@@ -125,19 +125,12 @@
   src: url("~src/assets/Fonts/nunito-main/fonts/variable/Nunito[wght].ttf");
 }
 
-.animatorContainer{
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  align-items: end;
-}
-
 .animator-relative {
-  height: 60%;
-  width: 80%;
-  margin: 2%;
+  position: absolute;
+  height: 40%;
+  width: 20%;
+  right: 1%;
+  bottom: -1.5%
 }
 
 $delay: 0.5s;
@@ -161,31 +154,49 @@ $fade-duration: 1s;
 
 .bubble1 {
   position: absolute;
-  top: 45%;
-  left: 89%;
+  top: 56%;
+  left: 90%;
   height: 1vw;
   width: 1vw;
-  animation-delay: $delay * 0;
+  animation-delay: 0s;
 }
 
 .bubble2 {
   position: absolute;
-  top: 33%;
-  left: 87%;
-  height: 2vw;
-  width: 2vw;
-  animation-delay: $delay * 1;
+  top: 46.5%;
+  left: 91%;
+  height: 1.5vw;
+  width: 1.5vw;
+  animation-delay: 0.4s;
 }
 
-
 .bubble3 {
+  position: absolute;
+  top: 36%;
+  left: 89.5%;
+  height: 2vw;
+  width: 2vw;
+  animation-delay: 0.7s;
+}
+
+.bubble4 {
   background: rgba(185, 206, 210, 1);
   position: absolute;
-  top: 20%;
-  left: 82%;
+  top: 25.5%;
+  left: 87%;
+  height: 2.5vw;
+  width: 2.5vw;
+  animation-delay: 0.9s;
+}
+
+.bubble5 {
+  background: rgba(185, 206, 210, 1);
+  position: absolute;
+  top: 16%;
+  left: 82.5%;
   height: 3vw;
   width: 3vw;
-  animation-delay: $delay * 2;
+  animation-delay: 1.2s;
 }
 
 .bubbleTextContainer {
@@ -199,7 +210,7 @@ $fade-duration: 1s;
   margin-right: 5%;
   margin-left: 5%;
 
-  animation-delay: $delay * 3;
+  animation-delay: 1.6s;
 
   font-size: 150%;
   font-family: Nunito;
