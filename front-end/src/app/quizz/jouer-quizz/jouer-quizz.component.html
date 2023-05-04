@@ -5,7 +5,7 @@
       </div>
       <div class="question-bubble">
         <p [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}">Q{{currentQuestion.id}} : {{currentQuestion.label}}</p>
-        <div class="timer">{{ timeElapsed | number: '1.0-1' }} s</div>
+        <div class="timer">{{ timeRemaining }} s</div>
 
       </div>
       <div class="answers-container">
