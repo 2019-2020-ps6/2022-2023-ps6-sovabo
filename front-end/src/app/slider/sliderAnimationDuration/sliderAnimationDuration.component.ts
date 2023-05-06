@@ -7,16 +7,18 @@ import {AnimationsService} from "../../../service/animations.service";
   styleUrls: ['./sliderAnimationDuration.component.scss']
 })
 export class SliderAnimationDurationComponent {
-  public duration: string | undefined ;
+  public position: number;
+
 
   constructor(private animationsService: AnimationsService) {
-    this.duration = this.animationsService.duration;
+    this.position = this.animationsService.positionCursorSlider;
   }
 
 
   onDurationChange() {
+    this.animationsService.positionCursorSlider = this.position;
     // @ts-ignore
-    this.animationsService.duration = `${(this.duration-10)*(-1)}s`;
+    this.animationsService.duration = `${(this.position-10)*(-1)}s`;
   }
 
 }

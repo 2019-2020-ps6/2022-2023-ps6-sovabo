@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class AnimationsService {
   public isAnimated = false;
   public duration: string | undefined = "5s";
+  public positionCursorSlider: number = 4;
 
 
   constructor() { }

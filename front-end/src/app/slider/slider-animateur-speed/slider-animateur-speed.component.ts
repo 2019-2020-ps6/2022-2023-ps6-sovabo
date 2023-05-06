@@ -8,15 +8,16 @@ import {AnimateurService} from "../../../service/animateur.service";
   styleUrls: ['./slider-animateur-speed.component.scss']
 })
 export class SliderAnimateurSpeedComponent {
-  public duration: string | undefined ;
+  public position: number ;
 
   constructor(private animateurService: AnimateurService) {
-    this.duration = this.animateurService.duration;
+    this.position = this.animateurService.positionCursorSlider;
   }
 
 
   onDurationChange() {
+    this.animateurService.positionCursorSlider = this.position;
     // @ts-ignore
-    this.animateurService.duration = `${(this.duration-10)*(-1)}s`;
+    this.animateurService.duration = `${(this.position-10)*(-1)}s`;
   }
 }

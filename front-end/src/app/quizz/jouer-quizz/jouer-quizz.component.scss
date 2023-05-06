@@ -1,52 +1,96 @@
 .question-bubble {
-  background-color: rgba(226, 226, 226, 0.359); /* rendre le fond semi-transparent à 70% */
+  background-color: rgba(226, 226, 226, 0.359);
   border: 2px solid #ccc;
-  padding: 10px;
   border-radius: 50px;
-  top: 100%;
+  margin-top: 2%;
   margin: auto;
   text-align: center;
-
-  padding-left: 3%;
-  padding-right: 3%;
-
-  width: fit-content;
-  height: fit-content;
+  padding: 10px 3%;
+  width: auto;
+  height: 6.2em;
 }
 
-.question-bubble p {
-  animation: AnimationQuestion infinite;
-  font-family: Nunito;
-  font-size: 2.3em;
-  font-weight: bold;
-  align-items: center;
-  white-space: nowrap; /* Ajout de la propriété pour forcer le texte sur une seule ligne */
+.svg {
+  height: auto;
+  width: auto;
+}
 
+.text-line{
+  stroke: #212529;
+  stroke-width: 2px;
+}
+
+.question-text {
+  font-family: Nunito;
+  font-weight: bold;
+  font-size: 3.2em;
+  white-space: nowrap;
+}
+
+.text-line text {
+  stroke-dasharray: 500;
+  stroke-dashoffset: 500;
+  animation: dash 4s linear forwards infinite alternate, filling 4s ease-in-out forwards infinite alternate;
+}
+
+@media (min-width: 600px) {
+  svg {
+    height: 100px;
+    width: 100%;
+  }
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes filling {
+  from{
+    fill: #212529;
+    fill-opacity: 0;
+  }
+  to {
+    fill: #212529;
+    fill-opacity: 1;
+  }
 }
 
 .answers-container{
   display: flex;
-
-
-  margin-top: 5%;
-
+  margin-top: 2%;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 input[type=radio] {
   display: none;
 }
 
-label{
-  animation: AnimationAnswer ;
-  animation-delay: 1s;
-  font-family: Nunito;
+@keyframes AnimationAnswer{
+  0%, 35%, 65%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
 
+
+label {
+  font-family: Nunito;
   font-weight: bold;
   font-size: 2.8em;
 }
+
+.animated-label {
+  animation: AnimationAnswer 13s infinite;
+  animation-delay: 2s;
+  animation-duration: 13s;
+}
+
 
 .answer{
   /*border: 2px solid #ccc;*/
@@ -56,7 +100,7 @@ label{
   padding-left: 2%;
   padding-right: 2%;
 
-  margin: 3%;
+  margin: 2%;
 
   border-radius: 50px;
 
@@ -97,7 +141,7 @@ label{
   padding: 10px;
   padding-left: 2%;
   padding-right: 2%;
-  font-size: 1.5em;
+  font-size: 2em;
   font-weight: bold;
   text-align: center;
   display: inline-block;
@@ -168,6 +212,69 @@ label{
   background-color: #ccc;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.bubble {
+  background: rgba(225, 225, 225, 0.5);
+  border-radius: 50%;
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+#bubble1 {
+  position: absolute;
+  top: 61vh;
+  left: 6vw;
+  height: 1vw;
+  width: 1vw;
+  animation-delay: 0s;
+}
+
+#bubble2 {
+  position: absolute;
+  top: 55vh;
+  left: 3.5vw;
+  height: 1.5vw;
+  width: 1.5vw;
+  animation-delay: 0.4s;
+}
+
+#bubble3 {
+  position: absolute;
+  top: 47vh;
+  left: 2vw;
+  height: 2vw;
+  width: 2vw;
+  animation-delay: 0.7s;
+}
+
+#bubble4 {
+  position: absolute;
+  top: 38vh;
+  left: 2.3vw;
+  height: 2.5vw;
+  width: 2.5vw;
+  animation-delay: 0.9s;
+}
+
+#bubble5 {
+  position: absolute;
+  top: 28vh;
+  left: 5vw;
+  height: 3vw;
+  width: 3vw;
+  animation-delay: 1.1s;
+}
+
 @keyframes AnimationQuestion{
   0% {
     font-variation-settings: "wght" 700;
@@ -188,29 +295,6 @@ label{
   100% {
     font-variation-settings: "wght" 700;
     font-size: 2.3em;
-  }
-}
-
-@keyframes AnimationAnswer{
-  0% {
-    font-variation-settings: "wght" 700;
-    font-size: 2.8em;
-  }
-  25% {
-    font-variation-settings: "wght" 700;
-    font-size: 2.8em;
-  }
-  50% {
-    font-variation-settings: "wght" 900;
-    font-size: 3.5em;
-  }
-  75% {
-    font-variation-settings: "wght" 700;
-    font-size: 2.8em;
-  }
-  100% {
-    font-variation-settings: "wght" 700;
-    font-size: 2.8em;
   }
 }
 
