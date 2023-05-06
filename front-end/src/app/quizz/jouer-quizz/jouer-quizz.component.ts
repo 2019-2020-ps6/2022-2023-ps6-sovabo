@@ -25,9 +25,11 @@ export class JouerQuizzComponent implements OnInit {
 
   public currentQuestionIndex: number = 0;
   public currentQuestion: Question = { id: "0", label: '', answers: [] };
+
+  public validateAnswerBool: boolean = false;
   public selectedAnswerIndex: number | null = null;
 
-  public selectedAnswerObject: HTMLElement | null= null;
+  public selectedAnswerObject?: HTMLElement;
 
   public isAnswerCorrect: boolean | null = null;
 
@@ -42,11 +44,18 @@ export class JouerQuizzComponent implements OnInit {
   public firstTime: boolean = true;
 
   public delay: number = 5000;
-  public timeElapsed: number = 0;
+
+  public timeRemaining: number = 10;
+
+  private timerId: any | undefined;
+
+
+
 
   constructor(private route: ActivatedRoute, private quizService: QuizService, private statistiquesService: StatistiqueService,private router: Router, private animateurService: AnimateurService, private animationService: AnimationsService) {}
 
   ngOnInit(): void {
+    this.timerId = undefined; // ou null
     this.quiz = this.quizService.getQuizCourant();
     this.currentQuestion = this.quiz.questions[this.currentQuestionIndex];
     this.questionCorrectIndex = this.getCorrectAnswerIndex(this.currentQuestion);
@@ -56,21 +65,43 @@ export class JouerQuizzComponent implements OnInit {
     this.startTime = Date.now();
     this.valueTime = [];
     this.animationDuration = this.animationService.duration;
-    console.log(this.animations);
-    console.log(this.animationService.duration);
+    this.startTimer();
 
   }
 
   checkWin(){
     if (this.currentQuestionIndex === this.quiz.questions.length - 1) {
-
       this.statistiquesService.ajouterMoyenneTimeResponseAuQuizCourant(this.calculerMoyenne());
       this.isQuizFinished = true;
     }
+
   }
 
+  startTimer() {
+    this.timeRemaining = 5;
+    this.timerId = setInterval(() => {
+      if (this.timeRemaining > 0) {
+        this.timeRemaining--;
+      } else {
+        if (this.timerId !== undefined) {
+          clearInterval(this.timerId);
+          this.validateAnswer();
+          if (!this.isLastQuestion) {
+            setTimeout(() => {
+              this.goToNextQuestion();
+            }, 5000); // délai de 5 secondes
+          }
+        }
+      }
+    }, 1000);
+  }
+  
+  
+
+  
+  
+
   selectAnswer(event: Event | null) {
-    console.log("coucou");
     if(event != null){
       const target = event?.currentTarget as HTMLElement;
   
@@ -87,73 +118,70 @@ export class JouerQuizzComponent implements OnInit {
   }
 
   validateAnswer() {
-    if (this.selectedAnswerIndex === null) {
-      return;
-    }
+    this.validateAnswerBool = true;
+    const selectedAnswer = this.currentQuestion?.answers[this.selectedAnswerIndex ?? -1];
   
-    const selectedAnswer = this.currentQuestion?.answers[this.selectedAnswerIndex];
-    if (!selectedAnswer) {
-      return;
-    }
-  
-    if (selectedAnswer.isCorrect) {
-      this.isAnswerCorrect = true;
-      // la réponse est correcte
-      setTimeout(() => {
-        this.goToNextQuestion();
-      }, this.delay);
-    } else {
-      // la réponse est incorrecte
-      this.isAnswerCorrect = false;
-      setTimeout(() => {
-        this.isAnswerCorrect = null;
-        this.goToNextQuestion();
-      }, this.delay); // afficher la bonne réponse pendant 7 secondes (5 + 2)
-    }
-  
-    if (selectedAnswer.isCorrect) {
-      this.quizService.addScore();
-    }
-  
-    this.selectedAnswerIndex = null;
-  
-    if (this.currentQuestionIndex == this.quiz.questions.length-2) {
-      this.isLastQuestion = true;
-    }
+    
+    // Arrêter le timer
+    clearTimeout(this.timerId);
+   
   
     //gestion du temps
     this.endTime = Date.now();
     const timeTaken = (this.endTime - this.startTime) / 1000;
     this.valueTime.push(timeTaken);
-  
-    console.log(selectedAnswer.isCorrect);
+
     //check win
     this.checkWin();
+  
+    if(!selectedAnswer){
+      this.isAnswerCorrect = false;
+      return;
+    }
+    
+    if (selectedAnswer.isCorrect) {
+      this.isAnswerCorrect = true;
+      this.quizService.addScore();
+
+    } else {
+      this.isAnswerCorrect = false;
+    }
+  
+    this.selectedAnswerIndex = null;
+  
+    
+    
   }
+  
   
   
 
 
 
   goToNextQuestion() {
+    this.validateAnswerBool = false; 
     //gestion du temps, si c'est pas la première question alors on reset le timer quand on va a la prochaine question
     if(!this.firstTime){
       this.endTime = Date.now();
       const timeTaken = (this.endTime - this.startTime) / 1000;
       this.valueTime.push(timeTaken);
       this.startTime = Date.now();
-    }else{//si c'est la première question alors il faut commencer le timer quand on va a la prochaine question car quand le component se charge le timer commence
+    } else { //si c'est la première question alors il faut commencer le timer quand on va a la prochaine question car quand le component se charge le timer commence
       this.firstTime = false;
       this.startTime = Date.now();
-
     }
-    this.timeElapsed = 0;
+    
+  
     this.currentQuestionIndex++;
     this.currentQuestion = this.quiz.questions[this.currentQuestionIndex];
     this.questionCorrectIndex = this.getCorrectAnswerIndex(this.currentQuestion);
     this.isAnswerCorrect = null;
-
+    if (this.currentQuestionIndex == this.quiz.questions.length - 1) {
+      this.isLastQuestion = true;
+    }
+    this.startTimer();
   }
+  
 
   getCorrectAnswerIndex(question: Question): number {
     for (let i = 0; i < question.answers.length; i++) {
