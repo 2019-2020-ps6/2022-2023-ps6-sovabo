@@ -35,7 +35,7 @@
             </div>
         </div>
       </div>
-      <app-btn-clickable-frame-background routerLink="/jouer-quiz/{{quiz.id}}" class="btnJouer">JOUER</app-btn-clickable-frame-background>
+      <app-btn-clickable-frame-background routerLink="/jouer-quiz/{{quiz.id}}" (click)="resetScore()" class="btnJouer">JOUER</app-btn-clickable-frame-background>
     </div>
 
     <div class="animatorContainer" *ngIf="getAnimateur()">

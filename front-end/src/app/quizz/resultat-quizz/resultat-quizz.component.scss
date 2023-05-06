@@ -1,10 +1,20 @@
-.titrePage{
+.titrePage {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-right: 27vw;
-  margin-left: 1vw;
+  padding: 10px;
+}
+
+#quizName {
+  margin: 0;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#polyquizHome {
+  margin-right: 10px;
 }
 
 .containerButtons {
@@ -23,6 +33,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .bubble {
@@ -32,7 +43,7 @@
   flex-direction: column;
   width: 40vw;
   height: 45vh;
-  border-radius: 50%;
+  border-radius: 49%;
   background-color: rgba(255, 255, 255, 0.3);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   text-align: center;
@@ -74,6 +85,7 @@ button {
   &.learn-more {
     width: 18rem;
     height: 3.7rem;
+    font-size: 1.4rem;
     .circle {
       @include transition(all, 0.45s, cubic-bezier(0.65,0,.076,1));
       position: relative;
