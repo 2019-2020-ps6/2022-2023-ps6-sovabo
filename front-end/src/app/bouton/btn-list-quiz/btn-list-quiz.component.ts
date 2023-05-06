@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
 
 @Component({
   selector: 'app-btn-list-quiz',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./btn-list-quiz.component.scss']
 })
 export class BtnListQuizComponent {
+  constructor(private jeuxCouleursService: JeuxCouleursService){}
+  contrasteTroubleEnable :boolean = this.jeuxCouleursService.getVisionAttentionStatus();
+
 
 }

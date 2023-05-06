@@ -5,22 +5,22 @@
 
 <div class="container">
 
-  <div id="contrastUpContainer" class="animateurContainer">
-    <p id="contrastUpText">Animateur</p>
+  <div [ngClass]="{'contrastUpContrainer' : this.contrasteTroubleEnable}" class="animateurContainer">
+    <p [ngClass]="{'contrastUpText' : this.contrasteTroubleEnable}">Animateur</p>
     <app-btn-on-off-animateur (click)="toggleAnimateur()"></app-btn-on-off-animateur>
     <app-slider-animateur-speed class="app-slider"></app-slider-animateur-speed>
     <img *ngIf="animateur" src="./assets/Images/Animateur_image.png" alt="Image animateur" id="imageAnimateur">
   </div>
 
-  <div  id="contrastUpContainer" class="animationContainer">
-    <p id="contrastUpText">Animations</p>
+  <div  [ngClass]="{'contrastUpContrainer' : this.contrasteTroubleEnable}" class="animationContainer">
+    <p [ngClass]="{'contrastUpText' : this.contrasteTroubleEnable}">Animations</p>
     <app-btn-on-off-animations (click)="toggleAnimations()"></app-btn-on-off-animations>
-    <p  id="contrastUpText">Vitesse <br> Animations</p>
+    <p  [ngClass]="{'contrastUpText' : this.contrasteTroubleEnable}">Vitesse <br> Animations</p>
     <app-sliderAnimationDuration class="app-slider"></app-sliderAnimationDuration>
   </div>
 
-  <div  id="contrastUpContainer" class="couleurContainer">
-    <p id="contrastUpText"> Meilleur <br> Contraste </p>
+  <div  [ngClass]="{'contrastUpContrainer' : this.contrasteTroubleEnable}" class="couleurContainer">
+    <p [ngClass]="{'contrastUpText' : this.contrasteTroubleEnable}"> Meilleur <br> Contraste </p>
     <app-btn-on-off-colors (click)="toggleContrastColor($event)"></app-btn-on-off-colors>
   </div>
 
