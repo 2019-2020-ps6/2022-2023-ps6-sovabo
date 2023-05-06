@@ -8,37 +8,58 @@
           <app-btn-list-quiz id="creerQuizz" [routerLink]="['/creer-quizz']">Créer mon quizz</app-btn-list-quiz>
           <app-btn-list-quiz id="configQuizz" [routerLink]="['/configuration']">
             <div class="settingsContainer">
-              <img src="../../../assets/Images/settings.png" alt="image settings" class="imageSettings">
+              <img src="../../../assets/Images/settings%20image.png" alt="image settings" class="imageSettings">
               <span id="settingsText">Paramètres<br>des quizz</span>
             </div>
           </app-btn-list-quiz>
       </div>
   </div>
   <div class="selectionQuiz">
-    <div class="recherche"><span id="rechercheText">Recherche …</span></div>
-    <div class="catégorie"><span id="catégorieText">Choisissez une catégorie</span></div>
+    <div class="container">
+
+      <div class="row height d-flex justify-content-center align-items-center">
+
+        <div class="col-md-6">
+
+          <div class="form">
+            <i class="fa fa-search"></i>
+            <input type="text" class="form-control form-input" placeholder="Titre du quiz …">
+            <span class="left-pan"><i class="fa fa-microphone"></i></span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Catégorie
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <button class="dropdown-item" type="button">Action</button>
+        <button class="dropdown-item" type="button">Another action</button>
+        <button class="dropdown-item" type="button">Something else here</button>
+      </div>
+    </div>
   </div>
 
   <div class="quiz-list-container" *ngIf="!animationsService.isAnimated; else carousel"  >
     <div class="quiz-list">
-      <div class="quiz"  *ngFor="let quiz of quizList"
-           (mouseenter)="quiz.hovered = true"
-           (mouseleave)="quiz.hovered = false"
-           [ngClass]="{'another-hovered': isAnotherHovered(quiz) && animationsService.isAnimated}"
-           [ngClass]="{'hovered':  quiz.hovered && animationsService.isAnimated}">
+      <div class="quiz"  *ngFor="let quiz of quizList">
         <app-quiz-element [quiz]="quiz" routerLink="/accueil-quiz/{{quiz.id}}"></app-quiz-element>
       </div>
     </div>
   </div>
 
   <ng-template #carousel>
-    
-    
+
+
       <app-carousel-quiz ></app-carousel-quiz>
 
-      
+
   </ng-template>
-  
+
 
 
 </div>
