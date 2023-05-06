@@ -1,26 +1,26 @@
 <header>
-  <h1>PolyQuiz</h1>
+  <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpText' : ''" class="titreStyle">PolyQuiz</h1>
   <app-btn-clickable-background onclick="history.go(-1);">RETOUR</app-btn-clickable-background>
 </header>
 
 <div class="container">
 
-  <div [ngClass]="{'contrastUpContrainer' : this.contrasteTroubleEnable}" class="animateurContainer">
-    <p [ngClass]="{'contrastUpText' : this.contrasteTroubleEnable}">Animateur</p>
+  <div [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}" class="animateurContainer">
+    <p [ngClass]="{'contrastUpTextExtrude' : this.contrasteTroubleEnable}">Animateur</p>
     <app-btn-on-off-animateur (click)="toggleAnimateur()"></app-btn-on-off-animateur>
     <app-slider-animateur-speed class="app-slider"></app-slider-animateur-speed>
     <img *ngIf="animateur" src="./assets/Images/Animateur_image.png" alt="Image animateur" id="imageAnimateur">
   </div>
 
-  <div  [ngClass]="{'contrastUpContrainer' : this.contrasteTroubleEnable}" class="animationContainer">
-    <p [ngClass]="{'contrastUpText' : this.contrasteTroubleEnable}">Animations</p>
+  <div  [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}" class="animationContainer">
+    <p [ngClass]="{'contrastUpTextExtrude' : this.contrasteTroubleEnable}">Animations</p>
     <app-btn-on-off-animations (click)="toggleAnimations()"></app-btn-on-off-animations>
-    <p  [ngClass]="{'contrastUpText' : this.contrasteTroubleEnable}">Vitesse <br> Animations</p>
+    <p  [ngClass]="{'contrastUpTextExtrude' : this.contrasteTroubleEnable}">Vitesse <br> Animations</p>
     <app-sliderAnimationDuration class="app-slider"></app-sliderAnimationDuration>
   </div>
 
-  <div  [ngClass]="{'contrastUpContrainer' : this.contrasteTroubleEnable}" class="couleurContainer">
-    <p [ngClass]="{'contrastUpText' : this.contrasteTroubleEnable}"> Meilleur <br> Contraste </p>
+  <div  [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}" class="couleurContainer">
+    <p [ngClass]="{'contrastUpTextExtrude' : this.contrasteTroubleEnable}"> Meilleur <br> Contraste </p>
     <app-btn-on-off-colors (click)="toggleContrastColor($event)"></app-btn-on-off-colors>
   </div>
 

@@ -6,13 +6,13 @@ import { Injectable } from '@angular/core';
 export class JeuxCouleursService {
 
   //option trouble de l'attention
-  private attentionColorActivated = false;
+  private attentionColorActivated = true;
 
   //option torouble de la vision
   private visionColorActivated = false;
   private colorSelected :number = 0;
 
-  constructor() { }
+  constructor() {}
 
   IsVisionColorActivated(): boolean {return this.visionColorActivated;}
   IsAttentionColorActivated(): boolean {return this.attentionColorActivated;}

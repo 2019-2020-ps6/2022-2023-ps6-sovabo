@@ -1,6 +1,6 @@
 <div class="container">
 
-  <h1>PolyQuiz</h1>
+  <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpText' : ''" class="titreStyle">PolyQuiz</h1>
 
   <div id="container parametre">
     <app-btn-clickable-frame-background class="navigation" [routerLink]="['/configurationVision']">PARAMETRE <br>

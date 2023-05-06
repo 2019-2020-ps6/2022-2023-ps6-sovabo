@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Quiz } from '../../../models/quizz.model';
 import { QuizService } from '../../../service/quizz.service';
+import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
 
 
 @Component({
@@ -14,7 +15,9 @@ export class ResultatQuizzComponent {
   score!: number;
   public quiz!: Quiz;
 
-  constructor(private route: ActivatedRoute, private quizService: QuizService) {
+  contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
+
+  constructor(private route: ActivatedRoute, private quizService: QuizService,  private jeuxCouleursService: JeuxCouleursService) {
   }
 
   ngOnInit() {

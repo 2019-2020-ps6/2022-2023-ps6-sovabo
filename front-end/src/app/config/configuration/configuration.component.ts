@@ -8,7 +8,7 @@ import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
 })
 export class ConfigurationComponent {
   AttentionColorStatus: boolean = false;
-
+  contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
   constructor(private jeuxCouleursService: JeuxCouleursService) {}
 
   ngOnInit(): void {
@@ -46,7 +46,7 @@ export class ConfigurationComponent {
         });
       }
     }
-  }  
+  }
 
 
 

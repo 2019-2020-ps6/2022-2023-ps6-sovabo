@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Quiz } from '../../../../models/quizz.model';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import {JeuxCouleursService} from "../../../../service/jeux-couleurs.service";
 
 @Component({
   selector: 'app-quiz-element',
@@ -13,8 +14,9 @@ export class QuizElementComponent {
   quiz!: Quiz;
 
   quizStar = faStar;
+  contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
 
-  constructor() {
+  constructor( private jeuxCouleursService: JeuxCouleursService) {
   }
 
   ngOnInit(): void {

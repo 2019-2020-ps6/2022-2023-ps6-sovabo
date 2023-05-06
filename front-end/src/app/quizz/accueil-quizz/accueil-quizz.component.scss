@@ -53,7 +53,7 @@
   align-items: center;
 }
 
-#modifyText{
+.modifyText{
   font-size: calc(1vw + 1.5vh);
   padding-top: 2%;
   padding-bottom: 2%;
@@ -61,7 +61,7 @@
   text-shadow: none;
 }
 
-.modifyContainer:hover #modifyText{
+.modifyContainer:hover{
   color: #212529;
   text-shadow: none;
 }
@@ -210,4 +210,15 @@ $fade-duration: 1s;
 .bubbleTextContainer>p {
   margin: 0;
   padding: 0;
+}
+
+
+//GESTION CONTRASTE
+.contrastUpTextExtrude{
+  text-shadow: none;
+  color: black;
+}
+
+.contrastUpContainer{
+  background: rgb(200, 200, 200);
 }

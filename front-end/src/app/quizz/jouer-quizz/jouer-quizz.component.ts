@@ -9,6 +9,7 @@ import { StatQuizz } from 'src/models/quizz.stat.model';
 
 import {AnimateurService} from "../../../service/animateur.service";
 import {AnimationsService} from "../../../service/animations.service";
+import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
 
 
 @Component({
@@ -49,10 +50,15 @@ export class JouerQuizzComponent implements OnInit {
 
   private timerId: any | undefined;
 
+  contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
 
-
-
-  constructor(private route: ActivatedRoute, private quizService: QuizService, private statistiquesService: StatistiqueService,private router: Router, private animateurService: AnimateurService, private animationService: AnimationsService) {}
+  constructor(private route: ActivatedRoute,
+              private quizService: QuizService,
+              private statistiquesService: StatistiqueService,
+              private router: Router,
+              private animateurService: AnimateurService,
+              private animationService: AnimationsService,
+              private jeuxCouleursService: JeuxCouleursService) {}
 
   ngOnInit(): void {
     this.timerId = undefined; // ou null
@@ -95,16 +101,16 @@ export class JouerQuizzComponent implements OnInit {
       }
     }, 1000);
   }
-  
-  
 
-  
-  
+
+
+
+
 
   selectAnswer(event: Event | null) {
     if(event != null){
       const target = event?.currentTarget as HTMLElement;
-  
+
       if(this.selectedAnswerObject != null){
         this.selectedAnswerObject.classList.remove('selected');
         this.selectedAnswerObject = target;
@@ -120,12 +126,12 @@ export class JouerQuizzComponent implements OnInit {
   validateAnswer() {
     this.validateAnswerBool = true;
     const selectedAnswer = this.currentQuestion?.answers[this.selectedAnswerIndex ?? -1];
-  
-    
+
+
     // Arrêter le timer
     clearTimeout(this.timerId);
-   
-  
+
+
     //gestion du temps
     this.endTime = Date.now();
     const timeTaken = (this.endTime - this.startTime) / 1000;
@@ -133,12 +139,12 @@ export class JouerQuizzComponent implements OnInit {
 
     //check win
     this.checkWin();
-  
+
     if(!selectedAnswer){
       this.isAnswerCorrect = false;
       return;
     }
-    
+
     if (selectedAnswer.isCorrect) {
       this.isAnswerCorrect = true;
       this.quizService.addScore();
@@ -146,20 +152,20 @@ export class JouerQuizzComponent implements OnInit {
     } else {
       this.isAnswerCorrect = false;
     }
-  
+
     this.selectedAnswerIndex = null;
-  
-    
-    
+
+
+
   }
-  
-  
-  
+
+
+
 
 
 
   goToNextQuestion() {
-    this.validateAnswerBool = false; 
+    this.validateAnswerBool = false;
     //gestion du temps, si c'est pas la première question alors on reset le timer quand on va a la prochaine question
     if(!this.firstTime){
       this.endTime = Date.now();
@@ -170,8 +176,8 @@ export class JouerQuizzComponent implements OnInit {
       this.firstTime = false;
       this.startTime = Date.now();
     }
-    
-  
+
+
     this.currentQuestionIndex++;
     this.currentQuestion = this.quiz.questions[this.currentQuestionIndex];
     this.questionCorrectIndex = this.getCorrectAnswerIndex(this.currentQuestion);
@@ -181,7 +187,7 @@ export class JouerQuizzComponent implements OnInit {
     }
     this.startTimer();
   }
-  
+
 
   getCorrectAnswerIndex(question: Question): number {
     for (let i = 0; i < question.answers.length; i++) {

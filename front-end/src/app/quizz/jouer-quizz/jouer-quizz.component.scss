@@ -71,7 +71,7 @@ label{
 }
 
 .answer:hover{
-  background-color: #ccc;
+  background-color: white;
 }
 
 /* A FINIR */
@@ -280,4 +280,13 @@ label{
 @font-face {
   font-family: 'Nunito';
   src: url('~src/assets/Fonts/nunito-main/fonts/variable/Nunito[wght].ttf');
+}
+
+.contrastUpTextExtrude{
+  text-shadow: none;
+  color: black;
+}
+
+.contrastUpContainer{
+  background: rgb(200, 200, 200);
 }
