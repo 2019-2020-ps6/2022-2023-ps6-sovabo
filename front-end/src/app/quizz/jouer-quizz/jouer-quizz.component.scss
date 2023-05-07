@@ -145,7 +145,7 @@ label{
   font-weight: bold;
   color: #333;
 }
-.next_btn{
+.next_btnContrastOff{
   display: flex;
   font-weight: bold;
   font-size: 30px;
@@ -162,6 +162,29 @@ label{
   border-radius: 50px;
   border: none;
   transition: box-shadow 0.3s ease-in;
+}
+
+.next_btnContrastOn{
+  display: flex;
+  font-weight: bold;
+  font-size: 30px;
+  color: #000000;
+  text-shadow: none;
+
+  padding: 20px 30px;
+  width: fit-content;
+  margin-right: auto;
+  margin-left: auto;
+
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 1px 1px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 50px;
+  border: none;
+}
+
+.contrastUpTextExtrude{
+  color: #000000;
+  text-shadow: none;
+  text-decoration: none;
 }
 
 .selected{
@@ -282,11 +305,3 @@ label{
   src: url('~src/assets/Fonts/nunito-main/fonts/variable/Nunito[wght].ttf');
 }
 
-.contrastUpTextExtrude{
-  text-shadow: none;
-  color: black;
-}
-
-.contrastUpContainer{
-  background: rgb(200, 200, 200);
-}

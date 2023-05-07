@@ -21,45 +21,24 @@ img {
   filter: drop-shadow(0.5vw 1vh 0px #000000);
 }
 
-//GESTION CONTRASTE
-
 .contrastUpContainer{
-  color: black;
-  text-shadow: none;
-  background: rgb(200, 200, 200);
-  text-shadow: none;
-  border-radius: 20px;
-  border: none;
-
+  border-radius: 100px;
 }
 
-.contrastUpText{
-  color: black;
-  text-shadow: none;
-}
-
-.contrastDownTextExtrude{
-  padding: 10px;
-
-  font-family: DynaPuff;
-  font-size: 3vw;
-  font-weight: 700;
-  color: #FFFDF8;
-  text-shadow: 0.5vw 1vh 0 #1E1E1E;
-  text-decoration: none;
-}
-
-.contrastUpTextExtrude{
-  padding: 10px;
-
-  font-family: DynaPuff;
-  font-size: 3vw;
-  font-weight: 700;
+.contrastUpButton{
+  font-family: "Roboto Mono";
+  font-weight: bold;
+  font-size: 2.8vw;
   color: #000000;
-  text-shadow: none;
   text-decoration: none;
+
+  padding: 10px 20px;
+  margin: 5px ;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 100px;
+  border: none;
 }
 
-.imgContrastUp{
-  filter: invert(1);
-}
+
+

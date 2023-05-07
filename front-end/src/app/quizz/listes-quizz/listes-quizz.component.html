@@ -2,7 +2,7 @@
 
   <div class="titrePage">
       <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
-      <p class="titreStyleContrastOff"> Liste des quizz</p>
+      <p [ngClass]="this.contrasteTroubleEnable ? 'titreStyleContrastOn' : 'titreStyleContrastOff'" > Liste des quizz</p>
 
       <div class="btnCreerConfig">
           <app-btn-list-quiz id="creerQuizz" [routerLink]="['/creer-quizz']">Créer mon quizz</app-btn-list-quiz>
@@ -49,11 +49,7 @@
   </div>
 
   <ng-template #carousel>
-
-
       <app-carousel-quiz ></app-carousel-quiz>
-
-
   </ng-template>
 
 

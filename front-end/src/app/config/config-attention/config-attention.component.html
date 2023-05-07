@@ -1,11 +1,11 @@
 <header>
-  <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpText' : ''" class="titreStyle">PolyQuiz</h1>
+  <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTitleExtrude' : ''" class="titreStyle">PolyQuiz</h1>
   <app-btn-clickable-background onclick="history.go(-1);">RETOUR</app-btn-clickable-background>
 </header>
 
 <div class="container">
 
-  <div [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}" class="animateurContainer">
+  <div [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer' : 'animateurContainer'" class="animateurContainer">
     <p [ngClass]="{'contrastUpTextExtrude' : this.contrasteTroubleEnable}">Animateur</p>
     <app-btn-on-off-animateur (click)="toggleAnimateur()"></app-btn-on-off-animateur>
     <app-slider-animateur-speed class="app-slider"></app-slider-animateur-speed>

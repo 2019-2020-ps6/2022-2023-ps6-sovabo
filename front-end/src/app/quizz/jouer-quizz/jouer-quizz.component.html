@@ -24,8 +24,8 @@
         <div *ngIf="isAnswerCorrect == true && selectedAnswerIndex != questionCorrectIndex" class="good-answer">
             <p>Bonne réponse ! </p>
           </div>
-        <button *ngIf="isAnswerCorrect != null && currentQuestionIndex != quiz.questions.length -1" [disabled]="isQuizFinished == true" (click)="goToNextQuestion()" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && contrastUpTextExtrude' : ''" class="next_btn">Question suivante</button>
-        <button *ngIf="isQuizFinished" [routerLink]="['/resultat-quizz']" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && contrastUpTextExtrude' : ''" class="next_btn">Voir les résultats !</button>
+        <button *ngIf="isAnswerCorrect != null && currentQuestionIndex != quiz.questions.length -1" [disabled]="isQuizFinished == true" (click)="goToNextQuestion()" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && next_btnContrastOn' : 'next_btnContrastOff'" >Question suivante</button>
+        <button *ngIf="isQuizFinished" [routerLink]="['/resultat-quizz']" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && next_btnContrastOn' : 'next_btnContrastOff'">Voir les résultats !</button>
       </div>
     </div>
     <div class="bubble" id="bubble1" *ngIf="getAnimateur()"></div>

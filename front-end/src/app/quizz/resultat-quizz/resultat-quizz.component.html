@@ -6,7 +6,7 @@
   </div>
 
 <div class="pageContainer">
-  <div [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && contrastUpText' : ''" class="bubble">
+  <div [ngClass]="this.contrasteTroubleEnable ? 'bubble_contrastOn && contrastUpContainer' : 'bubble_contrastOff'" >
       <p>Bravo, tu as fini le quizz, ton score est de {{score}}</p>
       <div id="container" routerLink="/statistiques-quiz">
         <button class="learn-more">
