@@ -25,19 +25,30 @@ img {
   border-radius: 100px;
 }
 
-.contrastUpButton{
-  font-family: "Roboto Mono";
-  font-weight: bold;
-  font-size: 2.8vw;
-  color: #000000;
-  text-decoration: none;
+.contrastDownButton{
+  padding: 10px;
 
-  padding: 10px 20px;
-  margin: 5px ;
-  width: fit-content;
-  height: fit-content;
-  border-radius: 100px;
-  border: none;
+  font-family: DynaPuff;
+  font-size: 3vw;
+  font-weight: 700;
+  color: #FFFDF8;
+  text-shadow: 0.5vw 1vh 0 #1E1E1E;
+  text-decoration: none;
+}
+
+.contrastUpButton{
+  padding: 10px;
+
+  font-family: DynaPuff;
+  font-size: 3vw;
+  font-weight: 700;
+  color: #000000;
+  text-shadow: none;
+  text-decoration: none;
+}
+
+.imgContrastUp{
+  filter: invert(1);
 }
 
 

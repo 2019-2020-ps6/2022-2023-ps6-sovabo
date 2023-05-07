@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class JeuxCouleursService {
 
   //option trouble de l'attention
-  private attentionColorActivated = true;
+  private attentionColorActivated = false;
 
   //option torouble de la vision
   private visionColorActivated = false;
