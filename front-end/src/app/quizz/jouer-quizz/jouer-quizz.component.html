@@ -4,14 +4,16 @@
         <p [ngClass]="this.contrasteTroubleEnable ? 'contrastUpText' : ''" class="titreStyle">{{quiz.name}}</p>
       </div>
       <div class="question-bubble">
-        <p [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}">Q{{currentQuestion.id}} : {{currentQuestion.label}}</p>
+        <svg class="text-line" *ngIf="animations">
+          <text [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}" class="question-text" x="50%" y="40%" text-anchor="middle" dominant-baseline="middle">{{ currentQuestion.label }}</text>
+        </svg>
         <div class="timer">{{ timeRemaining }} s</div>
 
       </div>
       <div class="answers-container">
         <div [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer' : ''"  *ngFor="let answer of currentQuestion?.answers; let i = index" class="answer" (click)="selectAnswer($event)">
           <input type="radio" name="answer" id="answer{{ i }}" [(ngModel)]="selectedAnswerIndex" [value]="i" (click)="selectAnswer($event)">
-          <label [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}" for="answer{{ i }}">{{ answer.value }}</label>
+          <label [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}" for="answer{{ i }}" [class]="animations ? 'animated-label' : ''">{{ answer.value }}</label>
         </div>
       </div>
       <div class="check-container">

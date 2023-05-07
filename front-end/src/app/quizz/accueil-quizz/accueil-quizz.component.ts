@@ -55,4 +55,7 @@ export class AccueilQuizzComponent {
     }
   }
 
+  resetScore() {
+    this.quizService.resetScore();
+  }
 }

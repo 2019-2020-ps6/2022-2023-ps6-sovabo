@@ -8,14 +8,14 @@
   <div [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer' : 'animateurContainer'" class="animateurContainer">
     <p [ngClass]="{'contrastUpTextExtrude' : this.contrasteTroubleEnable}">Animateur</p>
     <app-btn-on-off-animateur (click)="toggleAnimateur()"></app-btn-on-off-animateur>
-    <app-slider-animateur-speed class="app-slider"></app-slider-animateur-speed>
+    <app-slider-animateur-speed *ngIf="animateur" class="app-slider"></app-slider-animateur-speed>
     <img *ngIf="animateur" src="./assets/Images/Animateur_image.png" alt="Image animateur" id="imageAnimateur">
   </div>
 
   <div  [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}" class="animationContainer">
     <p [ngClass]="{'contrastUpTextExtrude' : this.contrasteTroubleEnable}">Animations</p>
     <app-btn-on-off-animations (click)="toggleAnimations()"></app-btn-on-off-animations>
-    <p  [ngClass]="{'contrastUpTextExtrude' : this.contrasteTroubleEnable}">Vitesse <br> Animations</p>
+    <p  *ngIf="animations"  [ngClass]="{'contrastUpTextExtrude' : this.contrasteTroubleEnable}">Vitesse <br> Animations</p>
     <app-sliderAnimationDuration class="app-slider"></app-sliderAnimationDuration>
   </div>
 
