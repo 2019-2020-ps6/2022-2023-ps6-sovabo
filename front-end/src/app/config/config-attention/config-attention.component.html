@@ -16,7 +16,7 @@
     <p [ngClass]="{'contrastUpTextExtrude' : this.contrasteTroubleEnable}">Animations</p>
     <app-btn-on-off-animations (click)="toggleAnimations()"></app-btn-on-off-animations>
     <p  *ngIf="animations"  [ngClass]="{'contrastUpTextExtrude' : this.contrasteTroubleEnable}">Vitesse <br> Animations</p>
-    <app-sliderAnimationDuration class="app-slider"></app-sliderAnimationDuration>
+    <app-sliderAnimationDuration *ngIf="animations" class="app-slider"></app-sliderAnimationDuration>
   </div>
 
   <div  [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}" class="couleurContainer">
