@@ -168,6 +168,27 @@ label{
   background-color: #ccc;
 }
 
+@keyframes animatorFadeIn {
+  0% {
+    bottom : -40%;
+  }
+  20%, 100% {
+    bottom : -3%;
+  }
+}
+
+.animator-relative {
+  position: absolute;
+  height: 40%;
+  width: 20%;
+  left: 1%;
+  bottom: -40%;
+  animation-name: animatorFadeIn;
+  animation-duration: 5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -188,47 +209,47 @@ label{
 
 #bubble1 {
   position: absolute;
-  top: 61vh;
+  top: 60vh;
   left: 6vw;
   height: 1vw;
   width: 1vw;
-  animation-delay: 0s;
+  animation-delay: 0.8s;
 }
 
 #bubble2 {
   position: absolute;
-  top: 55vh;
+  top: 54vh;
   left: 3.5vw;
   height: 1.5vw;
   width: 1.5vw;
-  animation-delay: 0.4s;
+  animation-delay: 1.1s;
 }
 
 #bubble3 {
   position: absolute;
-  top: 47vh;
+  top: 46vh;
   left: 2vw;
   height: 2vw;
   width: 2vw;
-  animation-delay: 0.7s;
+  animation-delay: 1.3s;
 }
 
 #bubble4 {
   position: absolute;
-  top: 38vh;
+  top: 37vh;
   left: 2.3vw;
   height: 2.5vw;
   width: 2.5vw;
-  animation-delay: 0.9s;
+  animation-delay: 1.5s;
 }
 
 #bubble5 {
   position: absolute;
-  top: 28vh;
+  top: 27vh;
   left: 5vw;
   height: 3vw;
   width: 3vw;
-  animation-delay: 1.1s;
+  animation-delay: 1.8s;
 }
 
 @keyframes AnimationQuestion{
