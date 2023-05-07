@@ -12,7 +12,7 @@ export class JeuxCouleursService {
   private visionColorActivated = false;
   private colorSelected :number = 0;
 
-  constructor() { }
+  constructor() {}
 
   IsVisionColorActivated(): boolean {return this.visionColorActivated;}
   IsAttentionColorActivated(): boolean {return this.attentionColorActivated;}

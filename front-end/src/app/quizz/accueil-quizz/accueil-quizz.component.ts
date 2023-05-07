@@ -5,6 +5,7 @@ import { Quiz } from '../../../models/quizz.model';
 import {AnimationsService} from "../../../service/animations.service";
 import {AnimateurService} from "../../../service/animateur.service";
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
 
 
 @Component({
@@ -18,10 +19,11 @@ export class AccueilQuizzComponent {
   public animationDuration: string | undefined;
 
   public quiz!: Quiz;
+  contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
 
   quizStar = faStar;
 
-  constructor(private animateurService: AnimateurService, private route: ActivatedRoute, private quizService: QuizService, private animationsService: AnimationsService) {
+  constructor(private animateurService: AnimateurService, private route: ActivatedRoute, private quizService: QuizService, private animationsService: AnimationsService,private jeuxCouleursService: JeuxCouleursService) {
     this.animationDuration = this.animationsService.duration;
   }
   ngOnInit(): void {
@@ -53,4 +55,7 @@ export class AccueilQuizzComponent {
     }
   }
 
+  resetScore() {
+    this.quizService.resetScore();
+  }
 }

@@ -1,10 +1,20 @@
-.titrePage{
+.titrePage {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-right: 27vw;
-  margin-left: 1vw;
+  padding: 10px;
+}
+
+#quizName {
+  margin: 0;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#polyquizHome {
+  margin-right: 10px;
 }
 
 .containerButtons {
@@ -23,16 +33,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
-.bubbleResult {
+.bubble_contrastOff {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   width: 40vw;
   height: 45vh;
-  border-radius: 50%;
+  border-radius: 49%;
   background-color: rgba(255, 255, 255, 0.3);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   text-align: center;
@@ -122,6 +133,27 @@
   animation-delay: 1.5s;
 }
 
+.bubble_contrastOn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 40vw;
+  height: 45vh;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  font-size: 1.5vw;
+  font-family: Mukta;
+  text-transform: uppercase;
+  color: #282936;
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-delay: 1.8s;
+}
+
 @import url('https://fonts.googleapis.com/css?family=Mukta:700');
 
 $bg: #f3f8fa;
@@ -154,6 +186,7 @@ button {
   &.learn-more {
     width: 18rem;
     height: 3.7rem;
+    font-size: 1.4rem;
     .circle {
       @include transition(all, 0.45s, cubic-bezier(0.65,0,.076,1));
       position: relative;
@@ -232,3 +265,5 @@ button {
     justify-self: center;
   }
 }
+
+

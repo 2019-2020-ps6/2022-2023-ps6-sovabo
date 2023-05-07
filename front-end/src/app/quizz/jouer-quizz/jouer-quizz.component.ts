@@ -9,6 +9,7 @@ import { StatQuizz } from 'src/models/quizz.stat.model';
 
 import {AnimateurService} from "../../../service/animateur.service";
 import {AnimationsService} from "../../../service/animations.service";
+import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
 
 
 @Component({
@@ -49,10 +50,15 @@ export class JouerQuizzComponent implements OnInit {
 
   private timerId: any | undefined;
 
+  contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
 
-
-
-  constructor(private route: ActivatedRoute, private quizService: QuizService, private statistiquesService: StatistiqueService,private router: Router, private animateurService: AnimateurService, private animationService: AnimationsService) {}
+  constructor(private route: ActivatedRoute,
+              private quizService: QuizService,
+              private statistiquesService: StatistiqueService,
+              private router: Router,
+              private animateurService: AnimateurService,
+              private animationService: AnimationsService,
+              private jeuxCouleursService: JeuxCouleursService) {}
 
   ngOnInit(): void {
     this.timerId = undefined; // ou null

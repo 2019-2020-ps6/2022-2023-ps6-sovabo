@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {AnimateurService} from "../../../../service/animateur.service";
+import {JeuxCouleursService} from "../../../../service/jeux-couleurs.service";
 
 @Component({
   selector: 'app-btn-on-off-animateur',
@@ -8,8 +9,10 @@ import {AnimateurService} from "../../../../service/animateur.service";
 })
 export class BtnOnOffAnimateurComponent {
   isOn: boolean = false;
+  contrasteTroubleEnable :boolean = this.jeuxCouleursService.getVisionAttentionStatus();
 
-  constructor(private animateurService: AnimateurService) {
+
+  constructor(private animateurService: AnimateurService,private jeuxCouleursService: JeuxCouleursService) {
   }
 
   ngOnInit() {

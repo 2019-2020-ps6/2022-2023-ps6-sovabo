@@ -9,6 +9,7 @@ import {AnimateurService} from "../../service/animateur.service";
 })
 export class AccueilComponent {
   AttentionColorStatus: boolean = false;
+  contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
 
   ngInit() {
   }

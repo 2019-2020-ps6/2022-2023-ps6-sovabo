@@ -2,13 +2,13 @@
 
   <div class="titrePage">
       <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
-      <p class="titreStyle"> Liste des quizz</p>
+      <p [ngClass]="this.contrasteTroubleEnable ? 'titreStyleContrastOn' : 'titreStyleContrastOff'" > Liste des quizz</p>
 
       <div class="btnCreerConfig">
           <app-btn-list-quiz id="creerQuizz" [routerLink]="['/creer-quizz']">Créer mon quizz</app-btn-list-quiz>
           <app-btn-list-quiz id="configQuizz" [routerLink]="['/configuration']">
             <div class="settingsContainer">
-              <img src="../../../assets/Images/settings%20image.png" alt="image settings" class="imageSettings">
+                <img [ngClass]="this.contrasteTroubleEnable ? 'imgContrastUp && imageSettings' : 'imageSettings'" src="../../../assets/Images/settings%20image.png" alt="image settings">
               <span id="settingsText">Paramètres<br>des quizz</span>
             </div>
           </app-btn-list-quiz>
@@ -16,26 +16,22 @@
   </div>
   <div class="selectionQuiz">
     <div class="container">
-
       <div class="row height d-flex justify-content-center align-items-center">
-
         <div class="col-md-6">
-
           <div class="form">
             <i class="fa fa-search"></i>
             <input type="text" class="form-control form-input" placeholder="Titre du quiz …">
             <span class="left-pan"><i class="fa fa-microphone"></i></span>
           </div>
-
         </div>
-
       </div>
-
     </div>
+
     <div class="dropdown">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Catégorie
       </button>
+
       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
         <button class="dropdown-item" type="button">Action</button>
         <button class="dropdown-item" type="button">Another action</button>
@@ -53,11 +49,7 @@
   </div>
 
   <ng-template #carousel>
-
-
       <app-carousel-quiz ></app-carousel-quiz>
-
-
   </ng-template>
 
 

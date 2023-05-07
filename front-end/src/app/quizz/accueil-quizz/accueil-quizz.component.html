@@ -14,15 +14,15 @@
       <img [src]="quiz.image" class="img-fluid" />
       <div class="btnModifierQuiz">
         <app-btn-list-quiz id="modifierQuizz" [routerLink]="['/modif-quizz']">
-          <div class="modifyContainer">
-            <span id="modifyText">Modifier le quiz</span>
+          <div [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer' : ''" class="modifyContainer">
+            <span [ngClass]="this.contrasteTroubleEnable ? 'contrastUpText && modifyText' : 'modifyText'" >Modifier le quiz</span>
           </div>
         </app-btn-list-quiz>
       </div>
     </div>
 
-    <div class="rightContainer">
-      <p class="titreStyle">{{quiz.name}}</p>
+    <div [ngClass]="this.contrasteTroubleEnable ? 'contrastUpText' : ''"  class="rightContainer">
+      <p [ngClass]="this.contrasteTroubleEnable ? 'contrastUpText' : ''" class="titreStyle">{{quiz.name}}</p>
       <div class="infoComplementaire">
         <div class="nbrTentatives">
           <span id="textTentative">NOMBRE DE TENTATIVES<br>EFFECTUÉES : 2</span>
@@ -35,7 +35,7 @@
             </div>
         </div>
       </div>
-      <app-btn-clickable-frame-background routerLink="/jouer-quiz/{{quiz.id}}" class="btnJouer">JOUER</app-btn-clickable-frame-background>
+      <app-btn-clickable-frame-background routerLink="/jouer-quiz/{{quiz.id}}" (click)="resetScore()" class="btnJouer">JOUER</app-btn-clickable-frame-background>
     </div>
 
     <div class="animatorContainer" *ngIf="getAnimateur()">
@@ -49,6 +49,5 @@
   <div class="bubble bubble4" *ngIf="getAnimateur()"></div>
   <div class="bubble bubble5" *ngIf="getAnimateur()"></div>
 
-
-
 </div>
+

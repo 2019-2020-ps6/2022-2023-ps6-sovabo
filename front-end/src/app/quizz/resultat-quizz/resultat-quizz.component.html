@@ -1,19 +1,17 @@
-
-  <div class="titrePage">
-    <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
-    <p class="titreStyle">Les présidents</p>
-
-  </div>
+<div class="titrePage">
+  <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
+  <p class="titreStyle" id="quizName">Les présidents</p>
+</div>
 
 <div class="pageContainer">
-  <div class="bubbleResult">
+  <div [ngClass]="this.contrasteTroubleEnable ? 'bubble_contrastOn && contrastUpContainer' : 'bubble_contrastOff'" >
       <p>Bravo, tu as fini le quizz, ton score est de {{score}}</p>
       <div id="container" routerLink="/statistiques-quiz">
         <button class="learn-more">
       <span class="circle" aria-hidden="true">
         <span class="icon arrow"></span>
       </span>
-          <span class="button-text">Voir les stats</span>
+          <span [ngClass]="this.contrasteTroubleEnable ? 'contrastUpText' : 'button-text'" >Voir les stats</span>
         </button>
       </div>
 

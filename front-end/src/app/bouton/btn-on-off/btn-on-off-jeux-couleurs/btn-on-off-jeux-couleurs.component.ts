@@ -8,6 +8,7 @@ import {JeuxCouleursService} from "../../../../service/jeux-couleurs.service";
 })
 export class BtnOnOffJeuxCouleursComponent {
   isOn: boolean = false;
+  contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
 
   constructor(private jeuxCouleursService: JeuxCouleursService) {
   }
