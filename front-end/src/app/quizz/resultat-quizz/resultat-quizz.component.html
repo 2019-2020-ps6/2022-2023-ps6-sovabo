@@ -6,7 +6,7 @@
   </div>
 
 <div class="pageContainer">
-  <div class="bubble">
+  <div class="bubbleResult">
       <p>Bravo, tu as fini le quizz, ton score est de {{score}}</p>
       <div id="container" routerLink="/statistiques-quiz">
         <button class="learn-more">
@@ -21,8 +21,13 @@
   </div>
 
 
-
-  <app-image-animateur></app-image-animateur>
+  <div class="bubble" id="bubble1" *ngIf="getAnimateur()"></div>
+  <div class="bubble" id="bubble2" *ngIf="getAnimateur()"></div>
+  <div class="bubble" id="bubble3" *ngIf="getAnimateur()"></div>
+  <div class="bubble" id="bubble4" *ngIf="getAnimateur()"></div>
+  <div class="animatorContainer" *ngIf="getAnimateur()">
+    <img src="../../../assets/Images/Animateur_image.png" alt="Image animateur" class="animator-relative">
+  </div>
   <div class="containerButtons">
     <app-btn-clickable-frame-background routerLink="/accueil-quiz/{{quiz.id}}">REJOUER</app-btn-clickable-frame-background>
     <app-btn-clickable-frame-background routerLink="/liste-quizz">CONTINUER</app-btn-clickable-frame-background>
