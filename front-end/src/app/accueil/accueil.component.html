@@ -6,7 +6,7 @@
 <div class="container accueilSite">
 
   <div class="leftContainer">
-    <h1 class="titreStyle">PolyQuiz</h1>
+    <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTitleExtrude' : 'contrastDownTitleExtrude'" >PolyQuiz</h1>
     <app-btn-clickable-frame-background class="navigation" id="jouer"[routerLink]="['/liste-quizz']">JOUER</app-btn-clickable-frame-background>
   </div>
 

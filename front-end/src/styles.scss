@@ -25,4 +25,38 @@ app-root{
   text-shadow: 8px 8px 0 #1E1E1E;
 }
 
+.imgContrastUp{
+  filter: invert(1);
+}
+
+.contrastUpContainer{
+  background: rgb(200, 200, 200);
+}
+
+.contrastUpText{
+  color: black;
+  text-shadow: none;
+}
+
+
+//TITRE ACCUEIL (VERSION GRANDE)
+.contrastUpTitleExtrude{
+  font-family: DynaPuff;
+  font-size: 11vw;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 5%;
+}
+
+.contrastUpTextExtrude{
+  padding: 10px;
+
+  font-family: DynaPuff;
+  font-size: 3vw;
+  font-weight: 700;
+  color: #000000;
+  text-shadow: none;
+  text-decoration: none;
+}
+
 

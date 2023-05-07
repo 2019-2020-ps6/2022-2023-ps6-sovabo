@@ -17,13 +17,23 @@
   justify-content: space-between;
   align-items: center;
 }
-.titreStyle {
+.titreStyleContrastOff {
   font-family: DynaPuff;
   font-size: 5vw;
   font-weight: 700;
   color: #FFFDF8;
   text-align: center;
   text-shadow: 8px 8px 0 #1E1E1E;
+  margin-right: 10vw;
+}
+
+.titreStyleContrastOn {
+  font-family: DynaPuff;
+  font-size: 5vw;
+  font-weight: 700;
+  color: #000000;
+  text-align: center;
+  text-shadow: none;
   margin-right: 10vw;
 }
 
@@ -75,6 +85,8 @@
    border: none;
    color: black;
  }
+
+
 
 
 

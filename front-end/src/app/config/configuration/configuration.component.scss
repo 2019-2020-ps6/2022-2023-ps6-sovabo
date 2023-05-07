@@ -3,12 +3,24 @@
   src: url("~src/assets/Fonts/dynapuff/fonts/variable/DynaPuff[wdth,wght].ttf");
 }
 
-h1{
+.contrastDownTitleExtrude{
   font-family: DynaPuff;
   font-size: 11vw;
   font-weight: 700;
   color: #FFFDF8;
   text-shadow: 8px 8px 0 #1E1E1E;
+
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
+.contrastUpTitleExtrude{
+  font-family: DynaPuff;
+  font-size: 11vw;
+  font-weight: 700;
+  color: #000000;
+  text-shadow: none;
 
   display: flex;
   justify-content: center;
@@ -33,18 +45,8 @@ h1{
   align-self: end;
   margin: 0 10px 20px 10px;
 }
-//SETUP DE CONTRASTE
-.contrastUpText{
-  font-family: Arial, Helvetica, sans-serif;
-  background: rgb(0, 0, 0);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
 
-.contrastUpContainer{
-  background: rgb(200, 200, 200);
-}
+
 
 
 

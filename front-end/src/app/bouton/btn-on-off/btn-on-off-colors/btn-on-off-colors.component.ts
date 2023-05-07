@@ -10,8 +10,8 @@ import {JeuxCouleursService} from "../../../../service/jeux-couleurs.service";
 export class BtnOnOffColorsComponent {
 
   isOn: boolean = false;
-
-  constructor(private jeuxCouleursService: JeuxCouleursService) {
+  contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
+  constructor(private jeuxCouleursService: JeuxCouleursService,) {
   }
 
   ngOnInit() {
