@@ -57,13 +57,19 @@
   }
 }
 
-.bubble {
+.bubbleAnimationsON {
   background: rgba(225, 225, 225, 0.5);
   border-radius: 50%;
   opacity: 0;
   animation-name: fadeIn;
   animation-duration: 1s;
   animation-fill-mode: forwards;
+}
+
+.bubbleAnimationsOFF {
+  background: rgba(225, 225, 225, 0.5);
+  border-radius: 50%;
+  opacity: 1;
 }
 
 
