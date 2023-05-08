@@ -51,6 +51,9 @@
   font-family: Mukta;
   text-transform: uppercase;
   color: #282936;
+}
+
+.textBubbleWithAnimationsON {
   opacity: 0;
   animation-name: fadeIn;
   animation-duration: 1s;
@@ -67,7 +70,7 @@
   }
 }
 
-.animator-relative {
+.animatorWithAnimationsON {
   position: absolute;
   height: 40%;
   width: 20%;
@@ -76,6 +79,14 @@
   animation-name: animatorFadeIn;
   animation-duration: 1s;
   animation-fill-mode: forwards;
+}
+
+.animatorWithAnimationsOFF {
+  position: absolute;
+  height: 40%;
+  width: 20%;
+  left: 1%;
+  bottom: -3%;
 }
 
 @keyframes fadeIn {
@@ -87,7 +98,7 @@
   }
 }
 
-.bubble {
+.bubbleAnimationsON {
   background: rgba(225, 225, 225, 0.5);
   border-radius: 50%;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
@@ -95,6 +106,13 @@
   animation-name: fadeIn;
   animation-duration: 1s;
   animation-fill-mode: forwards;
+}
+
+.bubbleAnimationsOFF {
+  background: rgba(225, 225, 225, 0.5);
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  opacity: 1;
 }
 
 #bubble1 {
@@ -147,11 +165,6 @@
   font-family: Mukta;
   text-transform: uppercase;
   color: #282936;
-  opacity: 0;
-  animation-name: fadeIn;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
-  animation-delay: 1.8s;
 }
 
 @import url('https://fonts.googleapis.com/css?family=Mukta:700');

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Quiz } from '../../../models/quizz.model';
 import { QuizService } from '../../../service/quizz.service';
 import {AnimateurService} from "../../../service/animateur.service";
+import {AnimationsService} from "../../../service/animations.service";
 import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
 
 
@@ -17,7 +18,7 @@ export class ResultatQuizzComponent {
   public quiz!: Quiz;
 
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
-  constructor(private route: ActivatedRoute, private quizService: QuizService, private animateurService: AnimateurService, private jeuxCouleursService: JeuxCouleursService) {
+  constructor(private route: ActivatedRoute, private quizService: QuizService, private animateurService: AnimateurService, private animationsService: AnimationsService, private jeuxCouleursService: JeuxCouleursService) {
 
   }
 
@@ -28,6 +29,10 @@ export class ResultatQuizzComponent {
 
   getAnimateur() {
     return this.animateurService.getAnimateur();
+  }
+
+  getAnimations() {
+    return this.animationsService.isAnimated;
   }
 
 }
