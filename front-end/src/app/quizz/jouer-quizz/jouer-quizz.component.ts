@@ -212,4 +212,8 @@ export class JouerQuizzComponent implements OnInit {
   getAnimateur() {
     return this.animateurService.getAnimateur();
   }
+
+  getAnimations() {
+    return this.animationService.isAnimated;
+  }
 }

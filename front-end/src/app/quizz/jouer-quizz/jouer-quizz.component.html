@@ -33,12 +33,12 @@
 
       </div>
     </div>
-    <div class="bubble" id="bubble1" *ngIf="getAnimateur()"></div>
-    <div class="bubble" id="bubble2" *ngIf="getAnimateur()"></div>
-    <div class="bubble" id="bubble3" *ngIf="getAnimateur()"></div>
-    <div class="bubble" id="bubble4" *ngIf="getAnimateur()"></div>
-    <div class="bubble" id="bubble5" *ngIf="getAnimateur()"></div>
+    <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble1" *ngIf="getAnimateur()"></div>
+    <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble2" *ngIf="getAnimateur()"></div>
+    <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble3" *ngIf="getAnimateur()"></div>
+    <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble4" *ngIf="getAnimateur()"></div>
+    <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble5" *ngIf="getAnimateur()"></div>
     <div class="animatorContainer" *ngIf="getAnimateur()">
-      <img src="../../../assets/Images/Animateur_image.png" alt="Image animateur" class="animator-relative">
+      <img src="../../../assets/Images/Animateur_image.png" alt="Image animateur" [ngClass]="getAnimations() ? 'animatorWithAnimationsON' : 'animatorWithAnimationsOFF'">
     </div>
   </div>
