@@ -145,11 +145,17 @@ $fade-duration: 1s;
   }
 }
 
-.bubble {
+.bubbleAnimationsON {
   background: rgba(225, 225, 225, 0.5);
   border-radius: 50%;
   opacity: 0;
   animation: fadeIn $fade-duration forwards;
+}
+
+.bubbleAnimationsOFF {
+  background: rgba(225, 225, 225, 0.5);
+  border-radius: 50%;
+  opacity: 1;
 }
 
 .bubble1 {

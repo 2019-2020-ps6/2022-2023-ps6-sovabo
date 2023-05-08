@@ -38,6 +38,10 @@ export class AccueilQuizzComponent {
     return this.animateurService.getAnimateur();
   }
 
+  getAnimations() {
+    return this.animationsService.isAnimated;
+  }
+
   getDifficultyColor(difficulty: number): string {
     if (difficulty <= 0) {
       return 'rgba(46,49,54,0.6)'; // Gris
