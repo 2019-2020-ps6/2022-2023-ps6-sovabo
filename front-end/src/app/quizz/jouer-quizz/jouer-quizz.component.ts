@@ -91,8 +91,11 @@ export class JouerQuizzComponent implements OnInit {
       } else {
         if (this.timerId !== undefined) {
           clearInterval(this.timerId);
+          console.log("je valide car tu joues pas mdr");
+
           this.validateAnswer();
           if (!this.isLastQuestion) {
+              console.log("c'est pas la dernière bg on go a la prochaine");
             setTimeout(() => {
               this.goToNextQuestion();
             }, 5000); // délai de 5 secondes
@@ -155,6 +158,12 @@ export class JouerQuizzComponent implements OnInit {
 
     this.selectedAnswerIndex = null;
 
+    if (!this.isLastQuestion) {
+      console.log("c'est pas la dernière bg on go a la prochaine");
+    setTimeout(() => {
+      this.goToNextQuestion();
+    }, 5000); // délai de 5 secondes
+  }
 
 
   }
