@@ -35,4 +35,11 @@ export class ResultatQuizzComponent {
     return this.animationsService.isAnimated;
   }
 
+  getDelay() {
+    return this.animationsService.delay != undefined ? this.animationsService.delay : 0;
+  }
+
+  getAnimationDuration() {
+    return this.animationsService.duration;
+  }
 }
