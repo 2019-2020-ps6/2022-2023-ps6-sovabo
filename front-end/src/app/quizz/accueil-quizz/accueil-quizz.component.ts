@@ -42,6 +42,10 @@ export class AccueilQuizzComponent {
     return this.animationsService.isAnimated;
   }
 
+  getDelay() {
+    return this.animationsService.delay != undefined ? this.animationsService.delay : 0;
+  }
+
   getDifficultyColor(difficulty: number): string {
     if (difficulty <= 0) {
       return 'rgba(46,49,54,0.6)'; // Gris
