@@ -216,4 +216,8 @@ export class JouerQuizzComponent implements OnInit {
   getAnimations() {
     return this.animationService.isAnimated;
   }
+
+  getDelay() {
+    return this.animationService.delay != undefined ? this.animationService.delay : 0;
+  }
 }
