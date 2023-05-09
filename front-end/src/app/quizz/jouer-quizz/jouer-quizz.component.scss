@@ -239,7 +239,7 @@ label {
   0% {
     bottom : -40%;
   }
-  20%, 100% {
+  10%, 100% {
     bottom : -3%;
   }
 }
@@ -265,10 +265,10 @@ label {
 }
 
 @keyframes fadeIn {
-  from {
+  0% {
     opacity: 0;
   }
-  to {
+  10%, 100% {
     opacity: 1;
   }
 }
@@ -278,8 +278,9 @@ label {
   border-radius: 50%;
   opacity: 0;
   animation-name: fadeIn;
-  animation-duration: 1s;
+  animation-duration: 5s;
   animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
 }
 
 .bubbleAnimationsOFF {

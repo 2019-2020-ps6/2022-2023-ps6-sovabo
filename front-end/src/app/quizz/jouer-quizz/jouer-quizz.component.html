@@ -33,12 +33,12 @@
 
       </div>
     </div>
-    <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble1" *ngIf="getAnimateur()"></div>
-    <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble2" *ngIf="getAnimateur()"></div>
-    <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble3" *ngIf="getAnimateur()"></div>
-    <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble4" *ngIf="getAnimateur()"></div>
-    <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble5" *ngIf="getAnimateur()"></div>
+    <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble1" *ngIf="getAnimateur()" [ngStyle]="{'animation-duration' : getDelay()*(25) + 's', 'animation-delay' : getDelay()*(2) + 's'}"></div>
+    <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble2" *ngIf="getAnimateur()" [ngStyle]="{'animation-duration' : getDelay()*(25) + 's', 'animation-delay' : getDelay()*(11/4) + 's'}"></div>
+    <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble3" *ngIf="getAnimateur()" [ngStyle]="{'animation-duration' : getDelay()*(25) + 's', 'animation-delay' : getDelay()*(13/4) + 's'}"></div>
+    <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble4" *ngIf="getAnimateur()" [ngStyle]="{'animation-duration' : getDelay()*(25) + 's', 'animation-delay' : getDelay()*(15/4) + 's'}"></div>
+    <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble5" *ngIf="getAnimateur()" [ngStyle]="{'animation-duration' : getDelay()*(25) + 's', 'animation-delay' : getDelay()*(9/2) + 's'}"></div>
     <div class="animatorContainer" *ngIf="getAnimateur()">
-      <img src="../../../assets/Images/Animateur_image.png" alt="Image animateur" [ngClass]="getAnimations() ? 'animatorWithAnimationsON' : 'animatorWithAnimationsOFF'">
+      <img src="../../../assets/Images/Animateur_image.png" alt="Image animateur" [ngClass]="getAnimations() ? 'animatorWithAnimationsON' : 'animatorWithAnimationsOFF'" [ngStyle]="{'animation-duration' : (getDelay()*(25) + 's')}">
     </div>
   </div>
