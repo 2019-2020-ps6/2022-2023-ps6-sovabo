@@ -3,7 +3,7 @@
         <img [src]="quiz.image" class="img-fluid" />
 
         <div [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer' : ''" class="card-body">
-            <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpText' : ''" class="card-title font-weight-bold"><a>{{quiz.name}}</a></h1>
+            <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpText' : ''" class="card-title font-weight-bold"><p>{{quiz.name}}</p></h1>
             <ul class="list-unstyled list-inline mb-0">
               <li class="list-inline-item me-0">
                   <fa-icon [ngClass]="this.contrasteTroubleEnable ? 'imgContrastUp' : ''"  class="star-icon" [icon]="quizStar" *ngFor="let i of [].constructor(quiz.difficulty)"></fa-icon>

@@ -1,9 +1,7 @@
-
-  <div class="titrePage">
-    <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
-    <p [ngClass]="this.contrasteTroubleEnable ? 'titreStyleContrastOn' : 'titreStyleContrastOff'" class="titreStyle">Les présidents</p>
-
-  </div>
+<div class="titrePage">
+  <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
+  <p class="titreStyle" id="quizName">Les présidents</p>
+</div>
 
 <div class="pageContainer">
   <div [ngClass]="this.contrasteTroubleEnable ? 'bubble_contrastOn && contrastUpContainer' : 'bubble_contrastOff'" >

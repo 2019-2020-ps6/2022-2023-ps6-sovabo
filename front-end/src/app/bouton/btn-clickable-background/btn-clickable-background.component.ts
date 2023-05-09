@@ -8,13 +8,13 @@ import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
 })
 export class BtnClickableBackgroundComponent {
 
-  //PARTIE GESTION DU CONTRASTE 
+  //PARTIE GESTION DU CONTRASTE
   constructor(private jeuxCouleursService: JeuxCouleursService){}
   contrasteTroubleEnable :boolean = this.jeuxCouleursService.getVisionAttentionStatus();
+  fontSelected : string = this.jeuxCouleursService.getFontSelectedString();
 
   ngOnChanges() {
     this.contrasteTroubleEnable = this.jeuxCouleursService.getVisionAttentionStatus();
-    this.changeContrast();
   }
 
   ngOnInit() {

@@ -20,6 +20,8 @@ export class QuizElementComponent {
   }
 
   ngOnInit(): void {
+    this.jeuxCouleursService.changeFont(document);
+    this.jeuxCouleursService.changeFontSize(document);
     console.log(this.quiz.hovered)
   }
 

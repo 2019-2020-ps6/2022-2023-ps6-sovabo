@@ -19,7 +19,9 @@
         </div>
       </div>
       <div class="check-container">
-        <button (click)="validateAnswer()" [disabled]="selectedAnswerIndex == null" class="check_btn">Valider</button>
+        <button (click)="validateAnswer()" [disabled]="selectedAnswerIndex == null"  *ngIf="isAnswerCorrect==null" class="check_btn">Valider</button>
+        <button *ngIf="isAnswerCorrect != null && currentQuestionIndex != quiz.questions.length -1" [disabled]="isQuizFinished == true" (click)="goToNextQuestion()" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && next_btnContrastOn' : 'next_btnContrastOff'" >Question suivante</button>
+        <button *ngIf="isQuizFinished" [routerLink]="['/resultat-quizz']" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && next_btnContrastOn' : 'next_btnContrastOff'">Voir les résultats !</button>
       </div>
       <div class="buttons-container">
         <div *ngIf="isAnswerCorrect == false && selectedAnswerIndex != questionCorrectIndex" class="wrong-answer">
@@ -28,8 +30,7 @@
         <div *ngIf="isAnswerCorrect == true && selectedAnswerIndex != questionCorrectIndex" class="good-answer">
             <p>Bonne réponse ! </p>
           </div>
-        <button *ngIf="isAnswerCorrect != null && currentQuestionIndex != quiz.questions.length -1" [disabled]="isQuizFinished == true" (click)="goToNextQuestion()" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && next_btnContrastOn' : 'next_btnContrastOff'" >Question suivante</button>
-        <button *ngIf="isQuizFinished" [routerLink]="['/resultat-quizz']" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && next_btnContrastOn' : 'next_btnContrastOff'">Voir les résultats !</button>
+
       </div>
     </div>
     <div class="bubble" id="bubble1" *ngIf="getAnimateur()"></div>

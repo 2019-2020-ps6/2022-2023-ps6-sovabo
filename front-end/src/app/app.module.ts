@@ -28,10 +28,13 @@ import { BtnListQuizComponent } from './bouton/btn-list-quiz/btn-list-quiz.compo
 import { BtnOnOffAnimationsComponent } from './bouton/btn-on-off/btn-on-off-animations/btn-on-off-animations.component';
 import { BtnOnOffAnimateurComponent } from './bouton/btn-on-off/btn-on-off-animateur/btn-on-off-animateur.component';
 import { BtnOnOffJeuxCouleursComponent } from './bouton/btn-on-off/btn-on-off-jeux-couleurs/btn-on-off-jeux-couleurs.component';
-import { BtnOnOffColorsComponent } from './bouton/btn-on-off/btn-on-off-colors/btn-on-off-colors.component'
 import {ImageAnimateurComponent} from "./image-animateur/image-animateur.component";
 import { SliderAnimateurSpeedComponent } from './slider/slider-animateur-speed/slider-animateur-speed.component';
 import { CarouselQuizComponent } from '../app/quizz/listes-quizz/carousel-quiz/carousel-quiz.component';
+import {BtnOnOffColorsComponent} from "./bouton/btn-on-off/btn-on-off-colors/btn-on-off-colors.component";
+import { BtnFontComponent } from './bouton/btn-vision/btn-font/btn-font.component';
+import { SliderFontSizeComponent } from './slider/slider-font-size/slider-font-size.component';
+import { BtnOnOffContrastComponent } from './bouton/btn-on-off/btn-on-off-contrast/btn-on-off-contrast.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +64,10 @@ import { CarouselQuizComponent } from '../app/quizz/listes-quizz/carousel-quiz/c
     SliderAnimateurSpeedComponent,
     CarouselQuizComponent,
     ImageAnimateurComponent,
-    BtnOnOffColorsComponent
+    BtnOnOffColorsComponent,
+    BtnFontComponent,
+    SliderFontSizeComponent,
+    BtnOnOffContrastComponent
   ],
   imports: [
     BrowserModule,
