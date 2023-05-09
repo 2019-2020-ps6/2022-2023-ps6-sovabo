@@ -61,4 +61,12 @@ export class AccueilComponent {
   getAnimations() {
     return this.animationsService.isAnimated;
   }
+
+  getDuration() {
+    return this.animationsService.duration;
+  }
+
+  getDelay() {
+    return this.animationsService.delay != undefined ? this.animationsService.delay : 0;
+  }
 }
