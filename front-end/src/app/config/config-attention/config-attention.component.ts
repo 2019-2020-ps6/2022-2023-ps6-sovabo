@@ -42,7 +42,6 @@ export class ConfigAttentionComponent {
 
   toggleContrastColor(event: Event | null) {
     this.contrasteTroubleEnable = !this.contrasteTroubleEnable
-    //console.log('jeu contraste :'+this.contrasteTroubleEnable);
     this.jeuxCouleursService.setAttentionColor(this.contrasteTroubleEnable);
     this.resetPage();
   }

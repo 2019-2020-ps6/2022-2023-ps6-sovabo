@@ -12,13 +12,11 @@ export class ConfigurationComponent {
   constructor(private jeuxCouleursService: JeuxCouleursService) {}
 
   ngOnInit(): void {
-    console.log('ConfigVisionComponent');
     this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
     this.changeContrast();
   }
 
   changeContrast(){
-    console.log('changeContrast Vision');
     let tabContainer = document.querySelectorAll('[id=contrastUpContainer]');
     let tabText = document.querySelectorAll('[id=contrastUpText]');
 

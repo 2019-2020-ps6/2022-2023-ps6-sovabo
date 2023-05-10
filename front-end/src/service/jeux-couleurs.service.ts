@@ -20,7 +20,6 @@ export class JeuxCouleursService {
   setAttentionColor(value: boolean){this.attentionColorActivated=value;}
 
   setVisionColor(value: number) {
-    //console.log('setJeuxCouleurs: ' + value);
     if(value<0){} // Do nothing
     else{
       this.colorSelected=value
