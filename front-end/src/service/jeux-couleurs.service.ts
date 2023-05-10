@@ -8,7 +8,7 @@ export class JeuxCouleursService {
   //option trouble de l'attention
   private attentionColorActivated = false;
 
-  //option torouble de la vision
+  //option trouble de la vision
   listTrouble = ["TRICHROMATIE","DICHROMATISME"];
   listFont = ["Arial","Andale Mono","Comic Sans MS"];
 
@@ -83,7 +83,7 @@ export class JeuxCouleursService {
     }
   }
 
-    getFontSelectedString(){
+  getFontSelectedString(){
       return this.fontSelected;
     }
 
@@ -123,12 +123,8 @@ export class JeuxCouleursService {
 
   changeFontSize(document: Document) {
 
-    console.log("FONTSIZE CALL");
     let level = this.currentFontSize-this.oldFontSize;
-    console.log("LEVEL ="+level);
     let coeff = 4;
-
-    this.oldFontSize = this.currentFontSize;
 
     if(event!=null) {
       //on récupère l'élément html ciblé par l'event
@@ -139,10 +135,8 @@ export class JeuxCouleursService {
       let pList = document.querySelectorAll("p");
 
       pList.forEach(elem =>{
-
         let originFontSize = window.getComputedStyle(elem, null).getPropertyValue('font-size');
         var fontSize = parseFloat(originFontSize);
-
         elem.style.fontSize = (fontSize+(level*coeff))+"px";
       })
     }

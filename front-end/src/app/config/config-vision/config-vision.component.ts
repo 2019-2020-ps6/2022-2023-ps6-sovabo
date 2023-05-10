@@ -61,7 +61,13 @@ export class ConfigVisionComponent {
       count++;
     });
 
-
+    //ATTRIBUTION DE LA POLICE APPLIQUEE AU SAMPLE
+    count=0;
+    let pSample = document.querySelectorAll("#exampleTxt");
+    console.log(pSample);
+    pSample.forEach(sample=>{
+      sample.innerHTML = this.jeuxCouleursService.getFontSelectedString();
+    })
   }
 
   //appel lors du click sur le bouton de choix de vision
@@ -120,7 +126,6 @@ export class ConfigVisionComponent {
       this.jeuxCouleursService.changeFontSize(document);
     }
     else{}
-
   }
 
 

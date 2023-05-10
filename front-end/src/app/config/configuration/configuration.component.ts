@@ -11,9 +11,6 @@ export class ConfigurationComponent {
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
   constructor(private jeuxCouleursService: JeuxCouleursService) {}
 
-  getFontSize(){
-    return this.jeuxCouleursService.getCurrentFontSize();
-  }
 
   ngOnInit(): void {
     console.log('ConfigVisionComponent');
