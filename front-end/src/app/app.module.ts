@@ -30,7 +30,6 @@ import { BtnOnOffAnimateurComponent } from './bouton/btn-on-off/btn-on-off-anima
 import { BtnOnOffJeuxCouleursComponent } from './bouton/btn-on-off/btn-on-off-jeux-couleurs/btn-on-off-jeux-couleurs.component';
 import { BtnOnOffColorsComponent } from './bouton/btn-on-off/btn-on-off-colors/btn-on-off-colors.component'
 import {ImageAnimateurComponent} from "./image-animateur/image-animateur.component";
-import { SliderAnimateurSpeedComponent } from './slider/slider-animateur-speed/slider-animateur-speed.component';
 import { CarouselQuizComponent } from '../app/quizz/listes-quizz/carousel-quiz/carousel-quiz.component';
 
 @NgModule({
@@ -58,7 +57,6 @@ import { CarouselQuizComponent } from '../app/quizz/listes-quizz/carousel-quiz/c
     BtnOnOffAnimateurComponent,
     BtnOnOffJeuxCouleursComponent,
     ImageAnimateurComponent,
-    SliderAnimateurSpeedComponent,
     CarouselQuizComponent,
     ImageAnimateurComponent,
     BtnOnOffColorsComponent
