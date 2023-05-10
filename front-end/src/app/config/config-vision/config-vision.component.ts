@@ -19,7 +19,6 @@ export class ConfigVisionComponent {
   constructor(private jeuxCouleursService: JeuxCouleursService) {}
 
   ngOnInit(): void {
-    console.log('ConfigVisionComponent');
     this.jeuxCouleurs = this.jeuxCouleursService.IsVisionColorActivated();
     this.contrasteTroubleEnable = this.jeuxCouleursService.IsAttentionColorActivated();
     this.changeContrast();
@@ -37,7 +36,6 @@ export class ConfigVisionComponent {
       //on set le jeux de couleurs en fonction de l'id du bouton
       //DANS le service pour que toutes les pages puisses être mises au courant
 
-      //console.log('toggleJeuxCouleurs: ' + value);
       switch(value){
         case 'NONE':
           this.jeuxCouleursService.setVisionColor(0);
@@ -53,7 +51,6 @@ export class ConfigVisionComponent {
   }
 
   changeContrast(){
-    console.log('changeContrast Vision');
     let tabContainer = document.querySelectorAll('[id=contrastUpContainer]');
     let tabText = document.querySelectorAll('[id=contrastUpText]');
 

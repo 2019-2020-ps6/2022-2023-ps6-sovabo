@@ -18,13 +18,11 @@ export class AccueilComponent {
   constructor(private jeuxCouleursService: JeuxCouleursService,private animateurService: AnimateurService, private animationsService : AnimationsService) {}
 
   ngOnInit(): void {
-    console.log('ConfigVisionComponent');
     this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
     this.changeContrast();
   }
 
   changeContrast(){
-    console.log('changeContrast Vision');
     let tabContainer = document.querySelectorAll('[id=contrastUpContainer]');
     let tabText = document.querySelectorAll('[id=contrastUpText]');
 

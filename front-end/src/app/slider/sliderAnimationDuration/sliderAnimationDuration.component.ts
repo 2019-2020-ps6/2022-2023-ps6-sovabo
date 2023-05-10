@@ -20,7 +20,6 @@ export class SliderAnimationDurationComponent {
     // @ts-ignore
     this.animationsService.duration = `${(this.position-10)*(-1)}s`;
     this.animationsService.delay = (this.position-8)/(-10);
-    console.log(this.animationsService.delay);
   }
 
 }

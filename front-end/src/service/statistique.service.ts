@@ -22,9 +22,7 @@ export class StatistiqueService {
     if (quizCourant) {
       const statQuizCourant = quizCourant.statQuiz;
       if (statQuizCourant) {
-        console.log("j'ai add la moyenne");
         statQuizCourant.timeResponses.push(moyenne);
-        console.log("j'ai add l");
 
       }
     }
