@@ -2,7 +2,7 @@
 
   <div class="header">
     <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
-    <div class="bubble bubbleTextContainer" *ngIf="getAnimateur()">
+    <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubbleTextContainer" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(4) + 's')}">
       <p>Alors comme ça, tu penses être incollable sur <span style="text-transform: lowercase;">{{quiz.name}}</span> ?</p>
     </div>
     <app-btn-clickable-frame-background class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
@@ -43,9 +43,11 @@
     </div>
   </div>
 
-  <div class="bubble bubble1" *ngIf="getAnimateur()"></div>
-  <div class="bubble bubble2" *ngIf="getAnimateur()"></div>
-  <div class="bubble bubble3" *ngIf="getAnimateur()"></div>
+  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubble1" *ngIf="getAnimateur()"></div>
+  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubble2" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay() + 's')}"></div>
+  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubble3" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(7/4) + 's')}"></div>
+  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubble4" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(9/4) + 's')}"></div>
+  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubble5" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(3) + 's')}"></div>
 
 </div>
 

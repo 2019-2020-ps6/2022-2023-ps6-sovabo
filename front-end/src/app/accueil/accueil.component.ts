@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { JeuxCouleursService } from 'src/service/jeux-couleurs.service';
 import {AnimateurService} from "../../service/animateur.service";
+import {AnimationsService} from "../../service/animations.service";
 
 @Component({
   selector: 'app-accueil',
@@ -14,7 +15,7 @@ export class AccueilComponent {
   ngInit() {
   }
 
-  constructor(private jeuxCouleursService: JeuxCouleursService,private animateurService: AnimateurService) {}
+  constructor(private jeuxCouleursService: JeuxCouleursService,private animateurService: AnimateurService, private animationsService : AnimationsService) {}
 
   ngOnInit(): void {
     console.log('ConfigVisionComponent');
@@ -55,5 +56,17 @@ export class AccueilComponent {
 
   getAnimateur() {
     return this.animateurService.getAnimateur();
+  }
+
+  getAnimations() {
+    return this.animationsService.isAnimated;
+  }
+
+  getDuration() {
+    return this.animationsService.duration;
+  }
+
+  getDelay() {
+    return this.animationsService.delay != undefined ? this.animationsService.delay : 0;
   }
 }

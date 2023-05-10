@@ -237,4 +237,12 @@ export class JouerQuizzComponent implements OnInit {
   getAnimateur() {
     return this.animateurService.getAnimateur();
   }
+
+  getAnimations() {
+    return this.animationService.isAnimated;
+  }
+
+  getDelay() {
+    return this.animationService.delay != undefined ? this.animationService.delay : 0;
+  }
 }
