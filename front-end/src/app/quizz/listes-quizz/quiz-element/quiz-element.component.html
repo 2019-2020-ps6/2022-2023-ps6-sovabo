@@ -2,11 +2,11 @@
     <div class="card">
         <img [src]="quiz.image" class="img-fluid" />
 
-        <div class="card-body">
-            <h1 class="card-title font-weight-bold"><a>{{quiz.name}}</a></h1>
+        <div [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer' : ''" class="card-body">
+            <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpText' : ''" class="card-title font-weight-bold"><a>{{quiz.name}}</a></h1>
             <ul class="list-unstyled list-inline mb-0">
               <li class="list-inline-item me-0">
-                  <fa-icon class="star-icon" [icon]="quizStar" *ngFor="let i of [].constructor(quiz.difficulty)"></fa-icon>
+                  <fa-icon [ngClass]="this.contrasteTroubleEnable ? 'imgContrastUp' : ''"  class="star-icon" [icon]="quizStar" *ngFor="let i of [].constructor(quiz.difficulty)"></fa-icon>
                   <i class="fas fa-star text-warning fa-xs"> </i>
               </li>
               <li class="list-inline-item me-0">
@@ -22,10 +22,10 @@
                   <i class="fas fa-star-half-alt text-warning fa-xs"></i>
               </li>
               <li class="list-inline-item">
-                  <span class="note">{{quiz.difficulty}}/5 (413)</span>
+                  <span [ngClass]="this.contrasteTroubleEnable ? 'imgContrastUp' : ''"  class="note">{{quiz.difficulty}}/5 (413)</span>
               </li>
             </ul>
-            <h4><p class="card-theme mb-2">
+            <h4><p [ngClass]="this.contrasteTroubleEnable ? 'contrastUpText' : ''"  class="card-theme mb-2">
               {{quiz.theme}}
             </p></h4>
             <p class="card-text">

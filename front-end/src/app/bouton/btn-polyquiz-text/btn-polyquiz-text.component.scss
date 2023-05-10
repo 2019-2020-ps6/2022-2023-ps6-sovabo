@@ -14,7 +14,18 @@
   cursor: pointer;
 }
 
-#polyquiz {
+
+img {
+  width: 3.3vw;
+  height: 3vw;
+  filter: drop-shadow(0.5vw 1vh 0px #000000);
+}
+
+.contrastUpContainer{
+  border-radius: 100px;
+}
+
+.contrastDownButton{
   padding: 10px;
 
   font-family: DynaPuff;
@@ -25,15 +36,20 @@
   text-decoration: none;
 }
 
-img {
-  width: 3.3vw;
-  height: 3vw;
-  filter: drop-shadow(0.5vw 1vh 0px #000000);
+.contrastUpButton{
+  padding: 10px;
+
+  font-family: DynaPuff;
+  font-size: 3vw;
+  font-weight: 700;
+  color: #000000;
+  text-shadow: none;
+  text-decoration: none;
 }
 
-.contrastUpContainer{
-  font-family: Arial, Helvetica, sans-serif;
-  color: black;
-  background: rgb(200, 200, 200);
-  text-shadow: none;
+.imgContrastUp{
+  filter: invert(1);
 }
+
+
+

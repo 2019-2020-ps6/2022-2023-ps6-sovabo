@@ -53,7 +53,7 @@
   align-items: center;
 }
 
-#modifyText{
+.modifyText{
   font-size: calc(1vw + 1.5vh);
   padding-top: 2%;
   padding-bottom: 2%;
@@ -61,7 +61,7 @@
   text-shadow: none;
 }
 
-.modifyContainer:hover #modifyText{
+.modifyContainer:hover{
   color: #212529;
   text-shadow: none;
 }

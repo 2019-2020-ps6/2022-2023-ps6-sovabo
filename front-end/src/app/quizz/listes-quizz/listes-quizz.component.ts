@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { QuizService } from '../../../service/quizz.service';
 import { Quiz } from '../../../models/quizz.model';
 import {AnimationsService} from "../../../service/animations.service";
+import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
 
 @Component({
   selector: 'app-listes-quizz',
@@ -12,8 +13,8 @@ import {AnimationsService} from "../../../service/animations.service";
 export class ListesQuizzComponent {
 
   public quizList: Quiz[] = [];
-
-  constructor(private quizService: QuizService, public animationsService: AnimationsService) { }
+  contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
+  constructor(private quizService: QuizService, public animationsService: AnimationsService, private jeuxCouleursService: JeuxCouleursService) { }
 
   ngOnInit(): void {
     this.quizList = this.quizService.getData();

@@ -9,7 +9,9 @@ import { JeuxCouleursService } from '../../../service/jeux-couleurs.service';
 
 export class ConfigVisionComponent {
   jeuxCouleurs: boolean = false;
-  AttentionColorStatus: boolean = false;
+  contrasteTroubleEnable: boolean = false;
+
+
 
   ngInit() {
   }
@@ -19,7 +21,7 @@ export class ConfigVisionComponent {
   ngOnInit(): void {
     console.log('ConfigVisionComponent');
     this.jeuxCouleurs = this.jeuxCouleursService.IsVisionColorActivated();
-    this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
+    this.contrasteTroubleEnable = this.jeuxCouleursService.IsAttentionColorActivated();
     this.changeContrast();
   }
 
@@ -32,8 +34,8 @@ export class ConfigVisionComponent {
       //on recup l'id du boutton (l'id dépends du trouble)
       const value = target.id;
 
-      //on set le jeux de couleurs en fonction de l'id du bouton 
-      //DANS le service pour que toutes les pages puisses être mises au courant 
+      //on set le jeux de couleurs en fonction de l'id du bouton
+      //DANS le service pour que toutes les pages puisses être mises au courant
 
       //console.log('toggleJeuxCouleurs: ' + value);
       switch(value){
@@ -45,7 +47,7 @@ export class ConfigVisionComponent {
           break;
         case 'DICHROMATISME':
           this.jeuxCouleursService.setVisionColor(2);
-          break;    
+          break;
       }
     }
   }
@@ -55,7 +57,7 @@ export class ConfigVisionComponent {
     let tabContainer = document.querySelectorAll('[id=contrastUpContainer]');
     let tabText = document.querySelectorAll('[id=contrastUpText]');
 
-    if(this.AttentionColorStatus){
+    if(this.contrasteTroubleEnable){
       if(tabContainer != null){
         tabContainer.forEach(element => {
           element.classList.add('contrastUpContainer');
@@ -79,6 +81,6 @@ export class ConfigVisionComponent {
         });
       }
     }
-  }  
+  }
 
 }
