@@ -143,7 +143,7 @@ export class JeuxCouleursService {
         let originFontSize = window.getComputedStyle(elem, null).getPropertyValue('font-size');
         var fontSize = parseFloat(originFontSize);
         elem.style.fontSize = (fontSize+(level*coeff))+"px";
-      })
+      });
     }
   }
 
@@ -162,7 +162,6 @@ export class JeuxCouleursService {
         if(elem.classList.contains("titreStyle")){
           elem.style.textShadow="none";
         }
-
       });
 
       for(let i=0;i<answerContainer.length;i++){

@@ -16,7 +16,7 @@ export class BtnOnOffContrastComponent {
   }
 
   ngOnInit() {
-    this.isOn = this.animateurService.getAnimateur();
+    this.isOn = this.jeuxCouleursService.getVisionAttentionStatus();
   }
 
   toggleState() {
