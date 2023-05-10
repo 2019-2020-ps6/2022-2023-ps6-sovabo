@@ -165,6 +165,12 @@ export class JouerQuizzComponent implements OnInit {
     this.selectedAnswerIndex = null;
 
 
+    if (!this.isLastQuestion) {
+    setTimeout(() => {
+      this.goToNextQuestion();
+    }, 5000); // délai de 5 secondes
+  }
+
 
   }
 
@@ -191,9 +197,12 @@ export class JouerQuizzComponent implements OnInit {
     this.currentQuestion = this.quiz.questions[this.currentQuestionIndex];
     this.questionCorrectIndex = this.getCorrectAnswerIndex(this.currentQuestion);
     this.isAnswerCorrect = null;
+
     if (this.currentQuestionIndex == this.quiz.questions.length - 1) {
       this.isLastQuestion = true;
+
     }
+
     this.startTimer();
   }
 
@@ -220,5 +229,13 @@ export class JouerQuizzComponent implements OnInit {
 
   getAnimateur() {
     return this.animateurService.getAnimateur();
+  }
+
+  getAnimations() {
+    return this.animationService.isAnimated;
+  }
+
+  getDelay() {
+    return this.animationService.delay != undefined ? this.animationService.delay : 0;
   }
 }

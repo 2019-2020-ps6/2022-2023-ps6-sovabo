@@ -23,4 +23,13 @@ export class ListesQuizzComponent {
     this.jeuxCouleursService.changeFontSize(document);
   }
 
+  isAnotherHovered(quiz: Quiz): boolean {
+    for (let q of this.quizList) {
+      if (q !== quiz && q.hovered) {
+        return true;
+      }
+    }
+    return false;
+  }
+
 }

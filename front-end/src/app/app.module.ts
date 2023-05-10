@@ -29,7 +29,6 @@ import { BtnOnOffAnimationsComponent } from './bouton/btn-on-off/btn-on-off-anim
 import { BtnOnOffAnimateurComponent } from './bouton/btn-on-off/btn-on-off-animateur/btn-on-off-animateur.component';
 import { BtnOnOffJeuxCouleursComponent } from './bouton/btn-on-off/btn-on-off-jeux-couleurs/btn-on-off-jeux-couleurs.component';
 import {ImageAnimateurComponent} from "./image-animateur/image-animateur.component";
-import { SliderAnimateurSpeedComponent } from './slider/slider-animateur-speed/slider-animateur-speed.component';
 import { CarouselQuizComponent } from '../app/quizz/listes-quizz/carousel-quiz/carousel-quiz.component';
 import {BtnOnOffColorsComponent} from "./bouton/btn-on-off/btn-on-off-colors/btn-on-off-colors.component";
 import { BtnFontComponent } from './bouton/btn-vision/btn-font/btn-font.component';
@@ -61,7 +60,6 @@ import { BtnOnOffContrastComponent } from './bouton/btn-on-off/btn-on-off-contra
     BtnOnOffAnimateurComponent,
     BtnOnOffJeuxCouleursComponent,
     ImageAnimateurComponent,
-    SliderAnimateurSpeedComponent,
     CarouselQuizComponent,
     ImageAnimateurComponent,
     BtnOnOffColorsComponent,

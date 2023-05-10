@@ -26,7 +26,6 @@ export class StatistiqueComponent {
     this.statQuiz = this.quiz.statQuiz;
     this.moyenneTimeReponse = this.calculerMoyenne();
     createChart();
-    console.log("TIme response enregistré pour le quiz : "+this.quizService.getTimeResponses());
 
     const openButton = document.getElementById("openButton");
     if (openButton) {
@@ -39,11 +38,10 @@ export class StatistiqueComponent {
     }
   }
 
-  
+
   public calculerMoyenne(): number {
 
     for (const timeResponse of this.statQuiz.timeResponses) {
-      console.log(timeResponse);
     }
     const timeResponses = this.statQuiz.timeResponses;
     const nbResponses = timeResponses.length;
@@ -56,20 +54,18 @@ export class StatistiqueComponent {
   }
 
   openPopup(): void {
-    console.log("cliiiquerrr");
     const popupElement = document.getElementById("popup");
     if (popupElement) {
       popupElement.style.display = "block";
     }
   }
   closePopup(): void {
-    console.log("cliiiquerrr");
 
     const popupElement = document.getElementById("popup");
     if (popupElement) {
       popupElement.style.display = "none";
     }
   }
-  
-  
+
+
 }

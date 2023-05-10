@@ -31,7 +31,6 @@ export class ConfigVisionComponent {
               private location: Location) {}
 
   ngOnInit(): void {
-    console.log('INIT ConfigVisionComponent');
     this.jeuxCouleursEnable = this.jeuxCouleursService.IsVisionColorActivated();
     this.contrasteTroubleEnable = this.jeuxCouleursService.IsAttentionColorActivated();
     this.fontSelected = this.jeuxCouleursService.getFontSelectedString();
@@ -81,9 +80,6 @@ export class ConfigVisionComponent {
 
   //appel lors du click sur le bouton de choix de vision
   toggleJeuxCouleurs(event: Event | null) {
-
-    console.log("config-vision : toggleJeuxCouleurs");
-
     //si un event est passé en paramètre
     if (event != null) {
       //on récupère l'élément html ciblé par l'event
