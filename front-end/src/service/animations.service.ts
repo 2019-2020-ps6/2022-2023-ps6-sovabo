@@ -8,7 +8,7 @@ export class AnimationsService {
   public duration: string | undefined = "5s";
   public positionCursorSlider: number = 4;
 
-  public delay: number | undefined = 0;
+  public delay: number | undefined = 0.4;
 
 
   constructor() { }
