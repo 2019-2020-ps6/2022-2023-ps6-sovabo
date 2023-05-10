@@ -3,6 +3,7 @@ import { JeuxCouleursService } from '../../../service/jeux-couleurs.service';
 import {ActivatedRoute, Router} from "@angular/router";
 
 import { CommonService } from '../../../service/updateMessenger.service';
+import {Location} from "@angular/common";
 
 
 
@@ -26,7 +27,8 @@ export class ConfigVisionComponent {
   constructor(private jeuxCouleursService: JeuxCouleursService,
               private router: Router,
               private route: ActivatedRoute,
-              private Service: CommonService) {}
+              private Service: CommonService,
+              private location: Location) {}
 
   ngOnInit(): void {
     console.log('INIT ConfigVisionComponent');
@@ -67,7 +69,14 @@ export class ConfigVisionComponent {
     console.log(pSample);
     pSample.forEach(sample=>{
       sample.innerHTML = this.jeuxCouleursService.getFontSelectedString();
-    })
+    });
+
+    this.jeuxCouleursService.changeFont(document);
+    this.jeuxCouleursService.changeFontSize(document);
+  }
+
+  lastPage(){
+    this.location.back();
   }
 
   //appel lors du click sur le bouton de choix de vision

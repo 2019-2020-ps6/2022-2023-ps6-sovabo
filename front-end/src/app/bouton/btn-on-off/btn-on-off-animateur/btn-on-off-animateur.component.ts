@@ -17,6 +17,7 @@ export class BtnOnOffAnimateurComponent {
 
   ngOnInit() {
     this.isOn = this.animateurService.getAnimateur();
+
   }
 
   toggleState() {

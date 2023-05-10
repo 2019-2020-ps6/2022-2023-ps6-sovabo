@@ -21,10 +21,25 @@
 }
 
 .question-text {
-  font-family: Nunito;
   font-weight: bold;
   font-size: 3.2em;
   white-space: nowrap;
+}
+
+//GESTION FONT
+.FONTSELECTED_ARIAL{
+  font-family: Arial;
+  text-shadow: none;
+}
+
+.FONTSELECTED_ANDALE{
+  font-family: Andale Mono;
+  text-shadow: none;
+}
+
+.FONTSELECTED_COMIC{
+  font-family: Comic Sans MS;
+  text-shadow: none;
 }
 
 .text-line text {
@@ -80,7 +95,6 @@ input[type=radio] {
 
 
 label {
-  font-family: Nunito;
   font-weight: bold;
   font-size: 2.8em;
 }

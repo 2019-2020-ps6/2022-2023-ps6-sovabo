@@ -18,38 +18,6 @@ export class BtnClickableBackgroundComponent {
   }
 
   ngOnInit() {
-    this.jeuxCouleursService.changeFont(document);
-    this.jeuxCouleursService.changeFontSize(document);
-  }
-
-  changeContrast(){
-    let tabContainer = document.querySelectorAll('[id=contrastUpContainer]');
-    let tabText = document.querySelectorAll('[id=contrastUpText]');
-
-    if(this.contrasteTroubleEnable){
-      if(tabContainer != null){
-        tabContainer.forEach(element => {
-          element.classList.add('contrastUpContainer');
-        });
-      }
-      if(tabText != null){
-        tabText.forEach(element => {
-          element.classList.add('contrastUpText');
-        });
-      }
-    }
-    else{
-      if(tabContainer != null){
-        tabContainer.forEach(element => {
-          element.classList.remove('contrastUpContainer');
-        });
-      }
-      if(tabText != null){
-        tabText.forEach(element => {
-          element.classList.remove('contrastUpText');
-        });
-      }
-    }
   }
 
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {duotone} from "@fortawesome/fontawesome-svg-core/import.macro";
 
 @Injectable({
   providedIn: 'root'
@@ -122,9 +123,13 @@ export class JeuxCouleursService {
   }
 
   changeFontSize(document: Document) {
+    console.log("FONTSIZE CHANGER");
+
+    console.log("currentFontSize :"+this.currentFontSize+" | "+"oldFontSize"+this.oldFontSize);
 
     let level = this.currentFontSize-this.oldFontSize;
-    let coeff = 4;
+    //let level = 1;
+    let coeff = 5;
 
     if(event!=null) {
       //on récupère l'élément html ciblé par l'event
@@ -143,13 +148,60 @@ export class JeuxCouleursService {
   }
 
   changeFont(document: Document) {
+    console.log("changeFont");
 
     if(this.fontCheck){
       let pElement = document.querySelectorAll("p");
 
+      //CAS DE JOUER QUIZZ
+      let answerContainer = document.getElementsByClassName("answers-container");
+      let questionContainer = document.getElementsByClassName("question-bubble");
+
       pElement.forEach(elem => {
         elem.style.fontFamily=this.getFontSelectedString();
-      })
+        if(elem.classList.contains("titreStyle")){
+          elem.style.textShadow="none";
+        }
+
+      });
+
+      for(let i=0;i<answerContainer.length;i++){
+        let fontToChange=this.getFontSelectedString();
+        switch (this.getFontSelectedString()){
+          case this.listFont[0]:
+            fontToChange = "FONTSELECTED_ARIAL";
+            break;
+          case this.listFont[1]:
+            fontToChange = "FONTSELECTED_ANDALE";
+            break;
+          case this.listFont[2]:
+            fontToChange = "FONTSELECTED_COMIC";
+            break;
+          default:
+            break;
+        }
+        console.log(answerContainer[i]);
+        answerContainer[i].classList.add(fontToChange);
+      }
+
+      for(let i=0;i<questionContainer.length;i++){
+        let fontToChange=this.getFontSelectedString();
+        switch (this.getFontSelectedString()){
+          case this.listFont[0]:
+            fontToChange = "FONTSELECTED_ARIAL";
+            break;
+          case this.listFont[1]:
+            fontToChange = "FONTSELECTED_ANDALE";
+            break;
+          case this.listFont[2]:
+            fontToChange = "FONTSELECTED_COMIC";
+            break;
+          default:
+            break;
+        }
+        console.log(questionContainer[i]);
+        questionContainer[i].classList.add(fontToChange);
+      }
     }
     else{}
 

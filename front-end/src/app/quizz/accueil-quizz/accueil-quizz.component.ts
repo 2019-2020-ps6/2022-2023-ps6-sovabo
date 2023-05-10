@@ -32,6 +32,8 @@ export class AccueilQuizzComponent {
     this.quizService.setQuizCourant(this.quiz);
     this.animations = this.animationsService.isAnimated;
     this.animationDuration = this.animationsService.duration;
+    this.jeuxCouleursService.changeFont(document);
+    this.jeuxCouleursService.changeFontSize(document);
   }
 
   getAnimateur() {

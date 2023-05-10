@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-configuration',
@@ -9,15 +10,20 @@ import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
 export class ConfigurationComponent {
   AttentionColorStatus: boolean = false;
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
-  constructor(private jeuxCouleursService: JeuxCouleursService) {}
+  constructor(private jeuxCouleursService: JeuxCouleursService,private location: Location) {}
 
+  lastPage(){
+    this.location.back();
+  }
 
   ngOnInit(): void {
     console.log('ConfigVisionComponent');
     this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
     this.changeContrast();
+    this.jeuxCouleursService.changeFont(document);
     this.jeuxCouleursService.changeFontSize(document);
   }
+
 
   changeContrast(){
     console.log('changeContrast Vision');

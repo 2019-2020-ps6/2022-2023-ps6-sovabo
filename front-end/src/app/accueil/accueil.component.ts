@@ -19,6 +19,8 @@ export class AccueilComponent {
   ngOnInit(): void {
     console.log('ConfigVisionComponent');
     this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
+    this.jeuxCouleursService.changeFont(document);
+    this.jeuxCouleursService.changeFontSize(document);
     this.changeContrast();
   }
 
