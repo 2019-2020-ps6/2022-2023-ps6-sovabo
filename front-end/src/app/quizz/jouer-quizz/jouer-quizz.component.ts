@@ -50,6 +50,8 @@ export class JouerQuizzComponent implements OnInit {
 
   private timerId: any | undefined;
 
+  private currentFont : string=this.jeuxCouleursService.getFontSelectedString();
+
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
 
   constructor(private route: ActivatedRoute,
@@ -73,6 +75,13 @@ export class JouerQuizzComponent implements OnInit {
     this.animationDuration = this.animationService.duration;
     this.startTimer();
 
+    this.jeuxCouleursService.changeFont(document);
+    this.jeuxCouleursService.changeFontSize(document);
+
+  }
+
+  getFontString(){
+    return this.currentFont;
   }
 
   checkWin(){

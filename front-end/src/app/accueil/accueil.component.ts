@@ -19,38 +19,10 @@ export class AccueilComponent {
 
   ngOnInit(): void {
     this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
-    this.changeContrast();
+    this.jeuxCouleursService.changeFont(document);
+    this.jeuxCouleursService.changeFontSize(document);
   }
 
-  changeContrast(){
-    let tabContainer = document.querySelectorAll('[id=contrastUpContainer]');
-    let tabText = document.querySelectorAll('[id=contrastUpText]');
-
-    if(this.AttentionColorStatus){
-      if(tabContainer != null){
-        tabContainer.forEach(element => {
-          element.classList.add('contrastUpContainer');
-        });
-      }
-      if(tabText != null){
-        tabText.forEach(element => {
-          element.classList.add('contrastUpText');
-        });
-      }
-    }
-    else{
-      if(tabContainer != null){
-        tabContainer.forEach(element => {
-          element.classList.remove('contrastUpContainer');
-        });
-      }
-      if(tabText != null){
-        tabText.forEach(element => {
-          element.classList.remove('contrastUpText');
-        });
-      }
-    }
-  }
 
   getAnimateur() {
     return this.animateurService.getAnimateur();

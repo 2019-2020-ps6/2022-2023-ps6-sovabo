@@ -9,14 +9,15 @@ import {JeuxCouleursService} from "../../../../service/jeux-couleurs.service";
 export class BtnOnOffJeuxCouleursComponent {
   isOn: boolean = false;
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
-
-  constructor(private jeuxCouleursService: JeuxCouleursService) {
+  constructor(private jeuxCouleursService: JeuxCouleursService,) {
   }
 
-  ngOnInit() {this.isOn = this.jeuxCouleursService.IsVisionColorActivated();}
+  ngOnInit() {
+    this.isOn = this.jeuxCouleursService.IsAttentionColorActivated();
+  }
 
   toggleState() {
     this.isOn = !this.isOn;
-    this.jeuxCouleursService.setAttentionColor(this.isOn);
   }
+
 }

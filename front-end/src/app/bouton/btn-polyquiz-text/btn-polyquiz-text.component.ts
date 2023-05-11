@@ -11,6 +11,8 @@ import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
 export class BtnPolyquizTextComponent {
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
 
+  ngOnInit(){
+  }
   constructor(private jeuxCouleursService: JeuxCouleursService) {
   }
 

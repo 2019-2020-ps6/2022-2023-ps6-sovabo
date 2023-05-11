@@ -7,7 +7,7 @@ import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
   styleUrls: ['./btn-clickable-frame-background.component.scss']
 })
 export class BtnClickableFrameBackgroundComponent {
-  
+
   constructor(private jeuxCouleursService: JeuxCouleursService){}
   contrasteTroubleEnable :boolean = this.jeuxCouleursService.getVisionAttentionStatus();
 
@@ -17,6 +17,7 @@ export class BtnClickableFrameBackgroundComponent {
   }
 
   ngOnInit() {
+    this.jeuxCouleursService.changeFontSize(document);
   }
 
   changeContrast(){

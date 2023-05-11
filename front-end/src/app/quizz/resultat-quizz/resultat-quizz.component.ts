@@ -25,6 +25,8 @@ export class ResultatQuizzComponent {
   ngOnInit() {
     this.quiz = this.quizService.getQuizCourant();
     this.score = this.quizService.getScore();
+    this.jeuxCouleursService.changeFont(document);
+    this.jeuxCouleursService.changeFontSize(document);
   }
 
   getAnimateur() {

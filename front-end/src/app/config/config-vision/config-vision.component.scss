@@ -11,7 +11,6 @@
   html, body {
     height: 100%;
     max-height: 100vh;
-    margin: 0;
   }
 
 header {
@@ -34,7 +33,7 @@ header {
 
   p{
     font-family: Nunito;
-    font-size: calc((6vh + 10.68vw)/4);
+    font-size: 6vh;
     font-weight: 900;
     text-align: center;
     margin-top: 5vh;
@@ -45,52 +44,106 @@ header {
     background-clip: text;
   }
 
+  .colorExample{
+    scale: 80%;
+    width: 80%;
+    margin-left: 10%;
+    border-radius: 100px;
+    background: linear-gradient(90deg, #f3f3f3 -4.73%, #ffe5e5 100%);
+    box-shadow: inset 5px -5px 4px rgba(0, 0, 0, 0.25),
+                inset -5px 5px 4px rgba(0, 0, 0, 0.25),
+                inset -5px -5px 4px rgba(0, 0, 0, 0.25),
+                inset 5px 5px 4px rgba(0, 0, 0, 0.25);
+  }
+  #exampleTxt{
+    font-size: 6vh;
+    scale: 60%;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 5vh;
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
 //conteneur general
 .generalContainer{
-    width: 80%;
-  height: auto;
-
-    margin: auto;
-    margin-top: 5%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-
-    background: rgba(255, 255, 255, 0.42);
-    border-radius: 45px;
+  margin-top: -2%;
+  height: 90%;
+  width: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
-//generalisation des conteneurs de chaques setups
-.setupContainer{
-    width: 100%;
-    margin: 1%;
-    display: flex;
-    flex-direction: line;
-    align-items: center;
-}
-
-//conteneur des boutons
-.btnContainer{
-    display: flex;
-    flex-direction: line;
-    justify-content: space-between;
-    align-items: center;
-}
-
-//conteneur des labels
 .labelContainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-
-    width: 25%;
+  margin: 0% 0% 15% 0%;
 }
 
-//espaces entre les boutons
+.setupContainer{
+  margin-top: 5%;
+  width: 30%;
+  height: 70%;
+  background: rgba(255, 255, 255, 0.42);
+  border-radius: 100px;
+}
+
+.colorExample{
+  margin: -10% auto auto auto;
+}
+
+.btnContainer{
+  width: 90%;
+  display: flex;
+  flex-flow: column;
+  align-self: center;
+}
+
+#fontChangerConfirmation{
+  margin-bottom: 5%;
+  align-self: center;
+  scale: 50%;
+}
+
+//re-size des boutons
 app-btn-on-off-colors{
-    margin-right: 50%;
+  scale: 80%;
+}
+
+app-btn-font{
+  scale: 80%;
+}
+
+
+//CONTRASTE
+.contrastUpContainer{
+  background: rgb(200, 200, 200);
+}
+
+.contrastUpTextExtrude{
+  background: black;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.contrastUpTitleExtrude{
+  font-family: DynaPuff;
+  font-size: 9vw;
+  font-weight: 700;
+  color: #000000;
+  text-shadow: none;
+  margin: 0 0 0 22%;
+}
+
+
+
+//MODIFICATION DES BOUTONS
+#TRICHROMATIE{
+  //background: black;
+}
+
+#DICHROMATISME{
+  //background: black;
 }
 
 
