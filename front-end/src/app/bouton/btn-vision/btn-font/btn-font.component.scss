@@ -4,10 +4,9 @@
 }
 
 button {
-  width: 110%;
+  width: 100%;
   height: 100%;
   border: none;
-  padding: 0% 0% 0% 0%;
 
   font-family: 'Roboto Mono';
   font-style: normal;
@@ -46,4 +45,8 @@ button {
 
 .DICHROMATISME{
   background: red;
+}
+
+p{
+  margin: 0;
 }

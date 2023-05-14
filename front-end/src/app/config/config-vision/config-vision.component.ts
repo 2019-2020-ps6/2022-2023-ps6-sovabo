@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { JeuxCouleursService } from '../../../service/jeux-couleurs.service';
 import {ActivatedRoute, Router} from "@angular/router";
 
@@ -72,6 +72,17 @@ export class ConfigVisionComponent {
 
     this.jeuxCouleursService.changeFont(document);
     this.jeuxCouleursService.changeFontSize(document);
+
+    // Appel de la fonction pour ajuster la hauteur de generalContainer
+    this.adjustGeneralContainerHeight();
+    this.adjustLabelFontSize();
+    window.addEventListener('resize', () => this.adjustGeneralContainerHeight());
+    window.addEventListener('resize', () => this.adjustLabelFontSize());
+  }
+
+  ngOnDestroy(): void {
+    window.removeEventListener('resize', () => this.adjustGeneralContainerHeight());
+    window.removeEventListener('resize', () => this.adjustLabelFontSize());
   }
 
   lastPage(){
@@ -151,4 +162,24 @@ export class ConfigVisionComponent {
     }
   }
 
+  adjustGeneralContainerHeight() {
+    const header = document.querySelector('header');
+    const generalContainer = document.querySelector('.generalContainer');
+    const headerHeight = header?.offsetHeight || 0;
+    const windowHeight = window.innerHeight || 0;
+    // @ts-ignore
+    generalContainer.style.height = `${windowHeight - headerHeight}px`;
+  }
+
+
+  adjustLabelFontSize() {
+    const labels = document.querySelectorAll('.labelContainer p, #taillePolice');
+    const setupContainer = document.querySelector('.setupContainer');
+    const setupContainerWidth = setupContainer?.clientWidth || 0;
+    const fontSize = setupContainerWidth / 10;
+    // @ts-ignore
+    labels.forEach((label: HTMLElement) => {
+      label.style.fontSize = `${fontSize}px`;
+    });
+  }
 }
