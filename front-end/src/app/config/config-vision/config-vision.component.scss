@@ -1,21 +1,22 @@
 @font-face {
-    font-family: 'DynaPuff';
-    src: url("~src/assets/Fonts/dynapuff/fonts/variable/DynaPuff[wdth,wght].ttf");
-  }
+  font-family: 'DynaPuff';
+  src: url("~src/assets/Fonts/dynapuff/fonts/variable/DynaPuff[wdth,wght].ttf");
+}
 
-  @font-face {
-    font-family: 'Nunito';
-    src: url("~src/assets/Fonts/nunito-main/fonts/variable/Nunito[wght].ttf");
-  }
+@font-face {
+  font-family: 'Nunito';
+  src: url("~src/assets/Fonts/nunito-main/fonts/variable/Nunito[wght].ttf");
+}
 
-  html, body {
-    height: 100%;
-    max-height: 100vh;
-  }
+html, body {
+  height: 100%;
+  max-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
 
 header {
-  padding-top: 4%;
-  height: 10%;
+  height: auto;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -36,7 +37,6 @@ header {
     font-size: 6vh;
     font-weight: 900;
     text-align: center;
-    margin-top: 5vh;
 
     background: linear-gradient(90deg, #7D67AA -4.73%, #8791B6 100%);
     -webkit-background-clip: text;
@@ -46,8 +46,7 @@ header {
 
   .colorExample{
     scale: 80%;
-    width: 80%;
-    margin-left: 10%;
+    width: 70%;
     border-radius: 100px;
     background: linear-gradient(90deg, #f3f3f3 -4.73%, #ffe5e5 100%);
     box-shadow: inset 5px -5px 4px rgba(0, 0, 0, 0.25),
@@ -60,59 +59,69 @@ header {
     scale: 60%;
     font-weight: 700;
     text-align: center;
-    margin-top: 5vh;
     -webkit-background-clip: text;
     background-clip: text;
+    //margin top and bottom 2%
+    margin: 2% 0;
   }
 
 //conteneur general
 .generalContainer{
-  margin-top: -2%;
-  height: 90%;
+  height: 100%;
   width: auto;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  align-content: center;
 }
 
 .labelContainer{
-  margin: 0% 0% 15% 0%;
+  margin-top: 5vh;
 }
 
 .setupContainer{
-  margin-top: 5%;
+  display: flex;
+  flex-flow: column;
+  justify-content: start;
+  align-items: center;
   width: 30%;
-  height: 70%;
+  height: 95%;
   background: rgba(255, 255, 255, 0.42);
   border-radius: 100px;
 }
 
-.colorExample{
-  margin: -10% auto auto auto;
-}
-
 .btnContainer{
-  width: 90%;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 30%;
   display: flex;
   flex-flow: column;
-  align-self: center;
+  justify-content: safe center;
+  align-items: center;
 }
 
 #fontChangerConfirmation{
-  margin-bottom: 5%;
-  align-self: center;
-  scale: 50%;
+  scale: 60%;
+  width: fit-content;
 }
 
 //re-size des boutons
 app-btn-on-off-colors{
+  width: 90%;
   scale: 80%;
 }
 
 app-btn-font{
+  width: 90%;
   scale: 80%;
+  margin: 0;
+  padding: 0;
 }
 
+.app-slider {
+  width: 80%;
+  margin: 3% 0;
+}
 
 //CONTRASTE
 .contrastUpContainer{
@@ -132,7 +141,7 @@ app-btn-font{
   font-weight: 700;
   color: #000000;
   text-shadow: none;
-  margin: 0 0 0 22%;
+  //margin: 0 0 0 22%;
 }
 
 

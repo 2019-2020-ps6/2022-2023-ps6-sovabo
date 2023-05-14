@@ -1,4 +1,3 @@
-
 <header>
     <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpText' : ''" class="titreStyle">PolyQuiz</h1>
     <app-btn-clickable-background onclick="history.go(-1);">RETOUR</app-btn-clickable-background>
@@ -36,8 +35,8 @@
         <div class="labelContainer">
             <p [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTextExtrude' : ''">Taille de police</p>
         </div>
-        <app-slider-font-size></app-slider-font-size>
+        <app-slider-font-size class="app-slider"></app-slider-font-size>
 
-      <p>Taille : {{this.getFontSize()}}</p>
+      <p id="taillePolice">{{this.getFontSize()}}</p>
     </div>
 </div>
