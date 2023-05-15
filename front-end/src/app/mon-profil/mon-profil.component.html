@@ -1,1 +1,29 @@
-<p>mon-profil works!</p>
+<div class="container">
+
+    <div class="top-element">
+
+        <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTitleExtrude' : 'contrastDownTitleExtrude'" >PolyQuiz</h1>
+
+    </div>
+  
+    <div class="left">
+        <img id="profile-img" src="default-profile.jpg" alt="Profile Image" (click)="triggerImageUpload()">
+        <input type="file" id="image-upload" accept="image/*" (change)="changeProfileImage($event)" style="display:none;">
+    
+        <p><b>Mon adresse email :</b> {{email}}</p>
+        <p><b>Nom d'utilisateur :</b> {{username}}</p>
+
+    </div>
+
+    <div class="right">
+        <button (click)="changePassword()">Changer de mot de passe</button>
+        <button (click)="createCaregiverCode()">Créer mon code soignant</button>
+        <button (click)="logout()">Déconnexion</button>
+
+    </div>
+     
+  
+      
+  </div>
+  
+  

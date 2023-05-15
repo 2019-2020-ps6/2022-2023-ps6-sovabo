@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 70px; // Ajustez cette valeur en fonction de la hauteur de votre élément en haut
+  
+    .left, .right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+  
+  .top-element {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10; // cette ligne assure que l'élément est toujours au-dessus des autres éléments
+  }
+  
