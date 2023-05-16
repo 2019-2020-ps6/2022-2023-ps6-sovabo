@@ -1,5 +1,4 @@
 function carousel(){
-  console.log("iciiiiiiiii");
   jQuery(document).ready(function($) {
     "use strict";
     //  TESTIMONIALS CAROUSEL HOOK

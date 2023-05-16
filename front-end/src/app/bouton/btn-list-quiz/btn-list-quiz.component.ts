@@ -8,6 +8,10 @@ import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
 })
 export class BtnListQuizComponent {
   constructor(private jeuxCouleursService: JeuxCouleursService){}
+
+  ngOnInit() {
+  }
+
   contrasteTroubleEnable :boolean = this.jeuxCouleursService.getVisionAttentionStatus();
 
 

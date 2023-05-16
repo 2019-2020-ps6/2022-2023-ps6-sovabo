@@ -50,6 +50,8 @@ export class JouerQuizzComponent implements OnInit {
 
   private timerId: any | undefined;
 
+  private currentFont : string=this.jeuxCouleursService.getFontSelectedString();
+
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
 
   constructor(private route: ActivatedRoute,
@@ -73,6 +75,13 @@ export class JouerQuizzComponent implements OnInit {
     this.animationDuration = this.animationService.duration;
     this.startTimer();
 
+    this.jeuxCouleursService.changeFont(document);
+    this.jeuxCouleursService.changeFontSize(document);
+
+  }
+
+  getFontString(){
+    return this.currentFont;
   }
 
   checkWin(){
@@ -92,8 +101,6 @@ export class JouerQuizzComponent implements OnInit {
         if (this.timerId !== undefined) {
           clearInterval(this.timerId);
           this.validateAnswer();
-          console.log("je suis dans timer : isLastQuestion ?")
-          console.log(this.isLastQuestion);
           if (!this.isLastQuestion) {
             setTimeout(() => {
               this.goToNextQuestion();
@@ -142,15 +149,6 @@ export class JouerQuizzComponent implements OnInit {
     //check win
     this.checkWin();
 
-  //   if (this.isLastQuestion) {
-  //     console.log("c'est la derniere je suis dans valide");
-  //   setTimeout(() => {
-  //     console.log("je suis dans valide je goto BG");
-  //     this.goToNextQuestion();
-  //   }, 5000); // délai de 5 secondes
-  // }
-
-
     if(!selectedAnswer){
       this.isAnswerCorrect = false;
       return;
@@ -165,12 +163,10 @@ export class JouerQuizzComponent implements OnInit {
     }
 
     this.selectedAnswerIndex = null;
-    
+
 
     if (!this.isLastQuestion) {
-      console.log("c'est pas la derniere je suis dans valide et je vais goto");
     setTimeout(() => {
-      console.log("hoop je goto");
       this.goToNextQuestion();
     }, 5000); // délai de 5 secondes
   }
@@ -201,15 +197,12 @@ export class JouerQuizzComponent implements OnInit {
     this.currentQuestion = this.quiz.questions[this.currentQuestionIndex];
     this.questionCorrectIndex = this.getCorrectAnswerIndex(this.currentQuestion);
     this.isAnswerCorrect = null;
-    
-    console.log("je suis dans valider");
+
     if (this.currentQuestionIndex == this.quiz.questions.length - 1) {
       this.isLastQuestion = true;
-      console.log("c'est la dernière");
-      console.log(this.isLastQuestion);
 
     }
-  
+
     this.startTimer();
   }
 

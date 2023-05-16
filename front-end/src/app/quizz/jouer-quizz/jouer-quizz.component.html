@@ -6,7 +6,8 @@
 
       <div class="question-bubble">
         <svg class="text-line" *ngIf="animations">
-          <text [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}" class="question-text" x="50%" y="40%" text-anchor="middle" dominant-baseline="middle">{{ currentQuestion.label }}</text>
+          <text [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}"
+                class="question-text" x="50%" y="40%" text-anchor="middle" dominant-baseline="middle">{{ currentQuestion.label }}</text>
         </svg>
           <text *ngIf="!animations" [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}" class="question-text">Q{{currentQuestion.id}} : {{currentQuestion.label}}</text>
         <div class="timer">{{ timeRemaining }} s</div>
@@ -19,9 +20,9 @@
         </div>
       </div>
       <div class="check-container">
-        <button (click)="validateAnswer()" [disabled]="selectedAnswerIndex == null"  *ngIf="isAnswerCorrect==null" class="check_btn">Valider</button>
-        <button *ngIf="isAnswerCorrect != null && currentQuestionIndex != quiz.questions.length -1" [disabled]="isQuizFinished == true" (click)="goToNextQuestion()" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && next_btnContrastOn' : 'next_btnContrastOff'" >Question suivante</button>
-        <button *ngIf="isQuizFinished" [routerLink]="['/resultat-quizz']" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && next_btnContrastOn' : 'next_btnContrastOff'">Voir les résultats !</button>
+        <button [ngStyle]="{'font-family': this.getFontString()}" (click)="validateAnswer()" [disabled]="selectedAnswerIndex == null"  *ngIf="isAnswerCorrect==null" class="check_btn">Valider</button>
+        <button [ngStyle]="{'font-family': this.getFontString()}" *ngIf="isAnswerCorrect != null && currentQuestionIndex != quiz.questions.length -1" [disabled]="isQuizFinished == true" (click)="goToNextQuestion()" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && next_btnContrastOn' : 'next_btnContrastOff'" >Question suivante</button>
+        <button [ngStyle]="{'font-family': this.getFontString()}" *ngIf="isQuizFinished" [routerLink]="['/resultat-quizz']" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && next_btnContrastOn' : 'next_btnContrastOff'">Voir les résultats !</button>
       </div>
       <div class="buttons-container">
         <div *ngIf="isAnswerCorrect == false && selectedAnswerIndex != questionCorrectIndex" class="wrong-answer">

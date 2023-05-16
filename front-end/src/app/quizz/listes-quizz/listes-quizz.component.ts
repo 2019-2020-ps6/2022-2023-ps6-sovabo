@@ -19,6 +19,8 @@ export class ListesQuizzComponent {
   ngOnInit(): void {
     this.quizList = this.quizService.getData();
     console.log(this.animationsService.isAnimated);
+    this.jeuxCouleursService.changeFont(document);
+    this.jeuxCouleursService.changeFontSize(document);
   }
 
   isAnotherHovered(quiz: Quiz): boolean {

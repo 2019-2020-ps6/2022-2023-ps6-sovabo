@@ -1,0 +1,3 @@
+<button [class.active]="isOn" (click)="toggleState()"  [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}">
+  {{ isOn ? 'ON' : 'OFF' }}
+</button>

@@ -1,21 +1,18 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import { Component } from '@angular/core';
+import {Subscription} from "rxjs";
 import {JeuxCouleursService} from "../../../../service/jeux-couleurs.service";
-
-import {Subscription} from 'rxjs';
-import {CommonService} from '../../../../service/updateMessenger.service';
+import {CommonService} from "../../../../service/updateMessenger.service";
 
 @Component({
-  selector: 'app-btn-on-off-colors',
-  templateUrl: './btn-on-off-colors.component.html',
-  styleUrls: ['./btn-on-off-colors.component.scss']
+  selector: 'app-btn-font',
+  templateUrl: './btn-font.component.html',
+  styleUrls: ['./btn-font.component.scss']
 })
-
-export class BtnOnOffColorsComponent {
+export class BtnFontComponent {
 
   //GESTION TROUBLES
   isOn: boolean = false;
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
-
 
   //GESTION DE NOTIFICATION
   messageReceived: any;
@@ -27,7 +24,7 @@ export class BtnOnOffColorsComponent {
     this.subscriptionName= this.Service.getUpdate().subscribe
     ((message: any) => { //message contains the data sent from service
       this.messageReceived = message;
-      //console.log(message);
+
     });
   }
 
