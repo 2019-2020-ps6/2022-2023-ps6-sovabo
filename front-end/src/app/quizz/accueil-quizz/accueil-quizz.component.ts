@@ -32,10 +32,20 @@ export class AccueilQuizzComponent {
     this.quizService.setQuizCourant(this.quiz);
     this.animations = this.animationsService.isAnimated;
     this.animationDuration = this.animationsService.duration;
+    this.jeuxCouleursService.changeFont(document);
+    this.jeuxCouleursService.changeFontSize(document);
   }
 
   getAnimateur() {
     return this.animateurService.getAnimateur();
+  }
+
+  getAnimations() {
+    return this.animationsService.isAnimated;
+  }
+
+  getDelay() {
+    return this.animationsService.delay != undefined ? this.animationsService.delay : 0;
   }
 
   getDifficultyColor(difficulty: number): string {

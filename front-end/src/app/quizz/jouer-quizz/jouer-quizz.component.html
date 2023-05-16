@@ -6,7 +6,8 @@
 
       <div class="question-bubble">
         <svg class="text-line" *ngIf="animations">
-          <text [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}" class="question-text" x="50%" y="40%" text-anchor="middle" dominant-baseline="middle">{{ currentQuestion.label }}</text>
+          <text [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}"
+                class="question-text" x="50%" y="40%" text-anchor="middle" dominant-baseline="middle">{{ currentQuestion.label }}</text>
         </svg>
           <text *ngIf="!animations" [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}" class="question-text">Q{{currentQuestion.id}} : {{currentQuestion.label}}</text>
         <div class="timer">{{ timeRemaining }} s</div>
@@ -19,9 +20,9 @@
         </div>
       </div>
       <div class="check-container">
-        <button (click)="validateAnswer()" [disabled]="selectedAnswerIndex == null"  *ngIf="isAnswerCorrect==null" class="check_btn">Valider</button>
-        <button *ngIf="isAnswerCorrect != null && currentQuestionIndex != quiz.questions.length -1" [disabled]="isQuizFinished == true" (click)="goToNextQuestion()" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && next_btnContrastOn' : 'next_btnContrastOff'" >Question suivante</button>
-        <button *ngIf="isQuizFinished" [routerLink]="['/resultat-quizz']" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && next_btnContrastOn' : 'next_btnContrastOff'">Voir les résultats !</button>
+        <button [ngStyle]="{'font-family': this.getFontString()}" (click)="validateAnswer()" [disabled]="selectedAnswerIndex == null"  *ngIf="isAnswerCorrect==null" class="check_btn">Valider</button>
+        <button [ngStyle]="{'font-family': this.getFontString()}" *ngIf="isAnswerCorrect != null && currentQuestionIndex != quiz.questions.length -1" [disabled]="isQuizFinished == true" (click)="goToNextQuestion()" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && next_btnContrastOn' : 'next_btnContrastOff'" >Question suivante</button>
+        <button [ngStyle]="{'font-family': this.getFontString()}" *ngIf="isQuizFinished" [routerLink]="['/resultat-quizz']" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && next_btnContrastOn' : 'next_btnContrastOff'">Voir les résultats !</button>
       </div>
       <div class="buttons-container">
         <div *ngIf="isAnswerCorrect == false && selectedAnswerIndex != questionCorrectIndex" class="wrong-answer">
@@ -33,10 +34,12 @@
 
       </div>
     </div>
-    <div class="bubble" id="bubble1" *ngIf="getAnimateur()"></div>
-    <div class="bubble" id="bubble2" *ngIf="getAnimateur()"></div>
-    <div class="bubble" id="bubble3" *ngIf="getAnimateur()"></div>
-    <div class="bubble" id="bubble4" *ngIf="getAnimateur()"></div>
-    <div class="bubble" id="bubble5" *ngIf="getAnimateur()"></div>
-    <app-image-animateur *ngIf="getAnimateur()"></app-image-animateur>
+    <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble1" *ngIf="getAnimateur()" [ngStyle]="{'animation-duration' : getDelay()*(25) + 's', 'animation-delay' : getDelay()*(2) + 's'}"></div>
+    <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble2" *ngIf="getAnimateur()" [ngStyle]="{'animation-duration' : getDelay()*(25) + 's', 'animation-delay' : getDelay()*(11/4) + 's'}"></div>
+    <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble3" *ngIf="getAnimateur()" [ngStyle]="{'animation-duration' : getDelay()*(25) + 's', 'animation-delay' : getDelay()*(13/4) + 's'}"></div>
+    <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble4" *ngIf="getAnimateur()" [ngStyle]="{'animation-duration' : getDelay()*(25) + 's', 'animation-delay' : getDelay()*(15/4) + 's'}"></div>
+    <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble5" *ngIf="getAnimateur()" [ngStyle]="{'animation-duration' : getDelay()*(25) + 's', 'animation-delay' : getDelay()*(9/2) + 's'}"></div>
+    <div class="animatorContainer" *ngIf="getAnimateur()">
+      <img src="../../../assets/Images/Animateur_image.png" alt="Image animateur" [ngClass]="getAnimations() ? 'animatorWithAnimationsON' : 'animatorWithAnimationsOFF'" [ngStyle]="{'animation-duration' : (getDelay()*(25) + 's')}">
+    </div>
   </div>

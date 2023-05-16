@@ -29,6 +29,8 @@ export class ConfigAttentionComponent {
     this.animations = this.animationsService.isAnimated;
     this.animateur = this.animateurService.getAnimateur();
     this.contrasteTroubleEnable = this.jeuxCouleursService.getVisionAttentionStatus();
+    this.jeuxCouleursService.changeFont(document);
+    this.jeuxCouleursService.changeFontSize(document);
   }
   toggleAnimations() {
     this.animations = !this.animations;
@@ -42,7 +44,6 @@ export class ConfigAttentionComponent {
 
   toggleContrastColor(event: Event | null) {
     this.contrasteTroubleEnable = !this.contrasteTroubleEnable
-    //console.log('jeu contraste :'+this.contrasteTroubleEnable);
     this.jeuxCouleursService.setAttentionColor(this.contrasteTroubleEnable);
     this.resetPage();
   }

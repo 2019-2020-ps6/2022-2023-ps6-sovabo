@@ -3,11 +3,11 @@ import {AnimateurService} from "../../../../service/animateur.service";
 import {JeuxCouleursService} from "../../../../service/jeux-couleurs.service";
 
 @Component({
-  selector: 'app-btn-on-off-animateur',
-  templateUrl: './btn-on-off-animateur.component.html',
-  styleUrls: ['./btn-on-off-animateur.component.scss']
+  selector: 'app-btn-on-off-contrast',
+  templateUrl: './btn-on-off-contrast.component.html',
+  styleUrls: ['./btn-on-off-contrast.component.scss']
 })
-export class BtnOnOffAnimateurComponent {
+export class BtnOnOffContrastComponent {
   isOn: boolean = false;
   contrasteTroubleEnable :boolean = this.jeuxCouleursService.getVisionAttentionStatus();
 
@@ -16,11 +16,11 @@ export class BtnOnOffAnimateurComponent {
   }
 
   ngOnInit() {
-    this.isOn = this.animateurService.getAnimateur();
-
+    this.isOn = this.jeuxCouleursService.getVisionAttentionStatus();
   }
 
   toggleState() {
     this.isOn = !this.isOn;
   }
+
 }
