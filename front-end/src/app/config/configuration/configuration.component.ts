@@ -19,6 +19,8 @@ export class ConfigurationComponent {
   ngOnInit(): void {
     this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
     this.changeContrast();
+
+    console.log("APPEL ONINIT CONFIG");
     if (this.jeuxCouleursService.isDefaultActive) {
       this.jeuxCouleursService.collectDefaultStyles();
     }
