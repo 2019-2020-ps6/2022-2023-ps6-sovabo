@@ -34,7 +34,7 @@ import {BtnOnOffColorsComponent} from "./bouton/btn-on-off/btn-on-off-colors/btn
 import { BtnFontComponent } from './bouton/btn-vision/btn-font/btn-font.component';
 import { SliderFontSizeComponent } from './slider/slider-font-size/slider-font-size.component';
 import { BtnOnOffContrastComponent } from './bouton/btn-on-off/btn-on-off-contrast/btn-on-off-contrast.component';
-
+import {BtnProfilUserComponent} from "./bouton/btn-profile/btn-profile.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +46,7 @@ import { BtnOnOffContrastComponent } from './bouton/btn-on-off/btn-on-off-contra
     ConfigVisionComponent,
     AccueilQuizzComponent,
     CreerQuizzComponent,
+    BtnProfilUserComponent,
     ListesQuizzComponent,
     ModifQuizzComponent,
     ResultatQuizzComponent,

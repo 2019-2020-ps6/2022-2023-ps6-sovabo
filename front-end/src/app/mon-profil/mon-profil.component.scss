@@ -1,19 +1,84 @@
 .container {
-    display: flex;
-    justify-content: space-between;
-  
-    .left, .right {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* ajouter cette ligne pour que le conteneur prenne toute la largeur de la page */
+}
+
+.top-element {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#profile-img {
+  width: 200px; // Largeur fixe
+  height: 60px;
+}
+
+.contenuProfil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; // faire en sorte que .contenuProfil prenne toute la largeur disponible
+  max-width: 1200px; // ajouter cette ligne pour limiter la largeur maximale du contenu
+  margin: 0 auto; // ajouter cette ligne pour centrer le contenu
+}
+
+.topContainer {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.left, .right {
+  display: flex;
+
+  flex-direction: column;
+  width: 100%; // faire en sorte que .left et .right prennent toute la largeur disponible
+}
+
+.left, .contenuRight{
+  gap: 30px;
+}
+
+.deconnexion > my-button{
+  color: red;
+  //background: rgba(207, 207, 207, 0.4);
+}
+
+.contenuRight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btnTextProfil {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .contenuProfil {
+    flex-direction: column;
   }
-  
-  .top-element {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 10; // cette ligne assure que l'élément est toujours au-dessus des autres éléments
+
+  .topContainer {
+    flex-direction: column;
+    align-items: center;
   }
-  
+
+  .btnTextProfil {
+    margin-bottom: 15px;
+  }
+}

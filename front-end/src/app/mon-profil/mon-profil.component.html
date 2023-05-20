@@ -1,29 +1,24 @@
-<div class="container">
-
+<div class="container monProfil">
     <div class="top-element">
-
-        <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTitleExtrude' : 'contrastDownTitleExtrude'" >PolyQuiz</h1>
-
+      <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTitleExtrude' : 'contrastDownTitleExtrude'">PolyQuiz</h1>
+    </div>  
+    <div class="contenuProfil">
+        <div class="topContainer"> <!-- Ajout de ce conteneur -->
+            <div class="left">
+                <!-- <img id="profile-img" src="default-profile.jpg" alt="Profile Image" (click)="triggerImageUpload()">
+                <input type="file" id="image-upload" accept="image/*" (change)="changeProfileImage($event)" style="display:none;"> -->
+                <app-btn-profile class="btnTextProfil">Adresse email: {{email}}</app-btn-profile>
+                <app-btn-profile class="btnTextProfil">Nom utilisateur: {{username}}</app-btn-profile>
+            </div>
+            <div class="right">
+                <div class="contenuRight">
+                    <app-btn-profile class="btnTextProfil">Changer de mot de passe</app-btn-profile>
+                    <app-btn-profile class="btnTextProfil">Créer mon code soignant</app-btn-profile>
+                </div>
+            </div>
+        </div>
+        <div class="bas">
+            <app-btn-profile class="btnTextProfil deconnexion">Deconnexion</app-btn-profile>
+        </div>
     </div>
-  
-    <div class="left">
-        <img id="profile-img" src="default-profile.jpg" alt="Profile Image" (click)="triggerImageUpload()">
-        <input type="file" id="image-upload" accept="image/*" (change)="changeProfileImage($event)" style="display:none;">
-    
-        <p><b>Mon adresse email :</b> {{email}}</p>
-        <p><b>Nom d'utilisateur :</b> {{username}}</p>
-
-    </div>
-
-    <div class="right">
-        <button (click)="changePassword()">Changer de mot de passe</button>
-        <button (click)="createCaregiverCode()">Créer mon code soignant</button>
-        <button (click)="logout()">Déconnexion</button>
-
-    </div>
-     
-  
-      
-  </div>
-  
-  
+</div>

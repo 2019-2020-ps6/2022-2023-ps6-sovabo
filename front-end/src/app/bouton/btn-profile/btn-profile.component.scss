@@ -1,0 +1,38 @@
+@font-face {
+  font-family: "Roboto Mono";
+  src: url('~src/assets/Fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf');
+}
+
+.my-button{
+  font-family: "Roboto Mono";
+  font-style: normal;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: -0.03em;
+  text-shadow: -1px 1px 1px #7C66A9;
+
+  padding: 10px 20px;
+  width: 300px; // Largeur fixe
+  height: 80px;
+
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 30px;
+  border: none;
+}
+
+//SETUP DE CONTRASTE
+.contrastUpContainer{
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+  background: rgb(200, 200, 200);
+  text-shadow: none;
+}
+
+p{
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+
