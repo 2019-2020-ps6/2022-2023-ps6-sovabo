@@ -1,6 +1,7 @@
 <div class="container monProfil">
     <div class="top-element">
       <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTitleExtrude' : 'contrastDownTitleExtrude'">PolyQuiz</h1>
+        
     </div>
   
     <div class="contenuProfil">
@@ -19,7 +20,12 @@
       <div class="bas">
         <app-btn-profile class="btnTextProfil deconnexion">Déconnexion</app-btn-profile>
       </div>
+
+      
+
     </div>
+    <app-btn-clickable-frame-background class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
+
   
     <!-- Fenêtre pop-up -->
     <div class="popup-overlay" *ngIf="isPopupOpen">
