@@ -29,8 +29,13 @@ export class ConfigAttentionComponent {
     this.animations = this.animationsService.isAnimated;
     this.animateur = this.animateurService.getAnimateur();
     this.contrasteTroubleEnable = this.jeuxCouleursService.getVisionAttentionStatus();
-    this.jeuxCouleursService.changeFont(document);
-    this.jeuxCouleursService.changeFontSize(document);
+    if (this.jeuxCouleursService.isDefaultActive) {
+      this.jeuxCouleursService.collectDefaultStyles();
+    }
+    else {
+      this.jeuxCouleursService.changeFont(document);
+      this.jeuxCouleursService.changeFontSize(document);
+    }
   }
   toggleAnimations() {
     this.animations = !this.animations;

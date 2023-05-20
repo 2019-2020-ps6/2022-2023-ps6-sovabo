@@ -31,11 +31,12 @@ export class ConfigVisionComponent {
               private location: Location) {}
 
   ngOnInit(): void {
+    this.jeuxCouleursService.collectDefaultStyles();
     this.jeuxCouleursEnable = this.jeuxCouleursService.IsVisionColorActivated();
     this.contrasteTroubleEnable = this.jeuxCouleursService.IsAttentionColorActivated();
     this.fontSelected = this.jeuxCouleursService.getFontSelectedString();
 
-    console.log(this.fontSelected);
+    // console.log(this.fontSelected);
 
     //ATTRIBUTION DU NOM DES BOUTONS JEUX DE COULEUR
     let tabJeuDeCouleur = document.querySelectorAll("app-btn-on-off-colors");
@@ -65,13 +66,18 @@ export class ConfigVisionComponent {
     //ATTRIBUTION DE LA POLICE APPLIQUEE AU SAMPLE
     count=0;
     let pSample = document.querySelectorAll("#exampleTxt");
-    console.log(pSample);
+    // console.log(pSample);
     pSample.forEach(sample=>{
       sample.innerHTML = this.jeuxCouleursService.getFontSelectedString();
     });
 
-    this.jeuxCouleursService.changeFont(document);
-    this.jeuxCouleursService.changeFontSize(document);
+    if (this.jeuxCouleursService.isDefaultActive) {
+      this.jeuxCouleursService.collectDefaultStyles();
+    }
+    else {
+      this.jeuxCouleursService.changeFont(document);
+      this.jeuxCouleursService.changeFontSize(document);
+    }
 
     // Appel de la fonction pour ajuster la hauteur de generalContainer
     this.adjustGeneralContainerHeight();
@@ -119,12 +125,9 @@ export class ConfigVisionComponent {
     this.Service.sendUpdate(str);
   }
   //ACTUALISATION DE LA PAGE
-  resetPage(){
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['./'], {
-      relativeTo: this.route
-    })
+  resetParameters(){
+    this.jeuxCouleursService.resetStylesToDefault();
+    this.jeuxCouleursService.isDefaultActive = true;
   }
 
   fontChanger($event: Event) {
@@ -132,6 +135,7 @@ export class ConfigVisionComponent {
   }
 
   fontChangerConfirmation(){
+    this.jeuxCouleursService.isDefaultActive = false;
     this.jeuxCouleursService.setFontCheck(true);
     this.jeuxCouleursService.changeFont(document);
   }

@@ -75,8 +75,13 @@ export class JouerQuizzComponent implements OnInit {
     this.animationDuration = this.animationService.duration;
     this.startTimer();
 
-    this.jeuxCouleursService.changeFont(document);
-    this.jeuxCouleursService.changeFontSize(document);
+    if (this.jeuxCouleursService.isDefaultActive) {
+      this.jeuxCouleursService.collectDefaultStyles();
+    }
+    else {
+      this.jeuxCouleursService.changeFont(document);
+      this.jeuxCouleursService.changeFontSize(document);
+    }
 
   }
 
