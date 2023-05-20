@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%; /* ajouter cette ligne pour que le conteneur prenne toute la largeur de la page */
+  width: 100%;
 }
 
 .top-element {
@@ -12,18 +12,13 @@
   align-items: center;
 }
 
-#profile-img {
-  width: 200px; // Largeur fixe
-  height: 60px;
-}
-
 .contenuProfil {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%; // faire en sorte que .contenuProfil prenne toute la largeur disponible
-  max-width: 1200px; // ajouter cette ligne pour limiter la largeur maximale du contenu
-  margin: 0 auto; // ajouter cette ligne pour centrer le contenu
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .topContainer {
@@ -32,20 +27,20 @@
   width: 100%;
 }
 
-.left, .right {
+.left,
+.right {
   display: flex;
-
   flex-direction: column;
-  width: 100%; // faire en sorte que .left et .right prennent toute la largeur disponible
+  width: 100%;
 }
 
-.left, .contenuRight{
+.left,
+.contenuRight {
   gap: 30px;
 }
 
-.deconnexion > my-button{
+.deconnexion > my-button {
   color: red;
-  //background: rgba(207, 207, 207, 0.4);
 }
 
 .contenuRight {
@@ -66,6 +61,34 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1); /* Modifier la valeur de l'opacité ici */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-container {
+  background-color: rgba(255, 255, 255, 0.85); /* Définir une opacité de 0.8 */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.popup-content {
+  margin-top: 10px;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
 }
 
 @media (max-width: 768px) {
