@@ -14,7 +14,7 @@ export class JeuxCouleursService {
   listFont = ["Arial","Andale Mono","Comic Sans MS"];
 
   private visionColorActivated = false;
-  private colorSelected :number = 0;
+  private colorSelected :number = -1;
   private fontSelected: string = this.listFont[0];
 
   private currentFontSize: number  = 2;
