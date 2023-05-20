@@ -21,6 +21,9 @@ export class JeuxCouleursService {
   private oldFontSize: number = 2;
 
   private fontCheck: boolean = false;
+  private defaultStyles: Map<string, Map<string, string>> = new Map();
+  public isDefaultActive: boolean = false;
+
 
   getFontCheck(){
     return this.fontCheck;
@@ -123,9 +126,9 @@ export class JeuxCouleursService {
   }
 
   changeFontSize(document: Document) {
-    console.log("FONTSIZE CHANGER");
-
-    console.log("currentFontSize :"+this.currentFontSize+" | "+"oldFontSize"+this.oldFontSize);
+    // console.log("FONTSIZE CHANGER");
+    //
+    // console.log("currentFontSize :"+this.currentFontSize+" | "+"oldFontSize"+this.oldFontSize);
 
     let level = this.currentFontSize-this.oldFontSize;
     //let level = 1;
@@ -149,41 +152,27 @@ export class JeuxCouleursService {
 
   changeFont(document: Document) {
     console.log("changeFont");
-
     if(this.fontCheck){
-      let pElement = document.querySelectorAll("p");
+      this.applyFontToElements(document.querySelectorAll("p"));
+      this.applyFontToElements(document.querySelectorAll("button"));
+      this.applyFontToElements(document.querySelectorAll("span"));
+      this.applyFontToClass(document.getElementsByClassName("answers-container"));
+      this.applyFontToClass(document.getElementsByClassName("question-bubble"));
+    }
+  }
 
-      //CAS DE JOUER QUIZZ
-      let answerContainer = document.getElementsByClassName("answers-container");
-      let questionContainer = document.getElementsByClassName("question-bubble");
-
-      pElement.forEach(elem => {
-        elem.style.fontFamily=this.getFontSelectedString();
-        if(elem.classList.contains("titreStyle")){
-          elem.style.textShadow="none";
-        }
-      });
-
-      for(let i=0;i<answerContainer.length;i++){
-        let fontToChange=this.getFontSelectedString();
-        switch (this.getFontSelectedString()){
-          case this.listFont[0]:
-            fontToChange = "FONTSELECTED_ARIAL";
-            break;
-          case this.listFont[1]:
-            fontToChange = "FONTSELECTED_ANDALE";
-            break;
-          case this.listFont[2]:
-            fontToChange = "FONTSELECTED_COMIC";
-            break;
-          default:
-            break;
-        }
-        console.log(answerContainer[i]);
-        answerContainer[i].classList.add(fontToChange);
+  applyFontToElements(elements: NodeListOf<HTMLElement>) {
+    elements.forEach(elem => {
+      elem.style.fontFamily = this.getFontSelectedString();
+      if(elem.classList.contains("titreStyle")){
+        elem.style.textShadow="none";
       }
+    });
+  }
 
-      for(let i=0;i<questionContainer.length;i++){
+  applyFontToClass(elements: HTMLCollectionOf<Element>) {
+    for(let i=0; i<elements.length; i++){
+      if (elements[i] instanceof HTMLElement) {
         let fontToChange=this.getFontSelectedString();
         switch (this.getFontSelectedString()){
           case this.listFont[0]:
@@ -198,11 +187,67 @@ export class JeuxCouleursService {
           default:
             break;
         }
-        console.log(questionContainer[i]);
-        questionContainer[i].classList.add(fontToChange);
+        console.log(elements[i]);
+        elements[i].classList.add(fontToChange);
       }
     }
-    else{}
-
   }
+
+  // appelez cette fonction lors du chargement de la page
+  collectDefaultStyles() {
+    console.log("collectDefaultStyles");
+    console.log(this.isDefaultActive);
+    //select only p and button
+    const allElements = document.querySelectorAll('p, button');
+    allElements.forEach((element) => {
+      const id = element.id;
+      const className = element.className;
+      const style = window.getComputedStyle(element, null);
+      let stylesMap = new Map<string, string>();
+      for (let i = 0; i < style.length; i++) {
+        if (style[i] == 'font-family' || style[i] == 'font-weight') {
+          const property = style[i];
+          const value = style.getPropertyValue(property);
+          stylesMap.set(property, value);
+        }
+
+      }
+      if (id) {
+        this.defaultStyles.set(`id-${id}`, stylesMap);
+      }
+      if (className) {
+        this.defaultStyles.set(`class-${className}`, stylesMap);
+      }
+      console.log(this.defaultStyles);
+    });
+  }
+
+
+  resetStylesToDefault() {
+    for (const [element, stylesMap] of this.defaultStyles.entries()) {
+      let prefix = element.split('-')[0];
+      let name = element.substring(element.indexOf('-') + 1);
+      if (prefix === 'id') {
+        let element = document.getElementById(name);
+        if (element) {
+          stylesMap.forEach((value, key) => {
+            // @ts-ignore
+            element.style.setProperty(key, value);
+          });
+        }
+      }
+      if (prefix === 'class') {
+        let elements = document.getElementsByClassName(name);
+        for (let i = 0; i < elements.length; i++) {
+          let element = elements[i];
+          stylesMap.forEach((value, key) => {
+            // @ts-ignore
+            element.style.setProperty(key, value);
+          });
+        }
+      }
+    }
+  }
+
+
 }

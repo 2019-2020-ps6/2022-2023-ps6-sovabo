@@ -1,12 +1,12 @@
 <header>
     <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpText' : ''" class="titreStyle">PolyQuiz</h1>
-    <app-btn-clickable-background onclick="history.go(-1);">RETOUR</app-btn-clickable-background>
+    <app-btn-clickable-background class="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-background>
 </header>
 
 <div class="generalContainer">
     <div [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}"  class="colorChangerContainer setupContainer">
         <div class="labelContainer">
-            <p [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTextExtrude' : ''">Jeux de couleurs</p>
+            <p class="label" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTextExtrude' : ''">Jeux de couleurs</p>
         </div>
         <div class="btnContainer">
             <app-btn-on-off-colors id="TRICHROMATIE" (click)="toggleJeuxCouleurs($event)"></app-btn-on-off-colors>
@@ -16,7 +16,7 @@
 
     <div [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}" class="fontChangerContainer setupContainer">
         <div class="labelContainer">
-            <p [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTextExtrude' : ''">Font</p>
+            <p class="label" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTextExtrude' : ''">Font</p>
         </div>
 
       <div class="colorExample">
@@ -33,10 +33,11 @@
 
     <div [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}" class="fontSizeChangerContainer setupContainer">
         <div class="labelContainer">
-            <p [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTextExtrude' : ''">Taille de police</p>
+            <p class="label" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTextExtrude' : ''">Taille de police</p>
         </div>
         <app-slider-font-size class="app-slider"></app-slider-font-size>
 
       <p id="taillePolice">{{this.getFontSize()}}</p>
     </div>
+  <button (click)="resetParameters()">Reset</button>
 </div>
