@@ -3,6 +3,7 @@ const morgan = require('morgan')
 const express = require('express')
 const bodyParser = require('body-parser')
 const api = require('./api')
+const buildServer = require('./build-server.js');
 
 module.exports = (cb) => {
   const app = express()
