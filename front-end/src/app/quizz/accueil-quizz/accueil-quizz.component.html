@@ -25,13 +25,13 @@
       <p [ngClass]="this.contrasteTroubleEnable ? 'contrastUpText' : ''" class="titreStyle">{{quiz.name}}</p>
       <div class="infoComplementaire">
         <div class="nbrTentatives">
-          <span class="fontStyleCanChange" id="textTentative">NOMBRE DE TENTATIVES<br>EFFECTUÉES : 2</span>
+          <span class="fontStyleCanChange fontSizeCanChange" id="textTentative">NOMBRE DE TENTATIVES<br>EFFECTUÉES : 2</span>
         </div>
         <div class="difficulty">
-          <span class="fontStyleCanChange" id="textDifficulty">DIFFICULTÉ :</span>
+          <span class="fontStyleCanChange fontSizeCanChange" id="textDifficulty">DIFFICULTÉ :</span>
             <div class="difficulty-bars">
               <span class="difficulty-bar" *ngFor="let i of [1, 2, 3, 4, 5]" [style.backgroundColor]="getDifficultyColor(i <= quiz.difficulty ? quiz.difficulty : 0)"></span>
-              <span class="note fontStyleCanChange">{{quiz.difficulty}}/5</span>
+              <span class="note fontStyleCanChange fontSizeCanChange">{{quiz.difficulty}}/5</span>
             </div>
         </div>
       </div>

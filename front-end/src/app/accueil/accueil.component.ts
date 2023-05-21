@@ -12,8 +12,7 @@ export class AccueilComponent {
   AttentionColorStatus: boolean = false;
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
 
-  ngInit() {
-  }
+
 
   constructor(private jeuxCouleursService: JeuxCouleursService,private animateurService: AnimateurService, private animationsService : AnimationsService) {}
 

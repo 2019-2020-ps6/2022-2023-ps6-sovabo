@@ -2,7 +2,7 @@
 
   <div class="titrePage">
       <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
-      <a [ngClass]="this.contrasteTroubleEnable ? 'titreStyleContrastOn' : 'titreStyleContrastOff'" > Liste des quizz</a>
+      <a [ngClass]="this.contrasteTroubleEnable ? 'titreStyleContrastOn' : 'titreStyleContrastOff'" >Liste des quizz</a>
 
       <div class="btnCreerConfig">
           <app-btn-list-quiz id="creerQuizz" [routerLink]="['/creer-quizz']">Créer mon quizz</app-btn-list-quiz>
@@ -40,11 +40,11 @@
     </div>
   </div>
 
-  <div class="fontStyleCanChange">
+  <div class="fontStyleCanChange fontSizeCanChange">
     <div class="quiz-list-container" *ngIf="!animationsService.isAnimated; else carousel"  >
       <div class="quiz-list">
-        <div class="quiz"  *ngFor="let quiz of quizList">
-          <app-quiz-element [quiz]="quiz" routerLink="/accueil-quiz/{{quiz.id}}"></app-quiz-element>
+        <div class="quiz" *ngFor="let quiz of quizList">
+            <app-quiz-element [quiz]="quiz" routerLink="/accueil-quiz/{{quiz.id}}"></app-quiz-element>
         </div>
       </div>
     </div>

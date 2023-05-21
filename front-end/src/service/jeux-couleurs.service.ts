@@ -143,14 +143,40 @@ export class JeuxCouleursService {
     const level = this.currentFontSize - this.oldFontSize;
     const coeff = 5;
 
-    if (event !== null) {
-      const pList = document.querySelectorAll("p");
+    this.applyFontSize(document);
+  }
 
-      pList.forEach(elem => {
-        const originFontSize = window.getComputedStyle(elem, null).getPropertyValue('font-size');
-        elem.style.fontSize = this.computeFontSizeChange(level, coeff, originFontSize);
-      });
+  applyFontSize(document: Document){
+    console.log("applyFontSize");
+
+    const level = this.currentFontSize - this.oldFontSize;
+    const coeff = 5;
+
+    //VIA LE DOM
+    let elements = document.getElementsByClassName("fontSizeCanChange");
+
+    for (let i = 0; i < elements.length; i++) {
+      const originFontSize = window.getComputedStyle(elements[i], null).getPropertyValue('font-size');
+
+      const unit = originFontSize.match(/[a-z]+/);
+      if(unit!=null){
+        console.log("unit :"+unit[0]);
+      }
+
+
+      window.getComputedStyle(elements[i],null).getPropertyValue('font-size');
+
+      elements[i].setAttribute("style", "font-size: " + this.computeFontSizeChange(level, coeff, originFontSize));
     }
+
+
+
+
+
+    //VIA L'HTML
+
+    //console.log(elements);
+
   }
 
 
