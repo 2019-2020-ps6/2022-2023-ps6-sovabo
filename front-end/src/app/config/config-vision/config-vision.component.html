@@ -27,7 +27,10 @@
         <app-btn-font (click)="fontChanger($event)" id="btn_fontChanger1"></app-btn-font>
         <app-btn-font (click)="fontChanger($event)" id="btn_fontChanger2"></app-btn-font>
         <app-btn-font (click)="fontChanger($event)" id="btn_fontChanger3"></app-btn-font>
-        <app-btn-clickable-frame-background (click)="fontChangerConfirmation()" id="fontChangerConfirmation">Valider</app-btn-clickable-frame-background>
+        <div class="btnContainerValiderReset">
+          <app-btn-clickable-frame-background class="fontChanger" (click)="fontChangerConfirmation()" id="fontChangerConfirmation">Valider</app-btn-clickable-frame-background>
+          <app-btn-clickable-background class="fontChanger" id="btn_fontReset" (click)="resetParameters($event)">Reset</app-btn-clickable-background>
+        </div>
       </div>
     </div>
 
@@ -39,5 +42,4 @@
 
       <p class="fontStyleCanChange" id="taillePolice">{{this.getFontSize()}}</p>
     </div>
-  <button id="btn_fontReset" (click)="resetParameters($event)">Reset</button>
 </div>
