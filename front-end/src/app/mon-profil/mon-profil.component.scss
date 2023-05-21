@@ -1,0 +1,114 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.top-element {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contenuProfil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.topContainer {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.left,
+.right {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.left,
+.contenuRight {
+  gap: 30px;
+}
+
+.deconnexion > my-button {
+  color: red;
+}
+
+.contenuRight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btnTextProfil {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1); /* Modifier la valeur de l'opacité ici */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-container {
+  background-color: rgba(255, 255, 255, 0.85); /* Définir une opacité de 0.8 */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.popup-content {
+  margin-top: 10px;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .contenuProfil {
+    flex-direction: column;
+  }
+
+  .topContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btnTextProfil {
+    margin-bottom: 15px;
+  }
+}
+
+#retour{
+  display: flex;
+  justify-content: end;
+  align-self: end;
+  margin: 0 10px 20px 10px;
+}

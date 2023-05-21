@@ -11,21 +11,28 @@ export class JeuxCouleursService {
 
   //option trouble de la vision
   listTrouble = ["TRICHROMATIE","DICHROMATISME"];
-  listFont = ["Arial","Andale Mono","Comic Sans MS"];
+  //La font par défaut est Nunito
+  listFont = ["Arial","Andale Mono","Comic Sans MS", "Nunito"];
 
   private visionColorActivated = false;
-  private colorSelected :number = 0;
-  private fontSelected: string = this.listFont[0];
+  private colorSelected :number = -1;
+  private fontSelected: string = this.listFont[3];
 
   private currentFontSize: number  = 2;
   private oldFontSize: number = 2;
 
   private fontCheck: boolean = false;
+  private defaultStyles: Map<string, Map<string, string>> = new Map();
+  public isDefaultActive: boolean = true;
+
 
   getFontCheck(){
     return this.fontCheck;
   }
 
+  setFontSelectedByDefault(){
+    this.fontSelected=this.listFont[3];
+  }
   setFontCheck(state: boolean){
     this.fontCheck=state;
   }
@@ -91,118 +98,138 @@ export class JeuxCouleursService {
   getVisionAttentionStatus(): boolean{return this.attentionColorActivated;}
 
   //UTILS METHODS
-  changeSampleFont(document: Document) {
-    if(event!=null){
-      //on récupère l'élément html ciblé par l'event
-      const target = event?.currentTarget as HTMLElement;
-      //on recup l'id du boutton (l'id dépends du trouble)
-      const value = target.id;
+  private changeElementFontStyleAndContent(element: HTMLElement, fontIndex: number): void {
+    element.style.fontFamily = this.listFont[fontIndex];
+    element.innerHTML = this.listFont[fontIndex];
+    this.setFont(fontIndex);
+    this.fontSelected = this.getFontSelectedString();
+  }
 
-      let exTxt = null;
-      if(exTxt = document.getElementById("exampleTxt")){
-        switch (value){
+  private getButtonId(target: HTMLElement): string {
+    return target.id;
+  }
+
+  public changeSampleFont(document: Document): void {
+    if (event !== null) {
+      const target = event?.currentTarget as HTMLElement;
+      const value = this.getButtonId(target);
+      const exTxt = document.getElementById("exampleTxt");
+
+      if (exTxt) {
+        switch (value) {
           case "btn_fontChanger1":
-            exTxt.style.fontFamily=this.listFont[0];
-            exTxt.innerHTML=this.listFont[0];
-            this.setFont(0);
+            this.changeElementFontStyleAndContent(exTxt, 0);
             break;
           case "btn_fontChanger2":
-            exTxt.style.fontFamily=this.listFont[1];
-            exTxt.innerHTML=this.listFont[1];
-            this.setFont(1);
+            this.changeElementFontStyleAndContent(exTxt, 1);
             break;
           case "btn_fontChanger3":
-            exTxt.style.fontFamily=this.listFont[2];
-            exTxt.innerHTML=this.listFont[2];
-            this.setFont(2);
+            this.changeElementFontStyleAndContent(exTxt, 2);
+            break;
+          case "btn_fontReset":
+            this.changeElementFontStyleAndContent(exTxt, 3);
             break;
         }
-        this.fontSelected=this.getFontSelectedString();
       }
     }
   }
 
-  changeFontSize(document: Document) {
-    console.log("FONTSIZE CHANGER");
+  private computeFontSizeChange(level: number, coeff: number, originFontSize: string): string {
+    const fontSize = parseFloat(originFontSize);
+    return (fontSize + (level * coeff)) + "px";
+  }
 
-    console.log("currentFontSize :"+this.currentFontSize+" | "+"oldFontSize"+this.oldFontSize);
+  public changeFontSize(document: Document): void {
+    const level = this.currentFontSize - this.oldFontSize;
+    const coeff = 5;
 
-    let level = this.currentFontSize-this.oldFontSize;
-    //let level = 1;
-    let coeff = 5;
+    if (event !== null) {
+      const pList = document.querySelectorAll("p");
 
-    if(event!=null) {
-      //on récupère l'élément html ciblé par l'event
-      const target = event?.currentTarget as HTMLElement;
-      //on recup l'id du boutton (l'id dépends du trouble)
-      const value = target.id;
-
-      let pList = document.querySelectorAll("p");
-
-      pList.forEach(elem =>{
-        let originFontSize = window.getComputedStyle(elem, null).getPropertyValue('font-size');
-        var fontSize = parseFloat(originFontSize);
-        elem.style.fontSize = (fontSize+(level*coeff))+"px";
+      pList.forEach(elem => {
+        const originFontSize = window.getComputedStyle(elem, null).getPropertyValue('font-size');
+        elem.style.fontSize = this.computeFontSizeChange(level, coeff, originFontSize);
       });
     }
   }
+
 
   changeFont(document: Document) {
     console.log("changeFont");
-
     if(this.fontCheck){
-      let pElement = document.querySelectorAll("p");
+      this.applyFontToClass(document.getElementsByClassName("fontStyleCanChange"));
+    }
+  }
 
-      //CAS DE JOUER QUIZZ
-      let answerContainer = document.getElementsByClassName("answers-container");
-      let questionContainer = document.getElementsByClassName("question-bubble");
+  applyFontToClass(elements: HTMLCollectionOf<Element>) {
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].setAttribute("style", "font-family: " + this.getFontSelectedString() + " !important");
+    }
+  }
 
-      pElement.forEach(elem => {
-        elem.style.fontFamily=this.getFontSelectedString();
-        if(elem.classList.contains("titreStyle")){
-          elem.style.textShadow="none";
-        }
-      });
-
-      for(let i=0;i<answerContainer.length;i++){
-        let fontToChange=this.getFontSelectedString();
-        switch (this.getFontSelectedString()){
-          case this.listFont[0]:
-            fontToChange = "FONTSELECTED_ARIAL";
-            break;
-          case this.listFont[1]:
-            fontToChange = "FONTSELECTED_ANDALE";
-            break;
-          case this.listFont[2]:
-            fontToChange = "FONTSELECTED_COMIC";
-            break;
-          default:
-            break;
-        }
-        console.log(answerContainer[i]);
-        answerContainer[i].classList.add(fontToChange);
+  private createStyleMap(style: CSSStyleDeclaration): Map<string, string> {
+    const styleKeys = ['font-family', 'font-weight'];
+    let stylesMap = new Map<string, string>();
+    styleKeys.forEach((key) => {
+      const value = style.getPropertyValue(key);
+      if (value) {
+        stylesMap.set(key, value);
       }
+    });
+    return stylesMap;
+  }
 
-      for(let i=0;i<questionContainer.length;i++){
-        let fontToChange=this.getFontSelectedString();
-        switch (this.getFontSelectedString()){
-          case this.listFont[0]:
-            fontToChange = "FONTSELECTED_ARIAL";
-            break;
-          case this.listFont[1]:
-            fontToChange = "FONTSELECTED_ANDALE";
-            break;
-          case this.listFont[2]:
-            fontToChange = "FONTSELECTED_COMIC";
-            break;
-          default:
-            break;
+  private addDefaultStyles(id: string,className: string | undefined, stylesMap: Map<string, string>): void {
+    if (id) {
+      this.defaultStyles.set(`id-${id}`, stylesMap);
+      return;
+    }
+    if (className) {
+      this.defaultStyles.set(`class-${className}`, stylesMap);
+    }
+  }
+
+  // appelez cette fonction lors du chargement de la page
+  public collectDefaultStyles(): void {
+    console.log("collectDefaultStyles");
+    const allElements = document.getElementsByClassName("fontStyleCanChange");
+    for (let i = 0; i < allElements.length; i++) {
+      const element = allElements[i];
+      const style = window.getComputedStyle(element);
+      const stylesMap = this.createStyleMap(style);
+      const classNameWithoutfontStyleCanChange = element.className.replace("fontStyleCanChange", "");
+      this.addDefaultStyles(element.id, classNameWithoutfontStyleCanChange, stylesMap);
+    }
+  }
+
+  private resetElementStyle(element: HTMLElement, stylesMap: Map<string, string>): void {
+    stylesMap.forEach((value, key) => {
+      element.style.setProperty(key, value);
+    });
+  }
+
+  public resetStylesToDefault(): void {
+    for (const [element, stylesMap] of this.defaultStyles.entries()) {
+      let prefix = element.split('-')[0];
+      let name = element.substring(element.indexOf('-') + 1);
+      if (prefix === 'id') {
+        let element = document.getElementById(name);
+        if (element) {
+          this.resetElementStyle(element, stylesMap);
         }
-        console.log(questionContainer[i]);
-        questionContainer[i].classList.add(fontToChange);
+      }
+      if (prefix === 'class') {
+        let elements = document.getElementsByClassName(name);
+        for (let i = 0; i < elements.length; i++) {
+          if (elements[i] instanceof HTMLElement) {
+            // @ts-ignore
+            this.resetElementStyle(elements[i], stylesMap);
+          }
+        }
       }
     }
-    else{}
-
   }
+
+
+
 }
