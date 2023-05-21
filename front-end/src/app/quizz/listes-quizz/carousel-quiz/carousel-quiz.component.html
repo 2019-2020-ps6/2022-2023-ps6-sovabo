@@ -20,14 +20,14 @@
                   <ul class="list-unstyled list-inline mb-0">
                     <li class="list-inline-item me-0">
                         <fa-icon class="star-icon" [icon]="quizStar" *ngFor="let i of [].constructor(quiz.difficulty)"></fa-icon>
-                        <span class="note">{{quiz.difficulty}}/5 (413)</span>
+                        <span class="note fontStyleCanChange">{{quiz.difficulty}}/5 (413)</span>
                         <i class="fas fa-star text-warning fa-xs"> </i>
                     </li>
                   </ul>
-                  <h4><p class="card-theme">
+                  <h4><p class="card-theme fontStyleCanChange">
                     {{quiz.theme}}
                   </p></h4>
-                  <p class="card-text">
+                  <p class="card-text fontStyleCanChange">
                     {{quiz.desc}}
                   </p>
                 </div>

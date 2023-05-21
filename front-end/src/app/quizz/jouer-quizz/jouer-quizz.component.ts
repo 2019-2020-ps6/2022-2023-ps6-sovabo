@@ -65,8 +65,8 @@ export class JouerQuizzComponent implements OnInit {
       this.jeuxCouleursService.collectDefaultStyles();
     } else {
       this.jeuxCouleursService.changeFont(document);
-      this.jeuxCouleursService.changeFontSize(document);
     }
+    this.jeuxCouleursService.changeFontSize(document);
   }
 
   getFontString() {
@@ -135,17 +135,17 @@ export class JouerQuizzComponent implements OnInit {
       this.isAnswerCorrect = false;
     }
     this.selectedAnswerIndex = null;
-  
+
     // Vérifier si la question suivante doit être affichée automatiquement
     if (!this.isLastQuestion && !this.isAnswerValidated) {
       this.timerId = setTimeout(() => { // Stocker l'ID du minuteur pour l'annuler si nécessaire
         this.goToNextQuestion();
       }, 5000);
     }
-  
+
     this.isAnswerValidated = true; // Marquer la réponse comme validée
   }
-  
+
   goToNextQuestion() {
     this.validateAnswerBool = false;
     clearTimeout(this.timerId); // Annuler le minuteur en cours s'il existe
@@ -166,14 +166,14 @@ export class JouerQuizzComponent implements OnInit {
       this.isLastQuestion = true;
     }
     this.isAnswerValidated = false; // Réinitialiser le statut de validation
-  
+
     // Vérifier si la réponse a été validée avant de passer à la question suivante
     if (!this.isAnswerValidated) {
       this.startTimer();
     }
   }
-  
-  
+
+
 
   getCorrectAnswerIndex(question: Question): number {
     for (let i = 0; i < question.answers.length; i++) {
