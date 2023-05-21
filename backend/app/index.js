@@ -9,6 +9,6 @@ const deleteAllData = () => {
   logger.info('Données supprimées avec succès.');
 };
 
-deleteAllData();
+//deleteAllData();
 
 buildServer((server) => logger.info(`Le serveur écoute sur le port ${server.address().port}`));

@@ -10,6 +10,7 @@ const buildQuizz = (quizId) => {
   const questions = Question.get().filter((question) => question.quizId === quiz.id)
   return { ...quiz, questions }
 }
+  
 
 module.exports = {
   buildQuizzes,

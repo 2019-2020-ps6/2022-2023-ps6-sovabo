@@ -9,10 +9,17 @@ const router = new Router({ mergeParams: true })
 
 router.get('/', (req, res) => {
   try {
-    // Check if quizId exists, if not it will throw a NotFoundError
-    Quiz.getById(req.params.quizId)
-    res.status(200).json(filterQuestionsFromQuizz(req.params.quizId))
+    // Récupérer l'identifiant du quiz à partir des paramètres de la requête
+    const quizId = req.params.quizId
+
+    // Récupérer les questions du quiz en utilisant l'identifiant
+    const quiz = Quiz.getById(quizId)
+    const questions = quiz.questions
+
+    // Répondre avec les questions du quiz
+    res.status(200).json(questions)
   } catch (err) {
+    // Gérer les erreurs
     manageAllErrors(res, err)
   }
 })
@@ -27,23 +34,10 @@ router.get('/:questionId', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  try {
-    // Check if quizId exists, if not it will throw a NotFoundError
-    Quiz.getById(req.params.quizId)
-    const quizId = parseInt(req.params.quizId, 10)
-    let questions = req.body.questions.map((question) => {
-      const answers = question.answers.map((answer) => Answer.create({ ...answer }))
-      return Question.create({ label: question.label, answers, quizId })
-    })
-    const quiz = {
-      ...req.body,
-      questions,
-    }
-    res.status(201).json(quiz)
-  } catch (err) {
-    manageAllErrors(res, err)
-  }
-})
+  res.status(400).json({ message: 'Not supported.' });
+});
+
+
 
 
 
