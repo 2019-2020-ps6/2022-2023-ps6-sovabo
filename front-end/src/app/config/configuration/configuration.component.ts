@@ -19,7 +19,12 @@ export class ConfigurationComponent {
   ngOnInit(): void {
     this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
     this.changeContrast();
-    this.jeuxCouleursService.changeFont(document);
+    if (this.jeuxCouleursService.isDefaultActive) {
+      this.jeuxCouleursService.collectDefaultStyles();
+    }
+    else {
+      this.jeuxCouleursService.changeFont(document);
+    }
     this.jeuxCouleursService.changeFontSize(document);
   }
 

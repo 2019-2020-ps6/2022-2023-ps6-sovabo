@@ -100,8 +100,18 @@ header {
   align-items: center;
 }
 
-#fontChangerConfirmation{
+.btnContainerValiderReset{
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: space-around;
   scale: 60%;
+  height: fit-content;
+  width: 140%;
+}
+
+.fontChanger{
+  justify-self: end;
   width: fit-content;
 }
 
