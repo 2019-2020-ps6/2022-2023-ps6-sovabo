@@ -24,12 +24,12 @@
         <button [ngStyle]="{'font-family': this.getFontString()}" *ngIf="isAnswerCorrect != null && currentQuestionIndex != quiz.questions.length -1" [disabled]="isQuizFinished == true" (click)="goToNextQuestion()" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && next_btnContrastOn' : 'next_btnContrastOff'" class="fontStyleCanChange">Question suivante</button>
         <button [ngStyle]="{'font-family': this.getFontString()}" *ngIf="isQuizFinished" [routerLink]="['/resultat-quizz']" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && next_btnContrastOn' : 'next_btnContrastOff'" class="fontStyleCanChange">Voir les résultats !</button>
       </div>
-      <div class="buttons-container">
+      <div class="buttons-container fontStyleCanChange">
         <div *ngIf="isAnswerCorrect == false && selectedAnswerIndex != questionCorrectIndex" class="wrong-answer">
-          <p class="fontStyleCanChange">Mauvaise réponse, la bonne réponse est {{ currentQuestion.answers[questionCorrectIndex].value }}</p>
+          <p>Mauvaise réponse, la bonne réponse est {{ currentQuestion.answers[questionCorrectIndex].value }}</p>
         </div>
         <div *ngIf="isAnswerCorrect == true && selectedAnswerIndex != questionCorrectIndex" class="good-answer">
-            <p class="fontStyleCanChange">Bonne réponse ! </p>
+            <p>Bonne réponse ! </p>
         </div>
 
       </div>
