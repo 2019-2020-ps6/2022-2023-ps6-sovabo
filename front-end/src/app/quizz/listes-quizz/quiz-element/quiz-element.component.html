@@ -22,13 +22,13 @@
                   <i class="fas fa-star-half-alt text-warning fa-xs"></i>
               </li>
               <li class="list-inline-item">
-                  <span [ngClass]="this.contrasteTroubleEnable ? 'imgContrastUp' : ''"  class="note">{{quiz.difficulty}}/5 (413)</span>
+                  <span [ngClass]="this.contrasteTroubleEnable ? 'imgContrastUp' : ''"  class="note fontStyleCanChange">{{quiz.difficulty}}/5 (413)</span>
               </li>
             </ul>
-            <h4><p [ngClass]="this.contrasteTroubleEnable ? 'contrastUpText' : ''"  class="card-theme mb-2">
+            <h4><p [ngClass]="this.contrasteTroubleEnable ? 'contrastUpText' : ''"  class="card-theme mb-2 fontStyleCanChange">
               {{quiz.theme}}
             </p></h4>
-            <p class="card-text">
+            <p class="card-text fontStyleCanChange">
               {{quiz.desc}}
             </p>
 

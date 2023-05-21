@@ -37,8 +37,8 @@ export class AccueilQuizzComponent {
     }
     else {
       this.jeuxCouleursService.changeFont(document);
-      this.jeuxCouleursService.changeFontSize(document);
     }
+    this.jeuxCouleursService.changeFontSize(document);
   }
 
   getAnimateur() {

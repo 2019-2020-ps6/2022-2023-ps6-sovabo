@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
   { path: 'configuration', component: ConfigurationComponent},
   { path: 'mon-profil', component: MonProfilComponent},
-  { path: 'statistiques', component: MonProfilComponent},
+  { path: 'statistiques', component: StatistiqueComponent},
   { path: 'resultat-quizz', component: ResultatQuizzComponent},
   { path: 'statistiques-quiz', component: StatistiqueComponent},
   { path: 'liste-quizz', component: ListesQuizzComponent},

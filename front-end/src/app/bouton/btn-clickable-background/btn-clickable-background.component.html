@@ -1,3 +1,6 @@
 <link rel="stylesheet" href="btn-clickable-background.component.scss">
 
-<button  [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}" class="my-button"><ng-content></ng-content></button>
+<button [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}"
+        class="my-button fontStyleCanChange">
+  <ng-content></ng-content>
+</button>

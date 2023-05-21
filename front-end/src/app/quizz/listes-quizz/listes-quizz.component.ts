@@ -18,14 +18,14 @@ export class ListesQuizzComponent {
 
   ngOnInit(): void {
     this.quizList = this.quizService.getData();
-    console.log(this.animationsService.isAnimated);
+    // console.log(this.animationsService.isAnimated);
     if (this.jeuxCouleursService.isDefaultActive) {
       this.jeuxCouleursService.collectDefaultStyles();
     }
     else {
       this.jeuxCouleursService.changeFont(document);
-      this.jeuxCouleursService.changeFontSize(document);
     }
+    this.jeuxCouleursService.changeFontSize(document);
   }
 
   isAnotherHovered(quiz: Quiz): boolean {
