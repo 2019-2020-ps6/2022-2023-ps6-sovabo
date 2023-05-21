@@ -34,8 +34,8 @@ export class ConfigAttentionComponent {
     }
     else {
       this.jeuxCouleursService.changeFont(document);
-      this.jeuxCouleursService.changeFontSize(document);
     }
+    this.jeuxCouleursService.changeFontSize(document);
   }
   toggleAnimations() {
     this.animations = !this.animations;

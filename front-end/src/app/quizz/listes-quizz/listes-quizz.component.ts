@@ -24,8 +24,8 @@ export class ListesQuizzComponent {
     }
     else {
       this.jeuxCouleursService.changeFont(document);
-      this.jeuxCouleursService.changeFontSize(document);
     }
+    this.jeuxCouleursService.changeFontSize(document);
   }
 
   isAnotherHovered(quiz: Quiz): boolean {

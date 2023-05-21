@@ -75,8 +75,8 @@ export class ConfigVisionComponent {
     }
     else {
       this.jeuxCouleursService.changeFont(document);
-      this.jeuxCouleursService.changeFontSize(document);
     }
+    this.jeuxCouleursService.changeFontSize(document);
 
     // Appel de la fonction pour ajuster la hauteur de generalContainer
     this.adjustGeneralContainerHeight();

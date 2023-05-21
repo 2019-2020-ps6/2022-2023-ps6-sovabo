@@ -65,8 +65,8 @@ export class JouerQuizzComponent implements OnInit {
       this.jeuxCouleursService.collectDefaultStyles();
     } else {
       this.jeuxCouleursService.changeFont(document);
-      this.jeuxCouleursService.changeFontSize(document);
     }
+    this.jeuxCouleursService.changeFontSize(document);
   }
 
   getFontString() {
