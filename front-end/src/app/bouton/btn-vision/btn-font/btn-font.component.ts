@@ -39,7 +39,17 @@ export class BtnFontComponent {
   ngOnDestroy() { // It's a good practice to unsubscribe to ensure no memory leaks
     this.subscriptionName.unsubscribe();
   }
+  get buttonClass() {
+    const visionColor = this.getVisionColorSelected();
+    if (visionColor === 0) {
+      return 'TRICHROMATIE';
+    } else if (visionColor === 1) {
+      return 'DICHROMATISME';
+    } else {
+      return '';
+    }
 
+  }
   getVisionColorSelected(){
     return this.jeuxCouleursService.getVisionColorSelected();
   }

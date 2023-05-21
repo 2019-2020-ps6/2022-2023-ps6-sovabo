@@ -6,7 +6,7 @@
 <div class="generalContainer">
     <div [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}"  class="colorChangerContainer setupContainer">
         <div class="labelContainer">
-            <p class="label" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTextExtrude' : ''">Jeux de couleurs</p>
+            <p class="label fontStyleCanChange" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTextExtrude' : ''">Jeux de couleurs</p>
         </div>
         <div class="btnContainer">
             <app-btn-on-off-colors id="TRICHROMATIE" (click)="toggleJeuxCouleurs($event)"></app-btn-on-off-colors>
@@ -16,11 +16,11 @@
 
     <div [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}" class="fontChangerContainer setupContainer">
         <div class="labelContainer">
-            <p class="label" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTextExtrude' : ''">Font</p>
+            <p class="label fontStyleCanChange" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTextExtrude' : ''">Font</p>
         </div>
 
       <div class="colorExample">
-        <p id="exampleTxt"></p>
+        <p class="fontStyleCanChange" id="exampleTxt"></p>
       </div>
 
       <div class="btnContainer">
@@ -33,11 +33,11 @@
 
     <div [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}" class="fontSizeChangerContainer setupContainer">
         <div class="labelContainer">
-            <p class="label" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTextExtrude' : ''">Taille de police</p>
+            <p class="label fontStyleCanChange" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTextExtrude' : ''">Taille de police</p>
         </div>
         <app-slider-font-size class="app-slider"></app-slider-font-size>
 
-      <p id="taillePolice">{{this.getFontSize()}}</p>
+      <p class="fontStyleCanChange" id="taillePolice">{{this.getFontSize()}}</p>
     </div>
-  <button (click)="resetParameters()">Reset</button>
+  <button id="btn_fontReset" (click)="resetParameters($event)">Reset</button>
 </div>

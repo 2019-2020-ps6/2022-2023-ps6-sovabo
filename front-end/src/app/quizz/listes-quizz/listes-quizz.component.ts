@@ -18,7 +18,7 @@ export class ListesQuizzComponent {
 
   ngOnInit(): void {
     this.quizList = this.quizService.getData();
-    console.log(this.animationsService.isAnimated);
+    // console.log(this.animationsService.isAnimated);
     if (this.jeuxCouleursService.isDefaultActive) {
       this.jeuxCouleursService.collectDefaultStyles();
     }

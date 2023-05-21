@@ -31,7 +31,6 @@ export class ConfigVisionComponent {
               private location: Location) {}
 
   ngOnInit(): void {
-    this.jeuxCouleursService.collectDefaultStyles();
     this.jeuxCouleursEnable = this.jeuxCouleursService.IsVisionColorActivated();
     this.contrasteTroubleEnable = this.jeuxCouleursService.IsAttentionColorActivated();
     this.fontSelected = this.jeuxCouleursService.getFontSelectedString();
@@ -125,9 +124,12 @@ export class ConfigVisionComponent {
     this.Service.sendUpdate(str);
   }
   //ACTUALISATION DE LA PAGE
-  resetParameters(){
+  resetParameters(event: Event | null){
     this.jeuxCouleursService.resetStylesToDefault();
     this.jeuxCouleursService.isDefaultActive = true;
+    if (event){
+      this.jeuxCouleursService.changeSampleFont(document);
+    }
   }
 
   fontChanger($event: Event) {
@@ -187,25 +189,3 @@ export class ConfigVisionComponent {
     });
   }
 }
-
-
-// adjustGeneralContainerHeight() {
-//   const header = document.querySelector('header');
-//   const generalContainer = document.querySelector('.generalContainer');
-//   const headerHeight = header?.offsetHeight || 0;
-//   const windowHeight = window.innerHeight || 0;
-//   // @ts-ignore
-//   generalContainer.style.height = `${windowHeight - headerHeight}px`;
-// }
-
-
-// adjustLabelFontSize() {
-//   const labels = document.querySelectorAll('.labelContainer p, #taillePolice');
-//   const setupContainer = document.querySelector('.setupContainer');
-//   const setupContainerWidth = setupContainer?.clientWidth || 0;
-//   const fontSize = setupContainerWidth / 10;
-//   // @ts-ignore
-//   labels.forEach((label: HTMLElement) => {
-//     label.style.fontSize = `${fontSize}px`;
-//   });
-// }
