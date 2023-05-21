@@ -20,7 +20,7 @@
         <div class="col-md-6">
           <div class="form">
             <i class="fa fa-search"></i>
-            <input type="text" class="form-control form-input" placeholder="Titre du quiz …">
+            <input type="text" class="form-control form-input fontStyleCanChange" placeholder="Titre du quiz …">
             <span class="left-pan"><i class="fa fa-microphone"></i></span>
           </div>
         </div>
@@ -28,7 +28,7 @@
     </div>
 
     <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button class="btn btn-secondary dropdown-toggle fontStyleCanChange" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Catégorie
       </button>
 
@@ -40,13 +40,15 @@
     </div>
   </div>
 
-  <div class="quiz-list-container" *ngIf="!animationsService.isAnimated; else carousel"  >
-    <div class="quiz-list">
-      <div class="quiz"  *ngFor="let quiz of quizList">
-        <app-quiz-element [quiz]="quiz" routerLink="/accueil-quiz/{{quiz.id}}"></app-quiz-element>
+  <div class="fontStyleCanChange">
+    <div class="quiz-list-container" *ngIf="!animationsService.isAnimated; else carousel"  >
+      <div class="quiz-list">
+        <div class="quiz"  *ngFor="let quiz of quizList">
+          <app-quiz-element [quiz]="quiz" routerLink="/accueil-quiz/{{quiz.id}}"></app-quiz-element>
+        </div>
       </div>
     </div>
-  </div>
+</div>
 
   <ng-template #carousel>
       <app-carousel-quiz ></app-carousel-quiz>

@@ -11,11 +11,12 @@ export class JeuxCouleursService {
 
   //option trouble de la vision
   listTrouble = ["TRICHROMATIE","DICHROMATISME"];
-  listFont = ["Arial","Andale Mono","Comic Sans MS"];
+  //La font par défaut est Nunito
+  listFont = ["Arial","Andale Mono","Comic Sans MS", "Nunito"];
 
   private visionColorActivated = false;
   private colorSelected :number = -1;
-  private fontSelected: string = this.listFont[0];
+  private fontSelected: string = this.listFont[3];
 
   private currentFontSize: number  = 2;
   private oldFontSize: number = 2;
@@ -29,6 +30,9 @@ export class JeuxCouleursService {
     return this.fontCheck;
   }
 
+  setFontSelectedByDefault(){
+    this.fontSelected=this.listFont[3];
+  }
   setFontCheck(state: boolean){
     this.fontCheck=state;
   }
@@ -122,6 +126,9 @@ export class JeuxCouleursService {
           case "btn_fontChanger3":
             this.changeElementFontStyleAndContent(exTxt, 2);
             break;
+          case "btn_fontReset":
+            this.changeElementFontStyleAndContent(exTxt, 3);
+            break;
         }
       }
     }
@@ -150,43 +157,13 @@ export class JeuxCouleursService {
   changeFont(document: Document) {
     console.log("changeFont");
     if(this.fontCheck){
-      this.applyFontToElements(document.querySelectorAll("p"));
-      this.applyFontToElements(document.querySelectorAll("button"));
-      this.applyFontToElements(document.querySelectorAll("span"));
-      this.applyFontToClass(document.getElementsByClassName("answers-container"));
-      this.applyFontToClass(document.getElementsByClassName("question-bubble"));
+      this.applyFontToClass(document.getElementsByClassName("fontStyleCanChange"));
     }
   }
 
-  applyFontToElements(elements: NodeListOf<HTMLElement>) {
-    elements.forEach(elem => {
-      elem.style.fontFamily = this.getFontSelectedString();
-      if(elem.classList.contains("titreStyle")){
-        elem.style.textShadow="none";
-      }
-    });
-  }
-
   applyFontToClass(elements: HTMLCollectionOf<Element>) {
-    for(let i=0; i<elements.length; i++){
-      if (elements[i] instanceof HTMLElement) {
-        let fontToChange=this.getFontSelectedString();
-        switch (this.getFontSelectedString()){
-          case this.listFont[0]:
-            fontToChange = "FONTSELECTED_ARIAL";
-            break;
-          case this.listFont[1]:
-            fontToChange = "FONTSELECTED_ANDALE";
-            break;
-          case this.listFont[2]:
-            fontToChange = "FONTSELECTED_COMIC";
-            break;
-          default:
-            break;
-        }
-        console.log(elements[i]);
-        elements[i].classList.add(fontToChange);
-      }
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].setAttribute("style", "font-family: " + this.getFontSelectedString() + " !important");
     }
   }
 
@@ -202,9 +179,10 @@ export class JeuxCouleursService {
     return stylesMap;
   }
 
-  private addDefaultStyles(id: string | undefined, className: string | undefined, stylesMap: Map<string, string>): void {
+  private addDefaultStyles(id: string,className: string | undefined, stylesMap: Map<string, string>): void {
     if (id) {
       this.defaultStyles.set(`id-${id}`, stylesMap);
+      return;
     }
     if (className) {
       this.defaultStyles.set(`class-${className}`, stylesMap);
@@ -213,12 +191,15 @@ export class JeuxCouleursService {
 
   // appelez cette fonction lors du chargement de la page
   public collectDefaultStyles(): void {
-    const allElements = document.querySelectorAll('p, button');
-    allElements.forEach((element) => {
-      const style = window.getComputedStyle(element, null);
+    console.log("collectDefaultStyles");
+    const allElements = document.getElementsByClassName("fontStyleCanChange");
+    for (let i = 0; i < allElements.length; i++) {
+      const element = allElements[i];
+      const style = window.getComputedStyle(element);
       const stylesMap = this.createStyleMap(style);
-      this.addDefaultStyles(element.id, element.className, stylesMap);
-    });
+      const classNameWithoutfontStyleCanChange = element.className.replace("fontStyleCanChange", "");
+      this.addDefaultStyles(element.id, classNameWithoutfontStyleCanChange, stylesMap);
+    }
   }
 
   private resetElementStyle(element: HTMLElement, stylesMap: Map<string, string>): void {

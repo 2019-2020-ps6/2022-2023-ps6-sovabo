@@ -1,24 +1,57 @@
 <div class="container monProfil">
     <div class="top-element">
       <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTitleExtrude' : 'contrastDownTitleExtrude'">PolyQuiz</h1>
-    </div>  
-    <div class="contenuProfil">
-        <div class="topContainer"> <!-- Ajout de ce conteneur -->
-            <div class="left">
-                <!-- <img id="profile-img" src="default-profile.jpg" alt="Profile Image" (click)="triggerImageUpload()">
-                <input type="file" id="image-upload" accept="image/*" (change)="changeProfileImage($event)" style="display:none;"> -->
-                <app-btn-profile class="btnTextProfil">Adresse email: {{email}}</app-btn-profile>
-                <app-btn-profile class="btnTextProfil">Nom utilisateur: {{username}}</app-btn-profile>
-            </div>
-            <div class="right">
-                <div class="contenuRight">
-                    <app-btn-profile class="btnTextProfil">Changer de mot de passe</app-btn-profile>
-                    <app-btn-profile class="btnTextProfil">Créer mon code soignant</app-btn-profile>
-                </div>
-            </div>
-        </div>
-        <div class="bas">
-            <app-btn-profile class="btnTextProfil deconnexion">Deconnexion</app-btn-profile>
-        </div>
+        
     </div>
-</div>
+  
+    <div class="contenuProfil">
+      <div class="topContainer">
+        <div class="left">
+          <app-btn-profile class="btnTextProfil" (click)="openPopup('Changer l\'adresse email')">Adresse email: {{ email }}</app-btn-profile>
+          <app-btn-profile class="btnTextProfil" (click)="openPopup('Changer le nom d\'utilisateur')">Nom utilisateur: {{ username }}</app-btn-profile>
+        </div>
+        <div class="right">
+          <div class="contenuRight">
+            <app-btn-profile class="btnTextProfil" (click)="openPopup('Changer le mot de passe')">Changer de mot de passe</app-btn-profile>
+            <app-btn-profile class="btnTextProfil" (click)="openPopup('Créer mon code soignant')">Créer mon code soignant</app-btn-profile>
+          </div>
+        </div>
+      </div>
+      <div class="bas">
+        <app-btn-profile class="btnTextProfil deconnexion">Déconnexion</app-btn-profile>
+      </div>
+
+      
+
+    </div>
+    <app-btn-clickable-frame-background class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
+
+  
+    <!-- Fenêtre pop-up -->
+    <div class="popup-overlay" *ngIf="isPopupOpen">
+      <div class="popup-container">
+        <h2>{{ popupTitle }}</h2>
+        <div class="popup-content">
+          <form>
+            <label *ngIf="popupTitle === 'Changer le mot de passe'">Nouveau mot de passe</label>
+            <input type="password" [(ngModel)]="newPassword" *ngIf="popupTitle === 'Changer le mot de passe'">
+  
+            <label *ngIf="popupTitle === 'Changer l\'adresse email'">Nouvelle adresse email</label>
+            <input type="email" [(ngModel)]="newEmail" *ngIf="popupTitle === 'Changer l\'adresse email'">
+  
+            <label *ngIf="popupTitle === 'Changer le nom d\'utilisateur'">Nouveau nom d'utilisateur</label>
+            <input type="text" [(ngModel)]="newUsername" *ngIf="popupTitle === 'Changer le nom d\'utilisateur'">
+  
+            <label *ngIf="popupTitle === 'Créer mon code soignant'">Nouveau code soignant</label>
+            <input type="text" [(ngModel)]="newCaregiverCode" *ngIf="popupTitle === 'Créer mon code soignant'">
+  
+            <div class="popup-buttons">
+              <button class="btn btn-primary" (click)="submitChanges()">Enregistrer</button>
+              <button class="btn btn-secondary" (click)="cancelChanges()">Annuler</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

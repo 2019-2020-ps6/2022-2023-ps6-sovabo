@@ -1,8 +1,15 @@
-const Joi = require('joi')
-const BaseModel = require('../utils/base-model.js')
+const Joi = require('joi');
+const BaseModel = require('../utils/base-model.js');
+const AnswerModel = require('./answer.model');
 
-module.exports = new BaseModel('Question', {
-    id: Joi.number().required(),
-    label: Joi.string().required(),
-    answers: Joi.array(),
-})
+const QuestionModel = new BaseModel('Question', {
+  label: Joi.string().required(),
+  answers: Joi.array().items(AnswerModel.schema).required(),
+});
+
+QuestionModel.deleteAll = function () {
+  this.items = [];
+  this.save();
+};
+
+module.exports = QuestionModel;
