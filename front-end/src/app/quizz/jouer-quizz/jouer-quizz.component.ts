@@ -171,6 +171,7 @@ export class JouerQuizzComponent implements OnInit {
     }
     this.isAnswerValidated = false; // Réinitialiser le statut de validation
 
+    this.decalageQuestion();
     // Vérifier si la réponse a été validée avant de passer à la question suivante
     if (!this.isAnswerValidated) {
       this.startTimer();
@@ -197,6 +198,21 @@ export class JouerQuizzComponent implements OnInit {
     const total = timeResponses.reduce((acc, timeResponse) => acc + timeResponse);
     const moyenne = total / nbResponses;
     return parseFloat(moyenne.toFixed(2));
+  }
+
+
+  decalageQuestion(): boolean{
+    let question = document.querySelectorAll<HTMLElement>("#question_sentence");
+    console.log(question[0].innerHTML);
+
+    let oldQuestion = question[0].innerHTML;
+    let split = oldQuestion.split(" ",3);
+    console.log(split);
+    //TAILLE AU MAX DONC ON PASSE LA QUESTION SUR DEUX NIVEAUX
+    if(this.jeuxCouleursService.getCurrentFontSize()==3){
+    }
+    return true;
+
   }
 
   getAnimateur() {
