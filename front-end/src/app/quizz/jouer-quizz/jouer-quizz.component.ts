@@ -51,9 +51,16 @@ export class JouerQuizzComponent implements OnInit {
     private jeuxCouleursService: JeuxCouleursService
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.timerId = undefined;
-    this.quiz = this.quizService.getQuizCourant();
+  this.quiz = this.quizService.getQuizCourant();
+  try {
+    this.quiz.questions = await this.quizService.loadQuestionsFromQuiz(this.quiz.id);
+  } catch (error) {
+    console.error('Erreur lors du chargement des questions', error);
+    return;
+  }
+  console.log(this.quiz.questions);
     this.currentQuestion = this.quiz.questions[this.currentQuestionIndex];
     this.questionCorrectIndex = this.getCorrectAnswerIndex(this.currentQuestion);
     this.animations = this.animationService.isAnimated;

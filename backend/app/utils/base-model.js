@@ -43,17 +43,8 @@ module.exports = class BaseModel {
     return item
   }
 
-  createUser(obj = {}) {
-    const user = { ...obj, id: uuid.v4() };
+
   
-    const { error } = Joi.validate(user, this.schema);
-    if (error) throw new ValidationError(`Create Error : Object ${JSON.stringify(obj)} does not match schema of model ${this.name}`, error);
-  
-    this.items.push(user);
-    this.save();
-  
-    return user;
-  }
   
 
   create(obj = {}) {

@@ -1,24 +1,38 @@
 // User Model
 const Joi = require('joi');
-const bcrypt = require('bcrypt');
 const BaseModel = require('../utils/base-model.js');
+const ConfigurationModel = require('./configuration.model.js');
+const uuid = require('uuid')
+
 
 class User extends BaseModel {
   constructor() {
     super('User', {
-      username: Joi.string().required(),
-      email: Joi.string().email().required(),
-      password: Joi.string().required(),
-      codeSoignant: Joi.string().optional()
+      name: Joi.string().required(),
+      imagePath: Joi.string().required(),
+      color: Joi.string().required(),
+      configuration: ConfigurationModel.schema.required(), // rend le champ 'configuration' requis
     });
   }
 
-  async createUser(userObject) {
-    // Hash the password before storing in the database
-    userObject.password = await bcrypt.hash(userObject.password, 10);
-    
-    // Then call the create method from the base model
-    return this.create(userObject);
+
+  createUser(obj = {}) {
+    console.log("ici3")
+
+    const newConfig = ConfigurationModel.create(obj.configuration || {});
+    console.log("ici apres")
+
+    const newUser = { ...obj, id: uuid.v4(), configuration: newConfig };
+    const { error } = Joi.validate(newUser, this.schema);
+    if (error) throw new ValidationError(`Create User Error : Object ${JSON.stringify(obj)} does not match schema of model ${this.name}`, error);
+    this.items.push(newUser);
+    this.save();
+    return newUser;
+  }
+
+  deleteAll() {
+    this.items = [];
+    this.save();
   }
 }
 
