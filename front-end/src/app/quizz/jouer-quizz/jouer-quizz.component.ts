@@ -61,14 +61,15 @@ export class JouerQuizzComponent implements OnInit {
     this.valueTime = [];
     this.animationDuration = this.animationService.duration;
     this.startTimer();
+
+  }
+
+  ngAfterViewInit(){
     if (this.jeuxCouleursService.isDefaultActive) {
       this.jeuxCouleursService.collectDefaultStyles();
     } else {
       this.jeuxCouleursService.changeFont(document);
     }
-  }
-
-  ngAfterViewInit(){
     this.jeuxCouleursService.changeFontSize(document);
   }
 
