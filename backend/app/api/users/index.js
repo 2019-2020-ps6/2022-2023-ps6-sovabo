@@ -1,6 +1,7 @@
 const { Router } = require('express')
 
 const { User } = require('../../models')
+
 const manageAllErrors = require('../../utils/routes/error-management')
 
 const router = new Router()
@@ -21,14 +22,16 @@ router.get('/:userId', (req, res) => {
   }
 })
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   try {
-    const user = User.create({ ...req.body })
-    res.status(201).json(user)
+    console.log(req.body)
+    const user = await User.createUser(req.body);
+    res.status(201).json(user);
   } catch (err) {
-    manageAllErrors(res, err)
+    console.log(err)
+    manageAllErrors(res, err);
   }
-})
+});
 
 router.put('/:userId', (req, res) => {
   try {

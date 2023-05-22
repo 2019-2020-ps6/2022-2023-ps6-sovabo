@@ -3,55 +3,196 @@
       <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTitleExtrude' : 'contrastDownTitleExtrude'">PolyQuiz</h1>
         
     </div>
-  
-    <div class="contenuProfil">
-      <div class="topContainer">
-        <div class="left">
-          <app-btn-profile class="btnTextProfil" (click)="openPopup('Changer l\'adresse email')">Adresse email: {{ email }}</app-btn-profile>
-          <app-btn-profile class="btnTextProfil" (click)="openPopup('Changer le nom d\'utilisateur')">Nom utilisateur: {{ username }}</app-btn-profile>
-        </div>
-        <div class="right">
-          <div class="contenuRight">
-            <app-btn-profile class="btnTextProfil" (click)="openPopup('Changer le mot de passe')">Changer de mot de passe</app-btn-profile>
-            <app-btn-profile class="btnTextProfil" (click)="openPopup('Créer mon code soignant')">Créer mon code soignant</app-btn-profile>
+
+  </div>
+
+  <div class="cardBody">
+    <div class="main-body">
+    
+          <!-- Breadcrumb -->
+          <nav aria-label="breadcrumb" class="main-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
+              <li class="breadcrumb-item active" aria-current="page">User Grid</li>
+            </ol>
+          </nav>
+          <!-- /Breadcrumb -->
+    
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-3 gutters-sm">
+            <div class="col mb-3">
+              <div class="card">
+                <div class="backGround">
+                  
+                  <!-- <img src="https://www.bootdey.com/image/340x120/FFB6C1/000000" alt="Cover" class="card-img-top"> -->
+
+                </div>
+                <div class="card-body text-center">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width:150px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
+                  <h5 class="card-title">John Doe</h5>
+                  <p class="text-secondary mb-1">Full Stack Developer</p>
+                  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                </div>
+                <div class="card-footer">
+                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button"><i class="material-icons">add</i>Follow</button>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-3">
+              <div class="card">
+                <img src="https://www.bootdey.com/image/340x120/87CEFA/000000" alt="Cover" class="card-img-top">
+                <div class="card-body text-center">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar1.png" style="width:150px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
+                  <h5 class="card-title">John Doe</h5>
+                  <p class="text-secondary mb-1">Full Stack Developer</p>
+                  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                </div>
+                <div class="card-footer">
+                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button"><i class="material-icons">add</i>Follow</button>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-3">
+              <div class="card">
+                <img src="https://www.bootdey.com/image/340x120/20B2AA/000000" alt="Cover" class="card-img-top">
+                <div class="card-body text-center">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar2.png" style="width:150px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
+                  <h5 class="card-title">John Doe</h5>
+                  <p class="text-secondary mb-1">Full Stack Developer</p>
+                  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                </div>
+                <div class="card-footer">
+                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button"><i class="material-icons">add</i>Follow</button>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-3">
+              <div class="card">
+                <img src="https://www.bootdey.com/image/340x120/FFA07A/000000" alt="Cover" class="card-img-top">
+                <div class="card-body text-center">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar3.png" style="width:150px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
+                  <h5 class="card-title">John Doe</h5>
+                  <p class="text-secondary mb-1">Full Stack Developer</p>
+                  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                </div>
+                <div class="card-footer">
+                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button"><i class="material-icons">add</i>Follow</button>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-3">  
+              <div class="card">
+                <img src="https://www.bootdey.com/image/340x120/7B68EE/000000" alt="Cover" class="card-img-top">
+                <div class="card-body text-center">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar4.png" style="width:150px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
+                  <h5 class="card-title">John Doe</h5>
+                  <p class="text-secondary mb-1">Full Stack Developer</p>
+                  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                </div>
+                <div class="card-footer">
+                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button"><i class="material-icons">add</i>Follow</button>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-3">
+              <div class="card">
+                <img src="https://www.bootdey.com/image/340x120/BA55D3/000000" alt="Cover" class="card-img-top">
+                <div class="card-body text-center">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar5.png" style="width:150px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
+                  <h5 class="card-title">John Doe</h5>
+                  <p class="text-secondary mb-1">Full Stack Developer</p>
+                  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                </div>
+                <div class="card-footer">
+                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button"><i class="material-icons">add</i>Follow</button>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-3">
+              <div class="card">
+                <img src="https://www.bootdey.com/image/340x120/FF4500/000000" alt="Cover" class="card-img-top">
+                <div class="card-body text-center">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar1.png" style="width:150px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
+                  <h5 class="card-title">John Doe</h5>
+                  <p class="text-secondary mb-1">Full Stack Developer</p>
+                  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                </div>
+                <div class="card-footer">
+                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button"><i class="material-icons">add</i>Follow</button>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-3">
+              <div class="card">
+                <img src="https://www.bootdey.com/image/340x120/191970/000000" alt="Cover" class="card-img-top">
+                <div class="card-body text-center">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar2.png" style="width:150px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
+                  <h5 class="card-title">John Doe</h5>
+                  <p class="text-secondary mb-1">Full Stack Developer</p>
+                  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                </div>
+                <div class="card-footer">
+                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button"><i class="material-icons">add</i>Follow</button>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-3">
+              <div class="card">
+                <img src="https://www.bootdey.com/image/340x120/DDA0DD/000000" alt="Cover" class="card-img-top">
+                <div class="card-body text-center">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar3.png" style="width:150px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
+                  <h5 class="card-title">John Doe</h5>
+                  <p class="text-secondary mb-1">Full Stack Developer</p>
+                  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                </div>
+                <div class="card-footer">
+                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button"><i class="material-icons">add</i>Follow</button>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-3">
+              <div class="card">
+                <img src="https://www.bootdey.com/image/340x120/DB7093/000000" alt="Cover" class="card-img-top">
+                <div class="card-body text-center">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar4.png" style="width:150px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
+                  <h5 class="card-title">John Doe</h5>
+                  <p class="text-secondary mb-1">Full Stack Developer</p>
+                  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                </div>
+                <div class="card-footer">
+                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button"><i class="material-icons">add</i>Follow</button>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-3">
+              <div class="card">
+                <img src="https://www.bootdey.com/image/340x120/663399/000000" alt="Cover" class="card-img-top">
+                <div class="card-body text-center">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar5.png" style="width:150px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
+                  <h5 class="card-title">John Doe</h5>
+                  <p class="text-secondary mb-1">Full Stack Developer</p>
+                  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                </div>
+                <div class="card-footer">
+                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button"><i class="material-icons">add</i>Follow</button>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-3">
+              <div class="card">
+                <img src="https://www.bootdey.com/image/340x120/FF8C00/000000" alt="Cover" class="card-img-top">
+                <div class="card-body text-center">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar1.png" style="width:150px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
+                  <h5 class="card-title">John Doe</h5>
+                  <p class="text-secondary mb-1">Full Stack Developer</p>
+                  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                </div>
+                <div class="card-footer">
+                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button"><i class="material-icons">add</i>Follow</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="bas">
-        <app-btn-profile class="btnTextProfil deconnexion">Déconnexion</app-btn-profile>
-      </div>
-
-      
-
-    </div>
-    <app-btn-clickable-frame-background class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
-
-  
-    <!-- Fenêtre pop-up -->
-    <div class="popup-overlay" *ngIf="isPopupOpen">
-      <div class="popup-container">
-        <h2>{{ popupTitle }}</h2>
-        <div class="popup-content">
-          <form>
-            <label *ngIf="popupTitle === 'Changer le mot de passe'">Nouveau mot de passe</label>
-            <input type="password" [(ngModel)]="newPassword" *ngIf="popupTitle === 'Changer le mot de passe'">
-  
-            <label *ngIf="popupTitle === 'Changer l\'adresse email'">Nouvelle adresse email</label>
-            <input type="email" [(ngModel)]="newEmail" *ngIf="popupTitle === 'Changer l\'adresse email'">
-  
-            <label *ngIf="popupTitle === 'Changer le nom d\'utilisateur'">Nouveau nom d'utilisateur</label>
-            <input type="text" [(ngModel)]="newUsername" *ngIf="popupTitle === 'Changer le nom d\'utilisateur'">
-  
-            <label *ngIf="popupTitle === 'Créer mon code soignant'">Nouveau code soignant</label>
-            <input type="text" [(ngModel)]="newCaregiverCode" *ngIf="popupTitle === 'Créer mon code soignant'">
-  
-            <div class="popup-buttons">
-              <button class="btn btn-primary" (click)="submitChanges()">Enregistrer</button>
-              <button class="btn btn-secondary" (click)="cancelChanges()">Annuler</button>
-            </div>
-          </form>
         </div>
-      </div>
-    </div>
-  </div>
   
