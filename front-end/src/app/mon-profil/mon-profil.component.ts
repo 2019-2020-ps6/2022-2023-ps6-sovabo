@@ -9,95 +9,38 @@ import { AnimationsService } from "../../service/animations.service";
   styleUrls: ['./mon-profil.component.scss']
 })
 export class MonProfilComponent {
-  AttentionColorStatus: boolean = false;
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
-  // Ces valeurs doivent être récupérées depuis le backend
-  email = 'exemple@exemple.com';
-  username = 'nom_utilisateur';
 
-  isPopupOpen: boolean = false;
-  popupTitle: string = '';
-  newPassword: string = '';
-  newEmail: string = '';
-  newUsername: string = '';
-  newCaregiverCode: string = '';
 
-  constructor(private jeuxCouleursService: JeuxCouleursService, private animateurService: AnimateurService, private animationsService: AnimationsService) {}
+  constructor(private jeuxCouleursService: JeuxCouleursService) {}
 
   ngOnInit(): void {
-    this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
-    this.jeuxCouleursService.changeFont(document);
-    this.jeuxCouleursService.changeFontSize(document);
+
   }
 
-  openPopup(title: string) {
-    this.popupTitle = title;
-    this.isPopupOpen = true;
-  }
 
-  submitChanges() {
-    // Implémenter la logique pour enregistrer les modifications selon le titre de la pop-up
-    switch (this.popupTitle) {
-      case 'Changer le mot de passe':
-        // Enregistrer le nouveau mot de passe
-        console.log('Nouveau mot de passe:', this.newPassword);
-        break;
-      case 'Changer l\'adresse email':
-        // Enregistrer la nouvelle adresse email
-        console.log('Nouvelle adresse email:', this.newEmail);
-        break;
-      case 'Changer le nom d\'utilisateur':
-        // Enregistrer le nouveau nom d'utilisateur
-        console.log('Nouveau nom d\'utilisateur:', this.newUsername);
-        break;
-      case 'Créer mon code soignant':
-        // Enregistrer le nouveau code soignant
-        console.log('Nouveau code soignant:', this.newCaregiverCode);
-        break;
+  get randomColor(): string {
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += '0123456789ABCDEF'[Math.floor(Math.random() * 16)];
     }
-
-    // Réinitialiser les champs et fermer la pop-up
-    this.newPassword = '';
-    this.newEmail = '';
-    this.newUsername = '';
-    this.newCaregiverCode = '';
-    this.isPopupOpen = false;
+    return color;
   }
 
-  cancelChanges() {
-    // Réinitialiser les champs et fermer la pop-up
-    this.newPassword = '';
-    this.newEmail = '';
-    this.newUsername = '';
-    this.newCaregiverCode = '';
-    this.isPopupOpen = false;
-  }
-
-  getAnimateur() {
-    return this.animateurService.getAnimateur();
-  }
-
-  getAnimations() {
-    return this.animationsService.isAnimated;
-  }
-
-  triggerImageUpload() {
-    const imageUpload = document.getElementById('image-upload');
-    if (imageUpload) {
-      imageUpload.click();
+  toggleEditUserName(user: User): void {
+    user.editing = !user.editing;
+    if (!user.editing) {
+      this.saveUserName(user);
     }
   }
 
-  getDuration() {
-    return this.animationsService.duration;
-  }
-
-  getDelay() {
-    return this.animationsService.delay != undefined ? this.animationsService.delay : 0;
-  }
-
-  changeProfileImage(event: Event) {
-    // Implémenter la logique pour changer l'image de profil
-    console.log(event);
+  saveUserName(user: User): void {
+    this.users.map(u => {
+      if (u.id === user.id) {
+        u.name = user.name;
+        console.log(u.name);
+      }
+      return u;
+    });
   }
 }
