@@ -25,4 +25,16 @@ export class CreerQuizzComponent {
     this.reponses[index].push('');
   }
 
+  selectionnerBonneReponse(event: any) {
+    let currentreponses = document.getElementsByClassName("reponse");
+    let arr = Array.from(currentreponses);
+    if(!arr.includes(event.target)) return;
+    for(let i = 0; i < currentreponses.length; i++) {
+      currentreponses[i].classList.remove("checked");
+    }
+    event.target.classList.add("checked");
+    event.stopPropagation();
+  }
+
+
 }

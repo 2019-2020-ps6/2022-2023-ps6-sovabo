@@ -10,12 +10,12 @@
     <div class="conteneur-caracteristiques-quiz">
       <div class="caracteristiques-quiz">
         <div class="image-quiz">
-          <img class="iconeImage" src="../../assets/Images/Icone_image_detour.png">
+          <img class="iconeImage" src="../../assets/Images/Logo_image.png">
         </div>
-        <div class="titre-quiz"><span class="textTitre"><input type="text" placeholder="Titre du quiz…"/></span></div>
+        <div class="titre-quiz"><input type="text" placeholder="Titre du quiz…"/></div>
         <div class="categorie-quiz">
           <span class="textCategorie"><strong>Catégorie</strong></span>
-          <img class="iconeTriangle" src="../../assets/Images/Icone_triangle_detour.png">
+          <img class="iconeTriangle" src="../../assets/Images/Fleche_categorie.png">
         </div>
       </div>
     </div>
@@ -23,15 +23,11 @@
     <div class="conteneur-questions">
       <div class="question" *ngFor="let question of questions; let i = index">
         <div class="titre-question">
-      <span class="textTitreQuestion">
-        <input type="text" placeholder="Question {{ i + 1 }} : ..." />
-      </span>
+          <input type="text" placeholder="Question {{ i + 1 }} : ..." />
         </div>
         <div class="reponses-question">
-          <div class="reponse" *ngFor="let reponse of reponses[i]; let j = index">
-            <span class="textReponse">
-              <input type="text" placeholder="Réponse {{ j + 1 }}"/>
-            </span>
+          <div class="reponse" (click)="selectionnerBonneReponse($event)" *ngFor="let reponse of reponses[i]; let j = index">
+            <input type="text" placeholder="Réponse {{ j + 1 }}"/>
           </div>
           <div class="ajout" *ngIf="reponses[i].length < 4" (click)="ajouterReponse(i)">
             <span class="textAjout"><strong>+</strong></span>
