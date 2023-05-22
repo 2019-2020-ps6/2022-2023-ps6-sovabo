@@ -1,14 +1,16 @@
 const QuizModel = require('./models/quiz.model.js');
 const QuestionModel = require('./models/question.model.js');
+const userModel = require('./models/user.model.js');
 const buildServer = require('./build-server.js');
 const logger = require('./utils/logger.js');
 
 const deleteAllData = () => {
   QuizModel.deleteAll();
+  userModel.deleteAll();
   QuestionModel.deleteAll();
   logger.info('Données supprimées avec succès.');
 };
 
-//deleteAllData();
+deleteAllData();
 
 buildServer((server) => logger.info(`Le serveur écoute sur le port ${server.address().port}`));
