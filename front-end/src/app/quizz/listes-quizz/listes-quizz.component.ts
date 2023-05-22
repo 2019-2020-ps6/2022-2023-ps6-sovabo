@@ -20,11 +20,14 @@ export class ListesQuizzComponent {
     this.quizList = this.quizService.getData();
     // console.log(this.animationsService.isAnimated);
     if (this.jeuxCouleursService.isDefaultActive) {
-      //this.jeuxCouleursService.collectDefaultStyles();
+      this.jeuxCouleursService.collectDefaultStyles();
     }
     else {
       this.jeuxCouleursService.changeFont(document);
     }
+  }
+
+  ngAfterViewInit(){
     this.jeuxCouleursService.changeFontSize(document);
   }
 

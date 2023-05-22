@@ -27,6 +27,9 @@ export class MonProfilComponent {
   ngOnInit(): void {
     this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
     this.jeuxCouleursService.changeFont(document);
+  }
+
+  ngAfterViewInit(){
     this.jeuxCouleursService.changeFontSize(document);
   }
 

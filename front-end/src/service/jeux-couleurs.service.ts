@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {ElementRef, Injectable} from '@angular/core';
 import {duotone} from "@fortawesome/fontawesome-svg-core/import.macro";
 
 @Injectable({
@@ -21,21 +21,19 @@ export class JeuxCouleursService {
   private currentFontSize: number  = 2;
   private oldFontSize: number = 2;
 
-  private fontCheck: boolean = false;
+  private level = this.currentFontSize - this.oldFontSize;
+  private coeff = 0.05;
+
   private defaultStyles: Map<string, Map<string, string>> = new Map();
   public isDefaultActive: boolean = true;
 
 
-  getFontCheck(){
-    return this.fontCheck;
-  }
+
 
   setFontSelectedByDefault(){
     this.fontSelected=this.listFont[3];
   }
-  setFontCheck(state: boolean){
-    this.fontCheck=state;
-  }
+
   getCurrentFontSize(){
     return this.currentFontSize;
   }
@@ -109,13 +107,16 @@ export class JeuxCouleursService {
     return target.id;
   }
 
-  public changeSampleFont(document: Document): void {
-    if (event !== null) {
+  public changeSampleFont(event: Event | null,document: Document): void {
+
+    if(event){
+      //on récupère l'élément html ciblé par l'event
       const target = event?.currentTarget as HTMLElement;
-      const value = this.getButtonId(target);
+      //on recup l'id du boutton (l'id dépends du trouble)
+      const value = target.id;
       const exTxt = document.getElementById("exampleTxt");
 
-      if (exTxt) {
+      if(exTxt){
         switch (value) {
           case "btn_fontChanger1":
             this.changeElementFontStyleAndContent(exTxt, 0);
@@ -126,70 +127,56 @@ export class JeuxCouleursService {
           case "btn_fontChanger3":
             this.changeElementFontStyleAndContent(exTxt, 2);
             break;
+          case "btn_fontChanger4":
+            this.changeElementFontStyleAndContent(exTxt,3);
+            break;
           case "btn_fontReset":
-            this.changeElementFontStyleAndContent(exTxt, 3);
+            this.changeElementFontStyleAndContent(exTxt, 4);
             break;
         }
       }
     }
   }
 
-  private computeFontSizeChange(level: number, coeff: number, originFontSize: string): string {
-    const fontSize = parseFloat(originFontSize);
-    return (fontSize + (level * coeff)) + "px";
+  public computeSize(elem : ElementRef){
+    const originFontSize = window.getComputedStyle(elem.nativeElement, null).getPropertyValue('font-size');
+    let size = parseFloat(originFontSize);
+    return this.computeFontSizeChange(size);
+  }
+
+  private computeFontSizeChange(originFontSize: number): string {
+    return (originFontSize + (this.level * this.coeff * originFontSize)) + "px";
   }
 
   public changeFontSize(document: Document): void {
-    const level = this.currentFontSize - this.oldFontSize;
-    const coeff = 5;
-
     this.applyFontSize(document);
   }
 
   applyFontSize(document: Document){
-    console.log("applyFontSize");
-
-    const level = this.currentFontSize - this.oldFontSize;
-    const coeff = 5;
+     this.level = this.currentFontSize - this.oldFontSize;
 
     //VIA LE DOM
-    let elements = document.getElementsByClassName("fontSizeCanChange");
+    let elements = document.querySelectorAll<HTMLElement>(".fontSizeCanChange, .titreStyle");
 
     for (let i = 0; i < elements.length; i++) {
       const originFontSize = window.getComputedStyle(elements[i], null).getPropertyValue('font-size');
-
-      const unit = originFontSize.match(/[a-z]+/);
-      if(unit!=null){
-        console.log("unit :"+unit[0]);
-      }
-
-
-      window.getComputedStyle(elements[i],null).getPropertyValue('font-size');
-
-      elements[i].setAttribute("style", "font-size: " + this.computeFontSizeChange(level, coeff, originFontSize));
+      let size = parseFloat(originFontSize);
+      elements[i].style.fontSize = this.computeFontSizeChange(size);
     }
-
-
-
-
-
-    //VIA L'HTML
-
-    //console.log(elements);
-
   }
 
 
   changeFont(document: Document) {
-    console.log("changeFont");
-    if(this.fontCheck){
-      this.applyFontToClass(document.getElementsByClassName("fontStyleCanChange"));
+    if(!this.isDefaultActive){
+      console.log("APPLY FONT CLASS ");
+      this.applyFontToClass(document);
     }
   }
 
-  applyFontToClass(elements: HTMLCollectionOf<Element>) {
+  applyFontToClass(document: Document) {
+    let elements = document.querySelectorAll<HTMLElement>(".fontStyleCanChange");
     for (let i = 0; i < elements.length; i++) {
-      elements[i].setAttribute("style", "font-family: " + this.getFontSelectedString() + " !important");
+      elements[i].style.fontFamily = this.getFontSelectedString();
     }
   }
 

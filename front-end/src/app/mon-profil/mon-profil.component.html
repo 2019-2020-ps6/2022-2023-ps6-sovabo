@@ -1,9 +1,9 @@
 <div class="container monProfil">
     <div class="top-element">
-      <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTitleExtrude' : 'contrastDownTitleExtrude'">PolyQuiz</h1>
-        
+      <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTitleExtrude' : 'contrastDownTitleExtrude'" class="titreStyle">PolyQuiz</h1>
+
     </div>
-  
+
     <div class="contenuProfil">
       <div class="topContainer">
         <div class="left">
@@ -21,12 +21,12 @@
         <app-btn-profile class="btnTextProfil deconnexion">Déconnexion</app-btn-profile>
       </div>
 
-      
+
 
     </div>
     <app-btn-clickable-frame-background class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
 
-  
+
     <!-- Fenêtre pop-up -->
     <div class="popup-overlay" *ngIf="isPopupOpen">
       <div class="popup-container">
@@ -35,16 +35,16 @@
           <form>
             <label *ngIf="popupTitle === 'Changer le mot de passe'">Nouveau mot de passe</label>
             <input type="password" [(ngModel)]="newPassword" *ngIf="popupTitle === 'Changer le mot de passe'">
-  
+
             <label *ngIf="popupTitle === 'Changer l\'adresse email'">Nouvelle adresse email</label>
             <input type="email" [(ngModel)]="newEmail" *ngIf="popupTitle === 'Changer l\'adresse email'">
-  
+
             <label *ngIf="popupTitle === 'Changer le nom d\'utilisateur'">Nouveau nom d'utilisateur</label>
             <input type="text" [(ngModel)]="newUsername" *ngIf="popupTitle === 'Changer le nom d\'utilisateur'">
-  
+
             <label *ngIf="popupTitle === 'Créer mon code soignant'">Nouveau code soignant</label>
             <input type="text" [(ngModel)]="newCaregiverCode" *ngIf="popupTitle === 'Créer mon code soignant'">
-  
+
             <div class="popup-buttons">
               <button class="btn btn-primary" (click)="submitChanges()">Enregistrer</button>
               <button class="btn btn-secondary" (click)="cancelChanges()">Annuler</button>
@@ -54,4 +54,3 @@
       </div>
     </div>
   </div>
-  

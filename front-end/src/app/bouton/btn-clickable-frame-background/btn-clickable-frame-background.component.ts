@@ -17,7 +17,6 @@ export class BtnClickableFrameBackgroundComponent {
   }
 
   ngOnInit() {
-    //this.jeuxCouleursService.changeFontSize(document);
   }
 
   changeContrast(){
