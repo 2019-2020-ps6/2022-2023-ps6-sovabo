@@ -11,11 +11,11 @@
   <div class="main-body">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-3 gutters-sm justify-content-center">
 
-      <div class="col mb-3" *ngFor="let user of users">
+      <div class="col mb-3" *ngFor="let user of this.users">
         <div class="card">
-          <div class="backGround" [ngStyle]="{'background-color': user.couleur}"></div>
+          <div class="backGround" [ngStyle]="{'background-color': user.color}"></div>
           <div class="card-body text-center">
-            <img [src]="user.animateur" style="width:150px;margin-top:-75px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
+            <img [src]="user.imagePath" style="width:150px;margin-top:-75px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
             <div class="user-title" [ngClass]="{'editing': user.editing}">
               <h5 class="user-name" *ngIf="!user.editing">{{ user.name }}</h5>
               <input type="text" [(ngModel)]="user.name" *ngIf="user.editing">
@@ -23,13 +23,14 @@
                 <svg class="user-svg" *ngIf="!user.editing" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.7574 2.99666L14.7574 4.99666H5V18.9967H19V9.2393L21 7.2393V19.9967C21 20.5489 20.5523 20.9967 20 20.9967H4C3.44772 20.9967 3 20.5489 3 19.9967V3.99666C3 3.44438 3.44772 2.99666 4 2.99666H16.7574ZM20.4853 2.09717L21.8995 3.51138L12.7071 12.7038L11.2954 12.7062L11.2929 11.2896L20.4853 2.09717Z"></path></svg>
               </button>
             </div>
-          <div class="card-footer">
-            <button *ngIf="!user.editing" class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button">Choisir</button>
-            <button *ngIf="user.editing" class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button" (click)="toggleEditUserName(user)">Valider</button>
+            <div class="card-footer">
+              <button *ngIf="!user.editing" class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button">Choisir</button>
+              <button *ngIf="user.editing" class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button" (click)="toggleEditUserName(user)">Valider</button>
+            </div>
           </div>
         </div>
-      </div>
 
+      </div>
     </div>
   </div>
 </div>

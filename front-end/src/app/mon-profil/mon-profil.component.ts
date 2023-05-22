@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { JeuxCouleursService } from 'src/service/jeux-couleurs.service';
 import { AnimateurService } from "../../service/animateur.service";
 import { AnimationsService } from "../../service/animations.service";
+import {UserService} from "../../service/user.service";
+import {User} from "../../models/user.model";
 
 @Component({
   selector: 'app-mon-profil',
@@ -10,12 +12,21 @@ import { AnimationsService } from "../../service/animations.service";
 })
 export class MonProfilComponent {
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
+  public users: User[] = [];
 
 
-  constructor(private jeuxCouleursService: JeuxCouleursService) {}
+  constructor(private jeuxCouleursService: JeuxCouleursService,
+              private userService: UserService) {
+  }
 
-  ngOnInit(): void {
-
+  async ngOnInit(): Promise<void> {
+    try {
+      this.users = await this.userService.loadUsersFromServer();
+      console.log(this.users);
+    }
+    catch (e) {
+      console.log(e);
+    }
   }
 
 
@@ -35,12 +46,12 @@ export class MonProfilComponent {
   }
 
   saveUserName(user: User): void {
-    this.users.map(u => {
-      if (u.id === user.id) {
-        u.name = user.name;
-        console.log(u.name);
-      }
-      return u;
-    });
+  //   this.users.map(u => {
+  //     if (u.id === user.id) {
+  //       u.name = user.name;
+  //       console.log(u.name);
+  //     }
+  //     return u;
+  //   });
   }
 }
