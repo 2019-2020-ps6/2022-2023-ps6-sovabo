@@ -9,7 +9,7 @@
           <text [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}"
                 class="question-text" x="50%" y="40%" text-anchor="middle" dominant-baseline="middle">{{ currentQuestion.label }}</text>
         </svg>
-          <text *ngIf="!animations" [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}" class="question-text fontStyleCanChange">Q{{currentQuestion.id}} : {{currentQuestion.label}}</text>
+          <text *ngIf="!animations" [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}" class="question-text fontStyleCanChange">{{currentQuestion.label}}</text>
         <div class="timer">{{ timeRemaining }} s</div>
       </div>
 

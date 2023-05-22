@@ -1,11 +1,13 @@
 const { Router } = require('express')
 
-const { Quiz, Question } = require('../../models')
-const QuestionsRouter = require('./questions')
+const { Quiz } = require('../../models')
 const manageAllErrors = require('../../utils/routes/error-management')
+const QuestionsRouter = require('./questions')
 const { buildQuizz, buildQuizzes } = require('./manager')
 
 const router = new Router()
+
+router.use('/:quizId/questions', QuestionsRouter)
 
 router.get('/', (req, res) => {
   try {
@@ -27,16 +29,12 @@ router.get('/:quizId', (req, res) => {
 
 router.post('/', (req, res) => {
   try {
-    const quiz = Quiz.create(req.body)
-    const builtQuiz = buildQuizz(quiz.id)
-    res.status(201).json(req.body)
+    const quiz = Quiz.create({ ...req.body })
+    res.status(201).json(quiz)
   } catch (err) {
     manageAllErrors(res, err)
   }
 })
-
-router.use('/:quizId/questions', QuestionsRouter)
-
 
 router.put('/:quizId', (req, res) => {
   try {
