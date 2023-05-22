@@ -7,37 +7,46 @@
   </div>
 
   <div class="contenu-creation-quiz">
-    <div class="caracteristiques-quiz">
-      <div class="image-quiz">
-        <img class="iconeImage" src="../../assets/Images/Icone_image_detour.png">
-      </div>
-      <div class="titre-quiz"><span class="textTitre"><strong>Titre du quiz…</strong></span></div>
-      <div class="categorie-quiz"><span class="textCategorie"><strong>Catégorie</strong></span>
-        <img class="iconeTriangle" src="../../assets/Images/Icone_triangle_detour.png">
-      </div>
-    </div>
-
-    <div class="question1">
-      <div class="titre-question1"><span class="textTitreQuestion1"><strong>Question 1 : …</strong></span></div>
-      <div class="reponses-question1">
-        <div class="reponse1"><span class="textReponse1"><strong>Réponse 1</strong></span></div>
-        <div class="reponse2"><span class="textReponse2"><strong>Réponse 2</strong></span></div>
-        <div class="ajout"><span class="textAjout"><strong>+</strong></span></div>
+    <div class="conteneur-caracteristiques-quiz">
+      <div class="caracteristiques-quiz">
+        <div class="image-quiz">
+          <img class="iconeImage" src="../../assets/Images/Icone_image_detour.png">
+        </div>
+        <div class="titre-quiz"><span class="textTitre"><input type="text" placeholder="Titre du quiz…"/></span></div>
+        <div class="categorie-quiz">
+          <span class="textCategorie"><strong>Catégorie</strong></span>
+          <img class="iconeTriangle" src="../../assets/Images/Icone_triangle_detour.png">
+        </div>
       </div>
     </div>
 
-    <div class="question2">
-      <div class="titre-question2"><span class="textTitreQuestion1"><strong>Question 2 : …</strong></span></div>
-      <div class="reponses-question2">
-        <div class="reponse1"><span class="textReponse1"><strong>Réponse 1</strong></span></div>
-        <div class="reponse2"><span class="textReponse2"><strong>Réponse 2</strong></span></div>
-        <div class="ajout"><span class="textAjout"><strong>+</strong></span></div>
+    <div class="conteneur-questions">
+      <div class="question" *ngFor="let question of questions; let i = index">
+        <div class="titre-question">
+      <span class="textTitreQuestion">
+        <input type="text" placeholder="Question {{ i + 1 }} : ..." />
+      </span>
+        </div>
+        <div class="reponses-question">
+          <div class="reponse" *ngFor="let reponse of reponses[i]; let j = index">
+            <span class="textReponse">
+              <input type="text" placeholder="Réponse {{ j + 1 }}"/>
+            </span>
+          </div>
+          <div class="ajout" *ngIf="reponses[i].length < 4" (click)="ajouterReponse(i)">
+            <span class="textAjout"><strong>+</strong></span>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="question-supplementaire">
-      <div class="boutonPlus"><span class="textBoutonPlus"><strong>+</strong></span></div>
-      <div class="ajouterQuestion"><span class="textAjouterQuestion"><strong>Ajouter une question supplémentaire</strong></span></div>
+      <div class="question-supplementaire">
+        <div class="boutonPlus" (click)="ajouterQuestion()">
+          <span class="textBoutonPlus"><strong>+</strong></span>
+        </div>
+        <div class="ajouterQuestion">
+          <span class="textAjouterQuestion"><strong>Ajouter une question supplémentaire</strong></span>
+        </div>
+      </div>
     </div>
 
   </div>

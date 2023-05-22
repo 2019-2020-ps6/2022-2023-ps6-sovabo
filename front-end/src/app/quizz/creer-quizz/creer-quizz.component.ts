@@ -13,4 +13,16 @@ export class CreerQuizzComponent {
   constructor(private jeuxCouleursService: JeuxCouleursService) {
   }
 
+  questions: string[] = ['', ''];
+  reponses: string[][] = [['', ''], ['', '']];
+
+  ajouterQuestion() {
+    this.questions.push('');
+    this.reponses.push(['', ''])
+  }
+
+  ajouterReponse(index: number) {
+    this.reponses[index].push('');
+  }
+
 }
