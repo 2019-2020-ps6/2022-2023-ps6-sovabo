@@ -1,197 +1,39 @@
 <div class="container monProfil">
-    <div class="top-element">
-      <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTitleExtrude' : 'contrastDownTitleExtrude'">PolyQuiz</h1>
-
-    </div>
-
+  <div class="top-element">
+    <h1 [ngClass]="contrasteTroubleEnable ? 'contrastUpTitleExtrude' : 'contrastDownTitleExtrude'">PolyQuiz</h1>
+    <app-btn-clickable-frame-background class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
   </div>
-
+</div>
+<div class="content-wrapper">
+  <div class="containerBtnGestionUser">
+    <button class="btnGestion" id="btnCreerUser" type="button" (click)="createUser()">CREER USER</button>
+    <button class="btnGestion" id="btnDeleteUser"type="button" (click)="deleteUser()">SUPPRIMER USER</button>
+  </div>
   <div class="cardBody">
     <div class="main-body">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-3 gutters-sm justify-content-center">
 
-          <!-- Breadcrumb -->
-          <nav aria-label="breadcrumb" class="main-breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
-              <li class="breadcrumb-item active" aria-current="page">User Grid</li>
-            </ol>
-          </nav>
-          <!-- /Breadcrumb -->
-
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-3 gutters-sm">
-            <div class="col mb-3">
-              <div class="card">
-                <div class="backGround">
-
-                  <!-- <img src="https://www.bootdey.com/image/340x120/FFB6C1/000000" alt="Cover" class="card-img-top"> -->
-
-                </div>
-                <div class="card-body text-center">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width:150px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
-                  <h5 class="card-title">John Doe</h5>
-                  <p class="text-secondary mb-1">Full Stack Developer</p>
-                  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                </div>
-                <div class="card-footer">
-                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button"><i class="material-icons">add</i>Follow</button>
-                </div>
+        <div class="col mb-3" *ngFor="let user of this.users">
+          <div class="card">
+            <div class="backGround" [ngStyle]="{'background-color': user.color}"></div>
+            <div class="card-body text-center">
+              <img [src]="getImageFromImageName(user.imagePath)" style="width:150px;height:160px;margin-top:-75px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
+              <div class="user-title" [ngClass]="{'editing': user.editing}">
+                <h5 class="user-name" *ngIf="!user.editing">{{ user.name }}</h5>
+                <input type="text" [(ngModel)]="user.name" *ngIf="user.editing">
+                <button class="edit-button" (click)="toggleEditUserName(user)">
+                  <svg class="user-svg" *ngIf="!user.editing" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.7574 2.99666L14.7574 4.99666H5V18.9967H19V9.2393L21 7.2393V19.9967C21 20.5489 20.5523 20.9967 20 20.9967H4C3.44772 20.9967 3 20.5489 3 19.9967V3.99666C3 3.44438 3.44772 2.99666 4 2.99666H16.7574ZM20.4853 2.09717L21.8995 3.51138L12.7071 12.7038L11.2954 12.7062L11.2929 11.2896L20.4853 2.09717Z"></path></svg>
+                </button>
               </div>
-            </div>
-            <div class="col mb-3">
-              <div class="card">
-                <img src="https://www.bootdey.com/image/340x120/87CEFA/000000" alt="Cover" class="card-img-top">
-                <div class="card-body text-center">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar1.png" style="width:150px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
-                  <h5 class="card-title">John Doe</h5>
-                  <p class="text-secondary mb-1">Full Stack Developer</p>
-                  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                </div>
-                <div class="card-footer">
-                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button"><i class="material-icons">add</i>Follow</button>
-                </div>
-              </div>
-            </div>
-            <div class="col mb-3">
-              <div class="card">
-                <img src="https://www.bootdey.com/image/340x120/20B2AA/000000" alt="Cover" class="card-img-top">
-                <div class="card-body text-center">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar2.png" style="width:150px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
-                  <h5 class="card-title">John Doe</h5>
-                  <p class="text-secondary mb-1">Full Stack Developer</p>
-                  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                </div>
-                <div class="card-footer">
-                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button"><i class="material-icons">add</i>Follow</button>
-                </div>
-              </div>
-            </div>
-            <div class="col mb-3">
-              <div class="card">
-                <img src="https://www.bootdey.com/image/340x120/FFA07A/000000" alt="Cover" class="card-img-top">
-                <div class="card-body text-center">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar3.png" style="width:150px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
-                  <h5 class="card-title">John Doe</h5>
-                  <p class="text-secondary mb-1">Full Stack Developer</p>
-                  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                </div>
-                <div class="card-footer">
-                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button"><i class="material-icons">add</i>Follow</button>
-                </div>
-              </div>
-            </div>
-            <div class="col mb-3">
-              <div class="card">
-                <img src="https://www.bootdey.com/image/340x120/7B68EE/000000" alt="Cover" class="card-img-top">
-                <div class="card-body text-center">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar4.png" style="width:150px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
-                  <h5 class="card-title">John Doe</h5>
-                  <p class="text-secondary mb-1">Full Stack Developer</p>
-                  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                </div>
-                <div class="card-footer">
-                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button"><i class="material-icons">add</i>Follow</button>
-                </div>
-              </div>
-            </div>
-            <div class="col mb-3">
-              <div class="card">
-                <img src="https://www.bootdey.com/image/340x120/BA55D3/000000" alt="Cover" class="card-img-top">
-                <div class="card-body text-center">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar5.png" style="width:150px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
-                  <h5 class="card-title">John Doe</h5>
-                  <p class="text-secondary mb-1">Full Stack Developer</p>
-                  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                </div>
-                <div class="card-footer">
-                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button"><i class="material-icons">add</i>Follow</button>
-                </div>
-              </div>
-            </div>
-            <div class="col mb-3">
-              <div class="card">
-                <img src="https://www.bootdey.com/image/340x120/FF4500/000000" alt="Cover" class="card-img-top">
-                <div class="card-body text-center">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar1.png" style="width:150px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
-                  <h5 class="card-title">John Doe</h5>
-                  <p class="text-secondary mb-1">Full Stack Developer</p>
-                  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                </div>
-                <div class="card-footer">
-                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button"><i class="material-icons">add</i>Follow</button>
-                </div>
-              </div>
-            </div>
-            <div class="col mb-3">
-              <div class="card">
-                <img src="https://www.bootdey.com/image/340x120/191970/000000" alt="Cover" class="card-img-top">
-                <div class="card-body text-center">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar2.png" style="width:150px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
-                  <h5 class="card-title">John Doe</h5>
-                  <p class="text-secondary mb-1">Full Stack Developer</p>
-                  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                </div>
-                <div class="card-footer">
-                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button"><i class="material-icons">add</i>Follow</button>
-                </div>
-              </div>
-            </div>
-            <div class="col mb-3">
-              <div class="card">
-                <img src="https://www.bootdey.com/image/340x120/DDA0DD/000000" alt="Cover" class="card-img-top">
-                <div class="card-body text-center">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar3.png" style="width:150px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
-                  <h5 class="card-title">John Doe</h5>
-                  <p class="text-secondary mb-1">Full Stack Developer</p>
-                  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                </div>
-                <div class="card-footer">
-                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button"><i class="material-icons">add</i>Follow</button>
-                </div>
-              </div>
-            </div>
-            <div class="col mb-3">
-              <div class="card">
-                <img src="https://www.bootdey.com/image/340x120/DB7093/000000" alt="Cover" class="card-img-top">
-                <div class="card-body text-center">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar4.png" style="width:150px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
-                  <h5 class="card-title">John Doe</h5>
-                  <p class="text-secondary mb-1">Full Stack Developer</p>
-                  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                </div>
-                <div class="card-footer">
-                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button"><i class="material-icons">add</i>Follow</button>
-                </div>
-              </div>
-            </div>
-            <div class="col mb-3">
-              <div class="card">
-                <img src="https://www.bootdey.com/image/340x120/663399/000000" alt="Cover" class="card-img-top">
-                <div class="card-body text-center">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar5.png" style="width:150px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
-                  <h5 class="card-title">John Doe</h5>
-                  <p class="text-secondary mb-1">Full Stack Developer</p>
-                  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                </div>
-                <div class="card-footer">
-                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button"><i class="material-icons">add</i>Follow</button>
-                </div>
-              </div>
-            </div>
-            <div class="col mb-3">
-              <div class="card">
-                <img src="https://www.bootdey.com/image/340x120/FF8C00/000000" alt="Cover" class="card-img-top">
-                <div class="card-body text-center">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar1.png" style="width:150px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">
-                  <h5 class="card-title">John Doe</h5>
-                  <p class="text-secondary mb-1">Full Stack Developer</p>
-                  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                </div>
-                <div class="card-footer">
-                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button"><i class="material-icons">add</i>Follow</button>
-                </div>
+              <div class="card-footer">
+                <button *ngIf="!user.editing" class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button">Choisir</button>
+                <button *ngIf="user.editing" class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button" (click)="toggleEditUserName(user)">Valider</button>
               </div>
             </div>
           </div>
+
         </div>
-        </div>
+      </div>
+    </div>
+  </div>
+</div>

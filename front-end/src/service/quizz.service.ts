@@ -2,22 +2,46 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Quiz } from '../models/quizz.model';
-import { QUIZ_LIST } from '../mocks/quizz-listes.mock';
 import { Question } from '../models/question.model';
-import { serverUrl, httpOptionsBase } from '../config/server.config'
+import { serverUrl, httpOptionsBase, serverBack } from '../config/server.config'
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuizService {
-    private quizzes: Quiz[] = QUIZ_LIST;
+    private quizzes: Quiz[] = [];
     private quizCourant!: Quiz;
     private score: number = 0;
 
+    constructor(private httpClient: HttpClient) {
+      this.loadQuizzesFromServer();
+    }
+
+    private loadQuizzesFromServer() {
+      this.httpClient.get<Quiz[]>(`${serverBack}/quizzes`).subscribe(
+        (quizzes) => {
+          this.quizzes.push(...quizzes);
+        },
+        (error) => {
+          console.log('Erreur ! : ' + error);
+        }
+      );
+      console.log(this.quizzes);
+    }
 
     getData() {
       return this.quizzes;
     }
+    async loadQuestionsFromQuiz(id: string): Promise<Question[]> {
+      const questions = await this.httpClient.get<Question[]>(`${serverBack}/quizzes/${id}/questions`).toPromise();
+      if (!questions) {
+        throw new Error(`No questions found for quiz with id ${id}`);
+      }
+      return questions;
+    }
+    
+    
+
     setQuizCourant(quiz : Quiz){
       this.quizCourant = quiz;
     }
@@ -27,7 +51,7 @@ export class QuizService {
     }
 
     getQuizById(id: string): Quiz {
-      const quiz = QUIZ_LIST.find(quiz => quiz.id === id); //Le quiz dans find n'est pas le même que celui de const quiz
+      const quiz = this.quizzes.find(quiz => quiz.id === id);
       if (!quiz) {
         throw new Error(`Quiz with id ${id} not found`);
       }
@@ -41,16 +65,12 @@ export class QuizService {
     addScore(){
       this.score++;
     }
-    
+
     resetScore(){
       this.score = 0;
     }
-    
+
     public getTimeResponses(): number[] | undefined {
       return this.quizCourant?.statQuiz?.timeResponses;
     }
-    
-
-
-
 }

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { JeuxCouleursService } from 'src/service/jeux-couleurs.service';
-import { AnimateurService } from "../../service/animateur.service";
-import { AnimationsService } from "../../service/animations.service";
+import {Component} from '@angular/core';
+import {JeuxCouleursService} from 'src/service/jeux-couleurs.service';
+import {DomSanitizer} from '@angular/platform-browser';
+import {UserService} from "../../service/user.service";
+import {User} from "../../models/user.model";
 
 @Component({
   selector: 'app-mon-profil',
@@ -9,98 +10,109 @@ import { AnimationsService } from "../../service/animations.service";
   styleUrls: ['./mon-profil.component.scss']
 })
 export class MonProfilComponent {
-  AttentionColorStatus: boolean = false;
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
-  // Ces valeurs doivent être récupérées depuis le backend
-  email = 'exemple@exemple.com';
-  username = 'nom_utilisateur';
+  public users: User[] = [];
+ public image: HTMLImageElement | undefined;
 
-  isPopupOpen: boolean = false;
-  popupTitle: string = '';
-  newPassword: string = '';
-  newEmail: string = '';
-  newUsername: string = '';
-  newCaregiverCode: string = '';
-
-  constructor(private jeuxCouleursService: JeuxCouleursService, private animateurService: AnimateurService, private animationsService: AnimationsService) {}
-
-  ngOnInit(): void {
-    this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
-    this.jeuxCouleursService.changeFont(document);
+  constructor(private jeuxCouleursService: JeuxCouleursService,
+              private userService: UserService, private sanitizer: DomSanitizer) {
   }
 
-  ngAfterViewInit(){
-    this.jeuxCouleursService.changeFontSize(document);
-  }
-
-  openPopup(title: string) {
-    this.popupTitle = title;
-    this.isPopupOpen = true;
-  }
-
-  submitChanges() {
-    // Implémenter la logique pour enregistrer les modifications selon le titre de la pop-up
-    switch (this.popupTitle) {
-      case 'Changer le mot de passe':
-        // Enregistrer le nouveau mot de passe
-        console.log('Nouveau mot de passe:', this.newPassword);
-        break;
-      case 'Changer l\'adresse email':
-        // Enregistrer la nouvelle adresse email
-        console.log('Nouvelle adresse email:', this.newEmail);
-        break;
-      case 'Changer le nom d\'utilisateur':
-        // Enregistrer le nouveau nom d'utilisateur
-        console.log('Nouveau nom d\'utilisateur:', this.newUsername);
-        break;
-      case 'Créer mon code soignant':
-        // Enregistrer le nouveau code soignant
-        console.log('Nouveau code soignant:', this.newCaregiverCode);
-        break;
+  async ngOnInit(): Promise<void> {
+    try {
+      this.users = await this.userService.loadUsersFromServer();
     }
-
-    // Réinitialiser les champs et fermer la pop-up
-    this.newPassword = '';
-    this.newEmail = '';
-    this.newUsername = '';
-    this.newCaregiverCode = '';
-    this.isPopupOpen = false;
-  }
-
-  cancelChanges() {
-    // Réinitialiser les champs et fermer la pop-up
-    this.newPassword = '';
-    this.newEmail = '';
-    this.newUsername = '';
-    this.newCaregiverCode = '';
-    this.isPopupOpen = false;
-  }
-
-  getAnimateur() {
-    return this.animateurService.getAnimateur();
-  }
-
-  getAnimations() {
-    return this.animationsService.isAnimated;
-  }
-
-  triggerImageUpload() {
-    const imageUpload = document.getElementById('image-upload');
-    if (imageUpload) {
-      imageUpload.click();
+    catch (e) {
+      console.log(e);
     }
   }
 
-  getDuration() {
-    return this.animationsService.duration;
+  ngAfterViewInit(): void {
+    this.adjustCardBodyHeight();
+    window.addEventListener('resize', () => this.adjustCardBodyHeight());
   }
 
-  getDelay() {
-    return this.animationsService.delay != undefined ? this.animationsService.delay : 0;
+  ngOnDestroy(): void {
+    window.removeEventListener('resize', () => this.adjustCardBodyHeight());
   }
 
-  changeProfileImage(event: Event) {
-    // Implémenter la logique pour changer l'image de profil
-    console.log(event);
+  get randomColor(): string {
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += '0123456789ABCDEF'[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+  toggleEditUserName(user: User): void {
+    user.editing = !user.editing;
+    if (!user.editing) {
+      this.saveUserName(user);
+    }
+  }
+
+  saveUserName(user: User): void {
+    this.users.map(u => {
+      if (u.id === user.id) {
+        user.name = u.name;
+        console.log(user.name);
+      }
+      return user;
+    });
+  }
+
+  getImageFromImageName(imageName: string): string {
+    return `../../assets/Images/${imageName}.png`;
+  }
+
+
+  async createUser(): Promise<void> {
+    try {
+      const newUser: Partial<User> = {
+        name: "wola ca marche",
+        imagePath: "Animateur_image",
+        color: "#633719",
+        configuration: {
+          animateur: false,
+          animateurImagePath: "/images/animateur.jpg",
+          animation: false,
+          animationSpeed: "normal",
+          sliderPosition: 0,
+          duration: "00:00:00",
+          contraste: false,
+          id: ""
+        },
+        id: ""
+      };
+      console.log(newUser.id);
+      const user = await this.userService.createUser(newUser);
+      this.users.push(user);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async deleteUser(): Promise<void> {
+    try {
+      const userIdToDelete = "" ;
+      this.users.forEach(user => {
+        if (user.name === "wola ca marche") {
+          userIdToDelete.concat(user.id);
+        }
+      })
+      console.log(userIdToDelete);
+      await this.userService.deleteUser(userIdToDelete);
+      this.users = this.users.filter(user => user.id !== userIdToDelete);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  adjustCardBodyHeight(): void {
+    const content_wrapper = document.querySelector('.content-wrapper');
+    const header = document.querySelector('.monProfil');
+    if (content_wrapper && header) {
+      content_wrapper.setAttribute('style', `height: ${window.innerHeight - header.clientHeight}px`);
+    }
   }
 }
