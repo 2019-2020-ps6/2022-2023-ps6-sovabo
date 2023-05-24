@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuizService } from '../../../service/quizz.service';
 import { Quiz } from '../../../models/quizz.model';
@@ -10,6 +10,7 @@ import { StatQuizz } from 'src/models/quizz.stat.model';
 import { AnimateurService } from "../../../service/animateur.service";
 import { AnimationsService } from "../../../service/animations.service";
 import { JeuxCouleursService } from "../../../service/jeux-couleurs.service";
+import {parse} from "@fortawesome/fontawesome-svg-core";
 
 
 @Component({
@@ -18,6 +19,7 @@ import { JeuxCouleursService } from "../../../service/jeux-couleurs.service";
   styleUrls: ['./jouer-quizz.component.scss']
 })
 export class JouerQuizzComponent implements OnInit {
+
   public quiz!: Quiz;
   public questionCorrectIndex: number = 0;
   public isLastQuestion: boolean = false;
@@ -60,7 +62,6 @@ export class JouerQuizzComponent implements OnInit {
     console.error('Erreur lors du chargement des questions', error);
     return;
   }
-  console.log(this.quiz.questions);
     this.currentQuestion = this.quiz.questions[this.currentQuestionIndex];
     this.questionCorrectIndex = this.getCorrectAnswerIndex(this.currentQuestion);
     this.animations = this.animationService.isAnimated;
@@ -68,7 +69,6 @@ export class JouerQuizzComponent implements OnInit {
     this.valueTime = [];
     this.animationDuration = this.animationService.duration;
     this.startTimer();
-
   }
 
   ngAfterViewInit(){
@@ -92,7 +92,7 @@ export class JouerQuizzComponent implements OnInit {
   }
 
   startTimer() {
-    this.timeRemaining = 5;
+    this.timeRemaining = 500;
     this.timerId = setInterval(() => {
       if (this.timeRemaining > 0) {
         this.timeRemaining--;
@@ -153,7 +153,6 @@ export class JouerQuizzComponent implements OnInit {
         this.goToNextQuestion();
       }, 5000);
     }
-
     this.isAnswerValidated = true; // Marquer la réponse comme validée
   }
 
@@ -181,10 +180,8 @@ export class JouerQuizzComponent implements OnInit {
     if (!this.isAnswerValidated) {
       this.startTimer();
     }
-    this.decalageQuestion();
+
   }
-
-
 
   getCorrectAnswerIndex(question: Question): number {
     for (let i = 0; i < question.answers.length; i++) {
@@ -206,41 +203,39 @@ export class JouerQuizzComponent implements OnInit {
     return parseFloat(moyenne.toFixed(2));
   }
 
+  getQuestion(){
+    return this.decalageQuestion();
+  }
 
-  decalageQuestion(): boolean{
-    let questionContainer = document.querySelector<HTMLElement>(".question-bubble");
+  decalageQuestion(): string{
+    let questionContainer = document.querySelector('.question-bubble');
     if(questionContainer){
-      let largeur = questionContainer.offsetHeight;
-      console.log(questionContainer);
-      console.log(largeur);
+      let htmlLocation = document.querySelector("#question_sentence");
+      if(htmlLocation){
+        let initData = "Q"+(this.currentQuestionIndex+1)+" : " + this.currentQuestion.label;
 
-      if(largeur>105) {
-        return this.reStyleQuestion();
+        let largeur = parseFloat(getComputedStyle(questionContainer).width);
+        console.log(largeur);
+
+        if(largeur>1200){
+          let split = initData.split(" ");
+
+          //CONSTRUCTION DE LA NOUVELLE QUESTION
+          let indexToCut = Math.round(split.length/2);
+          let finalHTML = ""
+          let i=0;
+
+          for(i;i<indexToCut;i++){finalHTML += split[i]+" ";}
+          finalHTML +="<br>";
+          for(i;i<split.length;i++){finalHTML += split[i]+" ";}
+          initData = finalHTML;
+        }
+        htmlLocation.innerHTML = initData;
       }
     }
-    return false;
+    return "";
   }
 
-  reStyleQuestion(){
-    let htmlLocation = document.querySelectorAll<HTMLElement>("#question_sentence");
-    let question = "Q"+(this.currentQuestionIndex+1) + " : " + this.currentQuestion.label;
-
-    let split = question.split(" ");
-    console.log(split);
-
-    //CONSTRCUTION DE LA NOUVELLE QUESTION
-    let indexToCut = Math.round(split.length/2);
-    let finalHTML = ""
-    let i=0;
-
-    for(i;i<indexToCut;i++){finalHTML += split[i]+" ";}
-    finalHTML +="<br>";
-    for(i;i<split.length;i++){finalHTML += split[i]+" ";}
-
-    //TAILLE AU MAX DONC ON PASSE LA QUESTION SUR DEUX NIVEAUX
-    htmlLocation[0].innerHTML = finalHTML;
-    return true;
-  }
 
   getAnimateur() {
     return this.animateurService.getAnimateur();
