@@ -44,14 +44,6 @@ export class MonProfilComponent {
     }
   }
 
-  ngAfterViewInit(): void {
-    this.adjustCardBodyHeight();
-    window.addEventListener('resize', () => this.adjustCardBodyHeight());
-  }
-
-  ngOnDestroy(): void {
-    window.removeEventListener('resize', () => this.adjustCardBodyHeight());
-  }
 
   get randomColor(): string {
     let color = '#';
@@ -178,13 +170,5 @@ export class MonProfilComponent {
 // Méthode pour fermer la modal
   closeModal() {
     this.showModal = false;
-  }
-
-  adjustCardBodyHeight(): void {
-    const content_wrapper = document.querySelector('.content-wrapper');
-    const header = document.querySelector('.monProfil');
-    if (content_wrapper && header) {
-      content_wrapper.setAttribute('style', `height: ${window.innerHeight - header.clientHeight}px`);
-    }
   }
 }
