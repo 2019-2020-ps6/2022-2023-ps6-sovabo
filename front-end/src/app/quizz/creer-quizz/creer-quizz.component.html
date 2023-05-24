@@ -26,7 +26,7 @@
           <input type="text" placeholder="Question {{ i + 1 }} : ..." />
         </div>
         <div class="reponses-question">
-          <div class="reponse" (click)="selectionnerBonneReponse($event)" *ngFor="let reponse of reponses[i]; let j = index">
+          <div class="reponse" (click)="selectionnerBonneReponse(i, j)" *ngFor="let reponse of reponses[i]; let j = index">
             <input type="text" placeholder="Réponse {{ j + 1 }}"/>
           </div>
           <div class="ajout" *ngIf="reponses[i].length < 4" (click)="ajouterReponse(i)">
