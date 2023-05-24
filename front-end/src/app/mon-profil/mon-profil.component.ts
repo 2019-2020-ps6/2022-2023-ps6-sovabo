@@ -10,6 +10,21 @@ import {User} from "../../models/user.model";
   styleUrls: ['./mon-profil.component.scss']
 })
 export class MonProfilComponent {
+  public userName: string = '';
+  public isCreatingUser: boolean = false;
+  showAlert: boolean = false;
+
+  showModal = false;
+
+  avatarImages = [
+    "../../assets/Images/settings.png",
+    "../../assets/Images/Animateur_image.png",
+    // Plus d'images...
+  ];
+
+  selectedAvatar = "../../assets/Images/Animateur_image.png";
+
+
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
   public users: User[] = [];
  public image: HTMLImageElement | undefined;
@@ -67,6 +82,7 @@ export class MonProfilComponent {
 
 
   async createUser(): Promise<void> {
+    this.isCreatingUser = true;
     try {
       const newUser: Partial<User> = {
         name: "wola ca marche",
@@ -106,6 +122,47 @@ export class MonProfilComponent {
     } catch (e) {
       console.log(e);
     }
+  }
+
+  cancelCreateUser(): void {
+    // Masquer le formulaire de création et afficher la liste d'utilisateurs
+    this.isCreatingUser = false;
+  }
+
+  submitForm(): void {
+    console.log("submitForm");
+    if(this.isCreatingUser) {
+      console.log(this.userName);
+      this.isCreatingUser = false;
+    }
+
+    this.showAlert = true;
+    setTimeout(() => this.showAlert = false, 4000); 
+  }
+
+
+  closeAlert() {
+    this.showAlert = false;
+  }
+
+  selectAvatar(img: string) {
+    console.log("selectAvatar");
+    this.selectedAvatar = img;
+    this.showModal = false;
+  }
+  
+
+  openModal() {
+    console.log("openModal");
+    this.showModal = true;
+  }
+  confirmDelete() {
+    //this.showModal = false;
+  }
+
+// Méthode pour fermer la modal
+  closeModal() {
+    this.showModal = false;
   }
 
   adjustCardBodyHeight(): void {
