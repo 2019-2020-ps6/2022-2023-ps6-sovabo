@@ -170,12 +170,11 @@ export class JouerQuizzComponent implements OnInit {
       this.isLastQuestion = true;
     }
     this.isAnswerValidated = false; // Réinitialiser le statut de validation
-
-    this.decalageQuestion();
     // Vérifier si la réponse a été validée avant de passer à la question suivante
     if (!this.isAnswerValidated) {
       this.startTimer();
     }
+    this.decalageQuestion();
   }
 
 
@@ -202,17 +201,38 @@ export class JouerQuizzComponent implements OnInit {
 
 
   decalageQuestion(): boolean{
-    let question = document.querySelectorAll<HTMLElement>("#question_sentence");
-    console.log(question[0].innerHTML);
+    let questionContainer = document.querySelector<HTMLElement>(".question-bubble");
+    if(questionContainer){
+      let largeur = questionContainer.offsetHeight;
+      console.log(questionContainer);
+      console.log(largeur);
 
-    let oldQuestion = question[0].innerHTML;
-    let split = oldQuestion.split(" ",3);
-    console.log(split);
-    //TAILLE AU MAX DONC ON PASSE LA QUESTION SUR DEUX NIVEAUX
-    if(this.jeuxCouleursService.getCurrentFontSize()==3){
+      if(largeur>105) {
+        return this.reStyleQuestion();
+      }
     }
-    return true;
+    return false;
+  }
 
+  reStyleQuestion(){
+    let htmlLocation = document.querySelectorAll<HTMLElement>("#question_sentence");
+    let question = "Q"+(this.currentQuestionIndex+1) + " : " + this.currentQuestion.label;
+
+    let split = question.split(" ");
+    console.log(split);
+
+    //CONSTRCUTION DE LA NOUVELLE QUESTION
+    let indexToCut = Math.round(split.length/2);
+    let finalHTML = ""
+    let i=0;
+
+    for(i;i<indexToCut;i++){finalHTML += split[i]+" ";}
+    finalHTML +="<br>";
+    for(i;i<split.length;i++){finalHTML += split[i]+" ";}
+
+    //TAILLE AU MAX DONC ON PASSE LA QUESTION SUR DEUX NIVEAUX
+    htmlLocation[0].innerHTML = finalHTML;
+    return true;
   }
 
   getAnimateur() {
