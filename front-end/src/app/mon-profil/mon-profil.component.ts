@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import { JeuxCouleursService } from 'src/service/jeux-couleurs.service';
-import { AnimateurService } from "../../service/animateur.service";
-import { AnimationsService } from "../../service/animations.service";
+import {Component} from '@angular/core';
+import {JeuxCouleursService} from 'src/service/jeux-couleurs.service';
+import {DomSanitizer} from '@angular/platform-browser';
 import {UserService} from "../../service/user.service";
 import {User} from "../../models/user.model";
 
@@ -13,22 +12,29 @@ import {User} from "../../models/user.model";
 export class MonProfilComponent {
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
   public users: User[] = [];
-
+ public image: HTMLImageElement | undefined;
 
   constructor(private jeuxCouleursService: JeuxCouleursService,
-              private userService: UserService) {
+              private userService: UserService, private sanitizer: DomSanitizer) {
   }
 
   async ngOnInit(): Promise<void> {
     try {
       this.users = await this.userService.loadUsersFromServer();
-      console.log(this.users);
     }
     catch (e) {
       console.log(e);
     }
   }
 
+  ngAfterViewInit(): void {
+    this.adjustCardBodyHeight();
+    window.addEventListener('resize', () => this.adjustCardBodyHeight());
+  }
+
+  ngOnDestroy(): void {
+    window.removeEventListener('resize', () => this.adjustCardBodyHeight());
+  }
 
   get randomColor(): string {
     let color = '#';
@@ -46,12 +52,67 @@ export class MonProfilComponent {
   }
 
   saveUserName(user: User): void {
-  //   this.users.map(u => {
-  //     if (u.id === user.id) {
-  //       u.name = user.name;
-  //       console.log(u.name);
-  //     }
-  //     return u;
-  //   });
+    this.users.map(u => {
+      if (u.id === user.id) {
+        user.name = u.name;
+        console.log(user.name);
+      }
+      return user;
+    });
+  }
+
+  getImageFromImageName(imageName: string): string {
+    return `../../assets/Images/${imageName}.png`;
+  }
+
+
+  async createUser(): Promise<void> {
+    try {
+      const newUser: Partial<User> = {
+        name: "wola ca marche",
+        imagePath: "Animateur_image",
+        color: "#633719",
+        configuration: {
+          animateur: false,
+          animateurImagePath: "/images/animateur.jpg",
+          animation: false,
+          animationSpeed: "normal",
+          sliderPosition: 0,
+          duration: "00:00:00",
+          contraste: false,
+          id: ""
+        },
+        id: ""
+      };
+      console.log(newUser.id);
+      const user = await this.userService.createUser(newUser);
+      this.users.push(user);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async deleteUser(): Promise<void> {
+    try {
+      const userIdToDelete = "" ;
+      this.users.forEach(user => {
+        if (user.name === "wola ca marche") {
+          userIdToDelete.concat(user.id);
+        }
+      })
+      console.log(userIdToDelete);
+      await this.userService.deleteUser(userIdToDelete);
+      this.users = this.users.filter(user => user.id !== userIdToDelete);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  adjustCardBodyHeight(): void {
+    const content_wrapper = document.querySelector('.content-wrapper');
+    const header = document.querySelector('.monProfil');
+    if (content_wrapper && header) {
+      content_wrapper.setAttribute('style', `height: ${window.innerHeight - header.clientHeight}px`);
+    }
   }
 }

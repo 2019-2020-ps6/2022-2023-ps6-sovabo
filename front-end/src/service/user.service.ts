@@ -24,7 +24,20 @@ export class UserService {
     return users;
   }
 
-  getUsers() {
-    return this.users;
+  // Ajouter un nouvel utilisateur
+  async createUser(newUser: Partial<User>): Promise<User> {
+    const user = await this.httpClient.post<User>(`${serverBack}users`, newUser).toPromise();
+    if (!user) {
+      throw new Error(`Failed to create user`);
+    }
+    return user;
   }
+
+  // Supprimer un utilisateur
+  async deleteUser(userId: string): Promise<void> {
+    await this.httpClient.delete<void>(`${serverBack}users/${userId}`).toPromise();
+  }
+
+
+
 }
