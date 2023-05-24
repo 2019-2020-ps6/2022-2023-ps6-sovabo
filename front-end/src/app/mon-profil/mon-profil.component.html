@@ -21,7 +21,7 @@
             <div class="card">
               <div class="backGround" [ngStyle]="{'background-color': user.color}"></div>
               <div class="card-body text-center">
-                <img [src]="getImageFromImageName(user.imagePath)" style="width:150px;height:160px;margin-top:-75px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3 avatarUser">
+                <img [src]="getImageFromImageName(user.imagePath)" style="width:150px;height:160px;margin-top:-75px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3 avatarUser" (click)="openModal()">
                 <div class="user-title" [ngClass]="{'editing': user.editing}">
                   <h5 class="user-name" *ngIf="!user.editing">{{ user.name }}</h5>
                   <input type="text" [(ngModel)]="user.name" *ngIf="user.editing">
