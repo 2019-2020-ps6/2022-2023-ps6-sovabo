@@ -6,7 +6,7 @@
 </div>
 <div class="content-wrapper">
   <div class="containerBtnGestionUser">
-    <button class="btnGestion" id="btnCreerUser" type="button" (click)="createUser()">CREER USER</button>
+    <button class="btnGestion" id="btnCreerUser" type="button" (click)="goToCreateUser()">CREER USER</button>
     <button class="btnGestion" id="btnDeleteUser" type="button" data-toggle="modal" data-target="#modalDeleteConfirmation">SUPPRIMER USER</button>
   </div>
   <div class="cardBody">
@@ -37,8 +37,8 @@
             </div>
           </div>
         </ng-container>
-        <div class="col mb-3">
-          <form (ngSubmit)="submitForm()">
+        <div class="col mb-3" *ngIf="isCreatingUser">
+          <form (ngSubmit)="createUser()">
             <div class="card">
               <div class="backGround" [ngStyle]="{'background-color': '#633719'}"></div>
               <div class="card-body text-center">

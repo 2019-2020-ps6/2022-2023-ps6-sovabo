@@ -13,6 +13,7 @@ export class MonProfilComponent {
   public userName: string = '';
   public isCreatingUser: boolean = false;
   showAlert: boolean = false;
+  public showPopUp: boolean = false;
 
   showModal = false;
 
@@ -34,6 +35,7 @@ export class MonProfilComponent {
   }
 
   async ngOnInit(): Promise<void> {
+    this.showModal = false;
     try {
       this.users = await this.userService.loadUsersFromServer();
     }
@@ -74,7 +76,21 @@ export class MonProfilComponent {
       }
       return user;
     });
+  
+    const updatedUser: Partial<User> = {
+      name: user.name,
+      imagePath: user.imagePath,
+      color: user.color,
+      configuration: { ...user.configuration },
+    };
+    const userId = user.id || ''
+    this.userService.updateUser(updatedUser,userId );
   }
+
+  getImageNameFromImagePath(imagePath: string): string {
+    return imagePath.split('/').pop()?.split('.')[0] || '';
+  }
+  
 
   getImageFromImageName(imageName: string): string {
     return `../../assets/Images/${imageName}.png`;
@@ -83,45 +99,53 @@ export class MonProfilComponent {
 
   async createUser(): Promise<void> {
     this.isCreatingUser = true;
+
+    let imageName = this.getImageNameFromImagePath(this.selectedAvatar);
+
+    console.log("createUser on va le créer la");
     try {
       const newUser: Partial<User> = {
-        name: "wola ca marche",
-        imagePath: "Animateur_image",
+        name: this.userName,
+        imagePath: imageName,
         color: "#633719",
         configuration: {
           animateur: false,
-          animateurImagePath: "/images/animateur.jpg",
+          animateurImagePath: imageName,
           animation: false,
           animationSpeed: "normal",
           sliderPosition: 0,
           duration: "00:00:00",
           contraste: false,
-          id: ""
         },
-        id: ""
       };
-      console.log(newUser.id);
+
       const user = await this.userService.createUser(newUser);
       this.users.push(user);
+      console.log("Il est créé");
+
+    } catch (e) {
+      console.log(e);
+    }
+
+    this.isCreatingUser = false;
+
+    this.showAlert = true;
+    setTimeout(() => this.showAlert = false, 4000); 
+  }
+
+  
+  
+
+  async deleteUser(): Promise<void> {
+    try {
+     
     } catch (e) {
       console.log(e);
     }
   }
 
-  async deleteUser(): Promise<void> {
-    try {
-      const userIdToDelete = "" ;
-      this.users.forEach(user => {
-        if (user.name === "wola ca marche") {
-          userIdToDelete.concat(user.id);
-        }
-      })
-      console.log(userIdToDelete);
-      await this.userService.deleteUser(userIdToDelete);
-      this.users = this.users.filter(user => user.id !== userIdToDelete);
-    } catch (e) {
-      console.log(e);
-    }
+  goToCreateUser(): void {
+    this.isCreatingUser = true;
   }
 
   cancelCreateUser(): void {
@@ -129,16 +153,7 @@ export class MonProfilComponent {
     this.isCreatingUser = false;
   }
 
-  submitForm(): void {
-    console.log("submitForm");
-    if(this.isCreatingUser) {
-      console.log(this.userName);
-      this.isCreatingUser = false;
-    }
-
-    this.showAlert = true;
-    setTimeout(() => this.showAlert = false, 4000); 
-  }
+    
 
 
   closeAlert() {
