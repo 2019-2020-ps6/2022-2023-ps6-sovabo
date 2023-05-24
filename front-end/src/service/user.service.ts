@@ -38,6 +38,17 @@ export class UserService {
     await this.httpClient.delete<void>(`${serverBack}users/${userId}`).toPromise();
   }
 
+  // Modifier un utilisateur
+  async updateUser(user: Partial<User>, userId : string): Promise<User> {
+    console.log("ça update")
+    const updatedUser = await this.httpClient.put<User>(`${serverBack}users/${userId}`, user).toPromise();
+    if (!updatedUser) {
+      throw new Error(`Failed to update user with id ${user.id}`);
+    }
+    return updatedUser;
+  }
+
+
 
 
 }
