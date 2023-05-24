@@ -9,8 +9,9 @@
   <div class="contenu-creation-quiz">
     <div class="conteneur-caracteristiques-quiz">
       <div class="caracteristiques-quiz">
-        <div class="image-quiz">
-          <img class="iconeImage" src="../../assets/Images/Logo_image.png">
+        <div id="image-quiz-id" class="image-quiz">
+          <label for="recup-fichier"><img class="iconeImage" src="../../assets/Images/Logo_image.png"></label>
+          <input id="recup-fichier" type="file" (change)="afficherFichier()" />
         </div>
         <div class="titre-quiz"><input type="text" placeholder="Titre du quiz…"/></div>
         <div class="categorie-quiz">

@@ -25,33 +25,6 @@ export class CreerQuizzComponent {
     this.reponses[index].push('');
   }
 
-  /*selectionnerBonneReponse(questionIndex: number, reponseIndex: number) {
-    // Réinitialiser les réponses
-    for (let i = 0; i < this.reponses.length; i++) {
-      for (let j = 0; j < this.reponses[i].length; j++) {
-        this.reponses[i][j] = '';
-      }
-    }
-
-    // Sélectionner la réponse cliquée comme la bonne réponse
-    this.reponses[questionIndex][reponseIndex] = 'correct';
-
-    console.log(this.reponses[questionIndex][reponseIndex] == 'correct');
-
-    // Réinitialiser les classes 'checked' des réponses
-    const reponsesElements = document.getElementsByClassName('reponse');
-    console.log(reponsesElements);
-    for(let i = 0; i < reponsesElements.length; i++) {
-      reponsesElements[i].classList.remove('checked');
-    }
-
-    for (let i = 0; i < reponsesElements.length; i++) {
-      if(reponsesElements[i].textContent === 'm') {
-        reponsesElements[i].classList.add('checked');
-      }
-    }
-  }*/
-
   selectionnerBonneReponse(questionIndex: number, reponseIndex: number) {
 
     //On détermine l'indice de la bonne réponse si on met toutes les réponses de toutes les questions dans une même liste
@@ -77,7 +50,7 @@ export class CreerQuizzComponent {
 
     //On détermine la longueur de la question à laquelle appartient la réponse sélectionnée
     let longueurQuestionBonneReponse = this.reponses[indiceQuestionBonneReponse].length;
-    
+
     const reponsesElements = document.getElementsByClassName('reponse');
     console.log(reponsesElements);
     for(let i = 0; i < longueurQuestionBonneReponse; i++) {
@@ -86,5 +59,32 @@ export class CreerQuizzComponent {
     reponsesElements[positionReponse].classList.add('checked');
   }
 
+  afficherFichier() {
+    const input = document.getElementById("recup-fichier") as HTMLInputElement;
+    const file = input.files?.[0];
+    const stockImage = document.getElementById("image-quiz-id") as HTMLDivElement;
+    const imageElement = document.createElement('img');
+    imageElement.style.height = "100%";
+    imageElement.style.width = "100%";
+    imageElement.style.objectFit = "contain";
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      imageElement.src = reader.result as string;
+    }
+    reader.readAsDataURL(file as Blob);
+
+    for(let i = 0; i < stockImage.children.length; i++) {
+      if(stockImage.children[i] != input) {
+        stockImage.children[i].remove();
+        i = 0;
+      }
+    }
+
+    stockImage.prepend(imageElement);
+    imageElement.addEventListener('click', function() {
+      input.click();
+    });
+  }
 
 }

@@ -59,6 +59,12 @@
   border-radius: 50%;
   height: 12vh;
   width: 12vh;
+  overflow: hidden;
+}
+
+.image-quiz input[type="file"] {
+  display: none;
+  opacity: 0%;
 }
 
 .iconeImage{
