@@ -2,12 +2,16 @@
   background-color: rgba(226, 226, 226, 0.359);
   border: 2px solid #ccc;
   border-radius: 50px;
+
   margin-top: 2%;
-  margin: auto;
+
+  margin-right: auto;
+  margin-left: auto;
   text-align: center;
   padding: 10px 3%;
-  width: auto;
-  height: 6.2em;
+  width: fit-content;
+
+  height: fit-content;
 }
 
 .svg {

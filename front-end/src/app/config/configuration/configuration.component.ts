@@ -10,57 +10,24 @@ import {Location} from '@angular/common';
 export class ConfigurationComponent {
   AttentionColorStatus: boolean = false;
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
-  constructor(private jeuxCouleursService: JeuxCouleursService,private location: Location) {}
-
-  lastPage(){
-    this.location.back();
-  }
+  constructor(private jeuxCouleursService: JeuxCouleursService) {}
 
   ngOnInit(): void {
     this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
-    this.changeContrast();
+
+    console.log("APPEL ONINIT CONFIG");
+    this.jeuxCouleursService.changeFont(document);
+  }
+
+  ngAfterViewInit(){
     if (this.jeuxCouleursService.isDefaultActive) {
       this.jeuxCouleursService.collectDefaultStyles();
     }
     else {
+      console.log("MODIFICATION DE LA FONT !!");
       this.jeuxCouleursService.changeFont(document);
     }
     this.jeuxCouleursService.changeFontSize(document);
   }
-
-
-  changeContrast(){
-    let tabContainer = document.querySelectorAll('[id=contrastUpContainer]');
-    let tabText = document.querySelectorAll('[id=contrastUpText]');
-
-    if(this.AttentionColorStatus){
-      if(tabContainer != null){
-        tabContainer.forEach(element => {
-          element.classList.add('contrastUpContainer');
-        });
-      }
-      if(tabText != null){
-        tabText.forEach(element => {
-          element.classList.add('contrastUpText');
-        });
-      }
-    }
-    else{
-      if(tabContainer != null){
-        tabContainer.forEach(element => {
-          element.classList.remove('contrastUpContainer');
-        });
-      }
-      if(tabText != null){
-        tabText.forEach(element => {
-          element.classList.remove('contrastUpText');
-        });
-      }
-    }
-  }
-
-
-
-
 
 }
