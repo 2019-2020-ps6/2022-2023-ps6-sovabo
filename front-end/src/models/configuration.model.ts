@@ -6,7 +6,7 @@ export class ConfigurationModel {
   sliderPosition: number;
   duration: string;
   contraste: boolean;
-  id: string;
+  id?: string;
 
   constructor(animateur: boolean, animateurImagePath: string, animation: boolean, animationSpeed: string, sliderPosition: number, duration: string, contraste: boolean, id: string) {
     this.animateur = animateur;
