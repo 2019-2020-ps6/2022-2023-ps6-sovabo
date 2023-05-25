@@ -37,7 +37,7 @@ export class JouerQuizzComponent implements OnInit {
   public endTime: number = 0;
   public firstTime: boolean = true;
   public delay: number = 5000;
-  public timeRemaining: number = 10;
+  public timeRemaining: number = 5;
   private timerId: any | undefined;
   private currentFont: string = this.jeuxCouleursService.getFontSelectedString();
   public contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
@@ -92,7 +92,6 @@ export class JouerQuizzComponent implements OnInit {
   }
 
   startTimer() {
-    this.timeRemaining = 500;
     this.timerId = setInterval(() => {
       if (this.timeRemaining > 0) {
         this.timeRemaining--;
