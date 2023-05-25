@@ -87,4 +87,31 @@ export class CreerQuizzComponent {
     });
   }
 
+  // Déclarez une variable pour stocker la couleur actuelle
+  currentColor: string = "rgba(46, 49, 54, 0.6)";
+  selectedIndex: number = 0;
+
+// Ajoutez une méthode pour gérer le clic et la mise à jour de la couleur
+  onClickChangeColor(i: number) {
+    console.log(i);
+    this.selectedIndex = i;
+    this.currentColor = this.getDifficultyColor(i);
+    console.log(this.currentColor);
+  }
+
+  getDifficultyColor(index: number): string {
+    switch (index) {
+      case(1) :
+        return '#00ff00'; // Vert
+      case(2) :
+        return '#99ff33'; // Vert clair
+      case(3) :
+        return'#ffff00'; // Jaune
+      case(4) :
+        return '#ff6600'; // Orange
+      default :
+        return '#ff0000'; // Rouge
+    }
+  }
+
 }

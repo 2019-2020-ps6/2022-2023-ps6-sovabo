@@ -9,9 +9,16 @@
   <div class="contenu-creation-quiz">
     <div class="conteneur-caracteristiques-quiz">
       <div class="caracteristiques-quiz">
-        <div id="image-quiz-id" class="image-quiz">
-          <label for="recup-fichier"><img class="iconeImage" src="../../assets/Images/Logo_image.png"></label>
-          <input id="recup-fichier" type="file" (change)="afficherFichier()" />
+        <div class="conteneur_image_difficulte">
+          <div id="image-quiz-id" class="image-quiz">
+            <label for="recup-fichier"><img class="iconeImage" src="../../assets/Images/Logo_image.png"></label>
+            <input id="recup-fichier" type="file" (change)="afficherFichier()" />
+          </div>
+          <div class="difficulty-bars">
+            <span class="note difficulte">DIFFICULTÉ</span>
+            <span class="difficulty-bar" *ngFor="let i of [1, 2, 3, 4, 5]" (click)="onClickChangeColor(i)" [style.background-color]="i <= selectedIndex ? currentColor : 'rgba(46, 49, 54, 0.6)'"></span>
+            <span class="note fontStyleCanChange">{{selectedIndex}}/5</span>
+          </div>
         </div>
         <div class="titre-quiz">
           <input type="text" placeholder="Titre du quiz…"/>
