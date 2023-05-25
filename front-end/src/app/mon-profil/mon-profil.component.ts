@@ -3,6 +3,7 @@ import {JeuxCouleursService} from 'src/service/jeux-couleurs.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {UserService} from "../../service/user.service";
 import {User} from "../../models/user.model";
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-mon-profil',
@@ -12,10 +13,15 @@ import {User} from "../../models/user.model";
 export class MonProfilComponent {
   public userName: string = '';
   public isCreatingUser: boolean = false;
+  public isModifyUser: boolean = true;
   showAlert: boolean = false;
+  selectedUser: User | undefined;
   public showPopUp: boolean = false;
+  alertMessage: string | null = null;
 
   showModal = false;
+
+  
 
   avatarImages = [
     "../../assets/Images/settings.png",
@@ -28,21 +34,31 @@ export class MonProfilComponent {
 
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
   public users: User[] = [];
- public image: HTMLImageElement | undefined;
+  public image: HTMLImageElement | undefined;
+  
+
+
+
 
   constructor(private jeuxCouleursService: JeuxCouleursService,
               private userService: UserService, private sanitizer: DomSanitizer) {
   }
 
   async ngOnInit(): Promise<void> {
-    this.showModal = false;
+    this.showModal = false;    
     try {
-      this.users = await this.userService.loadUsersFromServer();
+      const usersFromServer = await this.userService.loadUsersFromServer();
+      this.users = usersFromServer.map(user => ({...user, selected: false}));
     }
     catch (e) {
       console.log(e);
     }
+
+    this.userService.currentUser$.subscribe(user => {
+      // Faites quelque chose avec l'utilisateur courant
+    });
   }
+  
 
 
   get randomColor(): string {
@@ -80,6 +96,9 @@ export class MonProfilComponent {
   }
 
   getImageNameFromImagePath(imagePath: string): string {
+    if (!imagePath) {
+      return '';
+    }
     return imagePath.split('/').pop()?.split('.')[0] || '';
   }
   
@@ -94,12 +113,11 @@ export class MonProfilComponent {
 
     let imageName = this.getImageNameFromImagePath(this.selectedAvatar);
 
-    console.log("createUser on va le créer la");
     try {
       const newUser: Partial<User> = {
         name: this.userName,
         imagePath: imageName,
-        color: "#633719",
+        color: this.randomColor,
         configuration: {
           animateur: false,
           animateurImagePath: imageName,
@@ -120,11 +138,19 @@ export class MonProfilComponent {
     }
 
     this.isCreatingUser = false;
+    this.isModifyUser = true;
 
-    this.showAlert = true;
-    setTimeout(() => this.showAlert = false, 4000); 
+    this.showAlertNotif("L'utilisateur a bien été créé !");
   }
-
+  
+  showAlertNotif(message: string) { // Ajoutez le paramètre `message` ici
+    this.alertMessage = message; // Stocker le message dans la propriété `alertMessage`
+    this.showAlert = true;
+    setTimeout(() => {
+      this.showAlert = false;
+      this.alertMessage = null; // Effacez le message une fois l'alerte fermée
+    }, 4000);
+  }
   
   
 
@@ -138,15 +164,14 @@ export class MonProfilComponent {
 
   goToCreateUser(): void {
     this.isCreatingUser = true;
+    this.isModifyUser = false;
   }
 
   cancelCreateUser(): void {
+
     // Masquer le formulaire de création et afficher la liste d'utilisateurs
     this.isCreatingUser = false;
   }
-
-    
-
 
   closeAlert() {
     this.showAlert = false;
@@ -158,9 +183,52 @@ export class MonProfilComponent {
     this.showModal = false;
   }
   
+  modifyAvatar(img: string) {
+    if (this.selectedUser) {
+      // Prenez seulement le nom du fichier à partir de `img`, sans l'extension .png
+      const filename = img.split('/').pop()?.split('.png')[0];
+  
+      const updatedUser: Partial<User> = {
+        name: this.selectedUser.name,
+        imagePath: filename,  // Mettez à jour l'image du profil ici avec le nom du fichier sans l'extension .png
+        color: this.selectedUser.color,
+        configuration: { ...this.selectedUser.configuration },
+      };
+  
+      const userId = this.selectedUser.id || '';
+      this.userService.updateUser(updatedUser, userId);
+  
+      // Mettez à jour le chemin de l'image pour l'utilisateur sélectionné
+  
+      // Mettez à jour le chemin de l'image pour l'utilisateur dans la liste d'utilisateurs
+      this.users = this.users.map(user => user.id === this.selectedUser?.id ? { ...user, imagePath: filename } : user);
+      this.showModal = false;
 
-  openModal() {
-    console.log("openModal");
+    this.showAlertNotif("L'avatar a bien été modifié !");
+
+      
+    }
+  }
+
+  selectUser(user: User): void {
+    this.users.forEach(u => u.selected = false); // Désélectionner tous les autres utilisateurs.
+    user.selected = !user.selected; // Sélectionner l'utilisateur actuel.
+    this.selectedUser = user; // Garder une référence à l'utilisateur sélectionné pour la suppression.
+  }
+  
+  setUserCourant(user: User): void {
+    this.userService.setUserCourant(user);
+    console.log("setUserCourant");
+    console.log(this.userService.getUserCourant());
+    this.showAlertNotif("Tu as choisis cet utilisateur :  "+user.name+" !)");
+  }
+  
+
+
+  openModal(user: User | null) {
+    if(user != null){
+      this.selectedUser = user;
+    }
     this.showModal = true;
   }
   confirmDelete() {
