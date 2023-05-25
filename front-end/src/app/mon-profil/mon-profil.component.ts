@@ -10,6 +10,22 @@ import {User} from "../../models/user.model";
   styleUrls: ['./mon-profil.component.scss']
 })
 export class MonProfilComponent {
+  public userName: string = '';
+  public isCreatingUser: boolean = false;
+  showAlert: boolean = false;
+  public showPopUp: boolean = false;
+
+  showModal = false;
+
+  avatarImages = [
+    "../../assets/Images/settings.png",
+    "../../assets/Images/Animateur_image.png",
+    // Plus d'images...
+  ];
+
+  selectedAvatar = "../../assets/Images/Animateur_image.png";
+
+
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
   public users: User[] = [];
  public image: HTMLImageElement | undefined;
@@ -19,6 +35,7 @@ export class MonProfilComponent {
   }
 
   async ngOnInit(): Promise<void> {
+    this.showModal = false;
     try {
       this.users = await this.userService.loadUsersFromServer();
     }
@@ -27,14 +44,6 @@ export class MonProfilComponent {
     }
   }
 
-  ngAfterViewInit(): void {
-    this.adjustCardBodyHeight();
-    window.addEventListener('resize', () => this.adjustCardBodyHeight());
-  }
-
-  ngOnDestroy(): void {
-    window.removeEventListener('resize', () => this.adjustCardBodyHeight());
-  }
 
   get randomColor(): string {
     let color = '#';
@@ -59,7 +68,21 @@ export class MonProfilComponent {
       }
       return user;
     });
+  
+    const updatedUser: Partial<User> = {
+      name: user.name,
+      imagePath: user.imagePath,
+      color: user.color,
+      configuration: { ...user.configuration },
+    };
+    const userId = user.id || ''
+    this.userService.updateUser(updatedUser,userId );
   }
+
+  getImageNameFromImagePath(imagePath: string): string {
+    return imagePath.split('/').pop()?.split('.')[0] || '';
+  }
+  
 
   getImageFromImageName(imageName: string): string {
     return `../../assets/Images/${imageName}.png`;
@@ -67,52 +90,85 @@ export class MonProfilComponent {
 
 
   async createUser(): Promise<void> {
+    this.isCreatingUser = true;
+
+    let imageName = this.getImageNameFromImagePath(this.selectedAvatar);
+
+    console.log("createUser on va le créer la");
     try {
       const newUser: Partial<User> = {
-        name: "wola ca marche",
-        imagePath: "Animateur_image",
+        name: this.userName,
+        imagePath: imageName,
         color: "#633719",
         configuration: {
           animateur: false,
-          animateurImagePath: "/images/animateur.jpg",
+          animateurImagePath: imageName,
           animation: false,
           animationSpeed: "normal",
           sliderPosition: 0,
           duration: "00:00:00",
           contraste: false,
-          id: ""
         },
-        id: ""
       };
-      console.log(newUser.id);
+
       const user = await this.userService.createUser(newUser);
       this.users.push(user);
+      console.log("Il est créé");
+
     } catch (e) {
       console.log(e);
     }
+
+    this.isCreatingUser = false;
+
+    this.showAlert = true;
+    setTimeout(() => this.showAlert = false, 4000); 
   }
+
+  
+  
 
   async deleteUser(): Promise<void> {
     try {
-      const userIdToDelete = "" ;
-      this.users.forEach(user => {
-        if (user.name === "wola ca marche") {
-          userIdToDelete.concat(user.id);
-        }
-      })
-      console.log(userIdToDelete);
-      await this.userService.deleteUser(userIdToDelete);
-      this.users = this.users.filter(user => user.id !== userIdToDelete);
+     
     } catch (e) {
       console.log(e);
     }
   }
 
-  adjustCardBodyHeight(): void {
-    const content_wrapper = document.querySelector('.content-wrapper');
-    const header = document.querySelector('.monProfil');
-    if (content_wrapper && header) {
-      content_wrapper.setAttribute('style', `height: ${window.innerHeight - header.clientHeight}px`);
-    }
+  goToCreateUser(): void {
+    this.isCreatingUser = true;
+  }
+
+  cancelCreateUser(): void {
+    // Masquer le formulaire de création et afficher la liste d'utilisateurs
+    this.isCreatingUser = false;
+  }
+
+    
+
+
+  closeAlert() {
+    this.showAlert = false;
+  }
+
+  selectAvatar(img: string) {
+    console.log("selectAvatar");
+    this.selectedAvatar = img;
+    this.showModal = false;
+  }
+  
+
+  openModal() {
+    console.log("openModal");
+    this.showModal = true;
+  }
+  confirmDelete() {
+    //this.showModal = false;
+  }
+
+// Méthode pour fermer la modal
+  closeModal() {
+    this.showModal = false;
   }
 }

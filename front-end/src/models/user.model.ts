@@ -1,7 +1,7 @@
 import { ConfigurationModel } from './configuration.model';
 
 export class User {
-  id: string;
+  id?: string;
   name: string;
   imagePath: string;
   color: string;
