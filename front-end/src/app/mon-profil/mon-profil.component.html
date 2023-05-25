@@ -18,11 +18,17 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-3 gutters-sm justify-content-center">
         <ng-container *ngIf="!isCreatingUser">
           <div class="col mb-3 listUser" *ngFor="let user of this.users">
-            <div class="card">
+            <div class="card" (click)="selectUser(user)">
+              <svg *ngIf="user.selected" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm2.354-11.646-3.707 3.707-1.646-1.647a.5.5 0 0 0-.708.708l2 2a.5.5 0 0 0 .708 0l4-4a.5.5 0 1 0-.707-.708z"/>
+              </svg>
               <div class="backGround" [ngStyle]="{'background-color': user.color}"></div>
               <div class="card-body text-center">
-                <img [src]="getImageFromImageName(user.imagePath)" style="width:150px;height:160px;margin-top:-75px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3 avatarUser" (click)="openModal()">
-                <div class="user-title" [ngClass]="{'editing': user.editing}">
+                <img [src]="getImageFromImageName(user.imagePath ?? '')" style="width:150px;height:160px;margin-top:-75px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3 avatarUser" (click)="openModal(user)">
+
+
+                <div class="user-title" [ngClass]="{'editing': user.editing, 'selected': user.selected}">
+                 
                   <h5 class="user-name" *ngIf="!user.editing">{{ user.name }}</h5>
                   <input type="text" [(ngModel)]="user.name" *ngIf="user.editing">
                   <button class="edit-button" (click)="toggleEditUserName(user)">
@@ -30,7 +36,7 @@
                   </button>
                 </div>
                 <div class="card-footer">
-                  <button *ngIf="!user.editing" class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button">Choisir</button>
+                  <button *ngIf="!user.editing" class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button" (click)="setUserCourant(user)">Choisir</button>
                   <button *ngIf="user.editing" class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button" (click)="toggleEditUserName(user)">Valider</button>
                 </div>
               </div>
@@ -42,7 +48,7 @@
             <div class="card">
               <div class="backGround" [ngStyle]="{'background-color': '#633719'}"></div>
               <div class="card-body text-center">
-                <button type="button" class="btn btn-link p-0" (click)="openModal()">
+                <button type="button" class="btn btn-link p-0" (click)="openModal(null)">
                   <img [src]="selectedAvatar" style="width:150px;height:160px;margin-top:-75px" alt="User" class="img-fluid rounded-circle mb-3">
                 </button>
                 <div class="user-title" [ngClass]="{'editing': isCreatingUser}">
@@ -50,13 +56,12 @@
                   <input type="text" [(ngModel)]="userName" *ngIf="isCreatingUser" name="userName" required>
                 </div>
                 <div class="card-footer">
-                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button">Choisir</button>
+                  <button class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button" (click)="cancelCreateUser()">Annuler création</button>
                   <button type="submit" class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir">Valider</button>
                 </div>
               </div>
             </div>
           </form>
-          <button class="btnGestion" id="btnCancelCreateUser" type="button" (click)="cancelCreateUser()">ANNULER CREATION</button>
         </div>
       </div>
     </div>
@@ -67,12 +72,22 @@
 <!-- Pop-up pour le choix de l'avatar -->
 
 <div class="popup" [class.show]="showModal">
-  <div class="popup-content">
+  <div class="popup-content" *ngIf="isCreatingUser">
     <button type="button" class="close-button" (click)="closeModal()">&times;</button>
     <h3>Choisis ton animateur !</h3>
     <div class="row">
       <div class="col-4" *ngFor="let img of avatarImages">
         <img [src]="img" class="avatar-image img-thumbnail" (click)="selectAvatar(img)">
+      </div>
+    </div>
+  </div>
+
+  <div class="popup-content" *ngIf="isModifyUser">
+    <button type="button" class="close-button" (click)="closeModal()">&times;</button>
+    <h3>Choisis ton animateur !</h3>
+    <div class="row">
+      <div class="col-4" *ngFor="let img of avatarImages">
+        <img [src]="img" class="avatar-image img-thumbnail" (click)="modifyAvatar(img)">
       </div>
     </div>
   </div>

@@ -11,6 +11,8 @@ import {User} from "../models/user.model";
 })
 
 export class UserService {
+  private currentUserSubject = new BehaviorSubject<User | null>(null);
+currentUser$ = this.currentUserSubject.asObservable();
   private users: User[] = [];
   constructor(private httpClient: HttpClient) {
     this.loadUsersFromServer();
@@ -47,6 +49,15 @@ export class UserService {
     }
     return updatedUser;
   }
+
+  setUserCourant(user: User): void {
+    this.currentUserSubject.next(user);
+  }
+
+  getUserCourant(): User | null {
+    return this.currentUserSubject.getValue();
+  }
+  
 
 
 

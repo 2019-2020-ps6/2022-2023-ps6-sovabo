@@ -3,10 +3,11 @@ import { ConfigurationModel } from './configuration.model';
 export class User {
   id?: string;
   name: string;
-  imagePath: string;
+  imagePath?: string;
   color: string;
   configuration: ConfigurationModel;
   editing?: boolean;
+  selected?: boolean;
 
   constructor(id: string, name: string, imagePath: string, color: string, configuration: ConfigurationModel) {
     this.id = id;
