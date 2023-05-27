@@ -44,14 +44,20 @@ export class MonProfilComponent {
 
 
   constructor(private jeuxCouleursService: JeuxCouleursService,
-              public userService: UserService, private sanitizer: DomSanitizer) {
+              public userService: UserService) {
   }
 
   async ngOnInit(): Promise<void> {
     this.showModal = false;
     try {
+
       const usersFromServer = await this.userService.loadUsersFromServer();
-      this.users = usersFromServer.map(user => ({...user, selected: false}));
+      this.users = usersFromServer.map(user => ({...user}));
+      for (let user of this.users) {
+        if (user.selected){
+          await this.setUserCourant(user, "onInit");
+        }
+      }
     }
     catch (e) {
       // console.log(e);
@@ -80,9 +86,9 @@ export class MonProfilComponent {
     user.editing = !user.editing;
     this.isModifyingName = user.editing;
     if (!user.editing) {
-      if (await this.userNameAlreadyExists(user.name)) {
+      if (await this.userNameAlreadyExists(user.name, user)) {
         this.showAlertNotif("Ce nom est déjà utilisé !");
-        this.toggleEditUserName(user);
+        await this.toggleEditUserName(user);
         return
       }
       this.showAlertNotif("Votre nom a bien été modifié");
@@ -206,10 +212,20 @@ export class MonProfilComponent {
     this.showModal = false;
   }
 
+  // @ts-ignore
   modifyAvatar(img: string) {
     if (this.selectedUser) {
+      let filename: string = "";
       // Prenez seulement le nom du fichier à partir de `img`, sans l'extension .png
-      const filename = img.split('/').pop()?.split('.png')[0];
+      console.log(img);
+      if (img.includes('pngegg')) {
+        filename = 'pngegg.png';
+      }
+      filename = img.split('/').toString();
+      const parts = img.split('/');
+      filename = parts[parts.length - 2] + '/' + parts[parts.length - 1];
+      console.log(filename);
+
 
       const updatedUser: Partial<User> = {
         name: this.selectedUser.name,
@@ -219,7 +235,7 @@ export class MonProfilComponent {
       };
 
       const userId = this.selectedUser.id || '';
-      this.userService.updateUser(updatedUser, userId);
+      this.userService.updateUser(updatedUser, userId).then(r => console.log(r));
 
 
       // Mettez à jour le chemin de l'image pour l'utilisateur dans la liste d'utilisateurs
@@ -232,12 +248,12 @@ export class MonProfilComponent {
     }
   }
 
-  async setUserCourant(user: User): Promise<void> {
-    if (this.userService.getUserCourant()?.id === user.id) {
+  async setUserCourant(user: User, verif?: String): Promise<void> {
+    if (this.getUserCourant()?.id === user.id && verif !== "onInit") {
       this.userService.setUserCourant(null);
       await this.updateUserSelectionStatus(user, false);
       this.showAlertNotif("Le profil de " + user.name + " a été désélectionné !");
-    } else {
+    } else if (verif !== "onInit"){
       console.log("Je suis dans le else");
       for (let u of this.users) {
         console.log("Je parcours");
@@ -253,7 +269,7 @@ export class MonProfilComponent {
       this.showAlertNotif("Le profil de " + user.name + " a été sélectionné !");
     }
   }
-  
+
   async updateUserSelectionStatus(user: User, selected: boolean): Promise<void> {
     const updatedUser: Partial<User> = {
       ...user,
@@ -266,14 +282,14 @@ export class MonProfilComponent {
       console.error(`Failed to update user selection status: ${error}`);
     }
   }
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
 
 
   async deleteUserFromServer(user: User): Promise<void> {
@@ -315,13 +331,23 @@ export class MonProfilComponent {
   }
 
   // @ts-ignore
-  private async userNameAlreadyExists(name: string) {
-    let users = await this.userService.loadUsersFromServer();
-    for (let user of users) {
-      if (user.name === name) { // Si le nom existe déjà
+  private async userNameAlreadyExists(name: string, user?: User) {
+    // If an optional user parameter is provided, exclude it from the search
+    const users = await this.userService.loadUsersFromServer();
+    for (const u of users) {
+      if (u.name === name && u.id !== user?.id) {
         return true;
       }
     }
     return false;
+  }
+
+  cancelEditUserName(user: User) {
+    this.isModifyingName = false;
+    user.editing = false;
+  }
+
+  getUserCourant() {
+    return this.userService.getUserCourant();
   }
 }
