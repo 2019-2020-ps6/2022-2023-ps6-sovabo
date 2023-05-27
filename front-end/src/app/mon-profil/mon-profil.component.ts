@@ -50,8 +50,14 @@ export class MonProfilComponent {
   async ngOnInit(): Promise<void> {
     this.showModal = false;
     try {
+
       const usersFromServer = await this.userService.loadUsersFromServer();
-      this.users = usersFromServer.map(user => ({...user, selected: false}));
+      this.users = usersFromServer.map(user => ({...user}));
+      for (let user of this.users) {
+        if (user.selected){
+          await this.setUserCourant(user, "onInit");
+        }
+      }
     }
     catch (e) {
       // console.log(e);
@@ -242,12 +248,12 @@ export class MonProfilComponent {
     }
   }
 
-  async setUserCourant(user: User): Promise<void> {
-    if (this.userService.getUserCourant()?.id === user.id) {
+  async setUserCourant(user: User, verif?: String): Promise<void> {
+    if (this.getUserCourant()?.id === user.id && verif !== "onInit") {
       this.userService.setUserCourant(null);
       await this.updateUserSelectionStatus(user, false);
       this.showAlertNotif("Le profil de " + user.name + " a été désélectionné !");
-    } else {
+    } else if (verif !== "onInit"){
       console.log("Je suis dans le else");
       for (let u of this.users) {
         console.log("Je parcours");
@@ -263,7 +269,7 @@ export class MonProfilComponent {
       this.showAlertNotif("Le profil de " + user.name + " a été sélectionné !");
     }
   }
-  
+
   async updateUserSelectionStatus(user: User, selected: boolean): Promise<void> {
     const updatedUser: Partial<User> = {
       ...user,
@@ -276,14 +282,14 @@ export class MonProfilComponent {
       console.error(`Failed to update user selection status: ${error}`);
     }
   }
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
 
 
   async deleteUserFromServer(user: User): Promise<void> {
@@ -339,5 +345,9 @@ export class MonProfilComponent {
   cancelEditUserName(user: User) {
     this.isModifyingName = false;
     user.editing = false;
+  }
+
+  getUserCourant() {
+    return this.userService.getUserCourant();
   }
 }
