@@ -9,6 +9,7 @@
       <change beforePath="$PROJECT_DIR$/front-end/src/app/quizz/jouer-quizz/jouer-quizz.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/quizz/jouer-quizz/jouer-quizz.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/src/app/quizz/jouer-quizz/jouer-quizz.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/quizz/jouer-quizz/jouer-quizz.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/src/app/quizz/jouer-quizz/jouer-quizz.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/quizz/jouer-quizz/jouer-quizz.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/styles.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,6 +118,7 @@
       <workItem from="1684693751575" duration="7936000" />
       <workItem from="1684736167640" duration="13946000" />
       <workItem from="1684786512665" duration="2191000" />
+      <workItem from="1685182184274" duration="2797000" />
     </task>
     <servers />
   </component>
