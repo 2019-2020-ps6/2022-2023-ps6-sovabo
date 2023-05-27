@@ -20,6 +20,7 @@ export class MonProfilComponent {
   alertMessage: string | null = null;
   deleteMode: boolean = false;
   showModal = false;
+  public alertState: boolean = true;
 
 
 
@@ -80,6 +81,7 @@ export class MonProfilComponent {
 
   async toggleEditUserName(user: User): Promise<void> {
     if (user.name === "") {
+      this.alertState = false;
       this.showAlertNotif("Vous devez rentrer un nom");
       return;
     }
@@ -87,10 +89,12 @@ export class MonProfilComponent {
     this.isModifyingName = user.editing;
     if (!user.editing) {
       if (await this.userNameAlreadyExists(user.name, user)) {
+        this.alertState = false;
         this.showAlertNotif("Ce nom est déjà utilisé !");
         await this.toggleEditUserName(user);
         return
       }
+      this.alertState = true;
       this.showAlertNotif("Votre nom a bien été modifié");
       this.saveUserName(user);
     }
@@ -138,6 +142,7 @@ export class MonProfilComponent {
     this.isCreatingUser = true;
     let imageName = this.getImageNameFromImagePath(this.selectedAvatar);
     if (this.userName == ""){
+      this.alertState = false;
       this.showAlertNotif("Vous devez rentrer un nom !");
       return;
     }
@@ -167,10 +172,11 @@ export class MonProfilComponent {
       }
       this.isCreatingUser = false;
       this.isModifyAvatar = true;
-
+      this.alertState = true;
       this.showAlertNotif("L'utilisateur a bien été créé !");
     }
     else {
+      this.alertState = false;
       this.showAlertNotif("Ce nom est déjà utilisé !");
     }
 
@@ -241,7 +247,7 @@ export class MonProfilComponent {
       // Mettez à jour le chemin de l'image pour l'utilisateur dans la liste d'utilisateurs
       this.users = this.users.map(user => user.id === this.selectedUser?.id ? { ...user, imagePath: filename } : user);
       this.showModal = false;
-
+      this.alertState = true;
     this.showAlertNotif("L'avatar a bien été modifié !");
 
 
@@ -252,6 +258,7 @@ export class MonProfilComponent {
     if (this.getUserCourant()?.id === user.id && verif !== "onInit") {
       this.userService.setUserCourant(null);
       await this.updateUserSelectionStatus(user, false);
+      this.alertState = true;
       this.showAlertNotif("Le profil de " + user.name + " a été désélectionné !");
     } else if (verif !== "onInit"){
       console.log("Je suis dans le else");
@@ -266,6 +273,7 @@ export class MonProfilComponent {
       }
       this.userService.setUserCourant(user);
       await this.updateUserSelectionStatus(user, true);
+      this.alertState = true;
       this.showAlertNotif("Le profil de " + user.name + " a été sélectionné !");
     }
   }
@@ -296,6 +304,7 @@ export class MonProfilComponent {
     try {
       await this.userService.deleteUser(user.id || '');
       this.users = this.users.filter(u => u.id !== user.id);
+      this.alertState = true;
       this.showAlertNotif("L'utilisateur a bien été supprimé !");
     } catch (e) {
       //console.log(e);
@@ -326,6 +335,7 @@ export class MonProfilComponent {
       if (this.isModifyingName){
         modeAcitvated = "de modification !";
       }
+      this.alertState = false;
       this.showAlertNotif("Vous ne pouvez pas supprimer un utilisateur en cours " + modeAcitvated);
     }
   }
