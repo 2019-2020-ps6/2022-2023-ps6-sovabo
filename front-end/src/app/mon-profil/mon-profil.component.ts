@@ -18,10 +18,10 @@ export class MonProfilComponent {
   selectedUser: User | undefined;
   public showPopUp: boolean = false;
   alertMessage: string | null = null;
-
+  deleteMode: boolean = false;
   showModal = false;
 
-  
+
 
   avatarImages = [
     "../../assets/Images/settings.png",
@@ -35,30 +35,30 @@ export class MonProfilComponent {
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
   public users: User[] = [];
   public image: HTMLImageElement | undefined;
-  
+
 
 
 
 
   constructor(private jeuxCouleursService: JeuxCouleursService,
-              private userService: UserService, private sanitizer: DomSanitizer) {
+              public userService: UserService, private sanitizer: DomSanitizer) {
   }
 
   async ngOnInit(): Promise<void> {
-    this.showModal = false;    
+    this.showModal = false;
     try {
       const usersFromServer = await this.userService.loadUsersFromServer();
       this.users = usersFromServer.map(user => ({...user, selected: false}));
     }
     catch (e) {
-      console.log(e);
+      // console.log(e);
     }
 
     this.userService.currentUser$.subscribe(user => {
       // Faites quelque chose avec l'utilisateur courant
     });
   }
-  
+
 
 
   get randomColor(): string {
@@ -72,7 +72,9 @@ export class MonProfilComponent {
   toggleEditUserName(user: User): void {
     user.editing = !user.editing;
     if (!user.editing) {
+      this.showAlertNotif("Votre nom a bien été modifié");
       this.saveUserName(user);
+
     }
   }
 
@@ -80,11 +82,11 @@ export class MonProfilComponent {
     this.users.map(u => {
       if (u.id === user.id) {
         user.name = u.name;
-        console.log(user.name);
+        // console.log(user.name);
       }
       return user;
     });
-  
+
     const updatedUser: Partial<User> = {
       name: user.name,
       imagePath: user.imagePath,
@@ -101,7 +103,7 @@ export class MonProfilComponent {
     }
     return imagePath.split('/').pop()?.split('.')[0] || '';
   }
-  
+
 
   getImageFromImageName(imageName: string): string {
     return `../../assets/Images/${imageName}.png`;
@@ -131,10 +133,10 @@ export class MonProfilComponent {
 
       const user = await this.userService.createUser(newUser);
       this.users.push(user);
-      console.log("Il est créé");
+      // console.log("Il est créé");
 
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
 
     this.isCreatingUser = false;
@@ -142,7 +144,7 @@ export class MonProfilComponent {
 
     this.showAlertNotif("L'utilisateur a bien été créé !");
   }
-  
+
   showAlertNotif(message: string) { // Ajoutez le paramètre `message` ici
     this.alertMessage = message; // Stocker le message dans la propriété `alertMessage`
     this.showAlert = true;
@@ -151,14 +153,14 @@ export class MonProfilComponent {
       this.alertMessage = null; // Effacez le message une fois l'alerte fermée
     }, 4000);
   }
-  
-  
+
+
 
   async deleteUser(): Promise<void> {
     try {
-     
+
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
   }
 
@@ -178,35 +180,35 @@ export class MonProfilComponent {
   }
 
   selectAvatar(img: string) {
-    console.log("selectAvatar");
+    // console.log("selectAvatar");
     this.selectedAvatar = img;
     this.showModal = false;
   }
-  
+
   modifyAvatar(img: string) {
     if (this.selectedUser) {
       // Prenez seulement le nom du fichier à partir de `img`, sans l'extension .png
       const filename = img.split('/').pop()?.split('.png')[0];
-  
+
       const updatedUser: Partial<User> = {
         name: this.selectedUser.name,
         imagePath: filename,  // Mettez à jour l'image du profil ici avec le nom du fichier sans l'extension .png
         color: this.selectedUser.color,
         configuration: { ...this.selectedUser.configuration },
       };
-  
+
       const userId = this.selectedUser.id || '';
       this.userService.updateUser(updatedUser, userId);
-  
+
       // Mettez à jour le chemin de l'image pour l'utilisateur sélectionné
-  
+
       // Mettez à jour le chemin de l'image pour l'utilisateur dans la liste d'utilisateurs
       this.users = this.users.map(user => user.id === this.selectedUser?.id ? { ...user, imagePath: filename } : user);
       this.showModal = false;
 
     this.showAlertNotif("L'avatar a bien été modifié !");
 
-      
+
     }
   }
 
@@ -215,15 +217,24 @@ export class MonProfilComponent {
     user.selected = !user.selected; // Sélectionner l'utilisateur actuel.
     this.selectedUser = user; // Garder une référence à l'utilisateur sélectionné pour la suppression.
   }
-  
+
   setUserCourant(user: User): void {
     this.userService.setUserCourant(user);
-    console.log("setUserCourant");
-    console.log(this.userService.getUserCourant());
-    this.showAlertNotif("Tu as choisis cet utilisateur :  "+user.name+" !)");
+    // console.log("setUserCourant");
+    // console.log(this.userService.getUserCourant());
+    this.showAlertNotif("Le profil de " + user.name + " a été sélectionné !");
   }
-  
 
+  async deleteUserFromServer(user: User): Promise<void> {
+    try {
+      await this.userService.deleteUser(user.id || '');
+      this.users = this.users.filter(u => u.id !== user.id);
+      this.deleteMode = false;
+      this.showAlertNotif("L'utilisateur a bien été supprimé !");
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   openModal(user: User | null) {
     if(user != null){
@@ -238,5 +249,10 @@ export class MonProfilComponent {
 // Méthode pour fermer la modal
   closeModal() {
     this.showModal = false;
+  }
+
+  toggleDeleteMode() {
+    console.log("toggleDeleteMode");
+    this.deleteMode = !this.deleteMode;
   }
 }
