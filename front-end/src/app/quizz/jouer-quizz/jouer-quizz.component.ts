@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuizService } from '../../../service/quizz.service';
 import { Quiz } from '../../../models/quizz.model';
@@ -10,6 +10,7 @@ import { StatQuizz } from 'src/models/quizz.stat.model';
 import { AnimateurService } from "../../../service/animateur.service";
 import { AnimationsService } from "../../../service/animations.service";
 import { JeuxCouleursService } from "../../../service/jeux-couleurs.service";
+import {parse} from "@fortawesome/fontawesome-svg-core";
 
 
 @Component({
@@ -18,6 +19,7 @@ import { JeuxCouleursService } from "../../../service/jeux-couleurs.service";
   styleUrls: ['./jouer-quizz.component.scss']
 })
 export class JouerQuizzComponent implements OnInit {
+
   public quiz!: Quiz;
   public questionCorrectIndex: number = 0;
   public isLastQuestion: boolean = false;
@@ -35,7 +37,7 @@ export class JouerQuizzComponent implements OnInit {
   public endTime: number = 0;
   public firstTime: boolean = true;
   public delay: number = 5000;
-  public timeRemaining: number = 10;
+  public timeRemaining: number = 5;
   private timerId: any | undefined;
   private currentFont: string = this.jeuxCouleursService.getFontSelectedString();
   public contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
@@ -60,7 +62,6 @@ export class JouerQuizzComponent implements OnInit {
     console.error('Erreur lors du chargement des questions', error);
     return;
   }
-  console.log(this.quiz.questions);
     this.currentQuestion = this.quiz.questions[this.currentQuestionIndex];
     this.questionCorrectIndex = this.getCorrectAnswerIndex(this.currentQuestion);
     this.animations = this.animationService.isAnimated;
@@ -68,6 +69,9 @@ export class JouerQuizzComponent implements OnInit {
     this.valueTime = [];
     this.animationDuration = this.animationService.duration;
     this.startTimer();
+  }
+
+  ngAfterViewInit(){
     if (this.jeuxCouleursService.isDefaultActive) {
       this.jeuxCouleursService.collectDefaultStyles();
     } else {
@@ -88,7 +92,6 @@ export class JouerQuizzComponent implements OnInit {
   }
 
   startTimer() {
-    this.timeRemaining = 5;
     this.timerId = setInterval(() => {
       if (this.timeRemaining > 0) {
         this.timeRemaining--;
@@ -149,7 +152,6 @@ export class JouerQuizzComponent implements OnInit {
         this.goToNextQuestion();
       }, 5000);
     }
-
     this.isAnswerValidated = true; // Marquer la réponse comme validée
   }
 
@@ -173,14 +175,12 @@ export class JouerQuizzComponent implements OnInit {
       this.isLastQuestion = true;
     }
     this.isAnswerValidated = false; // Réinitialiser le statut de validation
-
     // Vérifier si la réponse a été validée avant de passer à la question suivante
     if (!this.isAnswerValidated) {
       this.startTimer();
     }
+
   }
-
-
 
   getCorrectAnswerIndex(question: Question): number {
     for (let i = 0; i < question.answers.length; i++) {
@@ -201,6 +201,42 @@ export class JouerQuizzComponent implements OnInit {
     const moyenne = total / nbResponses;
     return parseFloat(moyenne.toFixed(2));
   }
+
+  getQuestion(){
+    return this.decalageQuestion();
+  }
+
+  decalageQuestion(): string{
+    let questionContainer = document.querySelector('.question-bubble');
+    if(questionContainer){
+      let htmlLocation = document.querySelector("#question_sentence");
+      if(htmlLocation){
+        let initData = "Q"+(this.currentQuestionIndex+1)+" : " + this.currentQuestion.label;
+
+        let largeur = parseFloat(getComputedStyle(questionContainer).width);
+        let largeurTxt = parseFloat(getComputedStyle(htmlLocation).width);
+        console.log(largeur);
+        console.log(largeurTxt);
+
+        if(largeur>1200){
+          let split = initData.split(" ");
+
+          //CONSTRUCTION DE LA NOUVELLE QUESTION
+          let indexToCut = Math.round(split.length/2);
+          let finalHTML = ""
+          let i=0;
+
+          for(i;i<indexToCut;i++){finalHTML += split[i]+" ";}
+          finalHTML +="<br>";
+          for(i;i<split.length;i++){finalHTML += split[i]+" ";}
+          initData = finalHTML;
+        }
+        htmlLocation.innerHTML = initData;
+      }
+    }
+    return "";
+  }
+
 
   getAnimateur() {
     return this.animateurService.getAnimateur();

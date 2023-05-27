@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "node-js": "^1.0.0",
     "react-angular": "^0.4.0",
     "react-icons": "^4.8.0"
   },

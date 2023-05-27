@@ -11,6 +11,8 @@ import {User} from "../models/user.model";
 })
 
 export class UserService {
+  private currentUserSubject = new BehaviorSubject<User | null>(null);
+currentUser$ = this.currentUserSubject.asObservable();
   private users: User[] = [];
   constructor(private httpClient: HttpClient) {
     this.loadUsersFromServer();
@@ -37,6 +39,26 @@ export class UserService {
   async deleteUser(userId: string): Promise<void> {
     await this.httpClient.delete<void>(`${serverBack}users/${userId}`).toPromise();
   }
+
+  // Modifier un utilisateur
+  async updateUser(user: Partial<User>, userId : string): Promise<User> {
+    console.log("ça update")
+    const updatedUser = await this.httpClient.put<User>(`${serverBack}users/${userId}`, user).toPromise();
+    if (!updatedUser) {
+      throw new Error(`Failed to update user with id ${user.id}`);
+    }
+    return updatedUser;
+  }
+
+  setUserCourant(user: any): void {
+    this.currentUserSubject.next(user);
+  }
+
+  getUserCourant(): User | null {
+    return this.currentUserSubject.getValue();
+  }
+
+
 
 
 
