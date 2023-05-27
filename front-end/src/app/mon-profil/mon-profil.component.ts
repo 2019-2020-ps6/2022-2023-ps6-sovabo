@@ -13,7 +13,7 @@ import { BehaviorSubject } from 'rxjs';
 export class MonProfilComponent {
   public userName: string = '';
   public isCreatingUser: boolean = false;
-  public isModifyUser: boolean = true;
+  public isModifyAvatar: boolean = true;
   showAlert: boolean = false;
   selectedUser: User | undefined;
   public showPopUp: boolean = false;
@@ -24,17 +24,20 @@ export class MonProfilComponent {
 
 
   avatarImages = [
-    "../../assets/Images/settings.png",
-    "../../assets/Images/Animateur_image.png",
+    "../../assets/Images/Animateurs/bear/bear-emoji-normal.png.png",
+    "../../assets/Images/Animateurs/cat/cat-emoji-normal.png",
+    "../../assets/Images/Animateurs/black male/male-character-normal.png",
+    "../../assets/Images/Animateurs/white girl/girl-character-normal.png",
     // Plus d'images...
   ];
 
-  selectedAvatar = "../../assets/Images/Animateur_image.png";
+  selectedAvatar = "../../assets/Images/Animateurs/pngegg.png";
 
 
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
   public users: User[] = [];
   public image: HTMLImageElement | undefined;
+  private isModifyingName: Boolean = false;
 
 
 
@@ -69,12 +72,21 @@ export class MonProfilComponent {
     return color;
   }
 
-  toggleEditUserName(user: User): void {
+  async toggleEditUserName(user: User): Promise<void> {
+    if (user.name === "") {
+      this.showAlertNotif("Vous devez rentrer un nom");
+      return;
+    }
     user.editing = !user.editing;
+    this.isModifyingName = user.editing;
     if (!user.editing) {
+      if (await this.userNameAlreadyExists(user.name)) {
+        this.showAlertNotif("Ce nom est déjà utilisé !");
+        this.toggleEditUserName(user);
+        return
+      }
       this.showAlertNotif("Votre nom a bien été modifié");
       this.saveUserName(user);
-
     }
   }
 
@@ -101,48 +113,62 @@ export class MonProfilComponent {
     if (!imagePath) {
       return '';
     }
-    return imagePath.split('/').pop()?.split('.')[0] || '';
+    if (imagePath.includes('pngegg')) {
+      return 'pngegg.png';
+    }
+    //keep the last 2 parts of the path
+    const parts = imagePath.split('/');
+    return parts[parts.length - 2] + '/' + parts[parts.length - 1];
+
   }
 
 
   getImageFromImageName(imageName: string): string {
-    return `../../assets/Images/${imageName}.png`;
+    return `../../assets/Images/Animateurs/${imageName}`;
   }
 
 
   async createUser(): Promise<void> {
     this.isCreatingUser = true;
-
     let imageName = this.getImageNameFromImagePath(this.selectedAvatar);
-
-    try {
-      const newUser: Partial<User> = {
-        name: this.userName,
-        imagePath: imageName,
-        color: this.randomColor,
-        configuration: {
-          animateur: false,
-          animateurImagePath: imageName,
-          animation: false,
-          animationSpeed: "normal",
-          sliderPosition: 0,
-          duration: "00:00:00",
-          contraste: false,
-        },
-      };
-
-      const user = await this.userService.createUser(newUser);
-      this.users.push(user);
-      // console.log("Il est créé");
-
-    } catch (e) {
-      // console.log(e);
+    if (this.userName == ""){
+      this.showAlertNotif("Vous devez rentrer un nom !");
+      return;
     }
 
-    this.isCreatingUser = false;
-    this.isModifyUser = true;
+    if (!await this.userNameAlreadyExists(this.userName)) {
+      try {
+        const newUser: Partial<User> = {
+          name: this.userName,
+          imagePath: imageName,
+          color: this.randomColor,
+          configuration: {
+            animateur: false,
+            animateurImagePath: imageName,
+            animation: false,
+            animationSpeed: "normal",
+            sliderPosition: 0,
+            duration: "00:00:00",
+            contraste: false,
+          },
+        };
 
-    this.showAlertNotif("L'utilisateur a bien été créé !");
+        const user = await this.userService.createUser(newUser);
+        this.users.push(user);
+
+      } catch (e) {
+        // console.log(e);
+      }
+      this.isCreatingUser = false;
+      this.isModifyAvatar = true;
+
+      this.showAlertNotif("L'utilisateur a bien été créé !");
+    }
+    else {
+      this.showAlertNotif("Ce nom est déjà utilisé !");
+    }
+
+
   }
 
   showAlertNotif(message: string) { // Ajoutez le paramètre `message` ici
@@ -155,24 +181,20 @@ export class MonProfilComponent {
   }
 
 
-
-  async deleteUser(): Promise<void> {
-    try {
-
-    } catch (e) {
-      // console.log(e);
+  goToCreateUser(): void {
+    this.isCreatingUser = true;
+    this.isModifyAvatar = false;
+    this.deleteMode = false;
+    //find user with editing = true
+    const user = this.users.find(user => user.editing);
+    if (user) {
+      user.editing = false;
     }
   }
 
-  goToCreateUser(): void {
-    this.isCreatingUser = true;
-    this.isModifyUser = false;
-  }
-
   cancelCreateUser(): void {
-
-    // Masquer le formulaire de création et afficher la liste d'utilisateurs
     this.isCreatingUser = false;
+    this.isModifyAvatar = true;
   }
 
   closeAlert() {
@@ -180,7 +202,6 @@ export class MonProfilComponent {
   }
 
   selectAvatar(img: string) {
-    // console.log("selectAvatar");
     this.selectedAvatar = img;
     this.showModal = false;
   }
@@ -200,7 +221,6 @@ export class MonProfilComponent {
       const userId = this.selectedUser.id || '';
       this.userService.updateUser(updatedUser, userId);
 
-      // Mettez à jour le chemin de l'image pour l'utilisateur sélectionné
 
       // Mettez à jour le chemin de l'image pour l'utilisateur dans la liste d'utilisateurs
       this.users = this.users.map(user => user.id === this.selectedUser?.id ? { ...user, imagePath: filename } : user);
@@ -212,27 +232,24 @@ export class MonProfilComponent {
     }
   }
 
-  selectUser(user: User): void {
-    this.users.forEach(u => u.selected = false); // Désélectionner tous les autres utilisateurs.
-    user.selected = !user.selected; // Sélectionner l'utilisateur actuel.
-    this.selectedUser = user; // Garder une référence à l'utilisateur sélectionné pour la suppression.
+  setUserCourant(user: User): void {
+    if (this.userService.getUserCourant()?.id === user.id) {
+      this.userService.setUserCourant(null);
+      this.showAlertNotif("Le profil de " + user.name + " a été désélectionné !");
+    } else {
+      this.userService.setUserCourant(user);
+      this.showAlertNotif("Le profil de " + user.name + " a été sélectionné !");
+    }
   }
 
-  setUserCourant(user: User): void {
-    this.userService.setUserCourant(user);
-    // console.log("setUserCourant");
-    // console.log(this.userService.getUserCourant());
-    this.showAlertNotif("Le profil de " + user.name + " a été sélectionné !");
-  }
 
   async deleteUserFromServer(user: User): Promise<void> {
     try {
       await this.userService.deleteUser(user.id || '');
       this.users = this.users.filter(u => u.id !== user.id);
-      this.deleteMode = false;
       this.showAlertNotif("L'utilisateur a bien été supprimé !");
     } catch (e) {
-      console.log(e);
+      //console.log(e);
     }
   }
 
@@ -242,9 +259,6 @@ export class MonProfilComponent {
     }
     this.showModal = true;
   }
-  confirmDelete() {
-    //this.showModal = false;
-  }
 
 // Méthode pour fermer la modal
   closeModal() {
@@ -252,7 +266,29 @@ export class MonProfilComponent {
   }
 
   toggleDeleteMode() {
-    console.log("toggleDeleteMode");
-    this.deleteMode = !this.deleteMode;
+    if (!this.isCreatingUser && !this.isModifyingName) {
+      this.deleteMode = !this.deleteMode;
+    }
+    else{
+      let modeAcitvated = "";
+      if(this.isCreatingUser){
+        modeAcitvated = "de création !";
+      }
+      if (this.isModifyingName){
+        modeAcitvated = "de modification !";
+      }
+      this.showAlertNotif("Vous ne pouvez pas supprimer un utilisateur en cours " + modeAcitvated);
+    }
+  }
+
+  // @ts-ignore
+  private async userNameAlreadyExists(name: string) {
+    let users = await this.userService.loadUsersFromServer();
+    for (let user of users) {
+      if (user.name === name) { // Si le nom existe déjà
+        return true;
+      }
+    }
+    return false;
   }
 }

@@ -85,6 +85,13 @@ h1{
   border: none;
 }
 
+#btnCreerUser:hover{
+  box-shadow: inset 5px -5px 4px rgba(0, 0, 0, 0.25),
+  inset -5px 5px 4px rgba(0, 0, 0, 0.25),
+  inset -5px -5px 4px rgba(0, 0, 0, 0.25),
+  inset 5px 5px 4px rgba(0, 0, 0, 0.25);
+}
+
 #btnDeleteUser{
   font-family: "Roboto Mono";
   font-weight: bold;
@@ -99,6 +106,11 @@ h1{
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 1px 1px 4px rgba(255, 255, 255, 0.32);
   border-radius: 40px;
   border: none;
+}
+
+#btnDeleteUser:hover{
+  box-shadow: inset 5px 5px 16px rgba(0, 0, 0, 0.25), inset -4px -3px 16px rgba(255, 255, 255, 0.32);
+
 }
 
 .alert-success{
@@ -169,6 +181,7 @@ h1{
 
 .avatarUser{
   margin-left: 1.5rem;
+  object-fit: contain;
 }
 
 @keyframes vibrate {
@@ -207,11 +220,11 @@ h1{
 
 #trash-can{
   position: absolute;
-  top: 25%;
+  top: 12%;
   left: 25%;
   width: 50%;
   height: 50%;
-  z-index: 999;
+  z-index: 998;
 }
 
 .card-delete-mode:after {
@@ -246,7 +259,7 @@ h1{
 
 .selected{
   background-color: rgba(255, 255, 255, 0.6);
-box-shadow: 0 0 0.4em 0.4em rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 0.4em 0.4em rgba(255, 255, 255, 0.4);
 }
 
 
@@ -254,8 +267,12 @@ box-shadow: 0 0 0.4em 0.4em rgba(255, 255, 255, 0.4);
 .user-name{
   margin: 0;
   padding: 0.3em;
-}
 
+}
+.user-name-delete-mode{
+  z-index: 999;
+  color: #000000;
+}
 .user-title {
   display: flex;
   align-items: center;
@@ -311,7 +328,21 @@ box-shadow: 0 0 0.4em 0.4em rgba(255, 255, 255, 0.4);
   color: #1a202c;
   background-color: #fff;
   border-color: #cbd5e0;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* appliquer un flou */
+  transition: box-shadow 0.2s ease-in-out;
 }
+
+.btn-selected {
+  box-shadow: inset 5px -5px 8px rgba(0, 0, 0, 0.25),
+  inset -5px 5px 8px rgba(0, 0, 0, 0.25),
+  inset -5px -5px 8px rgba(0, 0, 0, 0.25),
+  inset 5px 5px 8px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+
+
+
 
 .card-footer, .card-header {
   display: flex;
@@ -383,4 +414,8 @@ box-shadow: 0 0 0.4em 0.4em rgba(255, 255, 255, 0.4);
   background: none;
   border: none;
   cursor: pointer;
+}
+
+#annulerCreation{
+  margin-right: 1em;
 }

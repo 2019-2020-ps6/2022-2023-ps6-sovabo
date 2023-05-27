@@ -50,14 +50,14 @@ currentUser$ = this.currentUserSubject.asObservable();
     return updatedUser;
   }
 
-  setUserCourant(user: User): void {
+  setUserCourant(user: any): void {
     this.currentUserSubject.next(user);
   }
 
   getUserCourant(): User | null {
     return this.currentUserSubject.getValue();
   }
-  
+
 
 
 
