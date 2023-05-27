@@ -128,6 +128,7 @@
 
 .titre-quiz input[type="text"]::placeholder {
   color: rgb(50, 50, 50); /* Couleur du texte de placeholder */
+  opacity: 50%;
 }
 
 .description-quiz{
@@ -204,9 +205,11 @@ textarea {
 
 .titre-question input[type="text"]::placeholder {
   color: rgb(50, 50, 50); /* Couleur du texte de placeholder */
+  opacity: 50%;
 }
 
 .reponses-question{
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -243,37 +246,41 @@ textarea {
 
 .reponse input[type="text"]::placeholder {
   color: rgb(50, 50, 50); /* Couleur du texte de placeholder */
+  opacity: 50%;
 }
 
-.reponse::before {
-  content: '╳';
+.uncheked::before {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  content:'╳';
   color: #FFFFFF;
+  font-size: 1.8vw;
   background-color: red;
   position: absolute;
-  display: inline-block;
-  text-align: center;
-  vertical-align: middle;
-  padding: 10px 15px;
   top: -1vw;
   left: -1vw;
   border-radius: 50%;
   pointer-events: all;
-  font-size: 1.5vw;
+  width: 5vh;
+  height: 5vh;
 }
 
-.reponse.checked::before {
+.checked::before {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
   content: '✓';
   background-color: #08CC0A;
   position: absolute;
-  display: inline-block;
-  line-height: normal;
-  padding: 10px 15px;
   top: -1vw;
   left: -1vw;
   border-radius: 50%;
   font-size: 1.8vw;
-  text-align: center;
-  vertical-align: middle;
+  width: 5vh;
+  height: 5vh;
 }
 
 .ajout{

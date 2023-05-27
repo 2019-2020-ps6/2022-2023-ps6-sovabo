@@ -39,10 +39,10 @@ export class CreerQuizzComponent {
           positionReponse++;
         }
         else if(questionIndex >= qIndex) {
+          indiceQuestionBonneReponse = qIndex;
           if(reponseIndex > rIndex) {
             positionReponse++;
             indiceReponse = rIndex + 1;
-            indiceQuestionBonneReponse = qIndex;
           }
         }
       }
@@ -51,8 +51,8 @@ export class CreerQuizzComponent {
     //On détermine la longueur de la question à laquelle appartient la réponse sélectionnée
     let longueurQuestionBonneReponse = this.reponses[indiceQuestionBonneReponse].length;
 
-    const reponsesElements = document.getElementsByClassName('reponse');
-    console.log(reponsesElements);
+    const reponsesElements = document.getElementsByClassName('reponse-bubble');
+
     for(let i = 0; i < longueurQuestionBonneReponse; i++) {
       reponsesElements[positionReponse - indiceReponse + i].classList.remove('checked');
     }
