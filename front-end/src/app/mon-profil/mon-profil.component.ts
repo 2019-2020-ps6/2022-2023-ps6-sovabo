@@ -232,15 +232,48 @@ export class MonProfilComponent {
     }
   }
 
-  setUserCourant(user: User): void {
+  async setUserCourant(user: User): Promise<void> {
     if (this.userService.getUserCourant()?.id === user.id) {
       this.userService.setUserCourant(null);
+      await this.updateUserSelectionStatus(user, false);
       this.showAlertNotif("Le profil de " + user.name + " a été désélectionné !");
     } else {
+      console.log("Je suis dans le else");
+      for (let u of this.users) {
+        console.log("Je parcours");
+
+        if (u.id !== user.id) {
+          console.log("Je parcours les users");
+          console.log(u);
+          await this.updateUserSelectionStatus(u, false);
+        }
+      }
       this.userService.setUserCourant(user);
+      await this.updateUserSelectionStatus(user, true);
       this.showAlertNotif("Le profil de " + user.name + " a été sélectionné !");
     }
   }
+  
+  async updateUserSelectionStatus(user: User, selected: boolean): Promise<void> {
+    const updatedUser: Partial<User> = {
+      ...user,
+      selected: selected, // Mettez à jour l'attribut 'selected'
+    };
+    const userId = user.id || '';
+    try {
+      await this.userService.updateUser(updatedUser, userId);
+    } catch (error) {
+      console.error(`Failed to update user selection status: ${error}`);
+    }
+  }
+  
+  
+  
+  
+  
+  
+  
+  
 
 
   async deleteUserFromServer(user: User): Promise<void> {
