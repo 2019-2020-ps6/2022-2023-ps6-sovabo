@@ -8,7 +8,7 @@
       <button (click)="toggleDeleteMode()" class="btnGestion" id="btnDeleteUser"type="button" data-toggle="modal" data-target="#modalDeleteConfirmation">{{deleteMode?"ANNULER":"SUPPRIMER PROFIL"}}</button>
 
     </div>
-    <div *ngIf="showAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+    <div *ngIf="showAlert" [ngClass]="alertState ? 'alert-success':'alert-danger'" class="alert alert-dismissible fade show" role="alert">
       {{ alertMessage }}
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlert()"></button>
     </div>
