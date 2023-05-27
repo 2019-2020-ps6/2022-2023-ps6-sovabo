@@ -27,6 +27,7 @@ class User extends BaseModel {
     if (error) throw new ValidationError(`Create User Error : Object ${JSON.stringify(obj)} does not match schema of model ${this.name}`, error);
     this.items.push(newUser);
     this.save();
+
     return newUser;
   }
 
