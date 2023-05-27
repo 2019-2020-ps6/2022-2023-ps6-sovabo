@@ -197,6 +197,8 @@ export class MonProfilComponent {
     this.isCreatingUser = true;
     this.isModifyAvatar = false;
     this.deleteMode = false;
+    this.userName = "";
+    this.selectedAvatar = "../../assets/Images/Animateurs/pngegg.png";
     //find user with editing = true
     const user = this.users.find(user => user.editing);
     if (user) {
@@ -290,15 +292,6 @@ export class MonProfilComponent {
       console.error(`Failed to update user selection status: ${error}`);
     }
   }
-
-
-
-
-
-
-
-
-
 
   async deleteUserFromServer(user: User): Promise<void> {
     try {
