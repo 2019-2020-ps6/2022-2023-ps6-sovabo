@@ -298,6 +298,7 @@ export class MonProfilComponent {
       } catch (e) {
       }
     }, 300); // Wait for the animation to finish before actually deleting the user
+    this.userService.updateAll();
   }
 
 

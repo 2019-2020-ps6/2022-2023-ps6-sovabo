@@ -35,7 +35,7 @@ export class UserService {
     if (!user) {
       throw new Error(`Failed to create user`);
     }
-    this.updateAll();
+    await this.updateAll();
     return user;
   }
 
@@ -50,26 +50,21 @@ export class UserService {
   async updateUser(user: Partial<User>, userId : string): Promise<User> {
     const updatedUser = await this.httpClient.put<User>(`${serverBack}users/${userId}`, user).toPromise()
       .then((user) => {
-      this.updateAll();
-      return user;
-    });
+        this.updateAll();
+        return user;
+      });
     if (!updatedUser) {
       throw new Error(`Failed to update user with id ${user.id}`);
     }
     return updatedUser;
   }
 
-
   setUserCourant(user: any): void {
-    localStorage.setItem('currentUser', JSON.stringify(user));
+    this.currentUserSubject.next(user);
   }
 
   getUserCourant(): User | null {
-    const storedUser = localStorage.getItem('currentUser');
-    if (storedUser) {
-      return JSON.parse(storedUser);
-    }
-    return this.currentUserSubject.getValue();
+    return this.currentUserSubject.value;
   }
 
   async getUserConfiguration(userId: string): Promise<ConfigurationModel> {
@@ -85,21 +80,24 @@ export class UserService {
     if (!updatedConfig) {
       throw new Error(`Failed to update configuration with id ${configId}`);
     }
-    this.updateAll();
+    await this.updateAll();
     return updatedConfig;
-}
+  }
 
-
-  private updateAll() {
-    localStorage.clear();
-    this.currentUserSubject.next(null);
-    this.loadUsersFromServer().then(users => {
-      this.users = users;
-      users.forEach(user => {
-        if (user.selected) {
-          this.setUserCourant(user);
-        }
+  public updateAll(): Promise<void> {
+    console.log(this.loadUsersFromServer());
+    return new Promise<void>((resolve) => {
+      this.setUserCourant(null);
+      this.loadUsersFromServer().then(users => {
+        this.users = users;
+        users.forEach(user => {
+          if (user.selected) {
+            this.setUserCourant(user);
+          }
+        });
+        resolve();
       })
     });
-    }
+  }
+
 }

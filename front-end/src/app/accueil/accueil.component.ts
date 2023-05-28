@@ -16,7 +16,7 @@ export class AccueilComponent {
   showAlert: boolean = false;
   alertMessage: string | null = null;
   accesAutorise: boolean | undefined;
-
+  animateur: boolean | undefined;
 
   constructor(private jeuxCouleursService: JeuxCouleursService,
               private animateurService: AnimateurService,
@@ -24,15 +24,15 @@ export class AccueilComponent {
               private userService: UserService,
               private router: Router) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
+    await this.userService.updateAll();
+    this.animateur = this.userService.getUserCourant()?.configuration.animateur || false;
     if (this.jeuxCouleursService.isDefaultActive) {
       this.jeuxCouleursService.collectDefaultStyles();
-    }
-    else {
+    } else {
       this.jeuxCouleursService.changeFont(document);
     }
-    console.log(this.userService.loadUsersFromServer());
   }
 
   ngAfterViewInit(){
@@ -41,7 +41,7 @@ export class AccueilComponent {
 
 
   getAnimateur() {
-    return this.animateurService.getAnimateur();
+    return this.animateurService.getAnimateur().value;
   }
 
   getAnimations() {
