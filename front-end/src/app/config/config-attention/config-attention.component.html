@@ -8,8 +8,9 @@
   <div [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer' : 'animateurContainer'" class="animateurContainer">
     <p class="label fontStyleCanChange" [ngClass]="{'contrastUpTextExtrude' : this.contrasteTroubleEnable}">Animateur</p>
     <app-btn-on-off-animateur (click)="toggleAnimateur()"></app-btn-on-off-animateur>
-    <img *ngIf="animateur" src="./assets/Images/Animateur_image.png" alt="Image animateur" id="imageAnimateur">
-  </div>
+    <img *ngIf="animateur" [src]="userAnimateurImg" alt="Image animateur" id="imageAnimateur">
+</div>
+
 
   <div  [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}" class="fontStyleCanChange animationContainer">
     <p class="label fontStyleCanChange" [ngClass]="{'contrastUpTextExtrude' : this.contrasteTroubleEnable}">Animations</p>
