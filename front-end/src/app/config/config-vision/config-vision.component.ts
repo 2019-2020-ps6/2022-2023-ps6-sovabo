@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 
 import { CommonService } from '../../../service/updateMessenger.service';
 import {Location} from "@angular/common";
+import {compareNumbers} from "@angular/compiler-cli/src/version_helpers";
 
 
 
@@ -16,7 +17,7 @@ import {Location} from "@angular/common";
 
 
 export class ConfigVisionComponent {
-   listTrouble = this.jeuxCouleursService.getListTrouble();
+  listTrouble = this.jeuxCouleursService.getListTrouble();
   listFont = this.jeuxCouleursService.getListFont();
 
   jeuxCouleursEnable: boolean = false;
@@ -27,8 +28,7 @@ export class ConfigVisionComponent {
   constructor(private jeuxCouleursService: JeuxCouleursService,
               private router: Router,
               private route: ActivatedRoute,
-              private Service: CommonService,
-              private location: Location) {}
+              private Service: CommonService) {}
 
   ngOnInit(): void {
     this.jeuxCouleursEnable = this.jeuxCouleursService.IsVisionColorActivated();
@@ -64,8 +64,7 @@ export class ConfigVisionComponent {
 
     //ATTRIBUTION DE LA POLICE APPLIQUEE AU SAMPLE
     count=0;
-    let pSample = document.querySelectorAll("#exampleTxt");
-    // console.log(pSample);
+    let pSample = document.querySelectorAll<HTMLElement>("#exampleTxt");
     pSample.forEach(sample=>{
       sample.innerHTML = this.jeuxCouleursService.getFontSelectedString();
     });
@@ -76,7 +75,6 @@ export class ConfigVisionComponent {
     else {
       this.jeuxCouleursService.changeFont(document);
     }
-    this.jeuxCouleursService.changeFontSize(document);
 
     // Appel de la fonction pour ajuster la hauteur de generalContainer
     this.adjustGeneralContainerHeight();
@@ -85,14 +83,15 @@ export class ConfigVisionComponent {
     window.addEventListener('resize', () => this.adjustLabelFontSize());
   }
 
+  ngAfterViewInit(){
+    this.jeuxCouleursService.changeFontSize(document);
+  }
+
   ngOnDestroy(): void {
     window.removeEventListener('resize', () => this.adjustGeneralContainerHeight());
     window.removeEventListener('resize', () => this.adjustLabelFontSize());
   }
 
-  lastPage(){
-    this.location.back();
-  }
 
   //appel lors du click sur le bouton de choix de vision
   toggleJeuxCouleurs(event: Event | null) {
@@ -123,22 +122,25 @@ export class ConfigVisionComponent {
     // send message to subscribers via observable subject
     this.Service.sendUpdate(str);
   }
-  //ACTUALISATION DE LA PAGE
+
   resetParameters(event: Event | null){
     this.jeuxCouleursService.resetStylesToDefault();
     this.jeuxCouleursService.isDefaultActive = true;
     if (event){
-      this.jeuxCouleursService.changeSampleFont(document);
+      this.jeuxCouleursService.changeSampleFont(event,document);
     }
   }
 
-  fontChanger($event: Event) {
-    this.jeuxCouleursService.changeSampleFont(document);
+  fontChanger(event: Event | null) {
+
+    if(event){
+      this.jeuxCouleursService.changeSampleFont(event,document);
+    }
+
   }
 
   fontChangerConfirmation(){
     this.jeuxCouleursService.isDefaultActive = false;
-    this.jeuxCouleursService.setFontCheck(true);
     this.jeuxCouleursService.changeFont(document);
   }
 
@@ -147,7 +149,6 @@ export class ConfigVisionComponent {
       this.jeuxCouleursService.setCurrentFontSize(nb);
       this.jeuxCouleursService.changeFontSize(document);
     }
-    else{}
   }
 
 
@@ -188,4 +189,6 @@ export class ConfigVisionComponent {
       label.style.fontSize = `${fontSize}px`;
     });
   }
+
+  protected readonly document = document;
 }

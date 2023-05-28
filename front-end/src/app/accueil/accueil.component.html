@@ -6,7 +6,7 @@
 <div class="container accueilSite">
 
   <div class="leftContainer">
-    <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTitleExtrude' : 'contrastDownTitleExtrude'" >PolyQuiz</h1>
+    <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTitleExtrude' : 'contrastDownTitleExtrude'" class="titreStyle">PolyQuiz</h1>
     <app-btn-clickable-frame-background class="navigation" id="jouer"[routerLink]="['/liste-quizz']">JOUER</app-btn-clickable-frame-background>
   </div>
 
@@ -25,7 +25,7 @@
 
   <div class="rightContainer">
     <app-btn-clickable-background class="navigation" [routerLink]="['/configuration']">CONFIGURATION</app-btn-clickable-background>
-    <app-btn-clickable-background class="navigation" [routerLink]="['/mon-profil']">MON PROFIL</app-btn-clickable-background>
+    <app-btn-clickable-background id="profils" class="navigation" [routerLink]="['/mon-profil']">PROFILS</app-btn-clickable-background>
     <app-btn-clickable-background class="navigation" [routerLink]="['/statistiques']">STATISTIQUE</app-btn-clickable-background>
   </div>
 

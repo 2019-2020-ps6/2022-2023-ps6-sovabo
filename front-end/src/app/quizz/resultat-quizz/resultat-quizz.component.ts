@@ -31,6 +31,9 @@ export class ResultatQuizzComponent {
     else {
       this.jeuxCouleursService.changeFont(document);
     }
+  }
+
+  ngAfterViewInit(){
     this.jeuxCouleursService.changeFontSize(document);
   }
 

@@ -30,6 +30,9 @@ export class CarouselQuizComponent {
 
     carousel();
   }
+
+
+
   isAnotherHovered(quiz: Quiz): boolean {
     for (let q of this.quizList) {
       if (q !== quiz && q.hovered) {

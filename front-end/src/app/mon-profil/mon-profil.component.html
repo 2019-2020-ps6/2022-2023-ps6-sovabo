@@ -1,57 +1,100 @@
-<div class="container monProfil">
-    <div class="top-element">
-      <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTitleExtrude' : 'contrastDownTitleExtrude'">PolyQuiz</h1>
-        
+<div class="container1">
+  <div class="containerBtnGestion">
+    <div id="retour">
+      <app-btn-clickable-frame-background class="navigation" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
     </div>
-  
-    <div class="contenuProfil">
-      <div class="topContainer">
-        <div class="left">
-          <app-btn-profile class="btnTextProfil" (click)="openPopup('Changer l\'adresse email')">Adresse email: {{ email }}</app-btn-profile>
-          <app-btn-profile class="btnTextProfil" (click)="openPopup('Changer le nom d\'utilisateur')">Nom utilisateur: {{ username }}</app-btn-profile>
-        </div>
-        <div class="right">
-          <div class="contenuRight">
-            <app-btn-profile class="btnTextProfil" (click)="openPopup('Changer le mot de passe')">Changer de mot de passe</app-btn-profile>
-            <app-btn-profile class="btnTextProfil" (click)="openPopup('Créer mon code soignant')">Créer mon code soignant</app-btn-profile>
-          </div>
-        </div>
-      </div>
-      <div class="bas">
-        <app-btn-profile class="btnTextProfil deconnexion">Déconnexion</app-btn-profile>
-      </div>
-
-      
+    <div class="containerBtnGestionUser">
+      <button class="btnGestion" id="btnCreerUser" type="button" (click)="goToCreateUser()">CREER PROFIL</button>
+      <button (click)="toggleDeleteMode()" class="btnGestion" id="btnDeleteUser"type="button" data-toggle="modal" data-target="#modalDeleteConfirmation">{{deleteMode?"ANNULER":"SUPPRIMER PROFIL"}}</button>
 
     </div>
-    <app-btn-clickable-frame-background class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
+    <div *ngIf="showAlert" [ngClass]="alertState ? 'alert-success':'alert-danger'" class="alert alert-dismissible fade show" role="alert">
+      {{ alertMessage }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlert()"></button>
+    </div>
+  </div>
+  <div class="content-wrapper">
 
-  
-    <!-- Fenêtre pop-up -->
-    <div class="popup-overlay" *ngIf="isPopupOpen">
-      <div class="popup-container">
-        <h2>{{ popupTitle }}</h2>
-        <div class="popup-content">
-          <form>
-            <label *ngIf="popupTitle === 'Changer le mot de passe'">Nouveau mot de passe</label>
-            <input type="password" [(ngModel)]="newPassword" *ngIf="popupTitle === 'Changer le mot de passe'">
-  
-            <label *ngIf="popupTitle === 'Changer l\'adresse email'">Nouvelle adresse email</label>
-            <input type="email" [(ngModel)]="newEmail" *ngIf="popupTitle === 'Changer l\'adresse email'">
-  
-            <label *ngIf="popupTitle === 'Changer le nom d\'utilisateur'">Nouveau nom d'utilisateur</label>
-            <input type="text" [(ngModel)]="newUsername" *ngIf="popupTitle === 'Changer le nom d\'utilisateur'">
-  
-            <label *ngIf="popupTitle === 'Créer mon code soignant'">Nouveau code soignant</label>
-            <input type="text" [(ngModel)]="newCaregiverCode" *ngIf="popupTitle === 'Créer mon code soignant'">
-  
-            <div class="popup-buttons">
-              <button class="btn btn-primary" (click)="submitChanges()">Enregistrer</button>
-              <button class="btn btn-secondary" (click)="cancelChanges()">Annuler</button>
+    <div class="container monProfil">
+      <div class="top-element">
+        <h1 [ngClass]="contrasteTroubleEnable ? 'contrastUpTitleExtrude' : 'contrastDownTitleExtrude'">PolyQuiz</h1>
+      </div>
+    </div>
+
+    <div class="cardBody">
+
+      <div class="main-body">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-3 gutters-sm justify-content-center">
+          <ng-container *ngIf="!isCreatingUser">
+            <div class="col mb-3 listUser" *ngFor="let user of this.users">
+              <div class="card" (click)="deleteMode ? deleteUserFromServer(user) : null" [ngClass]="{'selected': user.id == userService.getUserCourant()?.id, 'card-delete-mode':deleteMode}">
+                <svg id="trash-can" *ngIf="deleteMode" x="0px" y="0px" width="109.484px" height="122.88px" viewBox="0 0 109.484 122.88" enable-background="new 0 0 109.484 122.88" xml:space="preserve"><g><path fill-rule="evenodd" clip-rule="evenodd" d="M2.347,9.633h38.297V3.76c0-2.068,1.689-3.76,3.76-3.76h21.144 c2.07,0,3.76,1.691,3.76,3.76v5.874h37.83c1.293,0,2.347,1.057,2.347,2.349v11.514H0V11.982C0,10.69,1.055,9.633,2.347,9.633 L2.347,9.633z M8.69,29.605h92.921c1.937,0,3.696,1.599,3.521,3.524l-7.864,86.229c-0.174,1.926-1.59,3.521-3.523,3.521h-77.3 c-1.934,0-3.352-1.592-3.524-3.521L5.166,33.129C4.994,31.197,6.751,29.605,8.69,29.605L8.69,29.605z M69.077,42.998h9.866v65.314 h-9.866V42.998L69.077,42.998z M30.072,42.998h9.867v65.314h-9.867V42.998L30.072,42.998z M49.572,42.998h9.869v65.314h-9.869 V42.998L49.572,42.998z"/></g></svg>
+                <div class="backGround" [ngStyle]="{'background-color': user.color}"></div>
+                <div class="card-body text-center" >
+                  <img [src]="getImageFromImageName(user.imagePath ?? '')" style="width:150px;height:160px;margin-top:-75px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3 avatarUser">
+                  <svg class="user-svg" (click)="openModal(user)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 14V22H4C4 17.5817 7.58172 14 12 14ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM14.5946 18.8115C14.5327 18.5511 14.5 18.2794 14.5 18C14.5 17.7207 14.5327 17.449 14.5945 17.1886L13.6029 16.6161L14.6029 14.884L15.5952 15.4569C15.9883 15.0851 16.4676 14.8034 17 14.6449V13.5H19V14.6449C19.5324 14.8034 20.0116 15.0851 20.4047 15.4569L21.3971 14.8839L22.3972 16.616L21.4055 17.1885C21.4673 17.449 21.5 17.7207 21.5 18C21.5 18.2793 21.4673 18.551 21.4055 18.8114L22.3972 19.3839L21.3972 21.116L20.4048 20.543C20.0117 20.9149 19.5325 21.1966 19.0001 21.355V22.5H17.0001V21.3551C16.4677 21.1967 15.9884 20.915 15.5953 20.5431L14.603 21.1161L13.6029 19.384L14.5946 18.8115ZM18 17C17.4477 17 17 17.4477 17 18C17 18.5523 17.4477 19 18 19C18.5523 19 19 18.5523 19 18C19 17.4477 18.5523 17 18 17Z"></path></svg>
+
+                  <div class="user-title" [ngClass]="{'editing': user.editing}">
+
+                    <h5 [ngClass]="{'user-name-delete-mode':deleteMode}" class="user-name" *ngIf="!user.editing">{{ user.name }}</h5>
+                    <input type="text" [(ngModel)]="user.name" *ngIf="user.editing">
+                    <button class="edit-button" (click)="toggleEditUserName(user)">
+                      <svg class="user-svg" *ngIf="!user.editing" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.7574 2.99666L14.7574 4.99666H5V18.9967H19V9.2393L21 7.2393V19.9967C21 20.5489 20.5523 20.9967 20 20.9967H4C3.44772 20.9967 3 20.5489 3 19.9967V3.99666C3 3.44438 3.44772 2.99666 4 2.99666H16.7574ZM20.4853 2.09717L21.8995 3.51138L12.7071 12.7038L11.2954 12.7062L11.2929 11.2896L20.4853 2.09717Z"></path></svg>
+                    </button>
+                  </div>
+                  <div class="card-footer">
+                    <button *ngIf="!user.editing" [class.btn-selected]="this.getUserCourant()?.id == user.id" class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button" (click)="setUserCourant(user)">{{this.getUserCourant()?.id === user.id ? 'Selectionné' : 'Choisir'}}</button>
+                    <button *ngIf="user.editing" class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button" (click)="toggleEditUserName(user)">Valider</button>
+                  </div>
+                </div>
+              </div>
             </div>
-          </form>
+          </ng-container>
+          <div class="col mb-3" *ngIf="isCreatingUser">
+            <form (ngSubmit)="createUser()">
+              <div class="card">
+                <div class="backGround" [ngStyle]="{'background-color': '#633719'}"></div>
+                <div class="card-body text-center">
+                    <img [src]="selectedAvatar" style="width:150px;height:160px;margin-top:-75px" alt="User" class="img-fluid rounded-circle mb-3 avatarUser">
+                    <svg (click)="openModal(null)" class="user-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 14.252V22H4C4 17.5817 7.58172 14 12 14C12.6906 14 13.3608 14.0875 14 14.252ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM18 17V14H20V17H23V19H20V22H18V19H15V17H18Z"></path></svg>
+                  <div class="user-title" [ngClass]="{'editing': isCreatingUser}">
+                    <h5 class="user-name" *ngIf="!isCreatingUser">Nom de l'utilisateur</h5>
+                    <input type="text" [(ngModel)]="userName" *ngIf="isCreatingUser" name="userName" required>
+                  </div>
+                  <div class="card-footer creating">
+                    <button id="annulerCreation" class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button" (click)="cancelCreateUser()">Annuler</button>
+                    <button type="submit" class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir">Valider</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  
+
+</div>
+<!-- Pop-up pour le choix de l'avatar -->
+
+<div class="popup" [class.show]="showModal">
+  <div class="popup-content" *ngIf="isCreatingUser">
+    <button type="button" class="close-button" (click)="closeModal()">&times;</button>
+    <h3>Choisis ton animateur !</h3>
+    <div class="row">
+      <div class="col-4" *ngFor="let img of avatarImages">
+        <img [src]="img" class="avatar-image img-thumbnail" (click)="selectAvatar(img)">
+      </div>
+    </div>
+  </div>
+
+  <div class="popup-content" *ngIf="isModifyAvatar">
+    <button type="button" class="close-button" (click)="closeModal()">&times;</button>
+    <h3>Choisis ton animateur !</h3>
+    <div class="row">
+      <div class="col-4" *ngFor="let img of avatarImages">
+        <img [src]="img" class="avatar-image img-thumbnail" (click)="modifyAvatar(img)">
+      </div>
+    </div>
+  </div>
+</div>
