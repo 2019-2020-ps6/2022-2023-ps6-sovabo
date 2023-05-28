@@ -243,11 +243,11 @@ export class MonProfilComponent {
 
       // Mettez à jour le chemin de l'image pour l'utilisateur dans la liste d'utilisateurs
       this.users = this.users.map(user => user.id === this.selectedUser?.id ? { ...user, imagePath: filename } : user);
-      this.showModal = false;
-      this.alertState = true;
-      this.showAlertNotif("L'avatar a bien été modifié !");
-
-
+      this.userService.updateUser(updatedUser, userId).then(r => {
+        this.showModal = false;
+        this.alertState = true;
+        this.showAlertNotif("L'avatar a bien été modifié !");
+      });
     }
   }
 
