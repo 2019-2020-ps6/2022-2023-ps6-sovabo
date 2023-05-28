@@ -15,6 +15,11 @@ class User extends BaseModel {
       selected: Joi.boolean().required(),
     });
   }
+  getConfiguration(userId) {
+    const user = this.getById(userId);
+    if (!user) throw new NotFoundError(`Cannot get User id=${userId} : not found`)
+    return user.configuration;
+  }
 
 
   createUser(obj = {}) {

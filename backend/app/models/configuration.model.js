@@ -36,7 +36,13 @@ class Configuration extends BaseModel {
     return newConfig;
   }
 
+  deleteAll = function () {
+    this.items = [];
+    this.save();
+  };
+
   
 }
+
 
 module.exports = new Configuration();

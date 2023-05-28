@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Quiz } from '../models/quizz.model';
 import { Question } from '../models/question.model';
+import { ConfigurationModel} from 'src/models/configuration.model';
 import { serverUrl, httpOptionsBase, serverBack } from '../config/server.config'
 import {HttpClient} from "@angular/common/http";
 import {User} from "../models/user.model";
@@ -49,6 +50,7 @@ currentUser$ = this.currentUserSubject.asObservable();
     }
     return updatedUser;
   }
+  
 
   setUserCourant(user: any): void {
     this.currentUserSubject.next(user);
@@ -57,6 +59,25 @@ currentUser$ = this.currentUserSubject.asObservable();
   getUserCourant(): User | null {
     return this.currentUserSubject.getValue();
   }
+
+  async getUserConfiguration(userId: string): Promise<ConfigurationModel> {
+    const userConfig = await this.httpClient.get<ConfigurationModel>(`${serverBack}/users/${userId}/configuration`).toPromise();
+    if (!userConfig) {
+      throw new Error(`Failed to get user configuration for user with id ${userId}`);
+    }
+    return userConfig;
+  }
+
+  async updateConfiguration(configId: string, config: Partial<ConfigurationModel>): Promise<ConfigurationModel> {
+    console.log("ça update")
+    console.log("configId", configId)
+    const updatedConfig = await this.httpClient.put<ConfigurationModel>(`${serverBack}/configurations/${configId}`, config).toPromise();
+    if (!updatedConfig) {
+      throw new Error(`Failed to update configuration with id ${configId}`);
+    }
+    return updatedConfig;
+}
+
 
 
 
