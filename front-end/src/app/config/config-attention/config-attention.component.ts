@@ -4,7 +4,9 @@ import {AnimateurService} from "../../../service/animateur.service";
 import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
 import {UserService} from "../../../service/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {User} from "../../../models/user.model";
 import {Action} from "rxjs/internal/scheduler/Action";
+import {ConfigurationModel} from "../../../models/configuration.model";
 
 @Component({
   selector: 'app-config-attention',
@@ -15,6 +17,7 @@ export class ConfigAttentionComponent {
   animations: boolean = false;
   animateur: boolean = false;
   userAnimateurImg: string = '';
+  user = this.userService.getUserCourant();
 
   //type de trouble de la vision
   contrasteTroubleEnable: boolean = false;
@@ -31,13 +34,25 @@ export class ConfigAttentionComponent {
 
   ngOnInit(): void {
     this.animations = this.animationsService.isAnimated;
-    this.animateur = this.animateurService.getAnimateur();
+    this.user = this.userService.getUserCourant();
+    this.loadConfig();
+    this.animateur = this.user?.configuration.animateur || false;
     this.contrasteTroubleEnable = this.jeuxCouleursService.getVisionAttentionStatus();
     if (this.jeuxCouleursService.isDefaultActive) {
       this.jeuxCouleursService.collectDefaultStyles();
     }
     else {
       this.jeuxCouleursService.changeFont(document);
+    }
+  }
+
+  loadConfig(){
+    this.animateur = this.user?.configuration.animateur || false;
+    console.log("Animateur:", this.animateur);
+    console.log("User:", this.user);
+    if(this.animateur){
+      console.log("User:", this.user); 
+      this.userAnimateurImg = this.getImageFromImageName(this.user?.imagePath || '');
     }
   }
 
@@ -50,17 +65,36 @@ export class ConfigAttentionComponent {
   }
 
 
-  toggleAnimateur() {
+  async toggleAnimateur() {
     this.animateur = !this.animateur;
-    
-    const user = this.userService.getUserCourant();
-    console.log("User:", user);
-    if (user) {
-      let imagePath = user.imagePath || '';
-      this.userAnimateurImg = this.getImageFromImageName(imagePath); ;
+  
+    console.log("User:",this.user);
+    if (this.user) {
+      let imagePath = this.user.imagePath || '';
+      this.userAnimateurImg = this.getImageFromImageName(imagePath);
+  
+      // Récupère la configuration actuelle de l'utilisateur
+      let userId = (this.user as User).id!;
+      let configId = (this.user.configuration as ConfigurationModel).id!;
+      
+      let config = await this.userService.getUserConfiguration(userId);
+  
+      // Met à jour l'attribut animateur de la configuration
+      config.animateur = this.animateur;
+  
+      // Enregistre la configuration mise à jour
+      await this.userService.updateConfiguration(configId, config);
+  
+      // Met à jour l'utilisateur avec la nouvelle configuration
+      this.user.configuration = config;
+      await this.userService.updateUser(this.user, userId);
     }
+  
     this.animateurService.setAnimateur(this.animateur);
   }
+  
+
+  
 
 
   toggleContrastColor(event: Event | null) {

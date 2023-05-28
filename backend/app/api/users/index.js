@@ -16,6 +16,18 @@ router.get('/', (req, res) => {
   }
 })
 
+//get configuration from idUser
+router.get('/:userId/configuration', (req, res) => {
+  try {
+    console.log('config from user')
+    const configuration = User.getConfiguration(req.params.userId)
+    res.status(200).json(configuration)
+  } catch (err) {
+    manageAllErrors(res, err)
+  }
+})
+
+
 router.get('/:userId', (req, res) => {
   try {
     const user = User.getById(req.params.userId)
