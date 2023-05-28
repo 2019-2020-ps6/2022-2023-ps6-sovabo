@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import { Quiz } from '../models/quizz.model';
 import { Question } from '../models/question.model';
 import { ConfigurationModel} from 'src/models/configuration.model';
@@ -13,11 +13,13 @@ import {User} from "../models/user.model";
 
 export class UserService {
   private currentUserSubject = new BehaviorSubject<User | null>(null);
-currentUser$ = this.currentUserSubject.asObservable();
+  currentUser$ = this.currentUserSubject.asObservable();
   private users: User[] = [];
+
   constructor(private httpClient: HttpClient) {
-    this.loadUsersFromServer();
+    this.updateAll();
   }
+
 
   async loadUsersFromServer(): Promise<User[]> {
     const users = await this.httpClient.get<User[]>(`${serverBack}/users`).toPromise();
@@ -33,30 +35,40 @@ currentUser$ = this.currentUserSubject.asObservable();
     if (!user) {
       throw new Error(`Failed to create user`);
     }
+    this.updateAll();
     return user;
   }
 
   // Supprimer un utilisateur
   async deleteUser(userId: string): Promise<void> {
-    await this.httpClient.delete<void>(`${serverBack}users/${userId}`).toPromise();
+    await this.httpClient.delete<void>(`${serverBack}users/${userId}`).toPromise().then(() => {
+      this.updateAll();
+    });
   }
 
   // Modifier un utilisateur
   async updateUser(user: Partial<User>, userId : string): Promise<User> {
-    console.log("ça update")
-    const updatedUser = await this.httpClient.put<User>(`${serverBack}users/${userId}`, user).toPromise();
+    const updatedUser = await this.httpClient.put<User>(`${serverBack}users/${userId}`, user).toPromise()
+      .then((user) => {
+      this.updateAll();
+      return user;
+    });
     if (!updatedUser) {
       throw new Error(`Failed to update user with id ${user.id}`);
     }
     return updatedUser;
   }
-  
+
 
   setUserCourant(user: any): void {
-    this.currentUserSubject.next(user);
+    localStorage.setItem('currentUser', JSON.stringify(user));
   }
 
   getUserCourant(): User | null {
+    const storedUser = localStorage.getItem('currentUser');
+    if (storedUser) {
+      return JSON.parse(storedUser);
+    }
     return this.currentUserSubject.getValue();
   }
 
@@ -69,18 +81,25 @@ currentUser$ = this.currentUserSubject.asObservable();
   }
 
   async updateConfiguration(configId: string, config: Partial<ConfigurationModel>): Promise<ConfigurationModel> {
-    console.log("ça update")
-    console.log("configId", configId)
     const updatedConfig = await this.httpClient.put<ConfigurationModel>(`${serverBack}/configurations/${configId}`, config).toPromise();
     if (!updatedConfig) {
       throw new Error(`Failed to update configuration with id ${configId}`);
     }
+    this.updateAll();
     return updatedConfig;
 }
 
 
-
-
-
-
+  private updateAll() {
+    localStorage.clear();
+    this.currentUserSubject.next(null);
+    this.loadUsersFromServer().then(users => {
+      this.users = users;
+      users.forEach(user => {
+        if (user.selected) {
+          this.setUserCourant(user);
+        }
+      })
+    });
+    }
 }

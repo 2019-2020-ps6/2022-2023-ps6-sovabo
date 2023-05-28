@@ -14,7 +14,7 @@ import {ConfigurationModel} from "../../../models/configuration.model";
   styleUrls: ['./config-attention.component.scss']
 })
 export class ConfigAttentionComponent {
-  animations: boolean = false;
+  animations: boolean | undefined;
   animateur: boolean = false;
   userAnimateurImg: string = '';
   user = this.userService.getUserCourant();
@@ -30,6 +30,9 @@ export class ConfigAttentionComponent {
               private router:  Router,
               private route: ActivatedRoute,
               public userService: UserService) {
+    this.userService.currentUser$.subscribe((user) => {
+      this.animateur = user?.configuration.animateur || false;
+    });
   }
 
   ngOnInit(): void {
@@ -48,10 +51,8 @@ export class ConfigAttentionComponent {
 
   loadConfig(){
     this.animateur = this.user?.configuration.animateur || false;
-    console.log("Animateur:", this.animateur);
-    console.log("User:", this.user);
+;
     if(this.animateur){
-      console.log("User:", this.user); 
       this.userAnimateurImg = this.getImageFromImageName(this.user?.imagePath || '');
     }
   }
@@ -67,34 +68,33 @@ export class ConfigAttentionComponent {
 
   async toggleAnimateur() {
     this.animateur = !this.animateur;
-  
-    console.log("User:",this.user);
+
     if (this.user) {
       let imagePath = this.user.imagePath || '';
       this.userAnimateurImg = this.getImageFromImageName(imagePath);
-  
+
       // Récupère la configuration actuelle de l'utilisateur
       let userId = (this.user as User).id!;
       let configId = (this.user.configuration as ConfigurationModel).id!;
-      
+
       let config = await this.userService.getUserConfiguration(userId);
-  
+
       // Met à jour l'attribut animateur de la configuration
       config.animateur = this.animateur;
-  
+
       // Enregistre la configuration mise à jour
       await this.userService.updateConfiguration(configId, config);
-  
+
       // Met à jour l'utilisateur avec la nouvelle configuration
       this.user.configuration = config;
       await this.userService.updateUser(this.user, userId);
     }
-  
+
     this.animateurService.setAnimateur(this.animateur);
   }
-  
 
-  
+
+
 
 
   toggleContrastColor(event: Event | null) {
