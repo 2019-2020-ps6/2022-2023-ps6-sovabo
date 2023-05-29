@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
+import {Quiz} from "../../../models/quizz.model"
+import {Question, Answer} from "../../../models/question.model";
 
 @Component({
   selector: 'app-creer-quizz',
@@ -13,15 +15,18 @@ export class CreerQuizzComponent {
   constructor(private jeuxCouleursService: JeuxCouleursService) {
   }
 
-  questions: string[] = ['', ''];
-  reponses: string[][] = [['', ''], ['', '']];
+  questionsQuiz: string[] = ['', ''];
+  reponsesQuiz: string[][] = [['', ''], ['', '']];
 
   ajouterQuestion() {
+    this.questionsQuiz.push('');
+    this.reponsesQuiz.push(['', '']);
     this.questions.push('');
-    this.reponses.push(['', ''])
+    this.reponses.push([]);
   }
 
   ajouterReponse(index: number) {
+    this.reponsesQuiz[index].push('');
     this.reponses[index].push('');
   }
 
@@ -33,8 +38,8 @@ export class CreerQuizzComponent {
     let positionReponse = 0;
     let indiceQuestionBonneReponse = 0;
     let indiceReponse = 0;
-    for(let qIndex = 0; qIndex < this.questions.length; qIndex++) {
-      for(let rIndex = 0; rIndex < this.reponses[qIndex].length; rIndex++) {
+    for(let qIndex = 0; qIndex < this.questionsQuiz.length; qIndex++) {
+      for(let rIndex = 0; rIndex < this.reponsesQuiz[qIndex].length; rIndex++) {
         if(questionIndex > qIndex) {
           positionReponse++;
         }
@@ -49,7 +54,7 @@ export class CreerQuizzComponent {
     }
 
     //On détermine la longueur de la question à laquelle appartient la réponse sélectionnée
-    let longueurQuestionBonneReponse = this.reponses[indiceQuestionBonneReponse].length;
+    let longueurQuestionBonneReponse = this.reponsesQuiz[indiceQuestionBonneReponse].length;
 
     const reponsesElements = document.getElementsByClassName('reponse-bubble');
 
@@ -62,29 +67,35 @@ export class CreerQuizzComponent {
   afficherFichier() {
     const input = document.getElementById("recup-fichier") as HTMLInputElement;
     const file = input.files?.[0];
-    const stockImage = document.getElementById("image-quiz-id") as HTMLDivElement;
-    const imageElement = document.createElement('img');
-    imageElement.style.height = "100%";
-    imageElement.style.width = "100%";
-    imageElement.style.objectFit = "contain";
 
     const reader = new FileReader();
     reader.onload = () => {
+      const stockImage = document.getElementById("image-quiz-id") as HTMLDivElement;
+      const imageElement = document.createElement('img');
       imageElement.src = reader.result as string;
-    }
-    reader.readAsDataURL(file as Blob);
+      imageElement.style.height = "100%";
+      imageElement.style.width = "100%";
+      imageElement.style.objectFit = "contain";
 
-    for(let i = 0; i < stockImage.children.length; i++) {
-      if(stockImage.children[i] != input) {
-        stockImage.children[i].remove();
-        i = 0;
+      // Supprimer les anciennes images
+      for (let i = 0; i < stockImage.children.length; i++) {
+        if (stockImage.children[i] !== input) {
+          stockImage.children[i].remove();
+          i = 0;
+        }
       }
-    }
 
-    stockImage.prepend(imageElement);
-    imageElement.addEventListener('click', function() {
-      input.click();
-    });
+      // Ajouter la nouvelle image
+      stockImage.prepend(imageElement);
+      imageElement.addEventListener('click', function() {
+        input.click();
+      });
+      this.imageURL = imageElement.src;
+
+      // Ajoutez ici d'autres actions nécessaires avec l'image
+    };
+
+    reader.readAsDataURL(file as Blob);
   }
 
   // Déclarez une variable pour stocker la couleur actuelle
@@ -93,10 +104,9 @@ export class CreerQuizzComponent {
 
 // Ajoutez une méthode pour gérer le clic et la mise à jour de la couleur
   onClickChangeColor(i: number) {
-    console.log(i);
     this.selectedIndex = i;
     this.currentColor = this.getDifficultyColor(i);
-    console.log(this.currentColor);
+    this.difficultyQuiz = i;
   }
 
   getDifficultyColor(index: number): string {
@@ -111,6 +121,31 @@ export class CreerQuizzComponent {
         return '#ff6600'; // Orange
       default :
         return '#ff0000'; // Rouge
+    }
+  }
+
+  titreQuiz: string = '';
+  descriptionQuiz: string = '';
+  difficultyQuiz: number = 0;
+  questions: string[] = [];
+  reponses: string[][] = [[], []];
+  imageURL: string = '';
+
+  async createQuiz(): Promise<void> {
+    // Récupérer les valeurs du formulaire
+    if (this.titreQuiz && this.descriptionQuiz && this.difficultyQuiz && this.questions && this.reponses && this.imageURL) {
+      const quizData = {
+        titre: this.titreQuiz,
+        description: this.descriptionQuiz,
+        difficulte: this.difficultyQuiz,
+        questions: this.questions,
+        reponses: this.reponses,
+        imageURL: this.imageURL
+        // Ajoutez d'autres propriétés du quiz ici (photo, difficulté, etc.)
+      };
+
+      // Envoyer les données du quiz à votre backend ou effectuer d'autres actions nécessaires
+      console.log(quizData);
     }
   }
 
