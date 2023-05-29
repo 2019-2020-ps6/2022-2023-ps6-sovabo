@@ -76,7 +76,7 @@ export class QuizService {
     }
 
   async createQuiz(newQuiz: Partial<Quiz>): Promise<Quiz> {
-    const quiz = await this.httpClient.post<Quiz>(`${serverBack}users`, newQuiz).toPromise();
+    const quiz = await this.httpClient.post<Quiz>(`${serverBack}quizzes`, newQuiz).toPromise();
     if (!quiz) {
       throw new Error(`Failed to create user`);
     }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
 import {Quiz} from "../../../models/quizz.model"
 import {Question, Answer} from "../../../models/question.model";
+import {QuizService} from "../../../service/quizz.service";
 
 @Component({
   selector: 'app-creer-quizz',
@@ -12,22 +13,57 @@ export class CreerQuizzComponent {
 
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
 
-  constructor(private jeuxCouleursService: JeuxCouleursService) {
+  constructor(private jeuxCouleursService: JeuxCouleursService, public quizService: QuizService) {
   }
 
   questionsQuiz: string[] = ['', ''];
   reponsesQuiz: string[][] = [['', ''], ['', '']];
+  correctArray: boolean[] = [];
+
+  ngOnInit() {
+    for (let i = 0; i < 4; i++) {
+      this.correctArray.push(false);
+    }
+    console.log(this.correctArray)
+  }
 
   ajouterQuestion() {
     this.questionsQuiz.push('');
     this.reponsesQuiz.push(['', '']);
     this.questions.push('');
     this.reponses.push([]);
+
+    this.correctArray.push(false, false)
+    console.log(this.correctArray)
   }
 
   ajouterReponse(index: number) {
     this.reponsesQuiz[index].push('');
     this.reponses[index].push('');
+
+    let nombreReponses: number = 0;
+    for(let i = 0; i < this.questionsQuiz.length; i++) {
+      for(let j = 0; j < this.reponsesQuiz[i].length; j++) {
+        nombreReponses++;
+      }
+    }
+
+    this.correctArray.push(false);
+
+    if(index < this.questionsQuiz.length - 1) {   //On regarde si l'on ajoute une réponse à la dernière question, auquel cas on a juste a push un false en fin de tableau comme on vient de le faire
+      for(let i = this.questionsQuiz.length - 1; i > index; i--) {    //Dans ce cas, on décale tous les booléen vers la droite pour inclure le false à la bonne place
+        for(let j = 0; j < this.reponsesQuiz[i].length; j++) {
+          this.correctArray[nombreReponses - j - 1] = this.correctArray[nombreReponses - j - 2];
+        }
+        if(index == i - 1) {
+          this.correctArray[nombreReponses - this.reponsesQuiz[i].length - 1] = false;
+        }
+        nombreReponses -= this.reponsesQuiz[i].length;
+      }
+    }
+
+    console.log(this.correctArray);
+
   }
 
   selectionnerBonneReponse(questionIndex: number, reponseIndex: number) {
@@ -58,10 +94,17 @@ export class CreerQuizzComponent {
 
     const reponsesElements = document.getElementsByClassName('reponse-bubble');
 
+    while(this.correctArray.length < reponsesElements.length) {
+      this.correctArray.push(false);
+    }
+
     for(let i = 0; i < longueurQuestionBonneReponse; i++) {
       reponsesElements[positionReponse - indiceReponse + i].classList.remove('checked');
+      this.correctArray[positionReponse - indiceReponse + i] = false;
     }
     reponsesElements[positionReponse].classList.add('checked');
+    this.correctArray[positionReponse] = true;
+    console.log(this.correctArray);
   }
 
   afficherFichier() {
@@ -131,18 +174,48 @@ export class CreerQuizzComponent {
   reponses: string[][] = [[], []];
   imageURL: string = '';
 
+  convertReponsesToAnswer(index: number) {
+    let nombreReponses: number = 0;
+    for(let i = 0; i < index; i++) {
+      nombreReponses += this.reponsesQuiz[i].length;
+    }
+    let listeReponses: Answer[] = [];
+    for (let j = 0; j < this.reponses[index].length; j++) {
+      const answer: Answer = {
+        value: this.reponses[index][j],
+        isCorrect: this.correctArray[nombreReponses]
+      };
+      nombreReponses++;
+      listeReponses.push(answer);
+    }
+    return listeReponses;
+  }
+  associateAnswersToQuestions() {
+    let listeQuestions: Question[] = [];
+    for(let i = 0; i < this.questions.length; i++) {
+      const question: Partial<Question> = {
+        label: this.questions[i],
+        answers: this.convertReponsesToAnswer(i)
+      }
+      listeQuestions.push(<Question>question);
+    }
+    console.log(listeQuestions);
+    return listeQuestions;
+  }
+
   async createQuiz(): Promise<void> {
     // Récupérer les valeurs du formulaire
     if (this.titreQuiz && this.descriptionQuiz && this.difficultyQuiz && this.questions && this.reponses && this.imageURL) {
-      const quizData = {
-        titre: this.titreQuiz,
-        description: this.descriptionQuiz,
-        difficulte: this.difficultyQuiz,
-        questions: this.questions,
-        reponses: this.reponses,
-        imageURL: this.imageURL
+      const quizData: Partial<Quiz> = {
+        name: this.titreQuiz,
+        desc: this.descriptionQuiz,
+        difficulty: this.difficultyQuiz,
+        questions: this.associateAnswersToQuestions(),
+        image: this.imageURL
         // Ajoutez d'autres propriétés du quiz ici (photo, difficulté, etc.)
       };
+
+      const quiz = await this.quizService.createQuiz(quizData);
 
       // Envoyer les données du quiz à votre backend ou effectuer d'autres actions nécessaires
       console.log(quizData);
