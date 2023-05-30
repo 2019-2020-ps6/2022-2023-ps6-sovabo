@@ -11,8 +11,14 @@ class User extends BaseModel {
       name: Joi.string().required(),
       imagePath: Joi.string().required(),
       color: Joi.string().required(),
-      configuration: ConfigurationModel.schema.required(), // rend le champ 'configuration' requis
+      configuration: ConfigurationModel.schema.required(),
+      selected: Joi.boolean().required(),
     });
+  }
+  getConfiguration(userId) {
+    const user = this.getById(userId);
+    if (!user) throw new NotFoundError(`Cannot get User id=${userId} : not found`)
+    return user.configuration;
   }
 
 
@@ -22,11 +28,12 @@ class User extends BaseModel {
     const newConfig = ConfigurationModel.create(obj.configuration || {});
     console.log("ici apres")
 
-    const newUser = { ...obj, id: uuid.v4(), configuration: newConfig };
+    const newUser = { ...obj, id: uuid.v4(), configuration: newConfig, selected: false };
     const { error } = Joi.validate(newUser, this.schema);
     if (error) throw new ValidationError(`Create User Error : Object ${JSON.stringify(obj)} does not match schema of model ${this.name}`, error);
     this.items.push(newUser);
     this.save();
+
     return newUser;
   }
 

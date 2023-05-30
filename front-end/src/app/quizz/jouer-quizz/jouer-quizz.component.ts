@@ -214,7 +214,9 @@ export class JouerQuizzComponent implements OnInit {
         let initData = "Q"+(this.currentQuestionIndex+1)+" : " + this.currentQuestion.label;
 
         let largeur = parseFloat(getComputedStyle(questionContainer).width);
+        let largeurTxt = parseFloat(getComputedStyle(htmlLocation).width);
         console.log(largeur);
+        console.log(largeurTxt);
 
         if(largeur>1200){
           let split = initData.split(" ");

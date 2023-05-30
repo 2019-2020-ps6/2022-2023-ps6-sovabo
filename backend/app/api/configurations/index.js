@@ -1,13 +1,26 @@
 const { Router } = require('express')
-const { Configuration } = require('../../models/configuration.model.js')
+const Configuration = require('../../models/configuration.model.js')
+
 const manageAllErrors = require('../../utils/routes/error-management')
 
 const router = new Router()
 
 router.get('/', (req, res) => {
   try {
+    console.log("ici");
     const configurations = Configuration.get()
+    console.log("configurations");
     res.status(200).json(configurations)
+  } catch (err) {
+    manageAllErrors(res, err)
+  }
+})
+
+// Get configuration from idConfig
+router.get('/:idConfig', (req, res) => {
+  try {
+    const configuration = Configuration.getById(req.params.idConfig)
+    res.status(200).json(configuration)
   } catch (err) {
     manageAllErrors(res, err)
   }
