@@ -4,6 +4,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { Quiz } from '../models/quizz.model';
 import { Question } from '../models/question.model';
 import { serverUrl, httpOptionsBase, serverBack } from '../config/server.config'
+import {User} from "../models/user.model";
 
 @Injectable({
   providedIn: 'root'
@@ -39,8 +40,8 @@ export class QuizService {
       }
       return questions;
     }
-    
-    
+
+
 
     setQuizCourant(quiz : Quiz){
       this.quizCourant = quiz;
@@ -73,4 +74,12 @@ export class QuizService {
     public getTimeResponses(): number[] | undefined {
       return this.quizCourant?.statQuiz?.timeResponses;
     }
+
+  async createQuiz(newQuiz: Partial<Quiz>): Promise<Quiz> {
+    const quiz = await this.httpClient.post<Quiz>(`${serverBack}quizzes`, newQuiz).toPromise();
+    if (!quiz) {
+      throw new Error(`Failed to create user`);
+    }
+    return quiz;
+  }
 }

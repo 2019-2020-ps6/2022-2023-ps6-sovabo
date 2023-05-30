@@ -24,11 +24,16 @@
   </div>
 
   <div class="rightContainer">
-    <app-btn-clickable-background class="navigation" [routerLink]="['/configuration']">CONFIGURATION</app-btn-clickable-background>
+    <app-btn-clickable-background (click)="isAccessible('/configuration')" class="navigation">CONFIGURATION</app-btn-clickable-background>
     <app-btn-clickable-background id="profils" class="navigation" [routerLink]="['/mon-profil']">PROFILS</app-btn-clickable-background>
-    <app-btn-clickable-background class="navigation" [routerLink]="['/statistiques']">STATISTIQUE</app-btn-clickable-background>
+    <app-btn-clickable-background (click)="isAccessible('/statistiques')" class="navigation">STATISTIQUE</app-btn-clickable-background>
+
   </div>
 
 </div>
 
 </body>
+<div *ngIf="showAlert" class="alert alert-danger alert-dismissible fade show user-alert" role="alert">
+  Aucun profil n'est sélectionné, veuillez en créer un ou en sélectionner un existant.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlert()"></button>
+</div>
