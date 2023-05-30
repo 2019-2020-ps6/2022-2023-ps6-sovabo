@@ -1,7 +1,7 @@
-import {Component, HostListener} from '@angular/core';
+import {Component} from '@angular/core';
 import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
-import {Location} from '@angular/common';
-import {AuthService} from "../../../service/authentification";
+import {AuthService} from "../../../service/authentification.service";
+import {CodeAcces} from "../../../models/codeAcces.model";
 
 @Component({
   selector: 'app-configuration',
@@ -11,25 +11,27 @@ import {AuthService} from "../../../service/authentification";
 export class ConfigurationComponent {
   AttentionColorStatus: boolean = false;
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
-  showModal: boolean = true;
-  correctAccessCode: string = '1'; // replace this with your actual access code
+  showModalAuth: boolean | undefined;
+  correctAccessCode: string | undefined;
   isAccessing: boolean | undefined;
 
   constructor(private jeuxCouleursService: JeuxCouleursService,
               private authService: AuthService) {
   }
 
-  ngOnInit(): void {
-    this.showModal = !this.authService.getAuthenticationStatus();
+  async ngOnInit(): Promise<void> {
     this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
     this.jeuxCouleursService.changeFont(document);
+    this.showModalAuth = !this.authService.getAuthenticationStatus();
+    this.authService.getCorrectAccessCode().subscribe(code => {
+      this.correctAccessCode = code;
+    });
   }
 
   ngAfterViewInit() {
     if (this.jeuxCouleursService.isDefaultActive) {
       this.jeuxCouleursService.collectDefaultStyles();
     } else {
-      console.log("MODIFICATION DE LA FONT !!");
       this.jeuxCouleursService.changeFont(document);
     }
     this.jeuxCouleursService.changeFontSize(document);
@@ -37,10 +39,10 @@ export class ConfigurationComponent {
 
   handleAccessCode(accessCode: string): void {
     if (accessCode === this.correctAccessCode) {
-      this.toggleAuthenticate();
+      this.authService.toggleAuthenticate();
       this.isAccessing = true;
       setTimeout(() => {
-        this.showModal = false;
+        this.showModalAuth = false;
       }, 600); // The same duration as your animation
     } else {
       alert('Incorrect access code. Please try again.');

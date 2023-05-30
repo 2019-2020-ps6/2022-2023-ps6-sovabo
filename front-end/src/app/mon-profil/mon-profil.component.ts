@@ -4,7 +4,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {UserService} from "../../service/user.service";
 import {User} from "../../models/user.model";
 import { BehaviorSubject } from 'rxjs';
-import {AuthService} from "../../service/authentification";
+import {AuthService} from "../../service/authentification.service";
 
 @Component({
   selector: 'app-mon-profil',
@@ -24,7 +24,7 @@ export class MonProfilComponent {
   public alertState: boolean = true;
   deletingUsers: string[] = [];
   showModalAuth: boolean = true;
-  correctAccessCode: string = '1'; // replace this with your actual access code
+  correctAccessCode: string | undefined;
   isAccessing: boolean | undefined;
 
 
@@ -70,6 +70,9 @@ export class MonProfilComponent {
 
     this.userService.currentUser$.subscribe(user => {
       // Faites quelque chose avec l'utilisateur courant
+    });
+    this.authService.getCorrectAccessCode().subscribe(code => {
+      this.correctAccessCode = code;
     });
   }
 

@@ -14,7 +14,7 @@
   <app-btn-clickable-frame-background class="navigation" id="retour" [routerLink]="['/accueil']" (click)="toggleAuthenticate()">RETOUR</app-btn-clickable-frame-background>
 
 </div>
-<app-access-code-modal *ngIf="showModal"
+<app-access-code-modal *ngIf="showModalAuth"
                        (enteredAccessCode)="handleAccessCode($event)"
                        [isAccessing]="isAccessing">
 </app-access-code-modal>

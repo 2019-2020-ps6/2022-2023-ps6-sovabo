@@ -3,7 +3,7 @@ import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
 import {Quiz} from "../../../models/quizz.model"
 import {Question, Answer} from "../../../models/question.model";
 import {QuizService} from "../../../service/quizz.service";
-import {AuthService} from "../../../service/authentification";
+import {AuthService} from "../../../service/authentification.service";
 
 @Component({
   selector: 'app-creer-quizz',
@@ -13,8 +13,8 @@ import {AuthService} from "../../../service/authentification";
 export class CreerQuizzComponent {
 
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
-  showModalAuth: boolean = true;
-  correctAccessCode: string = '1'; // replace this with your actual access code
+  showModalAuth: boolean | undefined;
+  correctAccessCode: string | undefined;
   isAccessing: boolean | undefined;
 
   constructor(private jeuxCouleursService: JeuxCouleursService,
@@ -26,11 +26,14 @@ export class CreerQuizzComponent {
   reponsesQuiz: string[][] = [['', ''], ['', '']];
   correctArray: boolean[] = [];
 
-  ngOnInit() {
+  async ngOnInit(): Promise<void> {
     for (let i = 0; i < 4; i++) {
       this.correctArray.push(false);
     }
-    console.log(this.correctArray)
+    this.showModalAuth = !this.authService.getAuthenticationStatus();
+    this.authService.getCorrectAccessCode().subscribe(code => {
+      this.correctAccessCode = code;
+    });
   }
 
   ajouterQuestion() {
@@ -238,5 +241,9 @@ export class CreerQuizzComponent {
     } else {
       alert('Incorrect access code. Please try again.');
     }
+  }
+
+  toggleAuthenticate() {
+    this.authService.toggleAuthenticate();
   }
 }

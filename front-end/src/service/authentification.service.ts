@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {map, Observable, tap} from "rxjs";
+import {BehaviorSubject, map, Observable, tap} from "rxjs";
 import {serverBack} from "../config/server.config";
-import {CodeAcces} from "../models/codeAcces";
+import {CodeAcces} from "../models/codeAcces.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private isAuthenticated: boolean = false;
-  private correctAccessCode: string | undefined;
+  private correctAccessCode: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   constructor(private httpClient: HttpClient) {
+    this.fetchAccessCode().subscribe((code) => {
+      this.correctAccessCode.next(code.code);
+    });
   }
 
   async ngOnInit(): Promise<void> {
-    this.fetchAccessCode().subscribe((code) => {
-      this.correctAccessCode = code.code;
-    });
   }
 
   fetchAccessCode(): Observable<CodeAcces> {
@@ -34,15 +34,15 @@ export class AuthService {
   }
 
   toggleAuthenticate(): void {
-    this.isAuthenticated = true;
+    this.isAuthenticated = !this.isAuthenticated;
   }
 
   getAuthenticationStatus(): boolean {
     return this.isAuthenticated;
   }
 
-  getCorrectAccessCode(): string | undefined {
-    return this.correctAccessCode;
+  getCorrectAccessCode(): Observable<string> {
+    return this.correctAccessCode.asObservable();
   }
 
 }
