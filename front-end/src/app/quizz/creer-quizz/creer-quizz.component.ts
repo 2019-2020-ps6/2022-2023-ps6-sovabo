@@ -3,6 +3,7 @@ import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
 import {Quiz} from "../../../models/quizz.model"
 import {Question, Answer} from "../../../models/question.model";
 import {QuizService} from "../../../service/quizz.service";
+import {AuthService} from "../../../service/authentification";
 
 @Component({
   selector: 'app-creer-quizz',
@@ -12,8 +13,13 @@ import {QuizService} from "../../../service/quizz.service";
 export class CreerQuizzComponent {
 
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
+  showModalAuth: boolean = true;
+  correctAccessCode: string = '1'; // replace this with your actual access code
+  isAccessing: boolean | undefined;
 
-  constructor(private jeuxCouleursService: JeuxCouleursService, public quizService: QuizService) {
+  constructor(private jeuxCouleursService: JeuxCouleursService,
+              public quizService: QuizService,
+              private authService: AuthService) {
   }
 
   questionsQuiz: string[] = ['', ''];
@@ -222,4 +228,15 @@ export class CreerQuizzComponent {
     }
   }
 
+  handleAccessCode(accessCode: string): void {
+    if (accessCode === this.correctAccessCode) {
+      this.authService.toggleAuthenticate();
+      this.isAccessing = true;
+      setTimeout(() => {
+        this.showModalAuth = false;
+      }, 600); // The same duration as your animation
+    } else {
+      alert('Incorrect access code. Please try again.');
+    }
+  }
 }

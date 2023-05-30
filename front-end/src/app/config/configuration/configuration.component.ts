@@ -22,8 +22,6 @@ export class ConfigurationComponent {
   ngOnInit(): void {
     this.showModal = !this.authService.getAuthenticationStatus();
     this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
-
-    console.log("APPEL ONINIT CONFIG");
     this.jeuxCouleursService.changeFont(document);
   }
 
@@ -39,7 +37,7 @@ export class ConfigurationComponent {
 
   handleAccessCode(accessCode: string): void {
     if (accessCode === this.correctAccessCode) {
-      this.authService.toggleAuthenticate();
+      this.toggleAuthenticate();
       this.isAccessing = true;
       setTimeout(() => {
         this.showModal = false;

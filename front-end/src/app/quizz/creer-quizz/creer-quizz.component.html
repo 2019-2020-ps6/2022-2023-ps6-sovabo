@@ -66,3 +66,9 @@
   </form>
 
 </div>
+
+<!-- Pop-up pour le code d'acces -->
+<app-access-code-modal *ngIf="showModalAuth"
+                       (enteredAccessCode)="handleAccessCode($event)"
+                       [isAccessing]="isAccessing">
+</app-access-code-modal>

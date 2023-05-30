@@ -358,7 +358,7 @@ export class MonProfilComponent {
 
   handleAccessCode(accessCode: string): void {
     if (accessCode === this.correctAccessCode) {
-      this.authService.toggleAuthenticate();
+      this.toggleAuthenticate();
       this.isAccessing = true;
       setTimeout(() => {
         this.showModalAuth = false;
@@ -366,5 +366,8 @@ export class MonProfilComponent {
     } else {
       alert('Incorrect access code. Please try again.');
     }
+  }
+  toggleAuthenticate() {
+    this.authService.toggleAuthenticate();
   }
 }

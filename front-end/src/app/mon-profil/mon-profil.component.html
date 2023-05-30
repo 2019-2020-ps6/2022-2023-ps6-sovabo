@@ -1,7 +1,7 @@
 <div class="container1">
   <div class="containerBtnGestion">
     <div id="retour">
-      <app-btn-clickable-frame-background class="navigation" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
+      <app-btn-clickable-frame-background class="navigation" (click)="toggleAuthenticate()" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
     </div>
     <div class="containerBtnGestionUser">
       <button class="btnGestion" id="btnCreerUser" type="button" (click)="goToCreateUser()">CREER PROFIL</button>
