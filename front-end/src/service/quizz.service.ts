@@ -18,17 +18,21 @@ export class QuizService {
       this.loadQuizzesFromServer();
     }
 
-    private loadQuizzesFromServer() {
-      this.httpClient.get<Quiz[]>(`${serverBack}/quizzes`).subscribe(
-        (quizzes) => {
-          this.quizzes.push(...quizzes);
-        },
-        (error) => {
-          console.log('Erreur ! : ' + error);
-        }
-      );
-      console.log(this.quizzes);
+    public loadQuizzesFromServer(): Promise<Quiz[]> {
+      return new Promise((resolve, reject) => {
+        this.httpClient.get<Quiz[]>(`${serverBack}/quizzes`).subscribe(
+          (quizzes) => {
+            this.quizzes.push(...quizzes);
+            resolve(this.quizzes); // When data is received, the Promise is resolved
+          },
+          (error) => {
+            console.log('Erreur ! : ' + error);
+            reject(error); // If there's an error, the Promise is rejected
+          }
+        );
+      });
     }
+    
 
     getData() {
       return this.quizzes;
@@ -45,9 +49,13 @@ export class QuizService {
 
     setQuizCourant(quiz : Quiz){
       this.quizCourant = quiz;
+      console.log("dans setQuizCourant");
+      console.log(this.quizCourant);
     }
 
     getQuizCourant(): Quiz{
+      console.log("dans getQuizCourant");
+      console.log(this.quizCourant);
       return this.quizCourant;
     }
 
@@ -81,5 +89,13 @@ export class QuizService {
       throw new Error(`Failed to create user`);
     }
     return quiz;
+  }
+
+  async updateQuiz(quiz: Quiz): Promise<Quiz> {
+    const updatedQuiz = await this.httpClient.put<Quiz>(`${serverBack}quizzes/${quiz.id}`, quiz).toPromise();
+    if (!updatedQuiz) {
+      throw new Error(`Failed to update user with id ${quiz.id}`);
+    }
+    return updatedQuiz;
   }
 }

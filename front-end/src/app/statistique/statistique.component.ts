@@ -5,7 +5,7 @@ import { QuizService } from '../../service/quizz.service';
 import { StatistiqueService } from 'src/service/statistique.service';
 import { StatQuizz } from 'src/models/quizz.stat.model';
 
-declare function createChart(): any;
+declare function createChart(statQuiz: StatQuizz): any;
 
 @Component({
   selector: 'app-statistique',
@@ -18,14 +18,14 @@ export class StatistiqueComponent {
 
   public moyenneTimeReponse: number = 0;
   constructor(private route: ActivatedRoute, private quizService: QuizService,private statistiquesService: StatistiqueService) {
-    this.statQuiz = { timeResponses: [] };
   }
 
   ngOnInit() {
     this.quiz = this.quizService.getQuizCourant();
+
     this.statQuiz = this.quiz.statQuiz;
     this.moyenneTimeReponse = this.calculerMoyenne();
-    createChart();
+    createChart(this.statQuiz);
 
     const openButton = document.getElementById("openButton");
     if (openButton) {

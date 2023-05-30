@@ -86,6 +86,7 @@ export class JouerQuizzComponent implements OnInit {
 
   checkWin() {
     if (this.currentQuestionIndex === this.quiz.questions.length - 1) {
+      console.log('FINI');
       this.statistiquesService.ajouterMoyenneTimeResponseAuQuizCourant(this.calculerMoyenne());
       this.isQuizFinished = true;
     }
