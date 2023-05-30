@@ -4,6 +4,7 @@ const userModel = require('./models/user.model.js');
 const buildServer = require('./build-server.js');
 const logger = require('./utils/logger.js');
 const { Configuration } = require('./models/index.js');
+const CodeAccesModel = require('./models/codeAcces.model.js');
 
 const deleteAllData = () => {
   QuizModel.deleteAll();
@@ -15,7 +16,12 @@ const deleteAllData = () => {
 
 //deleteAllData();
 
+const codeAcces = () => {
+    CodeAccesModel.create({ code: '1234' });
+    logger.info('Code Accès créé avec succès.');
+};
 
+codeAcces();
 
 async function createSampleData() {
   try {

@@ -4,6 +4,7 @@ import { Quiz } from '../../models/quizz.model';
 import { QuizService } from '../../service/quizz.service';
 import { StatistiqueService } from 'src/service/statistique.service';
 import { StatQuizz } from 'src/models/quizz.stat.model';
+import {AuthService} from "../../service/authentification.service";
 
 declare function createChart(): any;
 
@@ -15,13 +16,20 @@ declare function createChart(): any;
 export class StatistiqueComponent {
   public statQuiz!: StatQuizz;
   public quiz!: Quiz;
-
   public moyenneTimeReponse: number = 0;
-  constructor(private route: ActivatedRoute, private quizService: QuizService,private statistiquesService: StatistiqueService) {
+  showModalAuth: boolean | undefined;
+  correctAccessCode: string | undefined;
+  isAccessing: boolean | undefined;
+
+
+  constructor(private route: ActivatedRoute,
+              private quizService: QuizService,
+              private statistiquesService: StatistiqueService,
+              private authService: AuthService) {
     this.statQuiz = { timeResponses: [] };
   }
 
-  ngOnInit() {
+  async ngOnInit(): Promise<void> {
     this.quiz = this.quizService.getQuizCourant();
     this.statQuiz = this.quiz.statQuiz;
     this.moyenneTimeReponse = this.calculerMoyenne();
@@ -36,6 +44,11 @@ export class StatistiqueComponent {
     if (closeButton) {
       closeButton.addEventListener("click", this.closePopup);
     }
+
+    this.showModalAuth = !this.authService.getAuthenticationStatus();
+    this.authService.getCorrectAccessCode().subscribe(code => {
+      this.correctAccessCode = code;
+    });
   }
 
 
@@ -67,5 +80,15 @@ export class StatistiqueComponent {
     }
   }
 
-
+  handleAccessCode(accessCode: string): void {
+    if (accessCode === this.correctAccessCode) {
+      this.authService.toggleAuthenticate();
+      this.isAccessing = true;
+      setTimeout(() => {
+        this.showModalAuth = false;
+      }, 600); // The same duration as your animation
+    } else {
+      alert('Incorrect access code. Please try again.');
+    }
+  }
 }

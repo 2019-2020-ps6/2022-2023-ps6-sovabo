@@ -3,7 +3,7 @@
   <div class="header">
     <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
     <p [ngClass]="this.contrasteTroubleEnable ? 'titreStyleContrastOn' : 'titreStyleContrastOff'" >Créer mon quizz</p>
-    <app-btn-clickable-frame-background class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
+    <app-btn-clickable-frame-background class="navigation" id="retour" (click)="toggleAuthenticate()" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
   </div>
 
   <form (ngSubmit)="createQuiz()"  #quizForm="ngForm">
@@ -66,3 +66,9 @@
   </form>
 
 </div>
+
+<!-- Pop-up pour le code d'acces -->
+<app-access-code-modal *ngIf="showModalAuth"
+                       (enteredAccessCode)="handleAccessCode($event)"
+                       [isAccessing]="isAccessing">
+</app-access-code-modal>
