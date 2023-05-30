@@ -9,7 +9,7 @@
 
 .titreStyleContrastOff {
   font-family: DynaPuff;
-  font-size: 5vw;
+  font-size: 9vh;
   font-weight: 700;
   color: #FFFDF8;
   text-align: center;
@@ -19,7 +19,7 @@
 
 .titreStyleContrastOn {
   font-family: DynaPuff;
-  font-size: 5vw;
+  font-size: 9vh;
   font-weight: 700;
   color: #000000;
   text-align: center;
@@ -30,27 +30,74 @@
 .contenu-creation-quiz{
   display: flex;
   flex-direction: column;
-  align-content: center;
+  align-items: center;
   height: 100%;
   min-height: 100vh;
 }
 
-.caracteristiques-quiz{
+.conteneur-caracteristiques-quiz {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  margin-top: 5vh;
+  width: 100%;
+  margin-bottom: 3vh;
+}
+
+.caracteristiques-quiz{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: calc(100% - 10vh);
+}
+
+.conteneur_image_difficulte {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  width: 20vw;
+}
+
+.difficulty-bars {
+  display: flex;
+  align-items: center;
+  height: 2vh;
+  width: 23vw;
+  margin-top: 1vh;
+}
+
+.difficulty-bar {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  margin-right: 2%;
+  border-radius: 2px;
+}
+
+.note {
+  font-size: 2.5vh;
+  font-weight: bold;
+}
+
+.difficulte {
+  margin-right: 2%;
 }
 
 .image-quiz{
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(217, 217, 217, 0.75);
+  background: rgba(217, 217, 217, 0.60);
   border-radius: 50%;
   height: 12vh;
   width: 12vh;
+  overflow: hidden;
+}
+
+.image-quiz input[type="file"] {
+  display: none;
+  opacity: 0%;
 }
 
 .iconeImage{
@@ -60,184 +107,259 @@
 }
 
 .titre-quiz{
+  background: rgba(217, 217, 217, 0.60);
   display: flex;
   align-items: center;
-  background: rgba(217, 217, 217, 0.75);
   border-radius: 59px;
   height: 8vh;
-  width: 75vh;
+  width: 40vw;
+  padding: 0 2vw;
 }
 
-.textTitre{
-  margin-left: 2vw;
+.titre-quiz input[type="text"] {
+  width: 100%;
+  border: none; /* Suppression de la bordure par défaut */
+  background: transparent; /* Fond transparent */
   font-size: 2vw;
-  color: #FFFFFF;
+  font-weight: bold;
+  outline: none; /* Suppression de la mise en évidence lors du focus */
 }
 
-.categorie-quiz{
+.inputStyleContrastOff::placeholder{
+  color: rgb(100, 100, 100);
+}
+
+.inputStyleContrastOn::placeholder{
+  color: black;
+}
+
+.inputStyleContrastOff{
+  color: rgb(100, 100, 100);
+}
+
+.inputStyleContrastOn{
+  color: black;
+}
+
+
+.description-quiz{
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  background: rgba(217, 217, 217, 0.75);
+  flex-direction: column;
+  background: rgba(217, 217, 217, 0.60);
   border-radius: 59px;
-  height: 8vh;
-  width: 35vh;
+  height: 15vh;
+  width: 50vh;
+  padding: 0vh 3vh 2vh 3vh;
+}
+
+textarea {
+  width: 100%;
+  height: 60%;
+  border: 2px dashed rgb(50, 50, 50);
+  background: transparent; /* Fond transparent */
+  font-size: 1.2vw;
+  color: rgb(50, 50, 50);
+  font-weight: bold;
+  outline: none; /* Suppression de la mise en évidence lors du focus */
 }
 
 .textCategorie{
-  margin-left: 2vw;
   font-size: 2vw;
-  color: #FFFFFF;
 }
 
 .iconeTriangle{
-  height: 10vh;
-  width: 15vh;
+  height: 6vh;
+  width: 6vh;
   color: #FFFFFF;
-  margin-left: 2vw;
 }
 
-.question1{
+.conteneur-questions {
+  width: 96%;
+  margin-left: 2vw;
+  margin-right: 2vw;
+  height: 55vh;
+  border-radius: 2vw;
+  overflow-y: auto;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 0) 90%, rgba(255, 255, 255, 0.5) 100%);
+}
+
+.question{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 8vh;
+  margin-top: 5vh;
 }
 
-.titre-question1{
+.titre-question{
   display: flex;
   align-items: center;
-  background: rgba(217, 217, 217, 0.75);
+  background: rgba(217, 217, 217, 0.60);
   border-radius: 59px;
   height: 6vh;
-  width: 150vh;
+  width: calc(100% - 14vw);
   margin-bottom: 5vh;
+  padding: 0 2vw;
 }
 
-.textTitreQuestion1{
-  margin-left: 1.8vw;
+.titre-question input[type="text"] {
+  border: none;
+  background: transparent;
   font-size: 1.5vw;
-  color: #FFFFFF;
+  font-weight: bold;
+  outline: none;
+  width: 100%;
 }
 
-.reponses-question1{
+.reponses-question{
+  position: relative;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   align-items: center;
+  width: 80%;
 }
 
-.reponse1{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(217, 217, 217, 0.75);
-  border-radius: 59px;
-  height: 8vh;
-  width: 30vh;
-  margin-right: 5vw;
-}
-
-.textReponse1{
-  font-size: 1.7vw;
-  color: #FFFFFF;
-}
-
-.reponse2{
+.reponse{
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(217, 217, 217, 0.75);
+  background: rgba(217, 217, 217, 0.60);
   border-radius: 59px;
   height: 8vh;
   width: 30vh;
-  margin-right: 5vw;
+  padding: 0 2vw;
+  margin-right: 2vh; /* Espacement horizontal entre les réponses */
+  margin-bottom: 2vh; /* Espacement vertical entre les réponses */
+  pointer-events: none;
 }
 
-.textReponse2{
+.reponse input[type="text"] {
+  border: none;
+  background: transparent;
   font-size: 1.7vw;
+  font-weight: bold;
+  outline: none;
+  width: 100%;
+  text-align: center;
+  pointer-events: all;
+}
+
+.uncheked::before {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  content:'╳';
   color: #FFFFFF;
+  font-size: 1.8vw;
+  background-color: red;
+  position: absolute;
+  top: -1vw;
+  left: -1vw;
+  border-radius: 50%;
+  pointer-events: all;
+  width: 5vh;
+  height: 5vh;
+}
+
+.checked::before {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  content: '✓';
+  background-color: #08CC0A;
+  position: absolute;
+  top: -1vw;
+  left: -1vw;
+  border-radius: 50%;
+  font-size: 1.8vw;
+  width: 5vh;
+  height: 5vh;
 }
 
 .ajout{
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(217, 217, 217, 0.75);
+  background: rgba(217, 217, 217, 0.60);
   border-radius: 59px;
   height: 8vh;
   width: 8vh;
-  margin-right: 20vw;
+  margin-bottom: 2vh;
+}
+
+.ajout:hover {
+  cursor: pointer;
 }
 
 .textAjout{
   font-size: 4vw;
-  color: #FFFFFF;
+  color: rgb(50, 50, 50);
   margin-bottom: 1vh;
-}
-
-.question2{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 5vh;
-}
-
-.titre-question2{
-  display: flex;
-  align-items: center;
-  background: rgba(217, 217, 217, 0.75);
-  border-radius: 59px;
-  height: 6vh;
-  width: 150vh;
-  margin-bottom: 5vh;
-}
-
-.textTitreQuestion2{
-  margin-left: 1.8vw;
-  font-size: 1.5vw;
-  color: #FFFFFF;
-}
-
-.reponses-question2{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
 }
 
 .question-supplementaire{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+  width: calc(100% - 45vw);
   margin-top: 5vh;
+  margin-bottom: 5vh;
 }
 
 .boutonPlus{
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(217, 217, 217, 0.75);
+  background: rgba(217, 217, 217, 0.60);
   border-radius: 59px;
   height: 6vh;
   width: 6vh;
   margin-left: 7vw;
 }
 
+.boutonPlus:hover {
+  cursor: pointer;
+}
+
 .textBoutonPlus{
   font-size: 3vw;
-  color: #FFFFFF;
+  color: rgb(50, 50, 50);
   margin-bottom: 0.8vh;
 }
 
 .ajouterQuestion{
-  margin-right: 53vw;
-  width: fit-content;
+  margin-left: 2vw;
 }
 
 .textAjouterQuestion{
   font-size: 2vw;
-  color: #FFFFFF;
+  color: rgb(50, 50, 50);
+}
+
+.bouton_valider {
+  width: 16vw;
+  height: 10vh;
+  background-color: #4FC031;
+  border-radius: 20px;
+  border: 1px solid white;
+  font-size: 3vh;
+
+  margin-top: 2vh;
+}
+
+.boutonValiderContrastOff{
+  color: rgb(50, 50, 50);
+  background-color: #4FC031;
+}
+
+.boutonValiderContrastOn{
+  color: black;
+  background: rgb(200, 200, 200);
 }
