@@ -9,4 +9,5 @@ router.use('/quizzes', QuizzesRouter)
 router.use('/users', UserRouter)
 router.use('/configurations', ConfigurationRouter)
 
+
 module.exports = router

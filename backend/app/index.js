@@ -3,15 +3,18 @@ const QuestionModel = require('./models/question.model.js');
 const userModel = require('./models/user.model.js');
 const buildServer = require('./build-server.js');
 const logger = require('./utils/logger.js');
+const { Configuration } = require('./models/index.js');
 
 const deleteAllData = () => {
   QuizModel.deleteAll();
   userModel.deleteAll();
   QuestionModel.deleteAll();
+  Configuration.deleteAll();
   logger.info('Données supprimées avec succès.');
 };
 
-deleteAllData();
+//deleteAllData();
+
 
 
 async function createSampleData() {

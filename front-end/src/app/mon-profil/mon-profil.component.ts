@@ -21,6 +21,7 @@ export class MonProfilComponent {
   deleteMode: boolean = false;
   showModal = false;
   public alertState: boolean = true;
+  deletingUsers: string[] = [];
 
 
 
@@ -61,7 +62,6 @@ export class MonProfilComponent {
       }
     }
     catch (e) {
-      // console.log(e);
     }
 
     this.userService.currentUser$.subscribe(user => {
@@ -104,7 +104,6 @@ export class MonProfilComponent {
     this.users.map(u => {
       if (u.id === user.id) {
         user.name = u.name;
-        // console.log(user.name);
       }
       return user;
     });
@@ -168,7 +167,6 @@ export class MonProfilComponent {
         this.users.push(user);
 
       } catch (e) {
-        // console.log(e);
       }
       this.isCreatingUser = false;
       this.isModifyAvatar = true;
@@ -225,14 +223,12 @@ export class MonProfilComponent {
     if (this.selectedUser) {
       let filename: string = "";
       // Prenez seulement le nom du fichier à partir de `img`, sans l'extension .png
-      console.log(img);
       if (img.includes('pngegg')) {
         filename = 'pngegg.png';
       }
       filename = img.split('/').toString();
       const parts = img.split('/');
       filename = parts[parts.length - 2] + '/' + parts[parts.length - 1];
-      console.log(filename);
 
 
       const updatedUser: Partial<User> = {
@@ -243,16 +239,15 @@ export class MonProfilComponent {
       };
 
       const userId = this.selectedUser.id || '';
-      this.userService.updateUser(updatedUser, userId).then(r => console.log(r));
 
 
       // Mettez à jour le chemin de l'image pour l'utilisateur dans la liste d'utilisateurs
       this.users = this.users.map(user => user.id === this.selectedUser?.id ? { ...user, imagePath: filename } : user);
-      this.showModal = false;
-      this.alertState = true;
-    this.showAlertNotif("L'avatar a bien été modifié !");
-
-
+      this.userService.updateUser(updatedUser, userId).then(r => {
+        this.showModal = false;
+        this.alertState = true;
+        this.showAlertNotif("L'avatar a bien été modifié !");
+      });
     }
   }
 
@@ -263,13 +258,9 @@ export class MonProfilComponent {
       this.alertState = true;
       this.showAlertNotif("Le profil de " + user.name + " a été désélectionné !");
     } else if (verif !== "onInit"){
-      console.log("Je suis dans le else");
       for (let u of this.users) {
-        console.log("Je parcours");
 
         if (u.id !== user.id) {
-          console.log("Je parcours les users");
-          console.log(u);
           await this.updateUserSelectionStatus(u, false);
         }
       }
@@ -289,20 +280,27 @@ export class MonProfilComponent {
     try {
       await this.userService.updateUser(updatedUser, userId);
     } catch (error) {
-      console.error(`Failed to update user selection status: ${error}`);
     }
   }
 
   async deleteUserFromServer(user: User): Promise<void> {
-    try {
-      await this.userService.deleteUser(user.id || '');
-      this.users = this.users.filter(u => u.id !== user.id);
-      this.alertState = true;
-      this.showAlertNotif("L'utilisateur a bien été supprimé !");
-    } catch (e) {
-      //console.log(e);
+    if (user.id != null) {
+      this.deletingUsers.push(user.id);
     }
+
+    setTimeout(async () => {
+      try {
+        await this.userService.deleteUser(user.id || '');
+        this.users = this.users.filter(u => u.id !== user.id);
+        this.alertState = true;
+        this.showAlertNotif("L'utilisateur a bien été supprimé !");
+        this.deletingUsers = this.deletingUsers.filter(id => id !== user.id); // remove the user from deletingUsers
+      } catch (e) {
+      }
+    }, 300); // Wait for the animation to finish before actually deleting the user
+    this.userService.updateAll();
   }
+
 
   openModal(user: User | null) {
     if(user != null){
