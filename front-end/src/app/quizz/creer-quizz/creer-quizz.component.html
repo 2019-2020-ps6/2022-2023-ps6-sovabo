@@ -70,5 +70,5 @@
 <!-- Pop-up pour le code d'acces -->
 <app-access-code-modal *ngIf="showModalAuth"
                        (enteredAccessCode)="handleAccessCode($event)"
-                       [isAccessing]="isAccessing">
+                       [isAccessing]="isAccessing" [isAppearing]="isAppearing">
 </app-access-code-modal>

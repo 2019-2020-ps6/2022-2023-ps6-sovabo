@@ -16,6 +16,7 @@ export class CreerQuizzComponent {
   showModalAuth: boolean | undefined;
   correctAccessCode: string | undefined;
   isAccessing: boolean | undefined;
+  isAppearing: boolean | undefined;
 
   constructor(private jeuxCouleursService: JeuxCouleursService,
               public quizService: QuizService,
@@ -27,6 +28,7 @@ export class CreerQuizzComponent {
   correctArray: boolean[] = [];
 
   async ngOnInit(): Promise<void> {
+    this.isAppearing = true;
     for (let i = 0; i < 4; i++) {
       this.correctArray.push(false);
     }
@@ -34,6 +36,11 @@ export class CreerQuizzComponent {
     this.authService.getCorrectAccessCode().subscribe(code => {
       this.correctAccessCode = code;
     });
+    if (this.showModalAuth) {
+      setTimeout(() => {
+        this.isAppearing = false;
+      }, 600);
+    }
   }
 
   ajouterQuestion() {

@@ -8,11 +8,11 @@ import {Component, Output, EventEmitter, Input} from '@angular/core';
 export class AccessCodeModalComponent {
   accessCode = "";
   @Input() isAccessing: boolean | undefined;
+  @Input() isAppearing: boolean | undefined;
   @Output() enteredAccessCode = new EventEmitter<string>();
 
   onSubmit(): void {
     this.enteredAccessCode.emit(this.accessCode);
-    console.log(this.isAccessing);
+    console.log(this.isAccessing, this.isAppearing);
   }
 }
-

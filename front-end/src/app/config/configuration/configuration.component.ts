@@ -14,6 +14,7 @@ export class ConfigurationComponent {
   showModalAuth: boolean | undefined;
   correctAccessCode: string | undefined;
   isAccessing: boolean | undefined;
+  isAppearing: boolean | undefined;
 
   constructor(private jeuxCouleursService: JeuxCouleursService,
               private authService: AuthService) {
@@ -23,9 +24,16 @@ export class ConfigurationComponent {
     this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
     this.jeuxCouleursService.changeFont(document);
     this.showModalAuth = !this.authService.getAuthenticationStatus();
+    this.isAppearing = true;
     this.authService.getCorrectAccessCode().subscribe(code => {
       this.correctAccessCode = code;
     });
+
+    if (this.showModalAuth) {
+      setTimeout(() => {
+        this.isAppearing = false;
+      }, 600);
+    }
   }
 
   ngAfterViewInit() {

@@ -12,10 +12,11 @@
   flex-flow: column;
   justify-content: center;
   align-items: center;
-  transform-origin: 50% 50%;
 }
 
 .modal-content {
+  position: relative;
+  transform-origin: 50% 175%;
   background: linear-gradient(261.58deg, rgba(124, 101, 169, 0.5) -77.61%, rgba(145, 192, 196, 0.5) 143.35%);
   box-shadow: 0 0 1em 0.4em rgba(255, 255, 255, 0.4);
   margin: auto;
@@ -57,23 +58,54 @@
 }
 
 .modal-content button:hover {
-  opacity: 0.8;
+  opacity: 0.6;
 }
 
-#retour{
-
+#retour {
   margin: 0 10px 20px 10px;
+  position: relative;
+  transform-origin: 50% 0;
+}
+
+@keyframes accessing-blur {
+  0% {
+    backdrop-filter: blur(10px);
+    background-color: rgba(0,0,0,0.4);
+  }
+  100% {
+    backdrop-filter: blur(0);
+    background-color: rgba(0,0,0,0);
+  }
+}
+
+.accessing-blur {
+  animation: accessing-blur 0.6s forwards;
+}
+
+@keyframes button-accessing {
+  0% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0) translateY(200%);
+    opacity: 0;
+  }
+}
+
+.button-accessing {
+  animation: button-accessing 0.6s forwards;
 }
 
 @keyframes accessing {
-  from {
-    transform: scale(1);
+  0% {
+    transform: scale(1) translateY(0);
     opacity: 1;
     background-color: rgba(0,0,0,0.4);
     backdrop-filter: blur(10px);
   }
-  to {
-    transform: scale(10);
+  100% {
+    transform: scale(0) translateY(200%);
     opacity: 0;
     background-color: rgba(0,0,0,0);
     backdrop-filter: blur(0);
@@ -81,7 +113,52 @@
 }
 
 .accessing {
-  animation: accessing 0.6s ease forwards;
+  animation: accessing 0.6s forwards;
+}
+
+@keyframes appearing-blur {
+  0% {
+    backdrop-filter: blur(0);
+    background-color: rgba(0,0,0,0);
+  }
+  100% {
+    backdrop-filter: blur(10px);
+    background-color: rgba(0,0,0,0.4);
+  }
+}
+
+.appearing-blur {
+  animation: appearing-blur 0.6s forwards;
+}
+
+@keyframes button-appearing {
+  0% {
+    transform: scale(0) translateY(200%);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.button-appearing {
+  animation: button-appearing 0.6s forwards;
+}
+
+@keyframes appearing {
+  0% {
+    transform: scale(0) translateY(200%);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.appearing {
+  animation: appearing 0.6s forwards;
 }
 
 
