@@ -97,6 +97,7 @@ export class JouerQuizzComponent implements OnInit {
       if (this.timeRemaining > 0) {
         this.timeRemaining--;
       } else {
+        this.timeRemaining = 5;
         if (this.timerId !== undefined) {
           clearInterval(this.timerId);
           this.timerId = undefined;
