@@ -24,10 +24,10 @@
             </div>
           </div>
           <div class="titre-quiz">
-            <input type="text" placeholder="Titre du quiz…" [(ngModel)]="titreQuiz" name="titreQuiz" required/>
+            <input [ngClass]="this.contrasteTroubleEnable ? 'inputStyleContrastOn' : 'inputStyleContrastOff'" type="text" placeholder="Titre du quiz…" [(ngModel)]="titreQuiz" name="titreQuiz" required/>
           </div>
           <div class="description-quiz">
-            <span class="textCategorie"><strong>Description</strong></span>
+            <span [ngClass]="this.contrasteTroubleEnable ? 'inputStyleContrastOn' : 'inputStyleContrastOff'" class="textCategorie"><strong >Description</strong></span>
             <textarea [(ngModel)]="descriptionQuiz" name="descriptionQuiz" required></textarea>
           </div>
         </div>
@@ -36,11 +36,11 @@
       <div class="conteneur-questions">
         <div class="question" *ngFor="let question of questionsQuiz; let i = index">
           <div class="titre-question">
-            <input type="text" placeholder="Question {{ i + 1 }} : ..." [(ngModel)]="questions[i]" name="question_{{i}}" required/>
+            <input [ngClass]="this.contrasteTroubleEnable ? 'inputStyleContrastOn' : 'inputStyleContrastOff'" type="text" placeholder="Question {{ i + 1 }} : ..." [(ngModel)]="questions[i]" name="question_{{i}}" required/>
           </div>
           <div class="reponses-question">
             <div class="reponse" *ngFor="let reponse of reponsesQuiz[i]; let j = index">
-              <input type="text" placeholder="Réponse {{ j + 1 }}" [(ngModel)]="reponses[i][j]" name="reponse_{{i}}_{{j}}" required/>
+              <input [ngClass]="this.contrasteTroubleEnable ? 'inputStyleContrastOn' : 'inputStyleContrastOff'" type="text" placeholder="Réponse {{ j + 1 }}" [(ngModel)]="reponses[i][j]" name="reponse_{{i}}_{{j}}" required/>
               <div class="reponse-bubble uncheked" (click)="selectionnerBonneReponse(i, j)">
               </div>
             </div>
@@ -60,7 +60,7 @@
         </div>
       </div>
 
-      <button type="submit" class="bouton_valider">VALIDER</button>
+      <button [ngClass]="this.contrasteTroubleEnable ? 'boutonValiderContrastOn' : 'boutonValiderContrastOff'" type="submit" class="bouton_valider">VALIDER</button>
 
     </div>
   </form>
