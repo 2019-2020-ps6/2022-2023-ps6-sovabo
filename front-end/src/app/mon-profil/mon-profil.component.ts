@@ -52,7 +52,6 @@ export class MonProfilComponent {
   async ngOnInit(): Promise<void> {
     this.showModal = false;
     try {
-
       const usersFromServer = await this.userService.loadUsersFromServer();
       this.users = usersFromServer.map(user => ({...user}));
       for (let user of this.users) {
@@ -63,6 +62,10 @@ export class MonProfilComponent {
     }
     catch (e) {
     }
+
+    if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
+    else {this.jeuxCouleursService.changeFont(document);}
+    this.jeuxCouleursService.changeFontSize(document);
 
     this.userService.currentUser$.subscribe(user => {
       // Faites quelque chose avec l'utilisateur courant

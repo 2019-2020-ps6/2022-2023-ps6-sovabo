@@ -14,7 +14,7 @@ export class JeuxCouleursService {
   //La font par défaut est Nunito
   listFont = ["Arial","Andale Mono","Comic Sans MS", "Nunito"];
 
-  private visionColorActivated = false;
+  private visionColorActivated = true;
   private colorSelected :number = -1;
   private fontSelected: string = this.listFont[3];
 

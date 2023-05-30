@@ -4,8 +4,8 @@
       <app-btn-clickable-frame-background class="navigation" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
     </div>
     <div class="containerBtnGestionUser">
-      <button class="btnGestion" id="btnCreerUser" type="button" (click)="goToCreateUser()">CREER PROFIL</button>
-      <button (click)="toggleDeleteMode()" class="btnGestion" id="btnDeleteUser"type="button" data-toggle="modal" data-target="#modalDeleteConfirmation">{{deleteMode?"ANNULER":"SUPPRIMER PROFIL"}}</button>
+      <button [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}" class="btnCreerUser fontStyleCanChange fontSizeCanChange" type="button" (click)="goToCreateUser()">CREER PROFIL</button>
+      <button [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}" (click)="toggleDeleteMode()" class="btnDeleteUser fontStyleCanChange fontSizeCanChange" type="button" data-toggle="modal" data-target="#modalDeleteConfirmation">{{deleteMode?"ANNULER":"SUPPRIMER PROFIL"}}</button>
 
     </div>
     <div *ngIf="showAlert" [ngClass]="alertState ? 'alert-success':'alert-danger'" class="alert alert-dismissible fade show" role="alert">
@@ -43,7 +43,7 @@
                     </button>
                   </div>
                   <div class="card-footer">
-                    <button *ngIf="!user.editing" [class.btn-selected]="this.getUserCourant()?.id == user.id" class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button" (click)="setUserCourant(user)">{{this.getUserCourant()?.id === user.id ? 'Selectionné' : 'Choisir'}}</button>
+                    <button [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}" *ngIf="!user.editing" [class.btn-selected]="this.getUserCourant()?.id == user.id" class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button" (click)="setUserCourant(user)">{{this.getUserCourant()?.id === user.id ? 'Selectionné' : 'Choisir'}}</button>
                     <button *ngIf="user.editing" class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button" (click)="toggleEditUserName(user)">Valider</button>
                   </div>
                 </div>
@@ -62,8 +62,8 @@
                     <input type="text" [(ngModel)]="userName" *ngIf="isCreatingUser" name="userName" required>
                   </div>
                   <div class="card-footer creating">
-                    <button id="annulerCreation" class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button" (click)="cancelCreateUser()">Annuler</button>
-                    <button type="submit" class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir">Valider</button>
+                    <button [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}" id="annulerCreation" class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir" type="button" (click)="cancelCreateUser()">Annuler</button>
+                    <button [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}" type="submit" class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir">Valider</button>
                   </div>
                 </div>
               </div>

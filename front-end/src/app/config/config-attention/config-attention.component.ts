@@ -25,7 +25,6 @@ export class ConfigAttentionComponent {
 
   private animateurSubscription: Subscription | undefined;
 
-
   constructor(private animationsService: AnimationsService,
               private animateurService: AnimateurService,
               private jeuxCouleursService: JeuxCouleursService,
