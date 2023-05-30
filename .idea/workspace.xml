@@ -6,8 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="9396fbe8-0460-49f5-b6f5-c041443176dc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/config/config-attention/config-attention.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/config/config-attention/config-attention.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/config/config-vision/config-vision.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/config/config-vision/config-vision.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/config/configuration/configuration.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/config/configuration/configuration.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/config/configuration/configuration.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/config/configuration/configuration.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/mon-profil/mon-profil.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/mon-profil/mon-profil.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/mon-profil/mon-profil.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/mon-profil/mon-profil.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/quizz/accueil-quizz/accueil-quizz.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/quizz/accueil-quizz/accueil-quizz.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/src/app/quizz/creer-quizz/creer-quizz.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/quizz/creer-quizz/creer-quizz.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/app/quizz/creer-quizz/creer-quizz.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/quizz/creer-quizz/creer-quizz.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/quizz/creer-quizz/creer-quizz.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/quizz/creer-quizz/creer-quizz.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/quizz/jouer-quizz/jouer-quizz.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/quizz/jouer-quizz/jouer-quizz.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/quizz/listes-quizz/listes-quizz.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/quizz/listes-quizz/listes-quizz.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/quizz/resultat-quizz/resultat-quizz.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/quizz/resultat-quizz/resultat-quizz.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/service/jeux-couleurs.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/service/jeux-couleurs.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

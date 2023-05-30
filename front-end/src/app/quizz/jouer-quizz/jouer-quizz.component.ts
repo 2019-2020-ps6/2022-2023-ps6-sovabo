@@ -72,11 +72,8 @@ export class JouerQuizzComponent implements OnInit {
   }
 
   ngAfterViewInit(){
-    if (this.jeuxCouleursService.isDefaultActive) {
-      this.jeuxCouleursService.collectDefaultStyles();
-    } else {
-      this.jeuxCouleursService.changeFont(document);
-    }
+    if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
+    else {this.jeuxCouleursService.changeFont(document);}
     this.jeuxCouleursService.changeFontSize(document);
   }
 

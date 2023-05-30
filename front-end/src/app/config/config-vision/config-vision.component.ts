@@ -69,13 +69,6 @@ export class ConfigVisionComponent {
       sample.innerHTML = this.jeuxCouleursService.getFontSelectedString();
     });
 
-    if (this.jeuxCouleursService.isDefaultActive) {
-      this.jeuxCouleursService.collectDefaultStyles();
-    }
-    else {
-      this.jeuxCouleursService.changeFont(document);
-    }
-
     // Appel de la fonction pour ajuster la hauteur de generalContainer
     this.adjustGeneralContainerHeight();
     this.adjustLabelFontSize();
@@ -84,6 +77,8 @@ export class ConfigVisionComponent {
   }
 
   ngAfterViewInit(){
+    if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
+    else {this.jeuxCouleursService.changeFont(document);}
     this.jeuxCouleursService.changeFontSize(document);
   }
 

@@ -158,6 +158,8 @@ export class JeuxCouleursService {
     //VIA LE DOM
     let elements = document.querySelectorAll<HTMLElement>(".fontSizeCanChange, .titreStyle");
 
+    console.log(elements);
+
     for (let i = 0; i < elements.length; i++) {
       const originFontSize = window.getComputedStyle(elements[i], null).getPropertyValue('font-size');
       let size = parseFloat(originFontSize);

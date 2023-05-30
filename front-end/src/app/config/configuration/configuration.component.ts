@@ -19,14 +19,9 @@ export class ConfigurationComponent {
     this.jeuxCouleursService.changeFont(document);
   }
 
-  ngAfterViewInit(){
-    if (this.jeuxCouleursService.isDefaultActive) {
-      this.jeuxCouleursService.collectDefaultStyles();
-    }
-    else {
-      console.log("MODIFICATION DE LA FONT !!");
-      this.jeuxCouleursService.changeFont(document);
-    }
+  ngAfterViewInit(){console.log("afterContent");
+    if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
+    else {this.jeuxCouleursService.changeFont(document);}
     this.jeuxCouleursService.changeFontSize(document);
   }
 

@@ -40,13 +40,6 @@ export class ConfigAttentionComponent {
     this.user = this.getUserCourant();
     await this.loadConfig();
     this.contrasteTroubleEnable = this.jeuxCouleursService.getVisionAttentionStatus();
-
-    if (this.jeuxCouleursService.isDefaultActive) {
-      this.jeuxCouleursService.collectDefaultStyles();
-    }
-    else {
-      this.jeuxCouleursService.changeFont(document);
-    }
   }
 
   ngOnDestroy() {
@@ -63,6 +56,8 @@ export class ConfigAttentionComponent {
   }
 
   ngAfterViewInit(){
+    if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
+    else {this.jeuxCouleursService.changeFont(document);}
     this.jeuxCouleursService.changeFontSize(document);
   }
   toggleAnimations() {

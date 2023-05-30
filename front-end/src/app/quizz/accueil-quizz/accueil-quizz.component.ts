@@ -32,15 +32,11 @@ export class AccueilQuizzComponent {
     this.quizService.setQuizCourant(this.quiz);
     this.animations = this.animationsService.isAnimated;
     this.animationDuration = this.animationsService.duration;
-    if (this.jeuxCouleursService.isDefaultActive) {
-      this.jeuxCouleursService.collectDefaultStyles();
-    }
-    else {
-      this.jeuxCouleursService.changeFont(document);
-    }
   }
 
   ngAfterViewInit(){
+    if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
+    else {this.jeuxCouleursService.changeFont(document);}
     this.jeuxCouleursService.changeFontSize(document);
   }
 

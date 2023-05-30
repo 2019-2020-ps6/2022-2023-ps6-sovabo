@@ -63,13 +63,16 @@ export class MonProfilComponent {
     catch (e) {
     }
 
-    if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
-    else {this.jeuxCouleursService.changeFont(document);}
-    this.jeuxCouleursService.changeFontSize(document);
-
     this.userService.currentUser$.subscribe(user => {
       // Faites quelque chose avec l'utilisateur courant
     });
+  }
+
+
+  ngAfterContentChecked(){
+    if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
+    else {this.jeuxCouleursService.changeFont(document);}
+    this.jeuxCouleursService.changeFontSize(document);
   }
 
 
