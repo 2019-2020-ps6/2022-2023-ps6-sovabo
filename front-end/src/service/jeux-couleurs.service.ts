@@ -170,15 +170,38 @@ export class JeuxCouleursService {
 
   changeFont(document: Document) {
     if(!this.isDefaultActive){
-      console.log("APPLY FONT CLASS ");
       this.applyFontToClass(document);
     }
   }
 
   applyFontToClass(document: Document) {
+    console.log("APPLY FONT");
     let elements = document.querySelectorAll<HTMLElement>(".fontStyleCanChange");
     for (let i = 0; i < elements.length; i++) {
       elements[i].style.fontFamily = this.getFontSelectedString();
+    }
+  }
+
+  changeColor(document: Document){
+    let elements = document.querySelectorAll<HTMLElement>(".fontColorToChange");
+    console.log(elements);
+    for (let i = 0; i < elements.length; i++) {
+      switch (this.getVisionColorSelectedString()) {
+        case this.listTrouble[0]:
+          elements[i].style.color = "white";
+          elements[i].style.textShadow = "none";
+          if(elements[i].classList.contains("fontColorToChange")){
+            elements[i].style.webkitTextFillColor = "white";
+          }
+          break;
+        case this.listTrouble[1]:
+          elements[i].style.color = "black";
+          elements[i].style.textShadow = "none";
+          if(elements[i].classList.contains("fontColorToChange")){
+            elements[i].style.webkitTextFillColor = "black";
+          }
+          break;
+      }
     }
   }
 

@@ -87,6 +87,10 @@ export class ConfigVisionComponent {
     window.removeEventListener('resize', () => this.adjustLabelFontSize());
   }
 
+  getVisionColorSelected(){
+    return this.jeuxCouleursService.getVisionColorSelectedString();
+  }
+
 
   //appel lors du click sur le bouton de choix de vision
   toggleJeuxCouleurs(event: Event | null) {
@@ -102,9 +106,11 @@ export class ConfigVisionComponent {
           switch (value) {
             case this.jeuxCouleursService.listTrouble[0]:
               this.jeuxCouleursService.setVisionColor(0);
+              this.jeuxCouleursService.changeColor(document);
               break;
             case this.jeuxCouleursService.listTrouble[1]:
               this.jeuxCouleursService.setVisionColor(1);
+              this.jeuxCouleursService.changeColor(document);
               break;
           }
         }
@@ -127,7 +133,6 @@ export class ConfigVisionComponent {
   }
 
   fontChanger(event: Event | null) {
-
     if(event){
       this.jeuxCouleursService.changeSampleFont(event,document);
     }

@@ -24,15 +24,7 @@ export class BtnOnOffColorsComponent {
   }
 
   get buttonClass() {
-    const visionColor = this.getVisionColorSelected();
-    if (visionColor === 0) {
-      return 'TRICHROMATIE';
-    } else if (visionColor === 1) {
-      return 'DICHROMATISME';
-    } else {
-      return '';
-    }
-
+    return this.jeuxCouleursService.getVisionColorSelectedString();
   }
 
 
