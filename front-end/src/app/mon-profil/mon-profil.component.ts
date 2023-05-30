@@ -26,7 +26,7 @@ export class MonProfilComponent {
   showModalAuth: boolean = true;
   correctAccessCode: string | undefined;
   isAccessing: boolean | undefined;
-
+  isAppearing: boolean | undefined;
 
   avatarImages = [
     "../../assets/Images/Animateurs/bear/bear-emoji-normal.png.png",
@@ -55,6 +55,7 @@ export class MonProfilComponent {
 
   async ngOnInit(): Promise<void> {
     this.showModalAvatar = false;
+    this.isAppearing = true;
     try {
 
       const usersFromServer = await this.userService.loadUsersFromServer();
@@ -74,6 +75,11 @@ export class MonProfilComponent {
     this.authService.getCorrectAccessCode().subscribe(code => {
       this.correctAccessCode = code;
     });
+    if (this.showModalAuth) {
+      setTimeout(() => {
+        this.isAppearing = false;
+      }, 600);
+    }
   }
 
 

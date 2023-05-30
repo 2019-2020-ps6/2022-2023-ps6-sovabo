@@ -16,5 +16,5 @@
 </div>
 <app-access-code-modal *ngIf="showModalAuth"
                        (enteredAccessCode)="handleAccessCode($event)"
-                       [isAccessing]="isAccessing">
+                       [isAccessing]="isAccessing" [isAppearing]="isAppearing">
 </app-access-code-modal>
