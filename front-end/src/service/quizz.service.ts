@@ -45,6 +45,11 @@ export class QuizService {
       return questions;
     }
 
+    getQuizNameById(id: string): string {
+      const quiz = this.quizzes.find(quiz => quiz.id === id);
+      return quiz ? quiz.name : '';
+    }
+
 
 
     setQuizCourant(quiz : Quiz){
