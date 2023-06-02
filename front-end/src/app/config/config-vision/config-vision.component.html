@@ -41,6 +41,6 @@
         </div>
         <app-slider-font-size class="app-slider"></app-slider-font-size>
 
-      <p class="fontStyleCanChange fontColorToChange" id="taillePolice" >{{this.getFontSize()}}</p>
+      <p class="fontStyleCanChange fontColorToChange " [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTextExtrude' : ''" id="taillePolice" >{{this.getStringFontSize()}}</p>
     </div>
 </div>

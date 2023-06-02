@@ -74,11 +74,12 @@ export class JouerQuizzComponent implements OnInit {
   ngAfterViewInit(){
     if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
     else {this.jeuxCouleursService.changeFont(document);}
+    this.jeuxCouleursService.changeFontSize(document);
 
   }
 
   ngAfterContentChecked(){
-    this.jeuxCouleursService.changeFontSize(document);
+
     this.jeuxCouleursService.changeColor(document);
   }
 
@@ -170,7 +171,7 @@ export class JouerQuizzComponent implements OnInit {
     if (!this.isLastQuestion && !this.isAnswerValidated) {
       this.timerId = setTimeout(() => { // Stocker l'ID du minuteur pour l'annuler si nécessaire
         this.goToNextQuestion();
-      }, 5000);
+      }, 100000);
     }
     this.isAnswerValidated = true; // Marquer la réponse comme validée
   }
@@ -239,7 +240,6 @@ export class JouerQuizzComponent implements OnInit {
 
         let largeur = parseFloat(getComputedStyle(questionContainer).width);
         let largeurTxt = parseFloat(getComputedStyle(htmlLocation).width);
-
 
         if(largeur>1200){
           let split = initData.split(" ");

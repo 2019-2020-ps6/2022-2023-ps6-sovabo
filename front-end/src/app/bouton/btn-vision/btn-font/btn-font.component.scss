@@ -33,8 +33,9 @@ button {
 
 //SETUP DE CONTRASTE
 .contrastUpContainer{
-  background: rgb(200, 200, 200);
-  text-shadow: none;
+  color: black!important;
+  background: rgb(200, 200, 200)!important;
+  text-shadow: none!important;
 }
 
 .DEUTERANOMALIE{
@@ -43,7 +44,7 @@ button {
 }
 
 .TRITANOPIE{
-  background: #e50b0b !important;
+  background: #fb5e7e !important;
   text-shadow: none !important;
 }
 

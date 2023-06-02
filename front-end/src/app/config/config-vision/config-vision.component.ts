@@ -156,7 +156,7 @@ export class ConfigVisionComponent {
   }
 
 
-  getFontSize(){
+  getStringFontSize(){
     switch (this.jeuxCouleursService.getCurrentFontSize()){
       case 1:
         return "petite";

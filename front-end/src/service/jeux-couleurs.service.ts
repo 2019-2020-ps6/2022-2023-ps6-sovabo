@@ -7,15 +7,15 @@ import {duotone} from "@fortawesome/fontawesome-svg-core/import.macro";
 export class JeuxCouleursService {
 
   //option trouble de l'attention
-  private attentionColorActivated = false;
+  private attentionColorActivated = true;
 
   //option trouble de la vision
   listTrouble = ["DEUTERANOMALIE","TRITANOPIE"];
   //La font par défaut est Nunito
   listFont = ["Arial","Andale Mono","Comic Sans MS", "Nunito"];
 
-  private visionColorActivated = true;
-  private colorSelected :number = 0;
+  private visionColorActivated = false;
+  private colorSelected :number = -1;
   private fontSelected: string = this.listFont[3];
 
   private currentFontSize: number  = 2;
@@ -149,6 +149,7 @@ export class JeuxCouleursService {
   }
 
   public changeFontSize(document: Document): void {
+    console.log("CALL FONTSIZE");
     this.applyFontSize(document);
   }
 
@@ -173,7 +174,6 @@ export class JeuxCouleursService {
   }
 
   applyFontToClass(document: Document) {
-    console.log("APPLY FONT");
     let elements = document.querySelectorAll<HTMLElement>(".fontStyleCanChange");
     for (let i = 0; i < elements.length; i++) {
       elements[i].style.fontFamily = this.getFontSelectedString();
@@ -182,7 +182,6 @@ export class JeuxCouleursService {
 
   changeColor(document: Document){
 
-    console.log("changeColor");
     let elements = document.querySelectorAll<HTMLElement>(".fontColorToChange");
 
     for (let i = 0; i < elements.length; i++) {
@@ -191,8 +190,6 @@ export class JeuxCouleursService {
       elements[i].classList.remove("TRITANOPIE_FONT");
       if(elements[i].nodeName=="BODY"){elements[i].style.background= ""}
     }
-
-    console.log(elements);
 
     //CAS OU IL N'Y A PAS de JEU DE COULEUR
     if(this.getVisionColorSelected()==-1){}
@@ -259,7 +256,6 @@ export class JeuxCouleursService {
 
   // appelez cette fonction lors du chargement de la page
   public collectDefaultStyles(): void {
-    console.log("collectDefaultStyles");
     const allElements = document.getElementsByClassName("fontStyleCanChange");
     for (let i = 0; i < allElements.length; i++) {
       const element = allElements[i];

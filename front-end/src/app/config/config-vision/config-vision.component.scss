@@ -135,13 +135,14 @@ app-btn-font{
 
 //CONTRASTE
 .contrastUpContainer{
-  background: rgb(200, 200, 200);
+  background: rgb(150, 150, 150, 0.75)!important;
 }
 
 .contrastUpTextExtrude{
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  background: black!important;
+  -webkit-background-clip: text!important;
+  -webkit-text-fill-color: transparent!important;
+  background-clip: text!important;
 }
 
 .contrastUpTitleExtrude{
@@ -166,7 +167,7 @@ app-btn-font{
 }
 
 .TRITANOPIE{
-  color: black !important;
+  color: #fb5e7e !important;
   text-shadow: none !important;
 }
 
