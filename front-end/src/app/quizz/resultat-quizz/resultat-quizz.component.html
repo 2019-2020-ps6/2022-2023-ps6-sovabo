@@ -5,7 +5,7 @@
 
 <div class="pageContainer">
   <div [ngClass]="getAnimations() ? 'textBubbleWithAnimationsON' : 'textBubbleWithAnimationsOFF'" [ngStyle]="{'animation-delay' : (getDelay()*(9/2) + 's')}">
-    <div [ngClass]="this.contrasteTroubleEnable ? 'bubble_contrastOn && contrastUpContainer' : 'bubble_contrastOff'" >
+    <div [ngClass]="this.contrasteTroubleEnable ? 'bubble_contrastOn contrastUpContainer' : 'bubble_contrastOff'" >
         <p class="fontStyleCanChange fontSizeCanChange">Bravo, tu as fini le quizz, ton score est de {{score}}</p>
         <div id="container" routerLink="/statistiques-quiz">
           <button class="learn-more">

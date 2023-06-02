@@ -57,7 +57,6 @@ export class MonProfilComponent {
     this.showModalAvatar = false;
     this.isAppearing = true;
     try {
-
       const usersFromServer = await this.userService.loadUsersFromServer();
       this.users = usersFromServer.map(user => ({...user}));
       for (let user of this.users) {
@@ -80,6 +79,14 @@ export class MonProfilComponent {
         this.isAppearing = false;
       }, 600);
     }
+  }
+
+
+  ngAfterContentChecked(){
+    if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
+    else {this.jeuxCouleursService.changeFont(document);}
+    this.jeuxCouleursService.changeFontSize(document);
+    this.jeuxCouleursService.changeColor(document);
   }
 
 

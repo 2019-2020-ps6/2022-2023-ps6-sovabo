@@ -16,6 +16,10 @@ export class BtnPolyquizTextComponent {
   constructor(private jeuxCouleursService: JeuxCouleursService) {
   }
 
+  getVisionColorSelected(){
+    return this.jeuxCouleursService.getVisionColorSelected();
+  }
+
 
 
 }

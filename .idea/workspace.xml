@@ -6,8 +6,38 @@
   <component name="ChangeListManager">
     <list default="true" id="9396fbe8-0460-49f5-b6f5-c041443176dc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/app/quizz/creer-quizz/creer-quizz.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/quizz/creer-quizz/creer-quizz.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/accueil/accueil.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/accueil/accueil.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/bouton/btn-clickable-background/btn-clickable-background.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/bouton/btn-clickable-background/btn-clickable-background.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/bouton/btn-clickable-frame-background/btn-clickable-frame-background.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/bouton/btn-clickable-frame-background/btn-clickable-frame-background.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/bouton/btn-list-quiz/btn-list-quiz.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/bouton/btn-list-quiz/btn-list-quiz.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/bouton/btn-list-quiz/btn-list-quiz.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/bouton/btn-list-quiz/btn-list-quiz.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/bouton/btn-on-off/btn-on-off-animateur/btn-on-off-animateur.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/bouton/btn-on-off/btn-on-off-animateur/btn-on-off-animateur.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/bouton/btn-on-off/btn-on-off-animations/btn-on-off-animations.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/bouton/btn-on-off/btn-on-off-animations/btn-on-off-animations.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/bouton/btn-on-off/btn-on-off-colors/btn-on-off-colors.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/bouton/btn-on-off/btn-on-off-colors/btn-on-off-colors.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/bouton/btn-on-off/btn-on-off-colors/btn-on-off-colors.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/bouton/btn-on-off/btn-on-off-colors/btn-on-off-colors.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/bouton/btn-on-off/btn-on-off-contrast/btn-on-off-contrast.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/bouton/btn-on-off/btn-on-off-contrast/btn-on-off-contrast.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/bouton/btn-on-off/btn-on-off-jeux-couleurs/btn-on-off-jeux-couleurs.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/bouton/btn-on-off/btn-on-off-jeux-couleurs/btn-on-off-jeux-couleurs.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/bouton/btn-profile/btn-profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/bouton/btn-profile/btn-profile.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/bouton/btn-profile/btn-profile.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/bouton/btn-profile/btn-profile.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/bouton/btn-vision/btn-font/btn-font.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/bouton/btn-vision/btn-font/btn-font.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/bouton/btn-vision/btn-font/btn-font.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/bouton/btn-vision/btn-font/btn-font.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/config/config-attention/config-attention.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/config/config-attention/config-attention.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/config/config-vision/config-vision.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/config/config-vision/config-vision.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/config/config-vision/config-vision.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/config/config-vision/config-vision.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/config/config-vision/config-vision.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/config/config-vision/config-vision.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/mon-profil/mon-profil.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/mon-profil/mon-profil.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/quizz/accueil-quizz/accueil-quizz.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/quizz/accueil-quizz/accueil-quizz.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/src/app/quizz/creer-quizz/creer-quizz.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/quizz/creer-quizz/creer-quizz.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/quizz/jouer-quizz/jouer-quizz.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/quizz/jouer-quizz/jouer-quizz.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/quizz/jouer-quizz/jouer-quizz.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/quizz/jouer-quizz/jouer-quizz.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/quizz/jouer-quizz/jouer-quizz.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/quizz/jouer-quizz/jouer-quizz.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/quizz/listes-quizz/carousel-quiz/carousel-quiz.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/quizz/listes-quizz/carousel-quiz/carousel-quiz.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/quizz/listes-quizz/carousel-quiz/carousel-quiz.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/quizz/listes-quizz/carousel-quiz/carousel-quiz.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/quizz/listes-quizz/quiz-element/quiz-element.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/quizz/listes-quizz/quiz-element/quiz-element.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/quizz/listes-quizz/quiz-element/quiz-element.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/quizz/listes-quizz/quiz-element/quiz-element.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/quizz/resultat-quizz/resultat-quizz.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/quizz/resultat-quizz/resultat-quizz.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/service/jeux-couleurs.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/service/jeux-couleurs.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/styles.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,6 +147,8 @@
       <workItem from="1684736167640" duration="13946000" />
       <workItem from="1684786512665" duration="2191000" />
       <workItem from="1685182184274" duration="2797000" />
+      <workItem from="1685712848487" duration="8196000" />
+      <workItem from="1685725208780" duration="368000" />
     </task>
     <servers />
   </component>

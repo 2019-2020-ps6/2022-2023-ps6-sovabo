@@ -23,4 +23,8 @@ export class BtnOnOffAnimationsComponent {
   toggleState() {
     this.isOn = !this.isOn;
   }
+
+  get buttonClass() {
+    return this.jeuxCouleursService.getVisionColorSelectedString();
+  }
 }

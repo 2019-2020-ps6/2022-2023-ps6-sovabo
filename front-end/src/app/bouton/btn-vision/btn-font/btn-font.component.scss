@@ -33,18 +33,19 @@ button {
 
 //SETUP DE CONTRASTE
 .contrastUpContainer{
-  font-family: Arial, Helvetica, sans-serif;
-  color: black;
-  background: rgb(200, 200, 200);
-  text-shadow: none;
+  color: black!important;
+  background: rgb(200, 200, 200)!important;
+  text-shadow: none!important;
 }
 
-.TRICHROMATIE{
-  background: black;
+.DEUTERANOMALIE{
+  background: #805ad0 !important;
+  text-shadow: none !important;
 }
 
-.DICHROMATISME{
-  background: red;
+.TRITANOPIE{
+  background: #fb5e7e !important;
+  text-shadow: none !important;
 }
 
 p{

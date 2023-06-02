@@ -30,13 +30,23 @@
 
 
 .contrastUpContainer{
-  font-family: Arial, Helvetica, sans-serif;
-  color: black;
-  background: rgb(200, 200, 200);
-  text-shadow: none;
+  color: black!important;
+  background: rgb(200, 200, 200)!important;
+  text-shadow: none!important;
 }
 
 p{
   margin-block-start: 0;
   margin-block-end: 0;
 }
+
+.DEUTERANOMALIE{
+  background: #805ad0 !important;
+  text-shadow: none !important;
+}
+
+.TRITANOPIE{
+  background: #fb5e7e !important;
+  text-shadow: none !important;
+}
+

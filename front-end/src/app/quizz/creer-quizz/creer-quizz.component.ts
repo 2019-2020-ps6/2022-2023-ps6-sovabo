@@ -41,6 +41,16 @@ export class CreerQuizzComponent {
         this.isAppearing = false;
       }, 600);
     }
+    if (this.jeuxCouleursService.isDefaultActive) {
+      this.jeuxCouleursService.collectDefaultStyles();
+    }
+    else {
+      this.jeuxCouleursService.changeFont(document);
+    }
+  }
+
+  ngAfterViewInit(){
+    this.jeuxCouleursService.changeFontSize(document);
   }
 
   ajouterQuestion() {

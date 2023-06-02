@@ -25,15 +25,11 @@ export class ResultatQuizzComponent {
   ngOnInit() {
     this.quiz = this.quizService.getQuizCourant();
     this.score = this.quizService.getScore();
-    if (this.jeuxCouleursService.isDefaultActive) {
-      this.jeuxCouleursService.collectDefaultStyles();
-    }
-    else {
-      this.jeuxCouleursService.changeFont(document);
-    }
   }
 
   ngAfterViewInit(){
+    if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
+    else {this.jeuxCouleursService.changeFont(document);}
     this.jeuxCouleursService.changeFontSize(document);
   }
 

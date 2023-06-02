@@ -69,13 +69,6 @@ export class ConfigVisionComponent {
       sample.innerHTML = this.jeuxCouleursService.getFontSelectedString();
     });
 
-    if (this.jeuxCouleursService.isDefaultActive) {
-      this.jeuxCouleursService.collectDefaultStyles();
-    }
-    else {
-      this.jeuxCouleursService.changeFont(document);
-    }
-
     // Appel de la fonction pour ajuster la hauteur de generalContainer
     this.adjustGeneralContainerHeight();
     this.adjustLabelFontSize();
@@ -84,12 +77,19 @@ export class ConfigVisionComponent {
   }
 
   ngAfterViewInit(){
+    if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
+    else {this.jeuxCouleursService.changeFont(document);}
     this.jeuxCouleursService.changeFontSize(document);
+    this.jeuxCouleursService.changeColor(document);
   }
 
   ngOnDestroy(): void {
     window.removeEventListener('resize', () => this.adjustGeneralContainerHeight());
     window.removeEventListener('resize', () => this.adjustLabelFontSize());
+  }
+
+  getVisionColorSelected(){
+    return this.jeuxCouleursService.getVisionColorSelectedString();
   }
 
 
@@ -102,14 +102,19 @@ export class ConfigVisionComponent {
       //on recup l'id du boutton (l'id dépends du trouble)
         const value = target.id;
 
-        if(this.jeuxCouleursService.getVisionColorSelectedString()==value){this.jeuxCouleursService.setVisionColor(-1);}
+        if(this.jeuxCouleursService.getVisionColorSelectedString()==value){
+          this.jeuxCouleursService.setVisionColor(-1);
+          this.jeuxCouleursService.changeColor(document);
+        }
         else {
           switch (value) {
             case this.jeuxCouleursService.listTrouble[0]:
               this.jeuxCouleursService.setVisionColor(0);
+              this.jeuxCouleursService.changeColor(document);
               break;
             case this.jeuxCouleursService.listTrouble[1]:
               this.jeuxCouleursService.setVisionColor(1);
+              this.jeuxCouleursService.changeColor(document);
               break;
           }
         }
@@ -132,7 +137,6 @@ export class ConfigVisionComponent {
   }
 
   fontChanger(event: Event | null) {
-
     if(event){
       this.jeuxCouleursService.changeSampleFont(event,document);
     }
@@ -152,7 +156,7 @@ export class ConfigVisionComponent {
   }
 
 
-  getFontSize(){
+  getStringFontSize(){
     switch (this.jeuxCouleursService.getCurrentFontSize()){
       case 1:
         return "petite";

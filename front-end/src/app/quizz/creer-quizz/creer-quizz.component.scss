@@ -363,3 +363,29 @@ textarea {
   color: black;
   background: rgb(200, 200, 200);
 }
+
+
+//GESTION JEU COULEUR
+.DEUTERANOMALIE{
+  color: #9999d4 !important;
+  text-shadow: none !important;
+}
+
+.DEUTERANOMALIE::placeholder{
+  color: black !important;
+}
+.DEUTERANOMALIE_FONT{
+  -webkit-text-fill-color: white !important;
+}
+
+.TRITANOPIE{
+  color: #fb5e7e !important;
+  text-shadow: none !important;
+}
+.TRITANOPIE::placeholder{
+  color: black !important;
+}
+
+.TRITANOPIE_FONT{
+  -webkit-text-fill-color: black !important;
+}
