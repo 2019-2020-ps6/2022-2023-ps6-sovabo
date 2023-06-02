@@ -96,14 +96,18 @@ button_DICHROMATISME {
 }
 
 .TRICHROMATIE{
-  background: black;
+  background: black !important;
+  text-shadow: none !important;
 }
 
 .DICHROMATISME{
-  background: red;
+  background: #e50b0b !important;
+  text-shadow: none !important;
 }
 
 p{
   //margin top and bottom
   margin: 2% 0;
 }
+
+

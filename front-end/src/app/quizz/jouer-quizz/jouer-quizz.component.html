@@ -9,14 +9,14 @@
           <text [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}"
                 class="question-text fontStyleCanChange" x="50%" y="40%" text-anchor="middle" dominant-baseline="middle">{{getQuestion()}}</text>
         </svg>
-          <p id="question_sentence" *ngIf="!animations" [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}" class="question-text fontStyleCanChange fontSizeCanChange">{{getQuestion()}}</p>
+          <p id="question_sentence" *ngIf="!animations" [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}" class="question-text fontStyleCanChange fontSizeCanChange fontColorToChange">{{getQuestion()}}</p>
         <div class="timer">{{ timeRemaining }} s</div>
       </div>
 
       <div class="answers-container fontSizeCanChange fontStyleCanChange">
-        <div [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer' : ''"  *ngFor="let answer of currentQuestion?.answers; let i = index" class="answer" (click)="selectAnswer($event)">
+        <div [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer' : ''"  *ngFor="let answer of currentQuestion?.answers; let i = index" class="answer fontColorToChange" (click)="selectAnswer($event)">
           <input type="radio" name="answer" id="answer{{ i }}" [(ngModel)]="selectedAnswerIndex" [value]="i" (click)="selectAnswer($event)">
-          <label [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}" for="answer{{ i }}" [class]="animations ? 'animated-label' : ''" class="fontStyleCanChange fontSizeCanChange">{{ answer.value }}</label>
+          <label [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}" for="answer{{ i }}" [class]="animations ? 'animated-label' : ''" class="fontStyleCanChange fontSizeCanChange fontColorToChange">{{ answer.value }}</label>
         </div>
       </div>
       <div class="check-container">
@@ -25,7 +25,7 @@
         <button [ngStyle]="{'font-family': this.getFontString()}" class="fontStyleCanChange fontSizeCanChange" *ngIf="isQuizFinished" [routerLink]="['/resultat-quizz']" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && next_btnContrastOn' : 'next_btnContrastOff'" >Voir les résultats !</button>
       </div>
       <div class="buttons-container fontStyleCanChange">
-        <div *ngIf="isAnswerCorrect == false && selectedAnswerIndex != questionCorrectIndex" class="wrong-answer">
+        <div *ngIf="isAnswerCorrect == false && selectedAnswerIndex != questionCorrectIndex" class="wrong-answer fontColorToChange">
           <p>Mauvaise réponse, la bonne réponse est {{ currentQuestion.answers[questionCorrectIndex].value }}</p>
         </div>
         <div *ngIf="isAnswerCorrect == true && selectedAnswerIndex != questionCorrectIndex" class="good-answer">

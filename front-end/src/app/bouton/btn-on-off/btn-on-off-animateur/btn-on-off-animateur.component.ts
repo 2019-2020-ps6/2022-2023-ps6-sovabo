@@ -32,4 +32,8 @@ export class BtnOnOffAnimateurComponent implements OnDestroy {
     this.animateurService.toggleAnimateur();
     this.isOn = !this.isOn;
   }
+
+  get buttonClass() {
+    return this.jeuxCouleursService.getVisionColorSelectedString();
+  }
 }

@@ -363,3 +363,29 @@ textarea {
   color: black;
   background: rgb(200, 200, 200);
 }
+
+
+//GESTION JEU COULEUR
+.TRICHROMATIE{
+  color: white !important;
+  text-shadow: none !important;
+}
+
+.TRICHROMATIE::placeholder{
+  color: black !important;
+}
+.TRICHROMATIE_FONT{
+  -webkit-text-fill-color: white !important;
+}
+
+.DICHROMATISME{
+  color: black !important;
+  text-shadow: none !important;
+}
+.DICHROMATISME::placeholder{
+  color: black !important;
+}
+
+.DICHROMATISME_FONT{
+  -webkit-text-fill-color: black !important;
+}

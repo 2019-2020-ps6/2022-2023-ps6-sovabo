@@ -74,7 +74,12 @@ export class JouerQuizzComponent implements OnInit {
   ngAfterViewInit(){
     if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
     else {this.jeuxCouleursService.changeFont(document);}
+
+  }
+
+  ngAfterContentChecked(){
     this.jeuxCouleursService.changeFontSize(document);
+    this.jeuxCouleursService.changeColor(document);
   }
 
   getFontString() {
@@ -112,13 +117,31 @@ export class JouerQuizzComponent implements OnInit {
   selectAnswer(event: Event | null) {
     if (event != null) {
       const target = event?.currentTarget as HTMLElement;
+
+      //SI UNE REPONSE A DEJA ETE SELECTIONNEE
       if (this.selectedAnswerObject != null) {
-        this.selectedAnswerObject.classList.remove('selected');
-        this.selectedAnswerObject = target;
-        this.selectedAnswerObject.classList.add('selected');
+        //SI LE JEU DE COULEUR EST PAS APPELE ->CLASSE ADPATEE
+        if(this.jeuxCouleursService.getVisionColorSelected()!=-1){
+          this.selectedAnswerObject.classList.remove(this.jeuxCouleursService.getVisionColorSelectedString()+"_SELECTED");
+          this.selectedAnswerObject = target;
+          this.selectedAnswerObject.classList.add(this.jeuxCouleursService.getVisionColorSelectedString()+"_SELECTED");
+        }
+        //SINON -> PAS DE COULEUR DONC CLASSE NORMALE
+        else{
+          this.selectedAnswerObject.classList.remove('selected');
+          this.selectedAnswerObject = target;
+          this.selectedAnswerObject.classList.add('selected');
+        }
       } else {
         this.selectedAnswerObject = target;
-        this.selectedAnswerObject.classList.add('selected');
+
+        if(this.jeuxCouleursService.getVisionColorSelected()==-1){
+          this.selectedAnswerObject.classList.add('selected');
+        }
+        else{
+          this.selectedAnswerObject.classList.add(this.jeuxCouleursService.getVisionColorSelectedString()+"_SELECTED");
+        }
+
       }
     }
   }
@@ -212,8 +235,7 @@ export class JouerQuizzComponent implements OnInit {
 
         let largeur = parseFloat(getComputedStyle(questionContainer).width);
         let largeurTxt = parseFloat(getComputedStyle(htmlLocation).width);
-        console.log(largeur);
-        console.log(largeurTxt);
+
 
         if(largeur>1200){
           let split = initData.split(" ");

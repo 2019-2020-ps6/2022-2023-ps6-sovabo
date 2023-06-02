@@ -15,7 +15,7 @@ export class JeuxCouleursService {
   listFont = ["Arial","Andale Mono","Comic Sans MS", "Nunito"];
 
   private visionColorActivated = true;
-  private colorSelected :number = -1;
+  private colorSelected :number = 0;
   private fontSelected: string = this.listFont[3];
 
   private currentFontSize: number  = 2;
@@ -158,8 +158,6 @@ export class JeuxCouleursService {
     //VIA LE DOM
     let elements = document.querySelectorAll<HTMLElement>(".fontSizeCanChange, .titreStyle");
 
-    console.log(elements);
-
     for (let i = 0; i < elements.length; i++) {
       const originFontSize = window.getComputedStyle(elements[i], null).getPropertyValue('font-size');
       let size = parseFloat(originFontSize);
@@ -183,24 +181,56 @@ export class JeuxCouleursService {
   }
 
   changeColor(document: Document){
+
+    console.log("changeColor");
     let elements = document.querySelectorAll<HTMLElement>(".fontColorToChange");
-    console.log(elements);
+
     for (let i = 0; i < elements.length; i++) {
-      switch (this.getVisionColorSelectedString()) {
-        case this.listTrouble[0]:
-          elements[i].style.color = "white";
-          elements[i].style.textShadow = "none";
-          if(elements[i].classList.contains("fontColorToChange")){
-            elements[i].style.webkitTextFillColor = "white";
-          }
-          break;
-        case this.listTrouble[1]:
-          elements[i].style.color = "black";
-          elements[i].style.textShadow = "none";
-          if(elements[i].classList.contains("fontColorToChange")){
-            elements[i].style.webkitTextFillColor = "black";
-          }
-          break;
+      for (let j = 0; j < this.listTrouble.length; j++) {elements[i].classList.remove(this.listTrouble[i]);}
+      elements[i].classList.remove("TRICHROMATIE_FONT");
+      elements[i].classList.remove("DICHROMATISME_FONT");
+      if(elements[i].nodeName=="BODY"){elements[i].style.background= ""}
+    }
+
+    console.log(elements);
+
+    //CAS OU IL N'Y A PAS de JEU DE COULEUR
+    if(this.getVisionColorSelected()==-1){}
+
+    else {
+      //CAS OU LA IL Y A UN JEU DE COULEUR
+      for (let i = 0; i < elements.length; i++) {
+        switch (this.getVisionColorSelectedString()) {
+          case this.listTrouble[0]:
+            if (elements[i].classList.contains("fontColorToChange")) {
+              if(elements[i].classList.contains("answer")){
+                elements[i].classList.remove("answer");
+                elements[i].classList.add("TRICHROMATIE_ANSWER");
+              }
+              if(elements[i].classList.contains("wrong-answer")){
+                elements[i].style.color=""
+              }
+              if(elements[i].nodeName=="BODY"){elements[i].style.background= "rgb(98 88 183)"}
+              else{
+                elements[i].classList.add(this.getVisionColorSelectedString());
+                elements[i].classList.add("TRICHROMATIE_FONT");
+              }
+            }
+            break;
+          case this.listTrouble[1]:
+            if (elements[i].classList.contains("fontColorToChange")) {
+              if(elements[i].classList.contains("answer")){
+                elements[i].classList.remove("answer");
+                elements[i].classList.add("DICHROMATISME_ANSWER");
+              }
+              if(elements[i].nodeName=="BODY"){elements[i].style.background= "#484848"}
+              else{
+                elements[i].classList.add(this.getVisionColorSelectedString());
+                elements[i].classList.add("DICHROMATISME_FONT");
+              }
+            }
+            break;
+        }
       }
     }
   }

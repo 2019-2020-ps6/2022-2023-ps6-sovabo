@@ -138,6 +138,64 @@ label {
   background-color: white;
 }
 
+.TRICHROMATIE_ANSWER{
+  /*border: 2px solid #ccc;*/
+
+  padding: 10px;
+
+  padding-left: 2%;
+  padding-right: 2%;
+
+  margin: 2%;
+
+  border-radius: 50px;
+
+  text-align: center;
+
+  display: inline-block;
+  width: fit-content;
+  min-width: 40%;
+  height: fit-content;
+
+  box-sizing: border-box;
+}
+.TRICHROMATIE_ANSWER:hover{
+  background-color: #0dcaf0;
+}
+
+.TRICHROMATIE_SELECTED{
+  background-color: #0dcaf0;
+}
+
+.DICHROMATISME_ANSWER{
+  /*border: 2px solid #ccc;*/
+
+  padding: 10px;
+
+  padding-left: 2%;
+  padding-right: 2%;
+
+  margin: 2%;
+
+  border-radius: 50px;
+
+  text-align: center;
+
+  display: inline-block;
+  width: fit-content;
+  min-width: 40%;
+  height: fit-content;
+
+  box-sizing: border-box;
+}
+.DICHROMATISME_ANSWER:hover{
+  background-color: #1eff00;
+}
+
+.DICHROMATISME_SELECTED{
+  background-color: #1eff00;
+}
+
 /* A FINIR */
 .answer input:checked ~ .checkmark{
   background-color: #ccc;
@@ -381,4 +439,25 @@ label {
   font-family: 'Nunito';
   src: url('~src/assets/Fonts/nunito-main/fonts/variable/Nunito[wght].ttf');
 }
+
+
+//GESTION JEU DE COULEUR
+
+.TRICHROMATIE{
+  color: white !important;
+  text-shadow: none !important;
+}
+.TRICHROMATIE_FONT{
+  -webkit-text-fill-color: white;
+}
+
+.DICHROMATISME{
+  color: black !important;
+  text-shadow: none !important;
+}
+
+.DICHROMATISME_FONT{
+  -webkit-text-fill-color: black;
+}
+
 

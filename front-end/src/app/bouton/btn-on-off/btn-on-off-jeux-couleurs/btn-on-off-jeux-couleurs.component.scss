@@ -48,3 +48,20 @@ button:not(.active) {
   background: rgb(200, 200, 200);
   text-shadow: none;
 }
+
+.TRICHROMATIE{
+  color: white !important;
+  text-shadow: none !important;
+}
+.TRICHROMATIE_FONT{
+  -webkit-text-fill-color: white;
+}
+
+.DICHROMATISME{
+  color: black !important;
+  text-shadow: none !important;
+}
+
+.DICHROMATISME_FONT{
+  -webkit-text-fill-color: black;
+}

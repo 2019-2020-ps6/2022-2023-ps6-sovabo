@@ -80,6 +80,7 @@ export class ConfigVisionComponent {
     if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
     else {this.jeuxCouleursService.changeFont(document);}
     this.jeuxCouleursService.changeFontSize(document);
+    this.jeuxCouleursService.changeColor(document);
   }
 
   ngOnDestroy(): void {
@@ -101,7 +102,10 @@ export class ConfigVisionComponent {
       //on recup l'id du boutton (l'id dépends du trouble)
         const value = target.id;
 
-        if(this.jeuxCouleursService.getVisionColorSelectedString()==value){this.jeuxCouleursService.setVisionColor(-1);}
+        if(this.jeuxCouleursService.getVisionColorSelectedString()==value){
+          this.jeuxCouleursService.setVisionColor(-1);
+          this.jeuxCouleursService.changeColor(document);
+        }
         else {
           switch (value) {
             case this.jeuxCouleursService.listTrouble[0]:

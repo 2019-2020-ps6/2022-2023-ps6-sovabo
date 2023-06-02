@@ -15,5 +15,9 @@ export class BtnListQuizComponent {
   contrasteTroubleEnable :boolean = this.jeuxCouleursService.getVisionAttentionStatus();
 
 
+  get buttonClass() {
+    return this.jeuxCouleursService.getVisionColorSelectedString();
+  }
+
 
 }

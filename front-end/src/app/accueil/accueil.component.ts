@@ -37,6 +37,7 @@ export class AccueilComponent {
 
   ngAfterViewInit(){
     this.jeuxCouleursService.changeFontSize(document);
+    this.jeuxCouleursService.changeColor(document);
   }
 
 

@@ -5,10 +5,16 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
 
+.TRICHROMATIE_BODY_BACKGROUND{
+  background-color: red;
+}
+.DICHROMATISME_BODY_BACKGROUND{
+  background-color: blue;
+}
 
 body{
-  display: flex;
   background: linear-gradient(90deg, #7C65A9 0%, #96D4CA 100%);
+  display: flex;
   overflow: hidden;
 }
 
@@ -66,6 +72,8 @@ app-root{
   text-shadow: none;
   text-decoration: none;
 }
+
+
 
 
 

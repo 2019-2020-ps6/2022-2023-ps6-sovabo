@@ -62,3 +62,22 @@
 .contrastUpText{
   text-shadow: none;
 }
+
+.TRICHROMATIE{
+  color: white !important;
+  text-shadow: none !important;
+  background-color: black;
+}
+.TRICHROMATIE_FONT{
+  -webkit-text-fill-color: white;
+}
+
+.DICHROMATISME{
+  color: black !important;
+  text-shadow: none !important;
+  background-color: #ffffffab;
+}
+
+.DICHROMATISME_FONT{
+  -webkit-text-fill-color: black;
+}
