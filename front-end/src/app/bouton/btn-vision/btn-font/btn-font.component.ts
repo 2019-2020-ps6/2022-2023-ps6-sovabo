@@ -42,9 +42,9 @@ export class BtnFontComponent {
   get buttonClass() {
     const visionColor = this.getVisionColorSelected();
     if (visionColor === 0) {
-      return 'TRICHROMATIE';
+      return 'DEUTERANOMALIE';
     } else if (visionColor === 1) {
-      return 'DICHROMATISME';
+      return 'TRITANOPIE';
     } else {
       return '';
     }

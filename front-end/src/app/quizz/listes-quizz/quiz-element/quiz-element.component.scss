@@ -63,21 +63,21 @@
   text-shadow: none;
 }
 
-.TRICHROMATIE{
-  color: white !important;
+.DEUTERANOMALIE{
   text-shadow: none !important;
-  background-color: black;
+  background-color: #9999d4;
 }
-.TRICHROMATIE_FONT{
-  -webkit-text-fill-color: white;
+.DEUTERANOMALIE_FONT{
+  -webkit-text-fill-color: #ffffff;
 }
 
-.DICHROMATISME{
-  color: black !important;
+.TRITANOPIE{
   text-shadow: none !important;
-  background-color: #ffffffab;
+  background-color: rgba(255, 0, 0, 0.75);
 }
 
-.DICHROMATISME_FONT{
+.TRITANOPIE_FONT{
   -webkit-text-fill-color: black;
 }
+
+

@@ -87,35 +87,34 @@ h1{
 }
 
 .contrastUpTextExtrude{
-  background: black;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .contrastUpTitleExtrude{
+  color: whitesmoke;
   font-family: DynaPuff;
   font-size: 9vw;
   font-weight: 700;
-  color: #000000;
   text-shadow: none;
   margin: 0 0 0 22%;
 }
 
-.TRICHROMATIE{
-  color: white !important;
+.DEUTERANOMALIE{
+  color: #9999d4 !important;
   text-shadow: none !important;
 }
-.TRICHROMATIE_FONT{
+.DEUTERANOMALIE_FONT{
   -webkit-text-fill-color: white;
 }
 
-.DICHROMATISME{
+.TRITANOPIE{
   color: black !important;
   text-shadow: none !important;
 }
 
-.DICHROMATISME_FONT{
+.TRITANOPIE_FONT{
   -webkit-text-fill-color: black;
 }
 

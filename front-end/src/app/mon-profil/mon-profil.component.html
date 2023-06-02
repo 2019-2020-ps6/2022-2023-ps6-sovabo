@@ -4,8 +4,8 @@
       <app-btn-clickable-frame-background class="navigation" (click)="toggleAuthenticate()" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
     </div>
     <div class="containerBtnGestionUser">
-      <button [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}" class="btnCreerUser fontStyleCanChange fontSizeCanChange" type="button" (click)="goToCreateUser()">CREER PROFIL</button>
-      <button [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}" (click)="toggleDeleteMode()" class="btnDeleteUser fontStyleCanChange fontSizeCanChange" type="button" data-toggle="modal" data-target="#modalDeleteConfirmation">{{deleteMode?"ANNULER":"SUPPRIMER PROFIL"}}</button>
+      <button [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}" class="btnCreerUser fontStyleCanChange fontSizeCanChange fontColorToChange" type="button" (click)="goToCreateUser()">CREER PROFIL</button>
+      <button [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}" (click)="toggleDeleteMode()" class="btnDeleteUser fontStyleCanChange fontSizeCanChange fontColorToChange" type="button" data-toggle="modal" data-target="#modalDeleteConfirmation">{{deleteMode?"ANNULER":"SUPPRIMER PROFIL"}}</button>
 
     </div>
     <div *ngIf="showAlert" [ngClass]="alertState ? 'alert-success':'alert-danger'" class="alert alert-dismissible fade show" role="alert">

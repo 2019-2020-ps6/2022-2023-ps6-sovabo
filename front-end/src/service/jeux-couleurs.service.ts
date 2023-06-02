@@ -10,7 +10,7 @@ export class JeuxCouleursService {
   private attentionColorActivated = false;
 
   //option trouble de la vision
-  listTrouble = ["TRICHROMATIE","DICHROMATISME"];
+  listTrouble = ["DEUTERANOMALIE","TRITANOPIE"];
   //La font par défaut est Nunito
   listFont = ["Arial","Andale Mono","Comic Sans MS", "Nunito"];
 
@@ -187,8 +187,8 @@ export class JeuxCouleursService {
 
     for (let i = 0; i < elements.length; i++) {
       for (let j = 0; j < this.listTrouble.length; j++) {elements[i].classList.remove(this.listTrouble[i]);}
-      elements[i].classList.remove("TRICHROMATIE_FONT");
-      elements[i].classList.remove("DICHROMATISME_FONT");
+      elements[i].classList.remove("DEUTERANOMALIE_FONT");
+      elements[i].classList.remove("TRITANOPIE_FONT");
       if(elements[i].nodeName=="BODY"){elements[i].style.background= ""}
     }
 
@@ -205,15 +205,15 @@ export class JeuxCouleursService {
             if (elements[i].classList.contains("fontColorToChange")) {
               if(elements[i].classList.contains("answer")){
                 elements[i].classList.remove("answer");
-                elements[i].classList.add("TRICHROMATIE_ANSWER");
+                elements[i].classList.add("DEUTERANOMALIE_ANSWER");
               }
               if(elements[i].classList.contains("wrong-answer")){
                 elements[i].style.color=""
               }
-              if(elements[i].nodeName=="BODY"){elements[i].style.background= "rgb(98 88 183)"}
+              if(elements[i].nodeName=="BODY"){elements[i].style.background= "rgb(75,114,126)"}
               else{
                 elements[i].classList.add(this.getVisionColorSelectedString());
-                elements[i].classList.add("TRICHROMATIE_FONT");
+                elements[i].classList.add("DEUTERANOMALIE_FONT");
               }
             }
             break;
@@ -221,12 +221,12 @@ export class JeuxCouleursService {
             if (elements[i].classList.contains("fontColorToChange")) {
               if(elements[i].classList.contains("answer")){
                 elements[i].classList.remove("answer");
-                elements[i].classList.add("DICHROMATISME_ANSWER");
+                elements[i].classList.add("TRITANOPIE_ANSWER");
               }
               if(elements[i].nodeName=="BODY"){elements[i].style.background= "#484848"}
               else{
                 elements[i].classList.add(this.getVisionColorSelectedString());
-                elements[i].classList.add("DICHROMATISME_FONT");
+                elements[i].classList.add("TRITANOPIE_FONT");
               }
             }
             break;

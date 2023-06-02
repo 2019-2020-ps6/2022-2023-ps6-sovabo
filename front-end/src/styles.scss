@@ -5,12 +5,6 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
 
-.TRICHROMATIE_BODY_BACKGROUND{
-  background-color: red;
-}
-.DICHROMATISME_BODY_BACKGROUND{
-  background-color: blue;
-}
 
 body{
   background: linear-gradient(90deg, #7C65A9 0%, #96D4CA 100%);
@@ -31,16 +25,13 @@ app-root{
   text-shadow: 8px 8px 0 #1E1E1E;
 }
 
-.imgContrastUp{
-  filter: invert(1);
-}
+
 
 .contrastUpContainer{
   background: rgb(200, 200, 200);
 }
 
 .contrastUpText{
-  color: black;
   text-shadow: none;
 }
 
@@ -60,7 +51,7 @@ app-root{
   font-family: DynaPuff;
   font-size: 11vw;
   font-weight: 700;
-  color: #000000;
+  color: whitesmoke;
   margin-bottom: 5%;
 }
 
@@ -71,6 +62,10 @@ app-root{
   color: #000000;
   text-shadow: none;
   text-decoration: none;
+}
+
+.INVERT{
+  filter: invert(1);
 }
 
 

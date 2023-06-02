@@ -20,7 +20,13 @@
         </div>
       </div>
       <div class="check-container">
-        <button [ngStyle]="{'font-family': this.getFontString()}" (click)="validateAnswer()" [disabled]="selectedAnswerIndex == null"  *ngIf="isAnswerCorrect==null" class="check_btn fontStyleCanChange">Valider</button>
+        <button
+          [ngClass]="[this.getVisionColorSelected()==0 ? 'TRITANOPIE_check_btn' : '',
+                      this.getVisionColorSelected()==1 ? 'DEUTERANOMALIE_check_btn' : '',
+                      this.getVisionColorSelected()==-1 ? 'check_btn' : '']"
+
+          [ngStyle]="{'font-family': this.getFontString()}" (click)="validateAnswer()" [disabled]="selectedAnswerIndex == null"  *ngIf="isAnswerCorrect==null"
+                class="fontStyleCanChange">Valider</button>
         <button [ngStyle]="{'font-family': this.getFontString()}" class="fontStyleCanChange fontSizeCanChange" *ngIf="isAnswerCorrect != null && currentQuestionIndex != quiz.questions.length -1" [disabled]="isQuizFinished == true" (click)="goToNextQuestion()" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && next_btnContrastOn' : 'next_btnContrastOff'" >Question suivante</button>
         <button [ngStyle]="{'font-family': this.getFontString()}" class="fontStyleCanChange fontSizeCanChange" *ngIf="isQuizFinished" [routerLink]="['/resultat-quizz']" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && next_btnContrastOn' : 'next_btnContrastOff'" >Voir les résultats !</button>
       </div>

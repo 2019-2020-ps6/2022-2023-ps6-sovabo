@@ -37,7 +37,7 @@ export class JouerQuizzComponent implements OnInit {
   public endTime: number = 0;
   public firstTime: boolean = true;
   public delay: number = 5000;
-  public timeRemaining: number = 5;
+  public timeRemaining: number = 50;
   private timerId: any | undefined;
   private currentFont: string = this.jeuxCouleursService.getFontSelectedString();
   public contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
@@ -224,6 +224,10 @@ export class JouerQuizzComponent implements OnInit {
 
   getQuestion(){
     return this.decalageQuestion();
+  }
+
+  getVisionColorSelected(){
+    return this.jeuxCouleursService.getVisionColorSelected();
   }
 
   decalageQuestion(): string{

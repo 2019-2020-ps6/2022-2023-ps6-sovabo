@@ -138,7 +138,7 @@ label {
   background-color: white;
 }
 
-.TRICHROMATIE_ANSWER{
+.DEUTERANOMALIE_ANSWER{
   /*border: 2px solid #ccc;*/
 
   padding: 10px;
@@ -159,15 +159,15 @@ label {
 
   box-sizing: border-box;
 }
-.TRICHROMATIE_ANSWER:hover{
-  background-color: #0dcaf0;
+.DEUTERANOMALIE_ANSWER:hover{
+  background-color: #a0a1d5;
 }
 
-.TRICHROMATIE_SELECTED{
-  background-color: #0dcaf0;
+.DEUTERANOMALIE_SELECTED{
+  background-color: #a0a1d5;
 }
 
-.DICHROMATISME_ANSWER{
+.TRITANOPIE_ANSWER{
   /*border: 2px solid #ccc;*/
 
   padding: 10px;
@@ -188,11 +188,11 @@ label {
 
   box-sizing: border-box;
 }
-.DICHROMATISME_ANSWER:hover{
+.TRITANOPIE_ANSWER:hover{
   background-color: #1eff00;
 }
 
-.DICHROMATISME_SELECTED{
+.TRITANOPIE_SELECTED{
   background-color: #1eff00;
 }
 
@@ -214,6 +214,36 @@ label {
 
 .check_btn{
   background-color: #1eff0081;
+  border: 2px solid #ccc;
+  border-radius: 50px;
+  padding: 10px;
+  padding-left: 2%;
+  padding-right: 2%;
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  display: inline-block;
+  width: fit-content;
+  height: fit-content;
+}
+
+.TRITANOPIE_check_btn{
+  background-color: #1eff0081;
+  border: 2px solid #ccc;
+  border-radius: 50px;
+  padding: 10px;
+  padding-left: 2%;
+  padding-right: 2%;
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  display: inline-block;
+  width: fit-content;
+  height: fit-content;
+}
+
+.DEUTERANOMALIE_check_btn{
+  background-color: #c6c68e;
   border: 2px solid #ccc;
   border-radius: 50px;
   padding: 10px;
@@ -304,7 +334,6 @@ label {
 }
 
 .contrastUpTextExtrude{
-  color: #000000;
   text-shadow: none;
   text-decoration: none;
 }
@@ -443,20 +472,20 @@ label {
 
 //GESTION JEU DE COULEUR
 
-.TRICHROMATIE{
-  color: white !important;
+.DEUTERANOMALIE{
+  color: #9999d4 !important;
   text-shadow: none !important;
 }
-.TRICHROMATIE_FONT{
+.DEUTERANOMALIE_FONT{
   -webkit-text-fill-color: white;
 }
 
-.DICHROMATISME{
+.TRITANOPIE{
   color: black !important;
   text-shadow: none !important;
 }
 
-.DICHROMATISME_FONT{
+.TRITANOPIE_FONT{
   -webkit-text-fill-color: black;
 }
 

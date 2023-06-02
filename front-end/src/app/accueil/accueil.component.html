@@ -21,7 +21,7 @@
     <img src="../../assets/Images/Animateur_image.png" alt="Image animateur" class="animator-relative">
   </div>
 
-  <div class="rightContainer">
+  <div class="rightContainer" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer' : ''">
     <app-btn-clickable-background (click)="isAccessible('/configuration')" class="navigation">CONFIGURATION</app-btn-clickable-background>
     <app-btn-clickable-background id="profils" class="navigation" [routerLink]="['/mon-profil']">PROFILS</app-btn-clickable-background>
     <app-btn-clickable-background (click)="isAccessible('/statistiques')" class="navigation">STATISTIQUE</app-btn-clickable-background>
