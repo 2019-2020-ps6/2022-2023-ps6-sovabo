@@ -3,6 +3,7 @@ import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
 import {Quiz} from "../../../models/quizz.model"
 import {Question, Answer} from "../../../models/question.model";
 import {QuizService} from "../../../service/quizz.service";
+import {AuthService} from "../../../service/authentification.service";
 
 @Component({
   selector: 'app-creer-quizz',
@@ -12,20 +13,34 @@ import {QuizService} from "../../../service/quizz.service";
 export class CreerQuizzComponent {
 
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
+  showModalAuth: boolean | undefined;
+  correctAccessCode: string | undefined;
+  isAccessing: boolean | undefined;
+  isAppearing: boolean | undefined;
 
-  constructor(private jeuxCouleursService: JeuxCouleursService, public quizService: QuizService) {
+  constructor(private jeuxCouleursService: JeuxCouleursService,
+              public quizService: QuizService,
+              private authService: AuthService) {
   }
 
   questionsQuiz: string[] = ['', ''];
   reponsesQuiz: string[][] = [['', ''], ['', '']];
   correctArray: boolean[] = [];
 
-  ngOnInit() {
+  async ngOnInit(): Promise<void> {
+    this.isAppearing = true;
     for (let i = 0; i < 4; i++) {
       this.correctArray.push(false);
     }
-    console.log(this.correctArray)
-
+    this.showModalAuth = !this.authService.getAuthenticationStatus();
+    this.authService.getCorrectAccessCode().subscribe(code => {
+      this.correctAccessCode = code;
+    });
+    if (this.showModalAuth) {
+      setTimeout(() => {
+        this.isAppearing = false;
+      }, 600);
+    }
     if (this.jeuxCouleursService.isDefaultActive) {
       this.jeuxCouleursService.collectDefaultStyles();
     }
@@ -233,4 +248,19 @@ export class CreerQuizzComponent {
     }
   }
 
+  handleAccessCode(accessCode: string): void {
+    if (accessCode === this.correctAccessCode) {
+      this.authService.toggleAuthenticate();
+      this.isAccessing = true;
+      setTimeout(() => {
+        this.showModalAuth = false;
+      }, 600); // The same duration as your animation
+    } else {
+      alert('Incorrect access code. Please try again.');
+    }
+  }
+
+  toggleAuthenticate() {
+    this.authService.toggleAuthenticate();
+  }
 }

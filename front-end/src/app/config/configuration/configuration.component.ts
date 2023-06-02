@@ -1,6 +1,7 @@
-import {Component, HostListener} from '@angular/core';
+import {Component} from '@angular/core';
 import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
-import {Location} from '@angular/common';
+import {AuthService} from "../../../service/authentification.service";
+import {CodeAcces} from "../../../models/codeAcces.model";
 
 @Component({
   selector: 'app-configuration',
@@ -10,19 +11,53 @@ import {Location} from '@angular/common';
 export class ConfigurationComponent {
   AttentionColorStatus: boolean = false;
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
-  constructor(private jeuxCouleursService: JeuxCouleursService) {}
+  showModalAuth: boolean | undefined;
+  correctAccessCode: string | undefined;
+  isAccessing: boolean | undefined;
+  isAppearing: boolean | undefined;
 
-  ngOnInit(): void {
-    this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
-
-    console.log("APPEL ONINIT CONFIG");
-    this.jeuxCouleursService.changeFont(document);
+  constructor(private jeuxCouleursService: JeuxCouleursService,
+              private authService: AuthService) {
   }
 
-  ngAfterViewInit(){console.log("afterContent");
-    if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
-    else {this.jeuxCouleursService.changeFont(document);}
+  async ngOnInit(): Promise<void> {
+    this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
+    this.jeuxCouleursService.changeFont(document);
+    this.showModalAuth = !this.authService.getAuthenticationStatus();
+    this.isAppearing = true;
+    this.authService.getCorrectAccessCode().subscribe(code => {
+      this.correctAccessCode = code;
+    });
+
+    if (this.showModalAuth) {
+      setTimeout(() => {
+        this.isAppearing = false;
+      }, 600);
+    }
+  }
+
+  ngAfterViewInit() {
+    if (this.jeuxCouleursService.isDefaultActive) {
+      this.jeuxCouleursService.collectDefaultStyles();
+    } else {
+      this.jeuxCouleursService.changeFont(document);
+    }
     this.jeuxCouleursService.changeFontSize(document);
   }
 
+  handleAccessCode(accessCode: string): void {
+    if (accessCode === this.correctAccessCode) {
+      this.authService.toggleAuthenticate();
+      this.isAccessing = true;
+      setTimeout(() => {
+        this.showModalAuth = false;
+      }, 600); // The same duration as your animation
+    } else {
+      alert('Incorrect access code. Please try again.');
+    }
+  }
+
+  toggleAuthenticate() {
+    this.authService.toggleAuthenticate();
+  }
 }

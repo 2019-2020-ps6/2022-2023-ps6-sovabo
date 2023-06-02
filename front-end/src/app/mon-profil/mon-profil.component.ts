@@ -4,6 +4,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {UserService} from "../../service/user.service";
 import {User} from "../../models/user.model";
 import { BehaviorSubject } from 'rxjs';
+import {AuthService} from "../../service/authentification.service";
 
 @Component({
   selector: 'app-mon-profil',
@@ -19,11 +20,13 @@ export class MonProfilComponent {
   public showPopUp: boolean = false;
   alertMessage: string | null = null;
   deleteMode: boolean = false;
-  showModal = false;
+  showModalAvatar = false;
   public alertState: boolean = true;
   deletingUsers: string[] = [];
-
-
+  showModalAuth: boolean = true;
+  correctAccessCode: string | undefined;
+  isAccessing: boolean | undefined;
+  isAppearing: boolean | undefined;
 
   avatarImages = [
     "../../assets/Images/Animateurs/bear/bear-emoji-normal.png.png",
@@ -46,11 +49,13 @@ export class MonProfilComponent {
 
 
   constructor(private jeuxCouleursService: JeuxCouleursService,
-              public userService: UserService) {
+              public userService: UserService,
+              private authService: AuthService) {
   }
 
   async ngOnInit(): Promise<void> {
-    this.showModal = false;
+    this.showModalAvatar = false;
+    this.isAppearing = true;
     try {
       const usersFromServer = await this.userService.loadUsersFromServer();
       this.users = usersFromServer.map(user => ({...user}));
@@ -66,6 +71,14 @@ export class MonProfilComponent {
     this.userService.currentUser$.subscribe(user => {
       // Faites quelque chose avec l'utilisateur courant
     });
+    this.authService.getCorrectAccessCode().subscribe(code => {
+      this.correctAccessCode = code;
+    });
+    if (this.showModalAuth) {
+      setTimeout(() => {
+        this.isAppearing = false;
+      }, 600);
+    }
   }
 
 
@@ -221,7 +234,7 @@ export class MonProfilComponent {
 
   selectAvatar(img: string) {
     this.selectedAvatar = img;
-    this.showModal = false;
+    this.showModalAvatar = false;
   }
 
   // @ts-ignore
@@ -250,7 +263,7 @@ export class MonProfilComponent {
       // Mettez à jour le chemin de l'image pour l'utilisateur dans la liste d'utilisateurs
       this.users = this.users.map(user => user.id === this.selectedUser?.id ? { ...user, imagePath: filename } : user);
       this.userService.updateUser(updatedUser, userId).then(r => {
-        this.showModal = false;
+        this.showModalAvatar = false;
         this.alertState = true;
         this.showAlertNotif("L'avatar a bien été modifié !");
       });
@@ -312,12 +325,12 @@ export class MonProfilComponent {
     if(user != null){
       this.selectedUser = user;
     }
-    this.showModal = true;
+    this.showModalAvatar = true;
   }
 
 // Méthode pour fermer la modal
   closeModal() {
-    this.showModal = false;
+    this.showModalAvatar = false;
   }
 
   toggleDeleteMode() {
@@ -356,5 +369,20 @@ export class MonProfilComponent {
 
   getUserCourant() {
     return this.userService.getUserCourant();
+  }
+
+  handleAccessCode(accessCode: string): void {
+    if (accessCode === this.correctAccessCode) {
+      this.toggleAuthenticate();
+      this.isAccessing = true;
+      setTimeout(() => {
+        this.showModalAuth = false;
+      }, 600); // The same duration as your animation
+    } else {
+      alert('Incorrect access code. Please try again.');
+    }
+  }
+  toggleAuthenticate() {
+    this.authService.toggleAuthenticate();
   }
 }

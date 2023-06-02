@@ -11,6 +11,10 @@
       ATTENTION</app-btn-clickable-frame-background>
   </div>
 
-  <app-btn-clickable-frame-background class="navigation" id="retour" [routerLink]="['/accueil']">RETOUR</app-btn-clickable-frame-background>
+  <app-btn-clickable-frame-background class="navigation" id="retour" [routerLink]="['/accueil']" (click)="toggleAuthenticate()">RETOUR</app-btn-clickable-frame-background>
 
 </div>
+<app-access-code-modal *ngIf="showModalAuth"
+                       (enteredAccessCode)="handleAccessCode($event)"
+                       [isAccessing]="isAccessing" [isAppearing]="isAppearing">
+</app-access-code-modal>
