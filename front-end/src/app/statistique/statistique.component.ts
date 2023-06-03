@@ -8,7 +8,7 @@ import { User } from 'src/models/user.model';
 import { ConfigurationModel } from 'src/models/configuration.model';
 import { UserService } from 'src/service/user.service';
 
-declare function createChart(statQuiz: StatQuizz): any;
+declare function createChart(statQuiz: StatQuizz, stat: String): any;
 
 @Component({
   selector: 'app-statistique',
@@ -18,6 +18,7 @@ declare function createChart(statQuiz: StatQuizz): any;
 export class StatistiqueComponent {
   public statQuiz!: StatQuizz[];
   public quiz!: Quiz;
+  public myLineChart: any;
   public userCourant!: User;
 
   public moyenneTimeReponse: number = 0;
@@ -42,15 +43,6 @@ export class StatistiqueComponent {
     //this.moyenneTimeReponse = this.calculerMoyenne();
     //createChart(this.statQuiz);
 
-    const openButton = document.getElementById("openButton");
-    if (openButton) {
-      openButton.addEventListener("click", this.openPopup);
-    }
-
-    const closeButton = document.getElementById("closeButton");
-    if (closeButton) {
-      closeButton.addEventListener("click", this.closePopup);
-    }
   }
 
 
@@ -68,7 +60,15 @@ export class StatistiqueComponent {
   //   return parseFloat(moyenne.toFixed(2));
   // }
 
-  openPopup(): void {
+  openPopup(statQuiz: StatQuizz, stat: String): void {
+    // Pass statQuiz to your createChart function
+    console.log(stat);
+    console.log("statQuiz");
+    console.log(statQuiz);
+
+    this.myLineChart = createChart(statQuiz, stat);
+    console.log(this.myLineChart);
+  
     const popupElement = document.getElementById("popup");
     if (popupElement) {
       popupElement.style.display = "block";
@@ -76,6 +76,10 @@ export class StatistiqueComponent {
   }
   closePopup(): void {
 
+    if (this.myLineChart) {
+      this.myLineChart.destroy();
+      this.myLineChart = null;
+    }
     const popupElement = document.getElementById("popup");
     if (popupElement) {
       popupElement.style.display = "none";
