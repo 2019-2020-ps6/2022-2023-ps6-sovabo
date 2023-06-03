@@ -11,7 +11,7 @@ class Configuration extends BaseModel {
       animateurImagePath: Joi.string().required(),
       animation: Joi.boolean().required(),
       animationSpeed: Joi.string().required(),
-      sliderPosition: Joi.number().integer().required(),
+      sliderPosition: Joi.number().precision(2).required(),
       duration: Joi.string().required(),
       contraste: Joi.boolean().required()
     });
