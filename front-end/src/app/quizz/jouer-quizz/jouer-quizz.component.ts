@@ -11,6 +11,7 @@ import { AnimateurService } from "../../../service/animateur.service";
 import { AnimationsService } from "../../../service/animations.service";
 import { JeuxCouleursService } from "../../../service/jeux-couleurs.service";
 import {parse} from "@fortawesome/fontawesome-svg-core";
+import {UserService} from "../../../service/user.service";
 
 
 @Component({
@@ -37,11 +38,12 @@ export class JouerQuizzComponent implements OnInit {
   public endTime: number = 0;
   public firstTime: boolean = true;
   public delay: number = 5000;
-  public timeRemaining: number = 5;
+  public timeRemaining: number = 50;
   private timerId: any | undefined;
   private currentFont: string = this.jeuxCouleursService.getFontSelectedString();
   public contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
   private isAnswerValidated: boolean = false; // Nouvelle variable
+  userCourant: any;
   private clickListener: ((event: Event) => void) | undefined;
   public clicksOutsideButtons: number = 0;
 
@@ -52,7 +54,8 @@ export class JouerQuizzComponent implements OnInit {
     private router: Router,
     private animateurService: AnimateurService,
     private animationService: AnimationsService,
-    private jeuxCouleursService: JeuxCouleursService
+    private jeuxCouleursService: JeuxCouleursService,
+    private userService: UserService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -80,15 +83,20 @@ export class JouerQuizzComponent implements OnInit {
       }
     };
     document.addEventListener('click', this.clickListener);
+
+    this.userCourant = this.userService.getUserCourant();
   }
 
   ngAfterViewInit(){
-    if (this.jeuxCouleursService.isDefaultActive) {
-      this.jeuxCouleursService.collectDefaultStyles();
-    } else {
-      this.jeuxCouleursService.changeFont(document);
-    }
+    if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
+    else {this.jeuxCouleursService.changeFont(document);}
     this.jeuxCouleursService.changeFontSize(document);
+
+  }
+
+  ngAfterContentChecked(){
+
+    this.jeuxCouleursService.changeColor(document);
   }
 
   getFontString() {
@@ -127,13 +135,31 @@ export class JouerQuizzComponent implements OnInit {
   selectAnswer(event: Event | null) {
     if (event != null) {
       const target = event?.currentTarget as HTMLElement;
+
+      //SI UNE REPONSE A DEJA ETE SELECTIONNEE
       if (this.selectedAnswerObject != null) {
-        this.selectedAnswerObject.classList.remove('selected');
-        this.selectedAnswerObject = target;
-        this.selectedAnswerObject.classList.add('selected');
+        //SI LE JEU DE COULEUR EST PAS APPELE ->CLASSE ADPATEE
+        if(this.jeuxCouleursService.getVisionColorSelected()!=-1){
+          this.selectedAnswerObject.classList.remove(this.jeuxCouleursService.getVisionColorSelectedString()+"_SELECTED");
+          this.selectedAnswerObject = target;
+          this.selectedAnswerObject.classList.add(this.jeuxCouleursService.getVisionColorSelectedString()+"_SELECTED");
+        }
+        //SINON -> PAS DE COULEUR DONC CLASSE NORMALE
+        else{
+          this.selectedAnswerObject.classList.remove('selected');
+          this.selectedAnswerObject = target;
+          this.selectedAnswerObject.classList.add('selected');
+        }
       } else {
         this.selectedAnswerObject = target;
-        this.selectedAnswerObject.classList.add('selected');
+
+        if(this.jeuxCouleursService.getVisionColorSelected()==-1){
+          this.selectedAnswerObject.classList.add('selected');
+        }
+        else{
+          this.selectedAnswerObject.classList.add(this.jeuxCouleursService.getVisionColorSelectedString()+"_SELECTED");
+        }
+
       }
     }
   }
@@ -162,7 +188,7 @@ export class JouerQuizzComponent implements OnInit {
     if (!this.isLastQuestion && !this.isAnswerValidated) {
       this.timerId = setTimeout(() => { // Stocker l'ID du minuteur pour l'annuler si nécessaire
         this.goToNextQuestion();
-      }, 5000);
+      }, 100000);
     }
     this.isAnswerValidated = true; // Marquer la réponse comme validée
   }
@@ -218,6 +244,10 @@ export class JouerQuizzComponent implements OnInit {
     return this.decalageQuestion();
   }
 
+  getVisionColorSelected(){
+    return this.jeuxCouleursService.getVisionColorSelected();
+  }
+
   decalageQuestion(): string{
     let questionContainer = document.querySelector('.question-bubble');
     if(questionContainer){
@@ -249,7 +279,7 @@ export class JouerQuizzComponent implements OnInit {
 
 
   getAnimateur() {
-    return this.animateurService.getAnimateur();
+    return this.userCourant.imagePath;
   }
 
   getAnimations() {

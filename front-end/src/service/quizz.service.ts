@@ -32,7 +32,7 @@ export class QuizService {
         );
       });
     }
-    
+
 
     getData() {
       return this.quizzes;
@@ -96,13 +96,12 @@ export class QuizService {
     return quiz;
   }
 
-  async updateQuiz(quiz: Quiz): Promise<Quiz> {
-    console.log("dans updateQuiz");
-    console.log(quiz);
-    const updatedQuiz = await this.httpClient.put<Quiz>(`${serverBack}quizzes/${quiz.id}`, quiz).toPromise();
-    if (!updatedQuiz) {
-      throw new Error(`Failed to update user with id ${quiz.id}`);
+
+  async updateQuiz(updateQuiz: Partial<Quiz>, id: string): Promise<Quiz> {
+    const quiz = await this.httpClient.put<Quiz>(`${serverBack}quizzes/${id}`, updateQuiz).toPromise();
+    if (!quiz) {
+      throw new Error(`Failed to update user`);
     }
-    return updatedQuiz;
+    return quiz;
   }
 }

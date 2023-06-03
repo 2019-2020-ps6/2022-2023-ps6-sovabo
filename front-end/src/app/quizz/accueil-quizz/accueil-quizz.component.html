@@ -14,8 +14,8 @@
       <img [src]="quiz.image" class="img-fluid" />
       <div class="btnModifierQuiz">
         <app-btn-list-quiz id="modifierQuizz" [routerLink]="['/modif-quizz']">
-          <div [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer' : ''" class="modifyContainer">
-            <span [ngClass]="this.contrasteTroubleEnable ? 'contrastUpText && modifyText' : 'modifyText'" >Modifier le quiz</span>
+          <div class="modifyContainer">
+            <span [ngClass]="this.contrasteTroubleEnable ? 'contrastUpText modifyText' : 'modifyText'" >Modifier le quiz</span>
           </div>
         </app-btn-list-quiz>
       </div>
@@ -39,7 +39,7 @@
     </div>
 
     <div class="animatorContainer" *ngIf="getAnimateur()">
-      <img src="../../../assets/Images/Animateur_image.png" alt="Image animateur" class="animator-relative">
+      <img [src]="'../../../assets/Images/Animateurs/'+getAnimateur()" alt="Image animateur" class="animator-relative">
     </div>
   </div>
 

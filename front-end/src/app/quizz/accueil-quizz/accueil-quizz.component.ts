@@ -6,6 +6,7 @@ import {AnimationsService} from "../../../service/animations.service";
 import {AnimateurService} from "../../../service/animateur.service";
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
+import {UserService} from "../../../service/user.service";
 
 
 @Component({
@@ -15,6 +16,7 @@ import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
 
 })
 export class AccueilQuizzComponent {
+  userCourant: any;
   animations: boolean = false;
   public animationDuration: string | undefined;
 
@@ -23,7 +25,7 @@ export class AccueilQuizzComponent {
 
   quizStar = faStar;
 
-  constructor(private animateurService: AnimateurService, private route: ActivatedRoute, private quizService: QuizService, private animationsService: AnimationsService,private jeuxCouleursService: JeuxCouleursService) {
+  constructor(private animateurService: AnimateurService, private route: ActivatedRoute, private quizService: QuizService, private animationsService: AnimationsService,private jeuxCouleursService: JeuxCouleursService, private userService: UserService) {
     this.animationDuration = this.animationsService.duration;
   }
   ngOnInit(): void {
@@ -38,14 +40,17 @@ export class AccueilQuizzComponent {
     else {
       this.jeuxCouleursService.changeFont(document);
     }
+    this.userCourant = this.userService.getUserCourant();
   }
 
   ngAfterViewInit(){
+    if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
+    else {this.jeuxCouleursService.changeFont(document);}
     this.jeuxCouleursService.changeFontSize(document);
   }
 
   getAnimateur() {
-    return this.animateurService.getAnimateur();
+    return this.userCourant.imagePath;
   }
 
   getAnimations() {

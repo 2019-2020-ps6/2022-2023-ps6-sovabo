@@ -7,6 +7,7 @@ import { StatQuizz } from 'src/models/quizz.stat.model';
 import { User } from 'src/models/user.model';
 import { ConfigurationModel } from 'src/models/configuration.model';
 import { UserService } from 'src/service/user.service';
+import {AuthService} from "../../service/authentification.service";
 
 declare function createChart(statQuiz: StatQuizz, stat: String): any;
 
@@ -20,10 +21,16 @@ export class StatistiqueComponent {
   public quiz!: Quiz;
   public myLineChart: any;
   public userCourant!: User;
+  showModalAuth: boolean | undefined;
+  correctAccessCode: string | undefined;
+  isAccessing: boolean | undefined;
 
   public moyenneTimeReponse: number = 0;
-  constructor(private route: ActivatedRoute, private quizService: QuizService,private statistiquesService: StatistiqueService,
-    private UserService: UserService) {
+  constructor(private route: ActivatedRoute,
+              private quizService: QuizService,
+              private statistiquesService: StatistiqueService,
+              private authService: AuthService,
+              private UserService: UserService) {
   }
 
   ngOnInit() {
@@ -39,7 +46,12 @@ export class StatistiqueComponent {
     for (let statQuiz of this.statQuiz) {
       statQuiz.nameQuizz = this.quizService.getQuizNameById(statQuiz.idQuizz);
     }
-    
+
+    this.showModalAuth = !this.authService.getAuthenticationStatus();
+    this.authService.getCorrectAccessCode().subscribe(code => {
+      this.correctAccessCode = code;
+    });
+
     //this.moyenneTimeReponse = this.calculerMoyenne();
     //createChart(this.statQuiz);
 
@@ -68,7 +80,7 @@ export class StatistiqueComponent {
 
     this.myLineChart = createChart(statQuiz, stat);
     console.log(this.myLineChart);
-  
+
     const popupElement = document.getElementById("popup");
     if (popupElement) {
       popupElement.style.display = "block";
@@ -86,5 +98,15 @@ export class StatistiqueComponent {
     }
   }
 
-
+  handleAccessCode(accessCode: string): void {
+    if (accessCode === this.correctAccessCode) {
+      this.authService.toggleAuthenticate();
+      this.isAccessing = true;
+      setTimeout(() => {
+        this.showModalAuth = false;
+      }, 600); // The same duration as your animation
+    } else {
+      alert('Incorrect access code. Please try again.');
+    }
+  }
 }

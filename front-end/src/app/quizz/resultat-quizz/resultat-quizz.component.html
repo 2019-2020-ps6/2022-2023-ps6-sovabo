@@ -5,7 +5,7 @@
 
 <div class="pageContainer">
   <div [ngClass]="getAnimations() ? 'textBubbleWithAnimationsON' : 'textBubbleWithAnimationsOFF'" [ngStyle]="{'animation-delay' : (getDelay()*(9/2) + 's')}">
-    <div [ngClass]="this.contrasteTroubleEnable ? 'bubble_contrastOn && contrastUpContainer' : 'bubble_contrastOff'" >
+    <div [ngClass]="this.contrasteTroubleEnable ? 'bubble_contrastOn contrastUpContainer' : 'bubble_contrastOff'" >
         <p class="fontStyleCanChange fontSizeCanChange">Bravo, tu as fini le quizz, ton score est de {{score}}</p>
         <div id="container" routerLink="/statistiques-quiz">
           <button class="learn-more">
@@ -26,7 +26,7 @@
   <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble3" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(13/4) + 's')}"></div>
   <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble4" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(15/4) + 's')}"></div>
   <div class="animatorContainer" *ngIf="getAnimateur()">
-    <img src="../../../assets/Images/Animateur_image.png" alt="Image animateur" [ngClass]="getAnimations() ? 'animatorWithAnimationsON' : 'animatorWithAnimationsOFF'" [ngStyle]="{'animation-duration' : (getDelay()*(10/4) + 's')}">
+    <img [src]="'../../../assets/Images/Animateurs/'+getAnimateur()" alt="Image animateur" [ngClass]="getAnimations() ? 'animatorWithAnimationsON' : 'animatorWithAnimationsOFF'" [ngStyle]="{'animation-duration' : (getDelay()*(10/4) + 's')}">
   </div>
   <div class="containerButtons">
     <app-btn-clickable-frame-background routerLink="/accueil-quiz/{{quiz.id}}">REJOUER</app-btn-clickable-frame-background>

@@ -1,8 +1,6 @@
-
-
-    <div class="titrePage">
-      <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
-      <p class="titreStyle"> Statistiques du quizz </p>
+<div class="titrePage">
+  <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
+  <p class="titreStyle"> Statistiques du quizz </p>
 
     </div>
     <div class="container">
@@ -134,10 +132,14 @@
 
     </div>
 
-    <app-btn-clickable-frame-background class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<app-btn-clickable-frame-background class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
+<!-- Pop-up pour le code d'acces -->
+<app-access-code-modal *ngIf="showModalAuth"
+                       (enteredAccessCode)="handleAccessCode($event)"
+                       [isAccessing]="isAccessing">
+</app-access-code-modal>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" defer></script>
 
 <script src="http://cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js" defer></script>

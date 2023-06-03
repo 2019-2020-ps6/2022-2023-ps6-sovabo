@@ -7,10 +7,10 @@ import {duotone} from "@fortawesome/fontawesome-svg-core/import.macro";
 export class JeuxCouleursService {
 
   //option trouble de l'attention
-  private attentionColorActivated = false;
+  private attentionColorActivated = true;
 
   //option trouble de la vision
-  listTrouble = ["TRICHROMATIE","DICHROMATISME"];
+  listTrouble = ["DEUTERANOMALIE","TRITANOPIE"];
   //La font par défaut est Nunito
   listFont = ["Arial","Andale Mono","Comic Sans MS", "Nunito"];
 
@@ -149,6 +149,7 @@ export class JeuxCouleursService {
   }
 
   public changeFontSize(document: Document): void {
+    console.log("CALL FONTSIZE");
     this.applyFontSize(document);
   }
 
@@ -168,7 +169,6 @@ export class JeuxCouleursService {
 
   changeFont(document: Document) {
     if(!this.isDefaultActive){
-      console.log("APPLY FONT CLASS ");
       this.applyFontToClass(document);
     }
   }
@@ -177,6 +177,58 @@ export class JeuxCouleursService {
     let elements = document.querySelectorAll<HTMLElement>(".fontStyleCanChange");
     for (let i = 0; i < elements.length; i++) {
       elements[i].style.fontFamily = this.getFontSelectedString();
+    }
+  }
+
+  changeColor(document: Document){
+
+    let elements = document.querySelectorAll<HTMLElement>(".fontColorToChange");
+
+    for (let i = 0; i < elements.length; i++) {
+      for (let j = 0; j < this.listTrouble.length; j++) {elements[i].classList.remove(this.listTrouble[i]);}
+      elements[i].classList.remove("DEUTERANOMALIE_FONT");
+      elements[i].classList.remove("TRITANOPIE_FONT");
+      if(elements[i].nodeName=="BODY"){elements[i].style.background= ""}
+    }
+
+    //CAS OU IL N'Y A PAS de JEU DE COULEUR
+    if(this.getVisionColorSelected()==-1){}
+
+    else {
+      //CAS OU LA IL Y A UN JEU DE COULEUR
+      for (let i = 0; i < elements.length; i++) {
+        switch (this.getVisionColorSelectedString()) {
+          case this.listTrouble[0]:
+            if (elements[i].classList.contains("fontColorToChange")) {
+              if(elements[i].classList.contains("answer")){
+                elements[i].classList.remove("answer");
+                elements[i].classList.add("DEUTERANOMALIE_ANSWER");
+              }
+              if(elements[i].classList.contains("wrong-answer")){
+                elements[i].style.color=""
+              }
+              if(elements[i].nodeName=="BODY"){elements[i].style.background= "rgb(75,114,126)"}
+              else{
+                elements[i].classList.add(this.getVisionColorSelectedString());
+                elements[i].classList.add("DEUTERANOMALIE_FONT");
+              }
+            }
+            break;
+          case this.listTrouble[1]:
+            if (elements[i].classList.contains("fontColorToChange")) {
+              if(elements[i].classList.contains("answer")){
+                elements[i].classList.remove("answer");
+                elements[i].classList.add("TRITANOPIE_ANSWER");
+              }
+              if(elements[i].nodeName=="BODY"){elements[i].style.background= "#484848"}
+              else{
+                elements[i].classList.add(this.getVisionColorSelectedString());
+                elements[i].classList.add("TRITANOPIE_FONT");
+              }
+            }
+            break;
+        }
+      }
     }
   }
 
@@ -204,7 +256,6 @@ export class JeuxCouleursService {
 
   // appelez cette fonction lors du chargement de la page
   public collectDefaultStyles(): void {
-    console.log("collectDefaultStyles");
     const allElements = document.getElementsByClassName("fontStyleCanChange");
     for (let i = 0; i < allElements.length; i++) {
       const element = allElements[i];
