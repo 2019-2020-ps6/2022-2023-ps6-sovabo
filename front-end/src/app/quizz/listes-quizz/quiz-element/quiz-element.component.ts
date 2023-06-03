@@ -22,4 +22,8 @@ export class QuizElementComponent {
   ngOnInit(): void {
   }
 
+  getVisionColorSelected(){
+    return this.jeuxCouleursService.getVisionColorSelected();
+  }
+
 }

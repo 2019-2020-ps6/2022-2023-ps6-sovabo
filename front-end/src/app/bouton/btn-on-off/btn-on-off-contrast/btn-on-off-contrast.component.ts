@@ -23,4 +23,8 @@ export class BtnOnOffContrastComponent {
     this.isOn = !this.isOn;
   }
 
+  get buttonClass() {
+    return this.jeuxCouleursService.getVisionColorSelectedString();
+  }
+
 }

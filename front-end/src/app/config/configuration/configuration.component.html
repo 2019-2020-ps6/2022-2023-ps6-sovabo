@@ -1,6 +1,6 @@
 <div class="container">
 
-  <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTitleExtrude' : 'contrastDownTitleExtrude'" class="polyquizTitre fontSizeCanChange">PolyQuiz</h1>
+  <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTitleExtrude' : 'contrastDownTitleExtrude'" class="polyquizTitre">PolyQuiz</h1>
 
 
   <div id="container parametre">
@@ -11,6 +11,10 @@
       ATTENTION</app-btn-clickable-frame-background>
   </div>
 
-  <app-btn-clickable-frame-background class="navigation" id="retour" [routerLink]="['/accueil']">RETOUR</app-btn-clickable-frame-background>
+  <app-btn-clickable-frame-background class="navigation" id="retour" [routerLink]="['/accueil']" (click)="toggleAuthenticate()">RETOUR</app-btn-clickable-frame-background>
 
 </div>
+<app-access-code-modal *ngIf="showModalAuth"
+                       (enteredAccessCode)="handleAccessCode($event)"
+                       [isAccessing]="isAccessing" [isAppearing]="isAppearing">
+</app-access-code-modal>

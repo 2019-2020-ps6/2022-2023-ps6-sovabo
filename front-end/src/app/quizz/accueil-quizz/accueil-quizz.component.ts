@@ -44,6 +44,8 @@ export class AccueilQuizzComponent {
   }
 
   ngAfterViewInit(){
+    if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
+    else {this.jeuxCouleursService.changeFont(document);}
     this.jeuxCouleursService.changeFontSize(document);
   }
 

@@ -43,8 +43,23 @@ button:not(.active) {
 
 //SETUP DE CONTRASTE
 .contrastUpContainer{
-  font-family: Arial, Helvetica, sans-serif;
-  color: black;
-  background: rgb(200, 200, 200);
-  text-shadow: none;
+  background: rgb(200, 200, 200)!important;
+  text-shadow: none!important;
+}
+
+.DEUTERANOMALIE{
+  color: #805ad0!important;
+  text-shadow: none !important;
+}
+.DEUTERANOMALIE_FONT{
+  -webkit-text-fill-color: white;
+}
+
+.TRITANOPIE{
+  color: #fb5e7e !important;
+  text-shadow: none !important;
+}
+
+.TRITANOPIE_FONT{
+  -webkit-text-fill-color: black;
 }

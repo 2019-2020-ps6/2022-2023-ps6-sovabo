@@ -1,3 +1,5 @@
-<button class="fontStyleCanChange" [class.active]="isOn" (click)="toggleState()"  [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}">
+<button class="fontStyleCanChange" [class.active]="isOn" (click)="toggleState()"
+        [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}"
+        [class]="buttonClass">
   {{ isOn ? 'ON' : 'OFF' }}
 </button>

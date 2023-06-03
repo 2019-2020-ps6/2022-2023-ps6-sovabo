@@ -31,7 +31,7 @@ button {
   inset -4px -3px 16px rgba(255, 255, 255, 0.32);
 }
 
-button_TRICHROMATIE {
+button_DEUTERANOMALIE {
   width: 110%;
   height: 100%;
   border: none;
@@ -59,7 +59,7 @@ button_TRICHROMATIE {
   inset -4px -3px 16px rgba(255, 255, 255, 0.32);
 }
 
-button_DICHROMATISME {
+button_TRITANOPIE {
   width: 110%;
   height: 100%;
   border: none;
@@ -89,22 +89,24 @@ button_DICHROMATISME {
 
 //SETUP DE CONTRASTE
 .contrastUpContainer{
-  font-family: Arial, Helvetica, sans-serif;
-  color: black;
-  background: rgb(200, 200, 200);
-  text-shadow: none;
+  color: black!important;
+  background: rgb(200, 200, 200)!important;
+  text-shadow: none!important;
 }
 
-
-.TRICHROMATIE{
-  background: black;
+.DEUTERANOMALIE{
+  background: #805ad0 !important;
+  text-shadow: none !important;
 }
 
-.DICHROMATISME{
-    background: red;
+.TRITANOPIE{
+  background: #fb5e7e !important;
+  text-shadow: none !important;
 }
 
 p{
   //margin top and bottom
   margin: 2% 0;
 }
+
+

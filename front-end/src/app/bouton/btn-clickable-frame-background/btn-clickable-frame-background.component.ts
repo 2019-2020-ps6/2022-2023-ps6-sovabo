@@ -16,6 +16,10 @@ export class BtnClickableFrameBackgroundComponent {
     this.changeContrast();
   }
 
+  get buttonClass() {
+    return this.jeuxCouleursService.getVisionColorSelectedString();
+  }
+
   ngOnInit() {
   }
 

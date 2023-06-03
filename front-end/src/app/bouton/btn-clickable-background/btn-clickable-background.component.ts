@@ -17,6 +17,10 @@ export class BtnClickableBackgroundComponent {
     this.contrasteTroubleEnable = this.jeuxCouleursService.getVisionAttentionStatus();
   }
 
+  get buttonClass() {
+    return this.jeuxCouleursService.getVisionColorSelectedString();
+  }
+
   ngOnInit() {
   }
 

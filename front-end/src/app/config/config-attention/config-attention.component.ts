@@ -8,6 +8,8 @@ import {User} from "../../../models/user.model";
 import {Action} from "rxjs/internal/scheduler/Action";
 import {ConfigurationModel} from "../../../models/configuration.model";
 import {debounceTime, mergeMap, of, Subscription, tap} from "rxjs";
+import {Simulate} from "react-dom/test-utils";
+import waiting = Simulate.waiting;
 
 @Component({
   selector: 'app-config-attention',
@@ -25,7 +27,6 @@ export class ConfigAttentionComponent {
 
   private animateurSubscription: Subscription | undefined;
 
-
   constructor(private animationsService: AnimationsService,
               private animateurService: AnimateurService,
               private jeuxCouleursService: JeuxCouleursService,
@@ -41,13 +42,6 @@ export class ConfigAttentionComponent {
     this.user = this.getUserCourant();
     await this.loadConfig();
     this.contrasteTroubleEnable = this.jeuxCouleursService.getVisionAttentionStatus();
-
-    if (this.jeuxCouleursService.isDefaultActive) {
-      this.jeuxCouleursService.collectDefaultStyles();
-    }
-    else {
-      this.jeuxCouleursService.changeFont(document);
-    }
   }
 
   ngOnDestroy() {
@@ -64,7 +58,14 @@ export class ConfigAttentionComponent {
   }
 
   ngAfterViewInit(){
+    if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
+    else {this.jeuxCouleursService.changeFont(document);}
     this.jeuxCouleursService.changeFontSize(document);
+    this.jeuxCouleursService.changeColor(document);
+  }
+
+  ngOnChanges(){
+    this.jeuxCouleursService.changeColor(document);
   }
   toggleAnimations() {
     this.animations = !this.animations;

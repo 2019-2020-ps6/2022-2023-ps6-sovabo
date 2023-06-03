@@ -107,9 +107,9 @@
 }
 
 .titre-quiz{
+  background: rgba(217, 217, 217, 0.60);
   display: flex;
   align-items: center;
-  background: rgba(217, 217, 217, 0.60);
   border-radius: 59px;
   height: 8vh;
   width: 40vw;
@@ -121,15 +121,26 @@
   border: none; /* Suppression de la bordure par défaut */
   background: transparent; /* Fond transparent */
   font-size: 2vw;
-  color: rgb(50, 50, 50);
   font-weight: bold;
   outline: none; /* Suppression de la mise en évidence lors du focus */
 }
 
-.titre-quiz input[type="text"]::placeholder {
-  color: rgb(50, 50, 50); /* Couleur du texte de placeholder */
-  opacity: 50%;
+.inputStyleContrastOff::placeholder{
+  color: rgb(100, 100, 100);
 }
+
+.inputStyleContrastOn::placeholder{
+  color: black;
+}
+
+.inputStyleContrastOff{
+  color: rgb(100, 100, 100);
+}
+
+.inputStyleContrastOn{
+  color: black;
+}
+
 
 .description-quiz{
   display: flex;
@@ -156,7 +167,6 @@ textarea {
 
 .textCategorie{
   font-size: 2vw;
-  color: rgb(50, 50, 50);
 }
 
 .iconeTriangle{
@@ -198,15 +208,9 @@ textarea {
   border: none;
   background: transparent;
   font-size: 1.5vw;
-  color: rgb(50, 50, 50);
   font-weight: bold;
   outline: none;
   width: 100%;
-}
-
-.titre-question input[type="text"]::placeholder {
-  color: rgb(50, 50, 50); /* Couleur du texte de placeholder */
-  opacity: 50%;
 }
 
 .reponses-question{
@@ -237,17 +241,11 @@ textarea {
   border: none;
   background: transparent;
   font-size: 1.7vw;
-  color: rgb(50, 50, 50);
   font-weight: bold;
   outline: none;
   width: 100%;
   text-align: center;
   pointer-events: all;
-}
-
-.reponse input[type="text"]::placeholder {
-  color: rgb(50, 50, 50); /* Couleur du texte de placeholder */
-  opacity: 50%;
 }
 
 .uncheked::before {
@@ -352,6 +350,42 @@ textarea {
   border-radius: 20px;
   border: 1px solid white;
   font-size: 3vh;
-  color: rgb(50, 50, 50);
+
   margin-top: 2vh;
+}
+
+.boutonValiderContrastOff{
+  color: rgb(50, 50, 50);
+  background-color: #4FC031;
+}
+
+.boutonValiderContrastOn{
+  color: black;
+  background: rgb(200, 200, 200);
+}
+
+
+//GESTION JEU COULEUR
+.DEUTERANOMALIE{
+  color: #9999d4 !important;
+  text-shadow: none !important;
+}
+
+.DEUTERANOMALIE::placeholder{
+  color: black !important;
+}
+.DEUTERANOMALIE_FONT{
+  -webkit-text-fill-color: white !important;
+}
+
+.TRITANOPIE{
+  color: #fb5e7e !important;
+  text-shadow: none !important;
+}
+.TRITANOPIE::placeholder{
+  color: black !important;
+}
+
+.TRITANOPIE_FONT{
+  -webkit-text-fill-color: black !important;
 }
