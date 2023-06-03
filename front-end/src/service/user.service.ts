@@ -6,6 +6,7 @@ import { ConfigurationModel} from 'src/models/configuration.model';
 import { serverUrl, httpOptionsBase, serverBack } from '../config/server.config'
 import {HttpClient} from "@angular/common/http";
 import {User} from "../models/user.model";
+import { StatQuizz } from 'src/models/quizz.stat.model';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,12 @@ export class UserService {
   // Supprimer un utilisateur
   async deleteUser(userId: string): Promise<void> {
     await this.httpClient.delete<void>(`${serverBack}users/${userId}`).toPromise().then(() => {
+      this.updateAll();
+    });
+  }
+
+  async updateStatQuizzForUser(userId : string, statQuizz : Partial<StatQuizz>, quizId: string): Promise<void> {
+    await this.httpClient.put<void>(`${serverBack}users/${userId}/statQuizz/${quizId}`, statQuizz).toPromise().then(() => {
       this.updateAll();
     });
   }

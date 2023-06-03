@@ -11,7 +11,7 @@ class QuizModel extends BaseModel {
       name: Joi.string().required(),
       desc: Joi.string().required(),
       theme: Joi.string().optional(),
-      statQuiz: StatQuizzModel.schema.optional(),
+      //statQuiz: StatQuizzModel.schema.optional(),
       questions: Joi.array().items(QuestionModel.schema).required(),
       difficulty: Joi.number().required(),
       image: Joi.string().required(),
@@ -23,7 +23,7 @@ class QuizModel extends BaseModel {
 
     console.log('item', item);
 
-    item.statQuiz = StatQuizzModel.createStatQuizz();
+    //item.statQuiz = StatQuizzModel.createStatQuizz();
 
     if (item.questions) {
       item.questions = item.questions.map((question) => {

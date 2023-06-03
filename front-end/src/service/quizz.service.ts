@@ -97,6 +97,8 @@ export class QuizService {
   }
 
   async updateQuiz(quiz: Quiz): Promise<Quiz> {
+    console.log("dans updateQuiz");
+    console.log(quiz);
     const updatedQuiz = await this.httpClient.put<Quiz>(`${serverBack}quizzes/${quiz.id}`, quiz).toPromise();
     if (!updatedQuiz) {
       throw new Error(`Failed to update user with id ${quiz.id}`);

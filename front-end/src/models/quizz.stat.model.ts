@@ -1,7 +1,9 @@
 export interface StatQuizz {
+    id?: string;
     idQuizz: string;
-    nbClicks: number[];
     timeResponses: number[];
     nameQuizz?: string;
-    correctResponses: boolean[];
-}
+    nbMissClicks: number[];
+    FreqInteractAnim: number[];
+    resultatQuizz: number[];
+  }

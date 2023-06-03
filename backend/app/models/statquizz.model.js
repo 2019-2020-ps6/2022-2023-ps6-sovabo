@@ -1,6 +1,7 @@
 const Joi = require('joi')
 const BaseModel = require('../utils/base-model.js')
 const uuid = require('uuid');
+const { ValidationError } = require('joi');
 
 class StatQuizzModel extends BaseModel {
   constructor() {

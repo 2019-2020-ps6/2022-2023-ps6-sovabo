@@ -42,6 +42,8 @@ export class JouerQuizzComponent implements OnInit {
   private currentFont: string = this.jeuxCouleursService.getFontSelectedString();
   public contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
   private isAnswerValidated: boolean = false; // Nouvelle variable
+  private clickListener: ((event: Event) => void) | undefined;
+  public clicksOutsideButtons: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -69,6 +71,15 @@ export class JouerQuizzComponent implements OnInit {
     this.valueTime = [];
     this.animationDuration = this.animationService.duration;
     this.startTimer();
+
+    this.clickListener = (event: Event) => {
+      const targetElement = event.target as HTMLElement;
+      if (targetElement.tagName.toLowerCase() !== 'button') {
+        this.clicksOutsideButtons++;
+        console.log('Clics en dehors des boutons : ', this.clicksOutsideButtons);
+      }
+    };
+    document.addEventListener('click', this.clickListener);
   }
 
   ngAfterViewInit(){
@@ -86,8 +97,7 @@ export class JouerQuizzComponent implements OnInit {
 
   checkWin() {
     if (this.currentQuestionIndex === this.quiz.questions.length - 1) {
-      console.log('FINI');
-      this.statistiquesService.ajouterMoyenneTimeResponseAuQuizCourant(this.calculerMoyenne());
+      this.statistiquesService.ajouterMoyenneTimeResponseAuUserCournat(this.calculerMoyenne(), this.quiz.id);
       this.isQuizFinished = true;
     }
   }
@@ -217,8 +227,6 @@ export class JouerQuizzComponent implements OnInit {
 
         let largeur = parseFloat(getComputedStyle(questionContainer).width);
         let largeurTxt = parseFloat(getComputedStyle(htmlLocation).width);
-        console.log(largeur);
-        console.log(largeurTxt);
 
         if(largeur>1200){
           let split = initData.split(" ");
