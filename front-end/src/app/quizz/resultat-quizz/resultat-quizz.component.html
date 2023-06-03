@@ -25,8 +25,8 @@
   <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble2" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(11/4) + 's')}"></div>
   <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble3" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(13/4) + 's')}"></div>
   <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble4" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(15/4) + 's')}"></div>
-  <div class="animatorContainer" *ngIf="getAnimateur()">
-    <img [src]="'../../../assets/Images/Animateurs/'+getAnimateur()" alt="Image animateur" [ngClass]="getAnimations() ? 'animatorWithAnimationsON' : 'animatorWithAnimationsOFF'" [ngStyle]="{'animation-duration' : (getDelay()*(10/4) + 's')}">
+  <div class="animatorContainer" [ngClass]="getAnimations() ? 'animatorWithAnimationsON' : 'animatorWithAnimationsOFF'" *ngIf="getAnimateur()">
+    <img [src]="'../../../assets/Images/Animateurs/'+getAnimateurPath()" alt="Image animateur" class="animator-relative" [ngStyle]="{'animation-duration' : (getDelay()*(10/4) + 's')}">
   </div>
   <div class="containerButtons">
     <app-btn-clickable-frame-background routerLink="/accueil-quiz/{{quiz.id}}">REJOUER</app-btn-clickable-frame-background>

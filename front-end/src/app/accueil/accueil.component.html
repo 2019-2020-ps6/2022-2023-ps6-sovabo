@@ -18,7 +18,7 @@
     <p>Bienvenue sur Polyquiz !<br>Es-tu prêt à tester tes connaissances ?</p>
   </div>
   <div class="animatorContainer" *ngIf="getAnimateur()">
-    <img [src]="'../../assets/Images/Animateurs/'+getAnimateur()" alt="Image animateur" class="animator-relative">
+    <img [src]="'../../assets/Images/Animateurs/'+getAnimateurPath()" alt="Image animateur" class="animator-relative">
   </div>
 
   <div class="rightContainer" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer' : ''">
