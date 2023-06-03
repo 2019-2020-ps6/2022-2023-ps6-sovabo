@@ -18,7 +18,6 @@ export class AnimationsService {
         this.isAnimated.next(user.configuration.animation);
         this.duration.next(user.configuration.duration);
         this.positionCursorSlider.next(user.configuration.sliderPosition);
-        console.log(user.configuration.sliderPosition);
         this.delay = (user.configuration.sliderPosition-8)/(-10);
 
       }

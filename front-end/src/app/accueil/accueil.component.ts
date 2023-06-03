@@ -17,6 +17,7 @@ export class AccueilComponent {
   alertMessage: string | null = null;
   accesAutorise: boolean | undefined;
   animateur: boolean | undefined;
+  animation: boolean | undefined;
   userCourant: any;
 
   constructor(private jeuxCouleursService: JeuxCouleursService,
@@ -30,6 +31,7 @@ export class AccueilComponent {
     this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
     this.contrasteTroubleEnable = this.userService.getUserCourant()?.configuration.contraste || false;
     this.animateur = this.userService.getUserCourant()?.configuration.animateur || false;
+    this.animation = this.userService.getUserCourant()?.configuration.animation || false;
     if (this.jeuxCouleursService.isDefaultActive) {
       this.jeuxCouleursService.collectDefaultStyles();
     } else {
@@ -52,7 +54,7 @@ export class AccueilComponent {
   }
 
   getAnimations() {
-    return this.animationsService.isAnimated;
+    return this.animationsService.isAnimated.value;
   }
 
   getDuration() {

@@ -59,6 +59,7 @@ export class JouerQuizzComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
+    this.loadConfig();
     this.timerId = undefined;
   this.quiz = this.quizService.getQuizCourant();
   try {
@@ -292,7 +293,7 @@ export class JouerQuizzComponent implements OnInit {
   }
 
   getAnimations() {
-    return this.animationService.isAnimated;
+    return this.animationService.isAnimated.value;
   }
 
   getDelay() {

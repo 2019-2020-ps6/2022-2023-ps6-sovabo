@@ -69,7 +69,7 @@ export class AccueilQuizzComponent {
   }
 
   getAnimations() {
-    return this.animationsService.isAnimated;
+    return this.animationsService.isAnimated.value;
   }
 
   getDelay() {
