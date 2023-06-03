@@ -125,6 +125,15 @@
   src: url("~src/assets/Fonts/nunito-main/fonts/variable/Nunito[wght].ttf");
 }
 
+@keyframes animatorFadeIn {
+  from {
+    bottom : -40%;
+  }
+  to {
+    bottom : 0%;
+  }
+}
+
 .animatorContainer {
   position: absolute;
   height: 40vh;
@@ -137,6 +146,12 @@
   object-fit: contain;
   height: 100%;
   width: 100%;
+}
+
+.animatorWithAnimationsON {
+  animation-name: animatorFadeIn;
+  animation-duration: 5s;
+  animation-fill-mode: forwards;
 }
 
 $delay: 0.5s;
@@ -170,7 +185,6 @@ $fade-duration: 1s;
   left: 90%;
   height: 1vw;
   width: 1vw;
-  animation-delay: 0s;
 }
 
 .bubble2 {
@@ -179,7 +193,6 @@ $fade-duration: 1s;
   left: 91%;
   height: 1.5vw;
   width: 1.5vw;
-  animation-delay: 0.4s;
 }
 
 .bubble3 {
@@ -188,7 +201,6 @@ $fade-duration: 1s;
   left: 89.5%;
   height: 2vw;
   width: 2vw;
-  animation-delay: 0.7s;
 }
 
 .bubble4 {
@@ -198,7 +210,6 @@ $fade-duration: 1s;
   left: 87%;
   height: 2.5vw;
   width: 2.5vw;
-  animation-delay: 0.9s;
 }
 
 .bubble5 {
@@ -208,7 +219,6 @@ $fade-duration: 1s;
   left: 82.5%;
   height: 3vw;
   width: 3vw;
-  animation-delay: 1.2s;
 }
 
 .bubbleTextContainer {
@@ -221,8 +231,6 @@ $fade-duration: 1s;
   border-radius: 25px;
   margin-right: 5%;
   margin-left: 5%;
-
-  animation-delay: 1.6s;
 
   font-size: 150%;
   font-family: Nunito;
