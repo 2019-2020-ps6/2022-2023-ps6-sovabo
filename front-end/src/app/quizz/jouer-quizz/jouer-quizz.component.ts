@@ -11,6 +11,7 @@ import { AnimateurService } from "../../../service/animateur.service";
 import { AnimationsService } from "../../../service/animations.service";
 import { JeuxCouleursService } from "../../../service/jeux-couleurs.service";
 import {parse} from "@fortawesome/fontawesome-svg-core";
+import {UserService} from "../../../service/user.service";
 
 
 @Component({
@@ -42,6 +43,7 @@ export class JouerQuizzComponent implements OnInit {
   private currentFont: string = this.jeuxCouleursService.getFontSelectedString();
   public contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
   private isAnswerValidated: boolean = false; // Nouvelle variable
+  userCourant: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -50,7 +52,8 @@ export class JouerQuizzComponent implements OnInit {
     private router: Router,
     private animateurService: AnimateurService,
     private animationService: AnimationsService,
-    private jeuxCouleursService: JeuxCouleursService
+    private jeuxCouleursService: JeuxCouleursService,
+    private userService: UserService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -69,6 +72,8 @@ export class JouerQuizzComponent implements OnInit {
     this.valueTime = [];
     this.animationDuration = this.animationService.duration;
     this.startTimer();
+
+    this.userCourant = this.userService.getUserCourant();
   }
 
   ngAfterViewInit(){
@@ -239,7 +244,7 @@ export class JouerQuizzComponent implements OnInit {
 
 
   getAnimateur() {
-    return this.animateurService.getAnimateur();
+    return this.userCourant.imagePath;
   }
 
   getAnimations() {
