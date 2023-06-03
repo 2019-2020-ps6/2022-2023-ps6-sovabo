@@ -1,1 +1,68 @@
-<p>modif-quizz works!</p>
+<div class="creationQuiz">
+
+  <div class="header">
+    <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
+    <p [ngClass]="this.contrasteTroubleEnable ? 'titreStyleContrastOn' : 'titreStyleContrastOff'" >Créer mon quizz</p>
+    <app-btn-clickable-frame-background class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
+  </div>
+
+  <form (ngSubmit)="updateQuiz()"  #quizForm="ngForm">
+    <div class="contenu-creation-quiz">
+      <div class="conteneur-caracteristiques-quiz">
+        <div class="caracteristiques-quiz">
+          <div class="conteneur_image_difficulte">
+            <div id="image-quiz-id" class="image-quiz">
+              <label for="recup-fichier">
+                <img class="iconeImage" [src]="imageURL">
+              </label>
+              <input id="recup-fichier" type="file" (change)="afficherFichier()" />
+            </div>
+            <div class="difficulty-bars">
+              <span class="note difficulte">DIFFICULTÉ</span>
+              <span class="difficulty-bar" *ngFor="let i of [1, 2, 3, 4, 5]" (click)="onClickChangeColor(i)" [style.background-color]="i <= selectedIndex ? currentColor : 'rgba(46, 49, 54, 0.6)'"></span>
+              <span class="note fontStyleCanChange">{{selectedIndex}}/5</span>
+            </div>
+          </div>
+          <div class="titre-quiz">
+            <input type="text" placeholder="Titre du quiz…" [(ngModel)]="titreQuiz" name="titreQuiz" required/>
+          </div>
+          <div class="description-quiz">
+            <span class="textCategorie"><strong>Description</strong></span>
+            <textarea [(ngModel)]="descriptionQuiz" name="descriptionQuiz" required></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="conteneur-questions">
+        <div class="question" *ngFor="let question of questionsQuiz; let i = index">
+          <div class="titre-question">
+            <input type="text" placeholder="Question {{ i + 1 }} : ..." [(ngModel)]="questions[i]" name="question_{{i}}" required/>
+          </div>
+          <div class="reponses-question">
+            <div class="reponse" *ngFor="let reponse of reponsesQuiz[i]; let j = index">
+              <input type="text" placeholder="Réponse {{ j + 1 }}" [(ngModel)]="reponses[i][j]" name="reponse_{{i}}_{{j}}" required/>
+              <div class="reponse-bubble uncheked" (click)="selectionnerBonneReponse(i, j)">
+              </div>
+            </div>
+            <div class="ajout" *ngIf="reponsesQuiz[i].length < 4" (click)="ajouterReponse(i)">
+              <span class="textAjout"><strong>+</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="question-supplementaire">
+          <div class="boutonPlus" (click)="ajouterQuestion()">
+            <span class="textBoutonPlus"><strong>+</strong></span>
+          </div>
+          <div class="ajouterQuestion">
+            <span class="textAjouterQuestion"><strong>Ajouter une question supplémentaire</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="bouton_valider">VALIDER</button>
+
+    </div>
+  </form>
+
+</div>

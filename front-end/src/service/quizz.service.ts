@@ -82,4 +82,12 @@ export class QuizService {
     }
     return quiz;
   }
+
+  async updateQuiz(updateQuiz: Partial<Quiz>, id: string): Promise<Quiz> {
+    const quiz = await this.httpClient.put<Quiz>(`${serverBack}quizzes/${id}`, updateQuiz).toPromise();
+    if (!quiz) {
+      throw new Error(`Failed to update user`);
+    }
+    return quiz;
+  }
 }

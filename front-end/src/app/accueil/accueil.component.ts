@@ -17,6 +17,7 @@ export class AccueilComponent {
   alertMessage: string | null = null;
   accesAutorise: boolean | undefined;
   animateur: boolean | undefined;
+  userCourant: any;
 
   constructor(private jeuxCouleursService: JeuxCouleursService,
               private animateurService: AnimateurService,
@@ -33,6 +34,7 @@ export class AccueilComponent {
     } else {
       this.jeuxCouleursService.changeFont(document);
     }
+    this.userCourant = this.userService.getUserCourant();
   }
 
   ngAfterViewInit(){
@@ -42,7 +44,7 @@ export class AccueilComponent {
 
 
   getAnimateur() {
-    return this.animateurService.getAnimateur().value;
+    return this.userCourant.imagePath;
   }
 
   getAnimations() {

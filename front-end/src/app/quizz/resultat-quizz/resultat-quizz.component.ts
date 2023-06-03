@@ -5,6 +5,7 @@ import { QuizService } from '../../../service/quizz.service';
 import {AnimateurService} from "../../../service/animateur.service";
 import {AnimationsService} from "../../../service/animations.service";
 import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
+import {UserService} from "../../../service/user.service";
 
 
 @Component({
@@ -16,15 +17,24 @@ export class ResultatQuizzComponent {
 
   score!: number;
   public quiz!: Quiz;
+  userCourant: any;
 
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
-  constructor(private route: ActivatedRoute, private quizService: QuizService, private animateurService: AnimateurService, private animationsService: AnimationsService, private jeuxCouleursService: JeuxCouleursService) {
+  constructor(private route: ActivatedRoute, private quizService: QuizService, private animateurService: AnimateurService, private animationsService: AnimationsService, private jeuxCouleursService: JeuxCouleursService, private userService: UserService) {
 
   }
 
   ngOnInit() {
     this.quiz = this.quizService.getQuizCourant();
     this.score = this.quizService.getScore();
+    if (this.jeuxCouleursService.isDefaultActive) {
+      this.jeuxCouleursService.collectDefaultStyles();
+    }
+    else {
+      this.jeuxCouleursService.changeFont(document);
+    }
+
+    this.userCourant = this.userService.getUserCourant();
   }
 
   ngAfterViewInit(){
@@ -34,7 +44,7 @@ export class ResultatQuizzComponent {
   }
 
   getAnimateur() {
-    return this.animateurService.getAnimateur();
+    return this.userCourant.imagePath;
   }
 
   getAnimations() {
