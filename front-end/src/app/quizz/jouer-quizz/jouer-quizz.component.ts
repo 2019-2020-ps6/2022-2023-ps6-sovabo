@@ -279,6 +279,10 @@ export class JouerQuizzComponent implements OnInit {
 
 
   getAnimateur() {
+    return this.animateurService.getAnimateur().value;
+  }
+
+  getAnimateurPath() {
     return this.userCourant.imagePath;
   }
 

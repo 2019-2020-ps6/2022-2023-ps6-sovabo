@@ -42,8 +42,11 @@ export class AccueilComponent {
     this.jeuxCouleursService.changeColor(document);
   }
 
-
   getAnimateur() {
+    return this.animateurService.getAnimateur().value;
+  }
+
+  getAnimateurPath() {
     return this.userCourant.imagePath;
   }
 

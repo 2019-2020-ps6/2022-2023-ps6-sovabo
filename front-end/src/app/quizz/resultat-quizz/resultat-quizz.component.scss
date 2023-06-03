@@ -70,23 +70,25 @@
   }
 }
 
-.animatorWithAnimationsON {
+.animatorContainer {
   position: absolute;
-  height: 40%;
-  width: 20%;
+  height: 40vh;
+  width: 38vh;
   left: 1%;
-  bottom: -40%;
-  animation-name: animatorFadeIn;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
+  bottom: 0%
 }
 
-.animatorWithAnimationsOFF {
-  position: absolute;
-  height: 40%;
-  width: 20%;
-  left: 1%;
-  bottom: -3%;
+.animator-relative {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+
+.animatorWithAnimationsON {
+  animation-name: animatorFadeIn;
+  animation-duration: 5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
 }
 
 @keyframes fadeIn {

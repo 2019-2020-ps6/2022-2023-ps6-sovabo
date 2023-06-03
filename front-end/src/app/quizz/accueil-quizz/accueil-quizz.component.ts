@@ -50,6 +50,10 @@ export class AccueilQuizzComponent {
   }
 
   getAnimateur() {
+    return this.animateurService.getAnimateur().value;
+}
+
+  getAnimateurPath() {
     return this.userCourant.imagePath;
   }
 

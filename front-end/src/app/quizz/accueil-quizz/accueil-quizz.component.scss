@@ -125,12 +125,18 @@
   src: url("~src/assets/Fonts/nunito-main/fonts/variable/Nunito[wght].ttf");
 }
 
-.animator-relative {
+.animatorContainer {
   position: absolute;
-  height: 40%;
-  width: 20%;
+  height: 40vh;
+  width: 38vh;
   right: 1%;
-  bottom: -1.5%
+  bottom: 0%
+}
+
+.animator-relative {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
 }
 
 $delay: 0.5s;

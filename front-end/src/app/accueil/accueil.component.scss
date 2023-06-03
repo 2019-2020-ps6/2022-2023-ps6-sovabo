@@ -40,12 +40,18 @@
   height: 70vh;
 }
 
-.animator-relative {
+.animatorContainer {
   position: absolute;
   height: 40vh;
   width: 38vh;
   left: 1%;
-  bottom: -3%
+  bottom: 0%
+}
+
+.animator-relative {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
 }
 
 @keyframes fadeIn {

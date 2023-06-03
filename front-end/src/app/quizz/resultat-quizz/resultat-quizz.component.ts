@@ -44,6 +44,10 @@ export class ResultatQuizzComponent {
   }
 
   getAnimateur() {
+    return this.animateurService.getAnimateur().value;
+  }
+
+  getAnimateurPath() {
     return this.userCourant.imagePath;
   }
 
