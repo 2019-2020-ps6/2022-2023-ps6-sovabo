@@ -69,10 +69,8 @@ export class JouerQuizzComponent implements OnInit {
   }
     this.currentQuestion = this.quiz.questions[this.currentQuestionIndex];
     this.questionCorrectIndex = this.getCorrectAnswerIndex(this.currentQuestion);
-    this.animations = this.animationService.isAnimated;
     this.startTime = Date.now();
     this.valueTime = [];
-    this.animationDuration = this.animationService.duration;
     this.startTimer();
 
     this.clickListener = (event: Event) => {
@@ -85,6 +83,13 @@ export class JouerQuizzComponent implements OnInit {
     document.addEventListener('click', this.clickListener);
 
     this.userCourant = this.userService.getUserCourant();
+  }
+
+  loadConfig() {
+    this.animations = this.userService.getUserCourant()?.configuration.animation;
+    this.animationDuration = this.userService.getUserCourant()?.configuration.animationSpeed;
+
+
   }
 
   ngAfterViewInit(){

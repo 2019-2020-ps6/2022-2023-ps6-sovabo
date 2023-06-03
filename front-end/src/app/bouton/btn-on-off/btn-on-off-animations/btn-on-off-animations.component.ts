@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {AnimationsService} from "../../../../service/animations.service";
 import {JeuxCouleursService} from "../../../../service/jeux-couleurs.service";
+import {BehaviorSubject, Observable, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-btn-on-off-animations',
@@ -9,7 +10,8 @@ import {JeuxCouleursService} from "../../../../service/jeux-couleurs.service";
 })
 export class BtnOnOffAnimationsComponent {
 
-  isOn: boolean = false;
+  public isOn : boolean | undefined;
+  private subscription: Subscription | undefined;
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
 
 
@@ -17,12 +19,21 @@ export class BtnOnOffAnimationsComponent {
   }
 
   ngOnInit() {
-    this.isOn = this.animationsService.isAnimated;
+    this.subscription = this.animationsService.isAnimated.subscribe(state => {
+      this.isOn = state;
+    });    
+    
+  }
+
+  ngOnDestroy() {
+    this.subscription?.unsubscribe();
   }
 
   toggleState() {
     this.isOn = !this.isOn;
+    this.animationsService.toggleAnimations();
   }
+
 
   get buttonClass() {
     return this.jeuxCouleursService.getVisionColorSelectedString();

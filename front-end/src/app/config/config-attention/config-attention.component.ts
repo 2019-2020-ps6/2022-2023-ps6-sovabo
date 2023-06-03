@@ -16,6 +16,7 @@ import {debounceTime, mergeMap, of, Subscription, tap} from "rxjs";
   styleUrls: ['./config-attention.component.scss']
 })
 export class ConfigAttentionComponent {
+
   animations: boolean | undefined;
   animateur: boolean | undefined;
   userAnimateurImg: string = '';
@@ -37,7 +38,6 @@ export class ConfigAttentionComponent {
   async ngOnInit(): Promise<void> {
 
     await this.userService.updateAll();
-    this.animations = this.animationsService.isAnimated;
     this.user = this.getUserCourant();
     await this.loadConfig();
     this.contrasteTroubleEnable = this.jeuxCouleursService.getVisionAttentionStatus();
@@ -50,6 +50,7 @@ export class ConfigAttentionComponent {
   }
 
   loadConfig(){
+    this.animations = this.getUserCourant()?.configuration.animateur || false;
     this.animateur = this.getUserCourant()?.configuration.animateur || false;
     if(this.animateur){
       this.userAnimateurImg = this.getImageFromImageName(this.user?.imagePath || '');

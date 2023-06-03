@@ -17,23 +17,28 @@ import {UserService} from "../../../service/user.service";
 })
 export class AccueilQuizzComponent {
   userCourant: any;
-  animations: boolean = false;
-  public animationDuration: string | undefined;
+  animations: boolean | undefined;
+  public animationSpeed: string | undefined;
 
   public quiz!: Quiz;
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
 
   quizStar = faStar;
 
-  constructor(private animateurService: AnimateurService, private route: ActivatedRoute, private quizService: QuizService, private animationsService: AnimationsService,private jeuxCouleursService: JeuxCouleursService, private userService: UserService) {
-    this.animationDuration = this.animationsService.duration;
+  constructor(private animateurService: AnimateurService,
+     private route: ActivatedRoute,
+      private quizService: QuizService,
+       private animationsService: AnimationsService,
+       private jeuxCouleursService: JeuxCouleursService,
+        private userService: UserService) {
   }
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id') ?? '';
     this.quiz = this.quizService.getQuizById(id);
     this.quizService.setQuizCourant(this.quiz);
-    this.animations = this.animationsService.isAnimated;
-    this.animationDuration = this.animationsService.duration;
+
+    this.loadConfig();
+
     if (this.jeuxCouleursService.isDefaultActive) {
       this.jeuxCouleursService.collectDefaultStyles();
     }
@@ -41,6 +46,12 @@ export class AccueilQuizzComponent {
       this.jeuxCouleursService.changeFont(document);
     }
     this.userCourant = this.userService.getUserCourant();
+  }
+
+  loadConfig(){
+    this.animations = this.userService.getUserCourant()?.configuration.animation;
+    this.animationSpeed = this.userService.getUserCourant()?.configuration.animationSpeed;
+
   }
 
   ngAfterViewInit(){
