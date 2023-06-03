@@ -26,8 +26,9 @@ export class AccueilComponent {
               private router: Router) {}
 
   async ngOnInit(): Promise<void> {
-    this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
     await this.userService.updateAll();
+    this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
+    this.contrasteTroubleEnable = this.userService.getUserCourant()?.configuration.contraste || false;
     this.animateur = this.userService.getUserCourant()?.configuration.animateur || false;
     if (this.jeuxCouleursService.isDefaultActive) {
       this.jeuxCouleursService.collectDefaultStyles();
@@ -59,6 +60,8 @@ export class AccueilComponent {
   }
 
   getDelay() {
+    // this.animations = this.getUserCourant()?.configuration.animation || false;
+
     return this.animationsService.delay != undefined ? this.animationsService.delay : 0;
   }
 

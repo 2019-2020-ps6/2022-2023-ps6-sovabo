@@ -310,7 +310,7 @@ export class MonProfilComponent {
 
     setTimeout(async () => {
       try {
-        await this.userService.deleteUser(user.id || '');
+        await this.userService.deleteUser(user.id || '', user.configuration.id || '');
         this.users = this.users.filter(u => u.id !== user.id);
         this.alertState = true;
         this.showAlertNotif("L'utilisateur a bien été supprimé !");

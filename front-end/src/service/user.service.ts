@@ -41,8 +41,9 @@ export class UserService {
   }
 
   // Supprimer un utilisateur
-  async deleteUser(userId: string): Promise<void> {
+  async deleteUser(userId: string, configId: string ): Promise<void> {
     await this.httpClient.delete<void>(`${serverBack}users/${userId}`).toPromise().then(() => {
+      this.httpClient.delete<void>(`${serverBack}configurations/${configId}`).toPromise();
       this.updateAll();
     });
   }
@@ -92,7 +93,7 @@ export class UserService {
   }
 
   public updateAll(): Promise<void> {
-    console.log(this.loadUsersFromServer());
+    // console.log(this.loadUsersFromServer());
     return new Promise<void>((resolve) => {
       this.setUserCourant(null);
       this.loadUsersFromServer().then(users => {

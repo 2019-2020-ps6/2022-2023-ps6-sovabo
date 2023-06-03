@@ -25,15 +25,33 @@ export class SliderAnimationDurationComponent {
 
   }
 
-  onDurationChange() {
+  async onDurationChange() {
+    // Votre code existant
     if(this.position){
       this.animationsService.positionCursorSlider.next(this.position);
     }
     // @ts-ignore
-    this.animationsService.duration = `${(this.position-10)*(-1)}s`;
+    this.animationsService.duration.next(`${(this.position-10)*(-1)}s`);
     if(this.position){
       this.animationsService.delay = (this.position-8)/(-10);
     }
+
+    // Nouveau code pour mettre à jour le backend
+    let user = this.userService.getUserCourant();
+    if (user) {
+      let userId = user.id!;
+      let configId = user.configuration.id!;
+
+      const config = await this.userService.getUserConfiguration(userId);
+      if (this.position) {
+        config.sliderPosition = this.position;
+      }
+
+      await this.userService.updateConfiguration(configId, config);
+      user.configuration = config;
+      await this.userService.updateUser(user, userId);
+    }
   }
+
 
 }

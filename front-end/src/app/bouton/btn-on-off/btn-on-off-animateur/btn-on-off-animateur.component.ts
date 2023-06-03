@@ -30,7 +30,7 @@ export class BtnOnOffAnimateurComponent implements OnDestroy {
 
   toggleState() {
     this.animateurService.toggleAnimateur();
-    this.isOn = !this.isOn;
+    this.isOn = !this.animateurService.getAnimateur().getValue();
   }
 
   get buttonClass() {

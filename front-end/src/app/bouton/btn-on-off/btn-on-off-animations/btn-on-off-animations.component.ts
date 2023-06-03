@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {AnimationsService} from "../../../../service/animations.service";
 import {JeuxCouleursService} from "../../../../service/jeux-couleurs.service";
 import {BehaviorSubject, Observable, Subscription} from "rxjs";
@@ -8,12 +8,11 @@ import {BehaviorSubject, Observable, Subscription} from "rxjs";
   templateUrl: './btn-on-off-animations.component.html',
   styleUrls: ['./btn-on-off-animations.component.scss']
 })
-export class BtnOnOffAnimationsComponent {
-
-  public isOn : boolean | undefined;
-  private subscription: Subscription | undefined;
+export class BtnOnOffAnimationsComponent implements OnDestroy{
+  isOn : boolean | undefined;
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
 
+  private subscription: Subscription | undefined;
 
   constructor(private animationsService: AnimationsService,private jeuxCouleursService: JeuxCouleursService) {
   }
@@ -21,8 +20,8 @@ export class BtnOnOffAnimationsComponent {
   ngOnInit() {
     this.subscription = this.animationsService.isAnimated.subscribe(state => {
       this.isOn = state;
-    });    
-    
+    });
+
   }
 
   ngOnDestroy() {
@@ -30,8 +29,8 @@ export class BtnOnOffAnimationsComponent {
   }
 
   toggleState() {
-    this.isOn = !this.isOn;
     this.animationsService.toggleAnimations();
+    this.isOn = !this.animationsService.getAnimations().getValue();
   }
 
 
