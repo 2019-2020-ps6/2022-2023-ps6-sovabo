@@ -2,7 +2,7 @@
 
   <div class="header">
     <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
-    <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubbleTextContainer" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(4) + 's')}">
+    <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubbleTextContainer" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(20/4) + 's')}">
       <p fontStyleCanChange>Alors comme ça, tu penses être incollable sur <span style="text-transform: lowercase;">{{quiz.name}}</span> ?</p>
     </div>
     <app-btn-clickable-frame-background class="navigation" id="retour" [routerLink]="['/liste-quizz']" >RETOUR</app-btn-clickable-frame-background>
@@ -38,16 +38,16 @@
       <app-btn-clickable-frame-background routerLink="/jouer-quiz/{{quiz.id}}" (click)="resetScore()" class="btnJouer">JOUER</app-btn-clickable-frame-background>
     </div>
 
-    <div class="animatorContainer" *ngIf="getAnimateur()">
+    <div class="animatorContainer" [ngClass]="getAnimations() ? 'animatorWithAnimationsON' : 'animatorWithAnimationsOFF'" *ngIf="getAnimateur()" [ngStyle]="{'animation-duration' : (getDelay()*(10/4) + 's')}">
       <img [src]="'../../../assets/Images/Animateurs/'+getAnimateurPath()" alt="Image animateur" class="animator-relative">
     </div>
   </div>
 
-  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubble1" *ngIf="getAnimateur()"></div>
-  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubble2" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay() + 's')}"></div>
-  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubble3" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(7/4) + 's')}"></div>
-  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubble4" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(9/4) + 's')}"></div>
-  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubble5" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(3) + 's')}"></div>
+  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubble1" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(2) + 's')}"></div>
+  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubble2" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(11/4) + 's')}"></div>
+  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubble3" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(13/4) + 's')}"></div>
+  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubble4" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(15/4) + 's')}"></div>
+  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubble5" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(17/4) + 's')}"></div>
 
 </div>
 

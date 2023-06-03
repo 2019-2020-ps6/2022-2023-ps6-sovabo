@@ -40,6 +40,15 @@
   height: 70vh;
 }
 
+@keyframes animatorFadeIn {
+  from {
+    bottom : -40%;
+  }
+  to {
+    bottom : 0%;
+  }
+}
+
 .animatorContainer {
   position: absolute;
   height: 40vh;
@@ -52,6 +61,12 @@
   object-fit: contain;
   height: 100%;
   width: 100%;
+}
+
+.animatorWithAnimationsON {
+  animation-name: animatorFadeIn;
+  animation-duration: 5s;
+  animation-fill-mode: forwards;
 }
 
 @keyframes fadeIn {
