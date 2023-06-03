@@ -36,12 +36,6 @@ export class StatistiqueService {
 
   
 
-  updateQuiz(quiz: Quiz) {
-    console.log("updateQuiz");
-    console.log(quiz.statQuiz.timeResponses);
-    this.quizService.updateQuiz(quiz);
-  }
-
 
 
   updateOrCreateStatQuizz(user: User, idQuizz: string, nbMissClicks?: number, timeResponse?: number, resultatQuizz?: number, FreqInteractAnim?: number): void {
