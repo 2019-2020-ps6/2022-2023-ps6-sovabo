@@ -257,4 +257,9 @@ export class ModifQuizzComponent {
     }
   }
 
+  async supprimerQuiz() {
+    const quiz = await this.quizService.deleteQuiz((this.quizCourant.id));
+    console.log("Quiz supprimé");
+  }
+
 }

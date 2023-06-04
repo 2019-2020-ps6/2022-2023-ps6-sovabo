@@ -345,6 +345,25 @@ textarea {
   color: rgb(50, 50, 50);
 }
 
+.boutonsAction {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.bouton_supprimer {
+  width: 16vw;
+  height: 10vh;
+  background-color: #F00020;
+  border-radius: 20px;
+  border: 1px solid white;
+  font-size: 3vh;
+  color: rgb(50, 50, 50);
+  margin-top: 2vh;
+  margin-right: 2vw;
+}
+
 .bouton_valider {
   width: 16vw;
   height: 10vh;
@@ -354,4 +373,5 @@ textarea {
   font-size: 3vh;
   color: rgb(50, 50, 50);
   margin-top: 2vh;
+  margin-left: 2vw;
 }
