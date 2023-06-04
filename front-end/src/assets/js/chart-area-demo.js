@@ -41,7 +41,7 @@ function createChart(statQuiz, statQuestion){
     switch(statQuestion) {
       case 'tempsMoyen':
         dataToLoad = statQuiz.timeResponses;
-        labelToLoad = "Temps moyen de réponse";
+        labelToLoad = "Temps moyen de réponse (en secondes) ";
         console.log("dans if");
         console.log(dataToLoad);
         break;
