@@ -14,6 +14,7 @@ export class BtnClickableBackgroundComponent {
     this.userService.currentUser$.subscribe(user => {
       if (user) {
         this.contrasteTroubleEnable = user.configuration.contraste;
+        this.fontSelected = user.configuration.police;
       }
     });
   }

@@ -7,7 +7,7 @@
       <div class="question-bubble fontSizeCanChange fontStyleCanChange">
         <svg class="text-line" *ngIf="animations">
           <text [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}"
-                class="question-text fontStyleCanChange" x="50%" y="40%" text-anchor="middle" dominant-baseline="middle">{{getQuestion()}}</text>
+                id="question-animation" class="question-text fontStyleCanChange" x="50%" y="40%" text-anchor="middle" dominant-baseline="middle">{{getQuestion()}}</text>
         </svg>
           <p id="question_sentence" *ngIf="!animations" [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}" class="question-text fontStyleCanChange fontSizeCanChange fontColorToChange">{{getQuestion()}}</p>
         <div class="timer">{{ timeRemaining }} s</div>

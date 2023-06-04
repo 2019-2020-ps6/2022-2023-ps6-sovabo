@@ -14,7 +14,8 @@ class Configuration extends BaseModel {
       sliderPosition: Joi.number().precision(2).required(),
       duration: Joi.string().required(),
       contraste: Joi.boolean().required(),
-      jeuCouleur: Joi.number().required()
+      jeuCouleur: Joi.number().required(),
+      police: Joi.string().required()
     });
   }
 
@@ -28,7 +29,8 @@ class Configuration extends BaseModel {
       sliderPosition: 0,
       duration: '00:00:00',
       contraste: false,
-      jeuCouleur: -1
+      jeuCouleur: -1,
+      police: 'Nunito'
     };
     const newConfig = { ...defaults, ...obj, id: uuid.v4() };
     const { error } = Joi.validate(newConfig, this.schema);
