@@ -54,6 +54,12 @@ export class JeuxCouleursService {
         this._attentionColorActivated.next(false);
       }
     });
+
+    this.userService.currentUser$.subscribe(user => {
+      if (user) {
+        this.colorSelected = user.configuration.jeuCouleur;
+      }
+    });
   }
 
   getListTrouble(){
@@ -87,6 +93,7 @@ export class JeuxCouleursService {
     //console.log("FIN SETVISION :"+this.visionColorActivated);
   }
 
+
   setFont(value: number){
     this.fontSelected=this.listFont[value];
   }
@@ -101,7 +108,7 @@ export class JeuxCouleursService {
         return this.listTrouble[1];
         break;
       default:
-        return "";
+        return "none";
     }
   }
 
@@ -197,6 +204,8 @@ export class JeuxCouleursService {
   }
 
   changeColor(document: Document){
+
+    console.log("reload color");
 
     let elements = document.querySelectorAll<HTMLElement>(".fontColorToChange");
 

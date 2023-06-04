@@ -80,6 +80,7 @@ router.put('/:userId', (req, res) => {
     const user = User.update(req.params.userId, req.body)
     res.status(200).json(user)
   } catch (err) {
+    console.log(err)
     manageAllErrors(res, err)
   }
 })

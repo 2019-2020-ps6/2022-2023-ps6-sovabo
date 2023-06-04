@@ -23,7 +23,7 @@ export class UserService {
 
 
   async loadUsersFromServer(): Promise<User[]> {
-    const users = await this.httpClient.get<User[]>(`${serverBack}/users`).toPromise();
+    const users = await this.httpClient.get<User[]>(`${serverBack}users`).toPromise();
     if (!users) {
       throw new Error(`No Users found`);
     }

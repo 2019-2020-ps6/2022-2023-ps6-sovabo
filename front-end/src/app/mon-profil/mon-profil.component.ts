@@ -184,6 +184,7 @@ export class MonProfilComponent {
             sliderPosition: 0,
             duration: "00:00:00",
             contraste: false,
+            jeuCouleur: -1
           },
         };
 
@@ -289,10 +290,13 @@ export class MonProfilComponent {
         }
       }
       this.userService.setUserCourant(user);
+      console.log("user status before"+user);
       await this.updateUserSelectionStatus(user, true);
+      console.log("user status after"+user);
       this.alertState = true;
       this.showAlertNotif("Le profil de " + user.name + " a été sélectionné !");
     }
+    this.updateHtmlWithConfig();
   }
 
   async updateUserSelectionStatus(user: User, selected: boolean): Promise<void> {
@@ -392,5 +396,4 @@ export class MonProfilComponent {
   }
 
   protected readonly document = document;
-
 }

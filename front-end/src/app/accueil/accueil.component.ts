@@ -24,7 +24,17 @@ export class AccueilComponent {
               private animateurService: AnimateurService,
               private animationsService : AnimationsService,
               private userService: UserService,
-              private router: Router) {}
+              private router: Router) {
+
+
+    this.userService.currentUser$.subscribe(user => {
+      if (user) {
+        console.log("USER OK");
+        this.jeuxCouleursService.setVisionColor(user.configuration.jeuCouleur);
+      }
+    });
+
+  }
 
   async ngOnInit(): Promise<void> {
     await this.userService.updateAll();
@@ -40,8 +50,9 @@ export class AccueilComponent {
     this.userCourant = this.userService.getUserCourant();
   }
 
-  ngAfterViewInit(){
+  ngAfterContentChecked(){
     this.jeuxCouleursService.changeFontSize(document);
+    console.log("changeColor");
     this.jeuxCouleursService.changeColor(document);
   }
 
