@@ -38,7 +38,7 @@ export class JouerQuizzComponent implements OnInit {
   public endTime: number = 0;
   public firstTime: boolean = true;
   public delay: number = 5000;
-  public timeRemaining: number = 50;
+  public timeRemaining: number = 20;
   private timerId: any | undefined;
   private currentFont: string = this.jeuxCouleursService.getFontSelectedString();
   public contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
@@ -89,19 +89,15 @@ export class JouerQuizzComponent implements OnInit {
   loadConfig() {
     this.animations = this.userService.getUserCourant()?.configuration.animation;
     this.animationDuration = this.userService.getUserCourant()?.configuration.animationSpeed;
-
-
   }
 
   ngAfterViewInit(){
     if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
     else {this.jeuxCouleursService.changeFont(document);}
     this.jeuxCouleursService.changeFontSize(document);
-
   }
 
   ngAfterContentChecked(){
-
     this.jeuxCouleursService.changeColor(document);
   }
 
@@ -121,7 +117,7 @@ export class JouerQuizzComponent implements OnInit {
       if (this.timeRemaining > 0) {
         this.timeRemaining--;
       } else {
-        this.timeRemaining = 5;
+        this.timeRemaining = 20;
         if (this.timerId !== undefined) {
           clearInterval(this.timerId);
           this.timerId = undefined;
@@ -221,6 +217,7 @@ export class JouerQuizzComponent implements OnInit {
     this.isAnswerValidated = false; // Réinitialiser le statut de validation
     // Vérifier si la réponse a été validée avant de passer à la question suivante
     if (!this.isAnswerValidated) {
+      this.timeRemaining=20;
       this.startTimer();
     }
 
