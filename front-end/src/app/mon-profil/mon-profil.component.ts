@@ -45,9 +45,6 @@ export class MonProfilComponent {
   private isModifyingName: Boolean = false;
 
 
-
-
-
   constructor(private jeuxCouleursService: JeuxCouleursService,
               public userService: UserService,
               private authService: AuthService) {
@@ -86,6 +83,13 @@ export class MonProfilComponent {
     if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
     else {this.jeuxCouleursService.changeFont(document);}
     this.jeuxCouleursService.changeFontSize(document);
+    this.jeuxCouleursService.changeColor(document);
+  }
+
+
+  updateHtmlWithConfig(){
+    this.jeuxCouleursService.changeFontSize(document);
+    this.jeuxCouleursService.changeFont(document);
     this.jeuxCouleursService.changeColor(document);
   }
 
@@ -386,4 +390,7 @@ export class MonProfilComponent {
   toggleAuthenticate() {
     this.authService.toggleAuthenticate();
   }
+
+  protected readonly document = document;
+
 }
