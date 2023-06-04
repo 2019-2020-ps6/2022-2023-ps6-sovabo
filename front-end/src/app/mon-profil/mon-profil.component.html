@@ -43,7 +43,7 @@
                     </button>
                   </div>
                   <div class="card-footer">
-                    <button [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}" *ngIf="!user.editing" [class.btn-selected]="this.getUserCourant()?.id == user.id" class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir fontStyleCanChange fontSizeCanChange" type="button" (click)="setUserCourant(user);">{{this.getUserCourant()?.id === user.id ? 'Selectionné' : 'Choisir'}}</button>
+                    <button [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}" *ngIf="!user.editing" [class.btn-selected]="this.getUserCourant()?.id == user.id" class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir fontStyleCanChange fontSizeCanChange fontColorToChange" type="button" (click)="setUserCourant(user);this.updateHtmlWithConfig();">{{this.getUserCourant()?.id === user.id ? 'Selectionné' : 'Choisir'}}</button>
                     <button *ngIf="user.editing" class="btn btn-light btn-sm bg-white has-icon btn-block btnChoisir fontStyleCanChange fontSizeCanChange" type="button" (click)="toggleEditUserName(user)">Valider</button>
                   </div>
                 </div>

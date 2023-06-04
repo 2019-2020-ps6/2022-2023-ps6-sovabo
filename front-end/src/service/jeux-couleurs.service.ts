@@ -213,6 +213,8 @@ export class JeuxCouleursService {
       for (let j = 0; j < this.listTrouble.length; j++) {elements[i].classList.remove(this.listTrouble[i]);}
       elements[i].classList.remove("DEUTERANOMALIE_FONT");
       elements[i].classList.remove("TRITANOPIE_FONT");
+      elements[i].classList.remove("DEUTERANOMALIE");
+      elements[i].classList.remove("TRITANOPIE");
       if(elements[i].nodeName=="BODY"){elements[i].style.background= ""}
     }
 
