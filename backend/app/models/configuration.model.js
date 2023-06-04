@@ -11,9 +11,10 @@ class Configuration extends BaseModel {
       animateurImagePath: Joi.string().required(),
       animation: Joi.boolean().required(),
       animationSpeed: Joi.string().required(),
-      sliderPosition: Joi.number().integer().required(),
+      sliderPosition: Joi.number().precision(2).required(),
       duration: Joi.string().required(),
-      contraste: Joi.boolean().required()
+      contraste: Joi.boolean().required(),
+      jeuCouleur: Joi.number().required()
     });
   }
 
@@ -26,7 +27,8 @@ class Configuration extends BaseModel {
       animationSpeed: 'normal',
       sliderPosition: 0,
       duration: '00:00:00',
-      contraste: false
+      contraste: false,
+      jeuCouleur: -1
     };
     const newConfig = { ...defaults, ...obj, id: uuid.v4() };
     const { error } = Joi.validate(newConfig, this.schema);

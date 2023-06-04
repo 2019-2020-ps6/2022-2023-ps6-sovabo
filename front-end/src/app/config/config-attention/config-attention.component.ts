@@ -9,12 +9,14 @@ import {Action} from "rxjs/internal/scheduler/Action";
 import {ConfigurationModel} from "../../../models/configuration.model";
 import {debounceTime, mergeMap, of, Subscription, tap} from "rxjs";
 
+
 @Component({
   selector: 'app-config-attention',
   templateUrl: './config-attention.component.html',
   styleUrls: ['./config-attention.component.scss']
 })
 export class ConfigAttentionComponent {
+
   animations: boolean | undefined;
   animateur: boolean | undefined;
   userAnimateurImg: string = '';
@@ -24,6 +26,8 @@ export class ConfigAttentionComponent {
   contrasteTroubleEnable: boolean = false;
 
   private animateurSubscription: Subscription | undefined;
+  private animationSubscription: Subscription | undefined;
+  private contrastSubscription: Subscription | undefined;
 
   constructor(private animationsService: AnimationsService,
               private animateurService: AnimateurService,
@@ -36,7 +40,6 @@ export class ConfigAttentionComponent {
   async ngOnInit(): Promise<void> {
 
     await this.userService.updateAll();
-    this.animations = this.animationsService.isAnimated;
     this.user = this.getUserCourant();
     await this.loadConfig();
     this.contrasteTroubleEnable = this.jeuxCouleursService.getVisionAttentionStatus();
@@ -46,9 +49,13 @@ export class ConfigAttentionComponent {
     if (this.animateurSubscription) {
       this.animateurSubscription.unsubscribe();
     }
+    if (this.animationSubscription) {
+      this.animationSubscription.unsubscribe();
+    }
   }
 
   loadConfig(){
+    this.animations = this.getUserCourant()?.configuration.animation || false;
     this.animateur = this.getUserCourant()?.configuration.animateur || false;
     if(this.animateur){
       this.userAnimateurImg = this.getImageFromImageName(this.user?.imagePath || '');
@@ -65,11 +72,36 @@ export class ConfigAttentionComponent {
   ngOnChanges(){
     this.jeuxCouleursService.changeColor(document);
   }
-  toggleAnimations() {
-    this.animations = !this.animations;
-    this.animationsService.setAnimations(this.animations);
-  }
+  async toggleAnimations() {
+    if (this.user) {
+      let imagePath = this.user.imagePath || '';
+      this.userAnimateurImg = this.getImageFromImageName(imagePath);
 
+      // Récupère la configuration actuelle de l'utilisateur
+      let userId = (this.user as User).id!;
+      let configId = (this.user.configuration as ConfigurationModel).id!;
+
+      const config = await this.userService.getUserConfiguration(userId);
+      config.animation = !config.animation;
+
+      await this.userService.updateConfiguration(configId, config);
+      this.user.configuration = config;
+      await this.userService.updateUser(this.user, userId);
+
+      this.animationsService.setAnimations(config.animation);
+      this.animations = config.animation;
+
+      if (this.animationSubscription) {
+        this.animationSubscription.unsubscribe();
+      }
+
+      this.animationSubscription = this.animationsService.getAnimations()
+        .pipe(debounceTime(500))
+        .subscribe((animation) => {
+          this.animations = animation;
+        });
+    }
+  }
 
   async toggleAnimateur() {
     if (this.user) {
@@ -95,15 +127,38 @@ export class ConfigAttentionComponent {
       }
 
       this.animateurSubscription = this.animateurService.getAnimateur()
-        .pipe(debounceTime(10))
+        .pipe(debounceTime(500))
         .subscribe(animateur => {
           this.animateur = animateur;
         });
     }
   }
-  toggleContrastColor(event: Event | null) {
-    this.contrasteTroubleEnable = !this.contrasteTroubleEnable
-    this.jeuxCouleursService.setAttentionColor(this.contrasteTroubleEnable);
+
+  async toggleContrastColor(event: Event | null) {
+    if (this.user) {
+      let userId = (this.user as User).id!;
+      let configId = (this.user.configuration as ConfigurationModel).id!;
+
+      const config = await this.userService.getUserConfiguration(userId);
+      config.contraste = !config.contraste;
+
+      await this.userService.updateConfiguration(configId, config);
+      this.user.configuration = config;
+      await this.userService.updateUser(this.user, userId);
+
+      this.jeuxCouleursService.setAttentionColor(config.contraste);
+      this.contrasteTroubleEnable = config.contraste;
+
+      if (this.contrastSubscription) {
+        this.contrastSubscription.unsubscribe();
+      }
+
+      this.contrastSubscription = this.jeuxCouleursService.getAttentionColorStatusSubject()
+        .pipe(debounceTime(500))
+        .subscribe(contrast => {
+          this.contrasteTroubleEnable = contrast;
+        });
+    }
     this.resetPage();
   }
 

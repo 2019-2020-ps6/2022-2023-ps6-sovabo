@@ -49,6 +49,7 @@ module.exports = class BaseModel {
 
   create(obj = {}) {
     const item = { ...obj, id: uuid.v4() };
+    
     if (item.questions) {
       item.questions = item.questions.map((question) => {
         const newQuestion = {
@@ -59,15 +60,15 @@ module.exports = class BaseModel {
         return newQuestion;
       });
     }
-  
+
     const { error } = Joi.validate(item, this.schema);
     if (error) throw new ValidationError(`Create Error : Object ${JSON.stringify(obj)} does not match schema of model ${this.name}`, error);
-  
+
     this.items.push(item);
     this.save();
-  
+
     return item;
-  }
+}
   
 
   
