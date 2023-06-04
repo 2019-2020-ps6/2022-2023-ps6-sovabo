@@ -13,6 +13,7 @@ export class BtnClickableFrameBackgroundComponent {
     this.userService.currentUser$.subscribe(user => {
       if (user) {
         this.contrasteTroubleEnable = user.configuration.contraste;
+
       }
     });
   }

@@ -8,8 +8,9 @@ export class ConfigurationModel {
   contraste: boolean;
   id?: string;
   jeuCouleur: number;
+  police: string;
 
-  constructor(animateur: boolean, animateurImagePath: string, animation: boolean, animationSpeed: string, sliderPosition: number, duration: string, contraste: boolean, id: string, jeuCouleur: number) {
+  constructor(animateur: boolean, animateurImagePath: string, animation: boolean, animationSpeed: string, sliderPosition: number, duration: string, contraste: boolean, id: string, jeuCouleur: number, police: string) {
     this.animateur = animateur;
     this.animateurImagePath = animateurImagePath;
     this.animation = animation;
@@ -19,5 +20,6 @@ export class ConfigurationModel {
     this.contraste = contraste;
     this.id = id;
     this.jeuCouleur = jeuCouleur;
+    this.police = police;
   }
 }

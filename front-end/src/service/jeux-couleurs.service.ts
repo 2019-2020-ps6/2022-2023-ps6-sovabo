@@ -58,6 +58,7 @@ export class JeuxCouleursService {
     this.userService.currentUser$.subscribe(user => {
       if (user) {
         this.colorSelected = user.configuration.jeuCouleur;
+        this.fontSelected = user.configuration.police;
       }
     });
   }
@@ -288,7 +289,7 @@ export class JeuxCouleursService {
       const element = allElements[i];
       const style = window.getComputedStyle(element);
       const stylesMap = this.createStyleMap(style);
-      const classNameWithoutfontStyleCanChange = element.className.replace("fontStyleCanChange", "");
+      const classNameWithoutfontStyleCanChange = element.className.toString().replace("fontStyleCanChange", "");
       this.addDefaultStyles(element.id, classNameWithoutfontStyleCanChange, stylesMap);
     }
   }

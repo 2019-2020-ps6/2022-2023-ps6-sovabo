@@ -184,7 +184,8 @@ export class MonProfilComponent {
             sliderPosition: 0,
             duration: "00:00:00",
             contraste: false,
-            jeuCouleur: -1
+            jeuCouleur: -1,
+            police: 'Nunito'
           },
         };
 
