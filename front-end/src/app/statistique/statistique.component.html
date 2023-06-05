@@ -132,7 +132,7 @@
 
     </div>
 
-<app-btn-clickable-frame-background class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
+<app-btn-clickable-frame-background (click)="toggleAuthenticate()" class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
 <!-- Pop-up pour le code d'acces -->
 <app-access-code-modal *ngIf="showModalAuth"
                        (enteredAccessCode)="handleAccessCode($event)"
