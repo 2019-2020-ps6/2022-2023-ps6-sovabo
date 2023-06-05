@@ -125,7 +125,6 @@ export class ConfigVisionComponent {
       }
 
       if (this.user) {
-        console.log("USER OK");
         let userId = (this.user as User).id!;
         let configId = (this.user.configuration as ConfigurationModel).id!;
 

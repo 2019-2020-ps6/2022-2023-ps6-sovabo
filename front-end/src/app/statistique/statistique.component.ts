@@ -38,8 +38,6 @@ export class StatistiqueComponent {
     if(userC){
       this.userCourant = userC;
     }
-    console.log("user courant");
-    console.log(this.userCourant);
     //this.quiz = this.quizService.getQuizCourant();
 
     this.statQuiz = this.userCourant.listeStatQuizz ? this.userCourant.listeStatQuizz : [];
@@ -112,5 +110,9 @@ export class StatistiqueComponent {
 
   toggleAuthenticate() {
     this.authService.toggleAuthenticate();
+  }
+
+  getNameQuizz(idQuizz: string): string {
+    return this.quizService.getQuizNameById(idQuizz);
   }
 }

@@ -29,7 +29,6 @@ export class AccueilComponent {
 
     this.userService.currentUser$.subscribe(user => {
       if (user) {
-        console.log("USER OK");
         this.jeuxCouleursService.setVisionColor(user.configuration.jeuCouleur);
       }
     });
