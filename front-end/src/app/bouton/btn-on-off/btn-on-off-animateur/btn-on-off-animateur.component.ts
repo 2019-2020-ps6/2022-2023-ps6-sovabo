@@ -2,6 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import {AnimateurService} from "../../../../service/animateur.service";
 import {JeuxCouleursService} from "../../../../service/jeux-couleurs.service";
 import {Observable, Subscription} from 'rxjs';
+import {UserService} from "../../../../service/user.service";
 
 @Component({
   selector: 'app-btn-on-off-animateur',
@@ -14,7 +15,12 @@ export class BtnOnOffAnimateurComponent implements OnDestroy {
 
   private subscription: Subscription | undefined;
 
-  constructor(private animateurService: AnimateurService, private jeuxCouleursService: JeuxCouleursService) {
+  constructor(private animateurService: AnimateurService, private jeuxCouleursService: JeuxCouleursService, private userService: UserService) {
+    this.userService.currentUser$.subscribe(user => {
+      if (user) {
+        this.contrasteTroubleEnable = user.configuration.contraste;
+      }
+    });
   }
 
   ngOnInit() {
@@ -30,7 +36,7 @@ export class BtnOnOffAnimateurComponent implements OnDestroy {
 
   toggleState() {
     this.animateurService.toggleAnimateur();
-    this.isOn = !this.isOn;
+    this.isOn = !this.animateurService.getAnimateur().getValue();
   }
 
   get buttonClass() {

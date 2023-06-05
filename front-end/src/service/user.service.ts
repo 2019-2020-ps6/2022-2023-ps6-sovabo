@@ -6,6 +6,7 @@ import { ConfigurationModel} from 'src/models/configuration.model';
 import { serverUrl, httpOptionsBase, serverBack } from '../config/server.config'
 import {HttpClient} from "@angular/common/http";
 import {User} from "../models/user.model";
+import { StatQuizz } from 'src/models/quizz.stat.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class UserService {
 
 
   async loadUsersFromServer(): Promise<User[]> {
-    const users = await this.httpClient.get<User[]>(`${serverBack}/users`).toPromise();
+    const users = await this.httpClient.get<User[]>(`${serverBack}users`).toPromise();
     if (!users) {
       throw new Error(`No Users found`);
     }
@@ -40,8 +41,15 @@ export class UserService {
   }
 
   // Supprimer un utilisateur
-  async deleteUser(userId: string): Promise<void> {
+  async deleteUser(userId: string, configId: string ): Promise<void> {
     await this.httpClient.delete<void>(`${serverBack}users/${userId}`).toPromise().then(() => {
+      this.httpClient.delete<void>(`${serverBack}configurations/${configId}`).toPromise();
+      this.updateAll();
+    });
+  }
+
+  async updateStatQuizzForUser(userId : string, statQuizz : Partial<StatQuizz>, quizId: string): Promise<void> {
+    await this.httpClient.put<void>(`${serverBack}users/${userId}/statQuizz/${quizId}`, statQuizz).toPromise().then(() => {
       this.updateAll();
     });
   }
@@ -85,7 +93,7 @@ export class UserService {
   }
 
   public updateAll(): Promise<void> {
-    console.log(this.loadUsersFromServer());
+    // console.log(this.loadUsersFromServer());
     return new Promise<void>((resolve) => {
       this.setUserCourant(null);
       this.loadUsersFromServer().then(users => {

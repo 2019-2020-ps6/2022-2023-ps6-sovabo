@@ -18,17 +18,20 @@ export class QuizService {
       this.loadQuizzesFromServer();
     }
 
-    private loadQuizzesFromServer() {
+    public loadQuizzesFromServer(): Promise<Quiz[]> {
       this.quizzes= [];
-      this.httpClient.get<Quiz[]>(`${serverBack}/quizzes`).subscribe(
-        (quizzes) => {
-          this.quizzes.push(...quizzes);
-        },
-        (error) => {
-          console.log('Erreur ! : ' + error);
-        }
-      );
-      console.log(this.quizzes);
+      return new Promise((resolve, reject) => {
+        this.httpClient.get<Quiz[]>(`${serverBack}/quizzes`).subscribe(
+          (quizzes) => {
+            this.quizzes.push(...quizzes);
+            resolve(this.quizzes); // When data is received, the Promise is resolved
+          },
+          (error) => {
+            console.log('Erreur ! : ' + error);
+            reject(error); // If there's an error, the Promise is rejected
+          }
+        );
+      });
     }
 
     getData() {
@@ -42,13 +45,22 @@ export class QuizService {
       return questions;
     }
 
+    getQuizNameById(id: string): string {
+      const quiz = this.quizzes.find(quiz => quiz.id === id);
+      return quiz ? quiz.name : '';
+    }
+
 
 
     setQuizCourant(quiz : any){
       this.quizCourant = quiz;
+      console.log("dans setQuizCourant");
+      console.log(this.quizCourant);
     }
 
     getQuizCourant(): Quiz{
+      console.log("dans getQuizCourant");
+      console.log(this.quizCourant);
       return this.quizCourant;
     }
 
@@ -99,5 +111,4 @@ export class QuizService {
       this.loadQuizzesFromServer();
     });
   }
-
 }

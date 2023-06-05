@@ -17,18 +17,31 @@ export class AccueilComponent {
   alertMessage: string | null = null;
   accesAutorise: boolean | undefined;
   animateur: boolean | undefined;
+  animation: boolean | undefined;
   userCourant: any;
 
   constructor(private jeuxCouleursService: JeuxCouleursService,
               private animateurService: AnimateurService,
               private animationsService : AnimationsService,
               private userService: UserService,
-              private router: Router) {}
+              private router: Router) {
+
+
+    this.userService.currentUser$.subscribe(user => {
+      if (user) {
+        console.log("USER OK");
+        this.jeuxCouleursService.setVisionColor(user.configuration.jeuCouleur);
+      }
+    });
+
+  }
 
   async ngOnInit(): Promise<void> {
-    this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
     await this.userService.updateAll();
+    this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
+    this.contrasteTroubleEnable = this.userService.getUserCourant()?.configuration.contraste || false;
     this.animateur = this.userService.getUserCourant()?.configuration.animateur || false;
+    this.animation = this.userService.getUserCourant()?.configuration.animation || false;
     if (this.jeuxCouleursService.isDefaultActive) {
       this.jeuxCouleursService.collectDefaultStyles();
     } else {
@@ -37,8 +50,9 @@ export class AccueilComponent {
     this.userCourant = this.userService.getUserCourant();
   }
 
-  ngAfterViewInit(){
+  ngAfterContentChecked(){
     this.jeuxCouleursService.changeFontSize(document);
+    console.log("changeColor");
     this.jeuxCouleursService.changeColor(document);
   }
 
@@ -51,7 +65,7 @@ export class AccueilComponent {
   }
 
   getAnimations() {
-    return this.animationsService.isAnimated;
+    return this.animationsService.isAnimated.value;
   }
 
   getDuration() {
@@ -59,6 +73,8 @@ export class AccueilComponent {
   }
 
   getDelay() {
+    // this.animations = this.getUserCourant()?.configuration.animation || false;
+
     return this.animationsService.delay != undefined ? this.animationsService.delay : 0;
   }
 

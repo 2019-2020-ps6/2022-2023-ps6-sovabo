@@ -1,5 +1,7 @@
 import {ElementRef, Injectable} from '@angular/core';
 import {duotone} from "@fortawesome/fontawesome-svg-core/import.macro";
+import {BehaviorSubject} from "rxjs";
+import {UserService} from "./user.service";
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +9,7 @@ import {duotone} from "@fortawesome/fontawesome-svg-core/import.macro";
 export class JeuxCouleursService {
 
   //option trouble de l'attention
-  private attentionColorActivated = true;
+  private _attentionColorActivated = new BehaviorSubject<boolean>(false);
 
   //option trouble de la vision
   listTrouble = ["DEUTERANOMALIE","TRITANOPIE"];
@@ -43,7 +45,22 @@ export class JeuxCouleursService {
     this.currentFontSize=nb;
   }
 
-  constructor() {}
+  constructor(private userService: UserService) {
+    this.userService.currentUser$.subscribe(user => {
+      if(user) {
+        this._attentionColorActivated.next(user.configuration.contraste);
+      }
+      else {
+        this._attentionColorActivated.next(false);
+      }
+    });
+
+    this.userService.currentUser$.subscribe(user => {
+      if (user) {
+        this.colorSelected = user.configuration.jeuCouleur;
+      }
+    });
+  }
 
   getListTrouble(){
     return this.listTrouble;
@@ -54,9 +71,14 @@ export class JeuxCouleursService {
   }
 
   IsVisionColorActivated(): boolean {return this.visionColorActivated;}
-  IsAttentionColorActivated(): boolean {return this.attentionColorActivated;}
+  IsAttentionColorActivated(): boolean {return this._attentionColorActivated.value;}
 
-  setAttentionColor(value: boolean){this.attentionColorActivated=value;}
+  getAttentionColorStatusSubject(): BehaviorSubject<boolean> {return this._attentionColorActivated;}
+
+  setAttentionColor(value: boolean){
+    console.log('setAttentionColor: ' + value);
+    this._attentionColorActivated.next(value);
+  }
 
   setVisionColor(value: number) {
     //console.log('setJeuxCouleurs: ' + value);
@@ -70,6 +92,7 @@ export class JeuxCouleursService {
     }
     //console.log("FIN SETVISION :"+this.visionColorActivated);
   }
+
 
   setFont(value: number){
     this.fontSelected=this.listFont[value];
@@ -85,7 +108,7 @@ export class JeuxCouleursService {
         return this.listTrouble[1];
         break;
       default:
-        return "";
+        return "none";
     }
   }
 
@@ -93,7 +116,7 @@ export class JeuxCouleursService {
       return this.fontSelected;
     }
 
-  getVisionAttentionStatus(): boolean{return this.attentionColorActivated;}
+  getVisionAttentionStatus(): boolean{return this._attentionColorActivated.value;}
 
   //UTILS METHODS
   private changeElementFontStyleAndContent(element: HTMLElement, fontIndex: number): void {
@@ -182,12 +205,16 @@ export class JeuxCouleursService {
 
   changeColor(document: Document){
 
+    console.log("reload color");
+
     let elements = document.querySelectorAll<HTMLElement>(".fontColorToChange");
 
     for (let i = 0; i < elements.length; i++) {
       for (let j = 0; j < this.listTrouble.length; j++) {elements[i].classList.remove(this.listTrouble[i]);}
       elements[i].classList.remove("DEUTERANOMALIE_FONT");
       elements[i].classList.remove("TRITANOPIE_FONT");
+      elements[i].classList.remove("DEUTERANOMALIE");
+      elements[i].classList.remove("TRITANOPIE");
       if(elements[i].nodeName=="BODY"){elements[i].style.background= ""}
     }
 
@@ -294,6 +321,8 @@ export class JeuxCouleursService {
     }
   }
 
-
-
+  toggleVisionAttentionStatus() {
+    let currentStatus = this._attentionColorActivated;
+    this.setAttentionColor(!currentStatus);
+  }
 }

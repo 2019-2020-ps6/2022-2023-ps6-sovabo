@@ -2,11 +2,10 @@
 
   <div class="header">
     <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
-    <p [ngClass]="this.contrasteTroubleEnable ? 'titreStyleContrastOn' : 'titreStyleContrastOff'" >Créer mon quizz</p>
+    <p [ngClass]="this.contrasteTroubleEnable ? 'titreStyleContrastOn' : 'titreStyleContrastOff'" >Modifier mon quizz</p>
     <app-btn-clickable-frame-background class="navigation" id="retour" [routerLink]="['/liste-quizz']">RETOUR</app-btn-clickable-frame-background>
   </div>
 
-  <form (ngSubmit)="updateQuiz()"  #quizForm="ngForm">
     <div class="contenu-creation-quiz">
       <div class="conteneur-caracteristiques-quiz">
         <div class="caracteristiques-quiz">
@@ -62,10 +61,9 @@
 
       <div class="boutonsAction">
         <button class="bouton_supprimer" (click)="supprimerQuiz()">SUPPRIMER</button>
-        <button type="submit" class="bouton_valider">VALIDER</button>
+        <button class="bouton_valider" (click)="submitAndRedirect()">VALIDER</button>
       </div>
 
     </div>
-  </form>
 
 </div>

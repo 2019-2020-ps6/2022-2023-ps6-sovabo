@@ -52,7 +52,7 @@ export class ResultatQuizzComponent {
   }
 
   getAnimations() {
-    return this.animationsService.isAnimated;
+    return this.animationsService.isAnimated.value;
   }
 
   getDelay() {
