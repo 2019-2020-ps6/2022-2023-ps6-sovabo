@@ -36,15 +36,10 @@ export class AccueilComponent {
   }
 
   async ngOnInit(): Promise<void> {
-
-    console.log("abc");
-
     await this.userService.updateAll();
     this.userCourant = this.userService.getUserCourant();
     await this.loadConfig();
 
-
-    await this.userService.updateAll();
     this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
     this.contrasteTroubleEnable = this.userService.getUserCourant()?.configuration.contraste || false;
     this.animateur = this.userService.getUserCourant()?.configuration.animateur || false;

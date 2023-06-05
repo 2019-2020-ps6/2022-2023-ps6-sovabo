@@ -336,7 +336,6 @@ export class JeuxCouleursService {
 
 
   updateDoc(document: Document){
-    console.log(this.userService.getUserCourant()?.configuration.police);
     this.userService.currentUser$.subscribe(user => {
       if (user) {
         this.colorSelected = user.configuration.jeuCouleur;

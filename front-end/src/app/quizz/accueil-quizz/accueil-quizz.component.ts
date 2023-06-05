@@ -46,8 +46,6 @@ export class AccueilQuizzComponent {
     });
   }
   async ngOnInit(): Promise<void> {
-    console.log("abc");
-
     await this.userService.updateAll();
     this.userCourant = this.userService.getUserCourant();
     await this.loadConfig();
