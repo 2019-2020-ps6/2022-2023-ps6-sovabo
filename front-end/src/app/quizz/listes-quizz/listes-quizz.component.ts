@@ -18,18 +18,14 @@ export class ListesQuizzComponent {
 
   ngOnInit(): void {
     this.quizList = this.quizService.getData();
-    // console.log(this.animationsService.isAnimated);
   }
 
   ngAfterViewInit(){
-    if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
-    else {this.jeuxCouleursService.changeFont(document);}
-    this.jeuxCouleursService.changeFontSize(document);
-
   }
 
   ngAfterContentChecked(){
-    this.jeuxCouleursService.changeColor(document);
+    console.log("AFTERCHECKED LISTE");
+    this.jeuxCouleursService.updateDoc(document);
   }
 
   delay(ms: number) {

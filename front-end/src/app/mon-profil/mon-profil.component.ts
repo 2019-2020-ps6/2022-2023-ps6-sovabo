@@ -198,8 +198,7 @@ export class MonProfilComponent {
         const user = await this.userService.createUser(newUser);
         this.users.push(user);
 
-      } catch (e) {
-      }
+      } catch (e) {}
       this.isCreatingUser = false;
       this.isModifyAvatar = true;
       this.alertState = true;
@@ -209,8 +208,6 @@ export class MonProfilComponent {
       this.alertState = false;
       this.showAlertNotif("Ce nom est déjà utilisé !");
     }
-
-
   }
 
   showAlertNotif(message: string) { // Ajoutez le paramètre `message` ici

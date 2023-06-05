@@ -99,10 +99,10 @@ export class JeuxCouleursService {
     this.fontSelected=this.listFont[value];
   }
 
-  setFontWithString(value: string | undefined){
+  setFontWithString(value: string){
     if(value==this.listFont[3]){this.isDefaultActive=true;}
     else{this.isDefaultActive=false;}
-    
+
     this.listTrouble.forEach(fontInList =>{
       if(fontInList==value){
         this.fontSelected=fontInList;
@@ -345,8 +345,9 @@ export class JeuxCouleursService {
       }
     });
 
+    if (this.isDefaultActive) {this.collectDefaultStyles();}
+    else {this.changeFont(document);}
     this.changeFontSize(document);
-    this.changeFont(document);
     this.changeColor(document);
   }
 }
