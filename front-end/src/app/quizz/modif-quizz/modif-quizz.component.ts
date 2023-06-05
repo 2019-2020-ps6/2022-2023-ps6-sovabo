@@ -3,6 +3,7 @@ import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
 import {QuizService} from "../../../service/quizz.service";
 import {Answer, Question} from "../../../models/question.model";
 import {Quiz} from "../../../models/quizz.model";
+import { Router } from '@angular/router';
 import {AuthService} from "../../../service/authentification.service";
 
 @Component({
@@ -17,7 +18,7 @@ export class ModifQuizzComponent {
   correctAccessCode: string | undefined;
   isAccessing: boolean | undefined;
   isAppearing: boolean | undefined;
-  constructor(private jeuxCouleursService: JeuxCouleursService, public quizService: QuizService,private authService: AuthService) {
+  constructor(private jeuxCouleursService: JeuxCouleursService, public quizService: QuizService,private authService: AuthService, private router: Router) {
 
   }
   quizCourant: Quiz = this.quizService.getQuizCourant();
@@ -229,25 +230,43 @@ export class ModifQuizzComponent {
     }
     let listeReponses: Answer[] = [];
     for (let j = 0; j < this.reponses[index].length; j++) {
-      const answer: Answer = {
-        value: this.reponses[index][j],
-        isCorrect: this.correctArray[nombreReponses],
-        id: this.listeObjetsQuestion[index].answers[j].id
-      };
-      nombreReponses++;
-      listeReponses.push(answer);
+      if(typeof this.listeObjetsQuestion[index]?.answers[j]?.id === 'undefined') {
+        const answer: Answer = {
+          value: this.reponses[index][j],
+          isCorrect: this.correctArray[nombreReponses]
+        };
+        nombreReponses++;
+        listeReponses.push(answer);
+      } else {
+        const answer: Answer = {
+          value: this.reponses[index][j],
+          isCorrect: this.correctArray[nombreReponses],
+          id: this.listeObjetsQuestion[index].answers[j].id
+        };
+        nombreReponses++;
+        listeReponses.push(answer);
+      }
     }
     return listeReponses;
   }
   associateAnswersToQuestions() {
     let listeQuestions: Question[] = [];
     for(let i = 0; i < this.questions.length; i++) {
-      const question: Partial<Question> = {
-        label: this.questions[i],
-        answers: this.convertReponsesToAnswer(i),
-        id: this.listeObjetsQuestion[i].id
+      if(typeof this.listeObjetsQuestion[i]?.id === 'undefined') {
+        const question: Partial<Question> = {
+          label: this.questions[i],
+          answers: this.convertReponsesToAnswer(i)
+        }
+        listeQuestions.push(<Question>question);
+      } else {
+        console.log("Tout va bien");
+        const question: Partial<Question> = {
+          label: this.questions[i],
+          answers: this.convertReponsesToAnswer(i),
+          id: this.listeObjetsQuestion[i].id
+        }
+        listeQuestions.push(<Question>question);
       }
-      listeQuestions.push(<Question>question);
     }
     console.log(listeQuestions);
     return listeQuestions;
@@ -265,11 +284,19 @@ export class ModifQuizzComponent {
         // Ajoutez d'autres propriétés du quiz ici (photo, difficulté, etc.)
       };
 
-      const quiz = await this.quizService.updateQuiz(quizData, this.quizCourant.id);
-
-      // Envoyer les données du quiz à votre backend ou effectuer d'autres actions nécessaires
       console.log(quizData);
+      const quiz = await this.quizService.updateQuiz(quizData, this.quizCourant.id);
     }
+  }
+
+  async supprimerQuiz() {
+    const quiz = await this.quizService.deleteQuiz((this.quizCourant.id));
+    await this.router.navigate(['/liste-quizz']);
+  }
+
+  async submitAndRedirect() {
+    await this.updateQuiz();
+    await this.router.navigate(['/liste-quizz']);
   }
 
   handleAccessCode(accessCode: string): void {

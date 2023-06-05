@@ -19,6 +19,7 @@ export class QuizService {
     }
 
     public loadQuizzesFromServer(): Promise<Quiz[]> {
+      this.quizzes= [];
       return new Promise((resolve, reject) => {
         this.httpClient.get<Quiz[]>(`${serverBack}/quizzes`).subscribe(
           (quizzes) => {
@@ -32,7 +33,6 @@ export class QuizService {
         );
       });
     }
-
 
     getData() {
       return this.quizzes;
@@ -52,7 +52,7 @@ export class QuizService {
 
 
 
-    setQuizCourant(quiz : Quiz){
+    setQuizCourant(quiz : any){
       this.quizCourant = quiz;
       console.log("dans setQuizCourant");
       console.log(this.quizCourant);
@@ -91,17 +91,24 @@ export class QuizService {
   async createQuiz(newQuiz: Partial<Quiz>): Promise<Quiz> {
     const quiz = await this.httpClient.post<Quiz>(`${serverBack}quizzes`, newQuiz).toPromise();
     if (!quiz) {
-      throw new Error(`Failed to create user`);
+      throw new Error(`Failed to create quiz`);
     }
+    this.loadQuizzesFromServer();
     return quiz;
   }
-
 
   async updateQuiz(updateQuiz: Partial<Quiz>, id: string): Promise<Quiz> {
     const quiz = await this.httpClient.put<Quiz>(`${serverBack}quizzes/${id}`, updateQuiz).toPromise();
     if (!quiz) {
-      throw new Error(`Failed to update user`);
+      throw new Error(`Failed to update quiz`);
     }
+    this.loadQuizzesFromServer();
     return quiz;
+  }
+
+  async deleteQuiz(id: string): Promise<void> {
+    const quiz = await this.httpClient.delete<Quiz>(`${serverBack}quizzes/${id}`).toPromise().then(() => {
+      this.loadQuizzesFromServer();
+    });
   }
 }
