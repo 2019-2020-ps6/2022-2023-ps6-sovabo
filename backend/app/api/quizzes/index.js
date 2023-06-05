@@ -42,6 +42,7 @@ router.put('/:quizId', (req, res) => {
     res.status(200).json(Quiz.update(req.params.quizId, req.body))
   } catch (err) {
     manageAllErrors(res, err)
+    console.log(err)
   }
 })
 
