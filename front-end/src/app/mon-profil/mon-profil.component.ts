@@ -48,6 +48,13 @@ export class MonProfilComponent {
   constructor(private jeuxCouleursService: JeuxCouleursService,
               public userService: UserService,
               private authService: AuthService) {
+    this.userService.currentUser$.subscribe(user => {
+      if (user) {
+        this.jeuxCouleursService.setVisionColor(user.configuration.jeuCouleur);
+        this.jeuxCouleursService.setAttentionColor(user.configuration.contraste);
+        this.jeuxCouleursService.setFontWithString(user.configuration.police);
+      }
+    });
   }
 
   async ngOnInit(): Promise<void> {
@@ -76,10 +83,7 @@ export class MonProfilComponent {
         this.isAppearing = false;
       }, 600);
     }
-  }
 
-
-  ngAfterContentChecked(){
     if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
     else {this.jeuxCouleursService.changeFont(document);}
     this.jeuxCouleursService.changeFontSize(document);
@@ -87,10 +91,12 @@ export class MonProfilComponent {
   }
 
 
+  ngAfterContentChecked(){
+  }
+
+
   updateHtmlWithConfig(){
-    this.jeuxCouleursService.changeFontSize(document);
-    this.jeuxCouleursService.changeFont(document);
-    this.jeuxCouleursService.changeColor(document);
+    this.jeuxCouleursService.updateDoc(document);
   }
 
 
@@ -192,8 +198,7 @@ export class MonProfilComponent {
         const user = await this.userService.createUser(newUser);
         this.users.push(user);
 
-      } catch (e) {
-      }
+      } catch (e) {}
       this.isCreatingUser = false;
       this.isModifyAvatar = true;
       this.alertState = true;
@@ -203,8 +208,6 @@ export class MonProfilComponent {
       this.alertState = false;
       this.showAlertNotif("Ce nom est déjà utilisé !");
     }
-
-
   }
 
   showAlertNotif(message: string) { // Ajoutez le paramètre `message` ici
@@ -291,9 +294,7 @@ export class MonProfilComponent {
         }
       }
       this.userService.setUserCourant(user);
-      console.log("user status before"+user);
       await this.updateUserSelectionStatus(user, true);
-      console.log("user status after"+user);
       this.alertState = true;
       this.showAlertNotif("Le profil de " + user.name + " a été sélectionné !");
     }

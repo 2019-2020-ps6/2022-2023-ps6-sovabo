@@ -36,7 +36,6 @@ export class ConfigVisionComponent {
               private Service: CommonService, private userService: UserService) {}
 
   ngOnInit(): void {
-    console.log(this.user?.configuration.jeuCouleur);
     this.jeuxCouleursEnable = this.jeuxCouleursService.IsVisionColorActivated();
     this.contrasteTroubleEnable = this.jeuxCouleursService.IsAttentionColorActivated();
     this.fontSelected = this.jeuxCouleursService.getFontSelectedString();
@@ -121,11 +120,14 @@ export class ConfigVisionComponent {
             this.jeuxCouleursService.setVisionColor(1);
             this.jeuxCouleursService.changeColor(document);
             break;
+          case this.jeuxCouleursService.listTrouble[2]:
+            this.jeuxCouleursService.setVisionColor(-1);
+            this.jeuxCouleursService.changeColor(document);
+            break;
         }
       }
 
       if (this.user) {
-        console.log("USER OK");
         let userId = (this.user as User).id!;
         let configId = (this.user.configuration as ConfigurationModel).id!;
 
@@ -165,7 +167,6 @@ export class ConfigVisionComponent {
     this.jeuxCouleursService.changeFont(document);
 
     if (this.user) {
-      console.log("USER OK");
       let userId = (this.user as User).id!;
       let configId = (this.user.configuration as ConfigurationModel).id!;
 
