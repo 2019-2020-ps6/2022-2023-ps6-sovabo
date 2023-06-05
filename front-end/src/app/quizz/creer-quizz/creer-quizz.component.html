@@ -60,7 +60,7 @@
         </div>
       </div>
 
-      <button [ngClass]="this.contrasteTroubleEnable ? 'boutonValiderContrastOn' : 'boutonValiderContrastOff'" class="bouton_valider fontStyleCanChange fontSizeCanChange" (click)="submitAndRedirect()">VALIDER</button>
+      <button [ngClass]="this.contrasteTroubleEnable ? 'boutonValiderContrastOn' : 'boutonValiderContrastOff'" class="bouton_valider fontStyleCanChange fontSizeCanChange" (click)="createQuiz()">VALIDER</button>
 
     </div>
   </form>
@@ -72,3 +72,8 @@
                        (enteredAccessCode)="handleAccessCode($event)"
                        [isAccessing]="isAccessing" [isAppearing]="isAppearing">
 </app-access-code-modal>
+
+<div *ngIf="showAlert" class="alert alert-danger alert-dismissible fade show user-alert" role="alert">
+  {{alertMessage}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlert()"></button>
+</div>
