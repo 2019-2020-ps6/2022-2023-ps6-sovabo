@@ -7,6 +7,74 @@
   margin-left: 1vw;
 }
 
+.containStat {
+  overflow-y: auto;
+  /* ajoutez une hauteur pour que la barre de défilement fonctionne correctement */
+  height: 58%; /* ajustez cette valeur en fonction de vos bésoins */
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1);
+  }
+  50%, 100% {
+    transform: scale(1);
+  }
+}
+
+.tooltip-container {
+  position: relative;
+  cursor: pointer;
+  animation: pulse 4s infinite;
+}
+
+
+.tooltip-container:hover {
+  background-color: #f0f0f0; /* Changez la couleur comme vous le souhaitez */
+}
+
+
+.tooltip-container {
+  position: relative;
+  cursor: pointer;  /* Ajoute un curseur */
+}
+
+.tooltip-text {
+  visibility: hidden;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  
+  /* Position du tooltip */
+  position: absolute;
+  z-index: 1;
+  bottom: 100%; /* Place le tooltip au-dessus de l'élément */
+  left: 50%;
+  margin-left: -50px; /* Centre le tooltip */
+  
+  /* Effet de fade in */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip-container:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.animated {
+  animation: pulse 4s infinite;
+}
+
+
 .titreStyle {
     font-family: DynaPuff !important;
     font-size: 4vw !important;

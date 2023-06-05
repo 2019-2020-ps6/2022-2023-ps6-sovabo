@@ -7,6 +7,8 @@ import {AnimateurService} from "../../../service/animateur.service";
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
 import {UserService} from "../../../service/user.service";
+import {User} from "../../../models/user.model";
+import {MonProfilComponent} from "../../mon-profil/mon-profil.component";
 
 
 @Component({
@@ -20,6 +22,7 @@ export class AccueilQuizzComponent {
   animations: boolean | undefined;
   public animationSpeed: string | undefined;
 
+
   public quiz!: Quiz;
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
 
@@ -31,34 +34,42 @@ export class AccueilQuizzComponent {
        private animationsService: AnimationsService,
        private jeuxCouleursService: JeuxCouleursService,
         private userService: UserService) {
+
+    this.userCourant = this.userService.getUserCourant();
+
+    this.userService.currentUser$.subscribe(user => {
+      if (user) {
+        this.jeuxCouleursService.setVisionColor(user.configuration.jeuCouleur);
+        this.jeuxCouleursService.setAttentionColor(user.configuration.contraste);
+        this.jeuxCouleursService.setFontWithString(user.configuration.police);
+      }
+    });
   }
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    await this.userService.updateAll();
+    this.userCourant = this.userService.getUserCourant();
+    await this.loadConfig();
+
     const id = this.route.snapshot.paramMap.get('id') ?? '';
     this.quiz = this.quizService.getQuizById(id);
     this.quizService.setQuizCourant(this.quiz);
-
-    this.loadConfig();
-
-    if (this.jeuxCouleursService.isDefaultActive) {
-      this.jeuxCouleursService.collectDefaultStyles();
-    }
-    else {
-      this.jeuxCouleursService.changeFont(document);
-    }
     this.userCourant = this.userService.getUserCourant();
+    this.jeuxCouleursService.updateDoc(document);
   }
+
 
   loadConfig(){
     this.animations = this.userService.getUserCourant()?.configuration.animation;
     this.animationSpeed = this.userService.getUserCourant()?.configuration.animationSpeed;
-
+    this.jeuxCouleursService.setFontWithString(this.userService.getUserCourant()?.configuration.police || this.jeuxCouleursService.listTrouble[3]);
+    this.jeuxCouleursService.setVisionColor(this.userService.getUserCourant()?.configuration.jeuCouleur || -1);
+    this.jeuxCouleursService.setAttentionColor(this.userService.getUserCourant()?.configuration.contraste || false);
   }
 
   ngAfterViewInit(){
-    if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
-    else {this.jeuxCouleursService.changeFont(document);}
-    this.jeuxCouleursService.changeFontSize(document);
+
   }
+
 
   getAnimateur() {
     return this.animateurService.getAnimateur().value;

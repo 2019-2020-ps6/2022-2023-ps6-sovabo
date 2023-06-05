@@ -4,6 +4,7 @@ import {Quiz} from "../../../models/quizz.model"
 import {Question, Answer} from "../../../models/question.model";
 import {QuizService} from "../../../service/quizz.service";
 import {AuthService} from "../../../service/authentification.service";
+import {UserService} from "../../../service/user.service";
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,9 +22,12 @@ export class CreerQuizzComponent {
   showAlert: boolean = false;
   alertMessage: string | null = null;
 
+  private userCourant: any;
+
   constructor(private jeuxCouleursService: JeuxCouleursService,
               public quizService: QuizService,
               private authService: AuthService,
+              private userService: UserService,
               private router: Router) {
   }
 
@@ -32,6 +36,10 @@ export class CreerQuizzComponent {
   correctArray: boolean[] = [];
 
   async ngOnInit(): Promise<void> {
+    await this.userService.updateAll();
+    this.userCourant = this.userService.getUserCourant();
+    await this.loadConfig();
+
     this.isAppearing = true;
     for (let i = 0; i < 4; i++) {
       this.correctArray.push(false);
@@ -45,12 +53,14 @@ export class CreerQuizzComponent {
         this.isAppearing = false;
       }, 600);
     }
-    if (this.jeuxCouleursService.isDefaultActive) {
-      this.jeuxCouleursService.collectDefaultStyles();
-    }
-    else {
-      this.jeuxCouleursService.changeFont(document);
-    }
+
+    this.jeuxCouleursService.updateDoc(document);
+  }
+
+  loadConfig(){
+    this.jeuxCouleursService.setFontWithString(this.userService.getUserCourant()?.configuration.police || this.jeuxCouleursService.listTrouble[3]);
+    this.jeuxCouleursService.setVisionColor(this.userService.getUserCourant()?.configuration.jeuCouleur || -1);
+    this.jeuxCouleursService.setAttentionColor(this.userService.getUserCourant()?.configuration.contraste || false);
   }
 
   ngAfterViewInit(){
