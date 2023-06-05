@@ -4,6 +4,7 @@ import {Quiz} from "../../../models/quizz.model"
 import {Question, Answer} from "../../../models/question.model";
 import {QuizService} from "../../../service/quizz.service";
 import {AuthService} from "../../../service/authentification.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-creer-quizz',
@@ -20,7 +21,8 @@ export class CreerQuizzComponent {
 
   constructor(private jeuxCouleursService: JeuxCouleursService,
               public quizService: QuizService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private router: Router) {
   }
 
   questionsQuiz: string[] = ['', ''];
@@ -246,6 +248,11 @@ export class CreerQuizzComponent {
       // Envoyer les données du quiz à votre backend ou effectuer d'autres actions nécessaires
       console.log(quizData);
     }
+  }
+
+  async submitAndRedirect() {
+    await this.createQuiz();
+    await this.router.navigate(['/liste-quizz']);
   }
 
   handleAccessCode(accessCode: string): void {

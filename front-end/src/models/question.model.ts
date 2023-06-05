@@ -1,12 +1,12 @@
 export interface Answer {
-    type?: string;
-    id?: string;
-    value: string;
-    isCorrect: boolean;
+  type?: string;
+  id?: string; // Rendre l'identifiant optionnel
+  value: string;
+  isCorrect: boolean;
 }
 
 export interface Question {
-    id: string;
-    label: string;
-    answers: Answer[];
+  id?: string; // Rendre l'identifiant optionnel
+  label: string;
+  answers: Answer[];
 }
