@@ -3,10 +3,9 @@
   <div class="header">
     <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
     <p [ngClass]="this.contrasteTroubleEnable ? 'titreStyleContrastOn' : 'titreStyleContrastOff'" class="fontSizeCanChange">Créer mon quizz</p>
-    <app-btn-clickable-frame-background class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
+    <app-btn-clickable-frame-background (click)="toggleAuthenticate()" class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
   </div>
 
-  <form (ngSubmit)="createQuiz()"  #quizForm="ngForm">
     <div class="contenu-creation-quiz fontStyleCanChange fontSizeCanChange">
       <div class="conteneur-caracteristiques-quiz">
         <div class="caracteristiques-quiz">
@@ -60,10 +59,9 @@
         </div>
       </div>
 
-      <button [ngClass]="this.contrasteTroubleEnable ? 'boutonValiderContrastOn' : 'boutonValiderContrastOff'" type="submit" class="bouton_valider fontStyleCanChange fontSizeCanChange">VALIDER</button>
+      <button [ngClass]="this.contrasteTroubleEnable ? 'boutonValiderContrastOn' : 'boutonValiderContrastOff'" class="bouton_valider fontStyleCanChange fontSizeCanChange" (click)="submitAndRedirect()">VALIDER</button>
 
     </div>
-  </form>
 
 </div>
 

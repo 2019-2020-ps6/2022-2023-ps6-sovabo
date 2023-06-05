@@ -44,11 +44,15 @@ export class ResultatQuizzComponent {
   }
 
   getAnimateur() {
+    return this.animateurService.getAnimateur().value;
+  }
+
+  getAnimateurPath() {
     return this.userCourant.imagePath;
   }
 
   getAnimations() {
-    return this.animationsService.isAnimated;
+    return this.animationsService.isAnimated.value;
   }
 
   getDelay() {

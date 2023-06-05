@@ -4,9 +4,12 @@ import { Quiz } from '../../models/quizz.model';
 import { QuizService } from '../../service/quizz.service';
 import { StatistiqueService } from 'src/service/statistique.service';
 import { StatQuizz } from 'src/models/quizz.stat.model';
+import { User } from 'src/models/user.model';
+import { ConfigurationModel } from 'src/models/configuration.model';
+import { UserService } from 'src/service/user.service';
 import {AuthService} from "../../service/authentification.service";
 
-declare function createChart(): any;
+declare function createChart(statQuiz: StatQuizz, stat: String): any;
 
 @Component({
   selector: 'app-statistique',
@@ -14,59 +17,70 @@ declare function createChart(): any;
   styleUrls: ['./statistique.component.scss',"../../assets/css/material-dashboard.css"]
 })
 export class StatistiqueComponent {
-  public statQuiz!: StatQuizz;
+  public statQuiz!: StatQuizz[];
   public quiz!: Quiz;
-  public moyenneTimeReponse: number = 0;
+  public myLineChart: any;
+  public userCourant!: User;
   showModalAuth: boolean | undefined;
   correctAccessCode: string | undefined;
   isAccessing: boolean | undefined;
 
-
+  public moyenneTimeReponse: number = 0;
   constructor(private route: ActivatedRoute,
               private quizService: QuizService,
               private statistiquesService: StatistiqueService,
-              private authService: AuthService) {
-    this.statQuiz = { timeResponses: [] };
+              private authService: AuthService,
+              private UserService: UserService) {
   }
 
-  async ngOnInit(): Promise<void> {
-    this.quiz = this.quizService.getQuizCourant();
-    this.statQuiz = this.quiz.statQuiz;
-    this.moyenneTimeReponse = this.calculerMoyenne();
-    createChart();
-
-    const openButton = document.getElementById("openButton");
-    if (openButton) {
-      openButton.addEventListener("click", this.openPopup);
+  ngOnInit() {
+    const userC = this.UserService.getUserCourant();
+    if(userC){
+      this.userCourant = userC;
     }
+    console.log("user courant");
+    console.log(this.userCourant);
+    //this.quiz = this.quizService.getQuizCourant();
 
-    const closeButton = document.getElementById("closeButton");
-    if (closeButton) {
-      closeButton.addEventListener("click", this.closePopup);
+    this.statQuiz = this.userCourant.listeStatQuizz ? this.userCourant.listeStatQuizz : [];
+    for (let statQuiz of this.statQuiz) {
+      statQuiz.nameQuizz = this.quizService.getQuizNameById(statQuiz.idQuizz);
     }
 
     this.showModalAuth = !this.authService.getAuthenticationStatus();
     this.authService.getCorrectAccessCode().subscribe(code => {
       this.correctAccessCode = code;
     });
+
+    //this.moyenneTimeReponse = this.calculerMoyenne();
+    //createChart(this.statQuiz);
+
   }
 
 
-  public calculerMoyenne(): number {
+  // public calculerMoyenne(): number {
 
-    for (const timeResponse of this.statQuiz.timeResponses) {
-    }
-    const timeResponses = this.statQuiz.timeResponses;
-    const nbResponses = timeResponses.length;
-    if (nbResponses === 0) {
-      return 0;
-    }
-    const total = timeResponses.reduce((acc, timeResponse) => acc + timeResponse);
-    const moyenne = total / nbResponses;
-    return parseFloat(moyenne.toFixed(2));
-  }
+  //   for (const timeResponse of this.statQuiz.timeResponses) {
+  //   }
+  //   const timeResponses = this.statQuiz.timeResponses;
+  //   const nbResponses = timeResponses.length;
+  //   if (nbResponses === 0) {
+  //     return 0;
+  //   }
+  //   const total = timeResponses.reduce((acc, timeResponse) => acc + timeResponse);
+  //   const moyenne = total / nbResponses;
+  //   return parseFloat(moyenne.toFixed(2));
+  // }
 
-  openPopup(): void {
+  openPopup(statQuiz: StatQuizz, stat: String): void {
+    // Pass statQuiz to your createChart function
+    console.log(stat);
+    console.log("statQuiz");
+    console.log(statQuiz);
+
+    this.myLineChart = createChart(statQuiz, stat);
+    console.log(this.myLineChart);
+
     const popupElement = document.getElementById("popup");
     if (popupElement) {
       popupElement.style.display = "block";
@@ -74,6 +88,10 @@ export class StatistiqueComponent {
   }
   closePopup(): void {
 
+    if (this.myLineChart) {
+      this.myLineChart.destroy();
+      this.myLineChart = null;
+    }
     const popupElement = document.getElementById("popup");
     if (popupElement) {
       popupElement.style.display = "none";
@@ -90,5 +108,9 @@ export class StatistiqueComponent {
     } else {
       alert('Incorrect access code. Please try again.');
     }
+  }
+
+  toggleAuthenticate() {
+    this.authService.toggleAuthenticate();
   }
 }

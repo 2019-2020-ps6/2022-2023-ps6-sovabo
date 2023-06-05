@@ -45,9 +45,6 @@ export class MonProfilComponent {
   private isModifyingName: Boolean = false;
 
 
-
-
-
   constructor(private jeuxCouleursService: JeuxCouleursService,
               public userService: UserService,
               private authService: AuthService) {
@@ -86,6 +83,13 @@ export class MonProfilComponent {
     if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
     else {this.jeuxCouleursService.changeFont(document);}
     this.jeuxCouleursService.changeFontSize(document);
+    this.jeuxCouleursService.changeColor(document);
+  }
+
+
+  updateHtmlWithConfig(){
+    this.jeuxCouleursService.changeFontSize(document);
+    this.jeuxCouleursService.changeFont(document);
     this.jeuxCouleursService.changeColor(document);
   }
 
@@ -180,6 +184,8 @@ export class MonProfilComponent {
             sliderPosition: 0,
             duration: "00:00:00",
             contraste: false,
+            jeuCouleur: -1,
+            police: 'Nunito'
           },
         };
 
@@ -285,10 +291,13 @@ export class MonProfilComponent {
         }
       }
       this.userService.setUserCourant(user);
+      console.log("user status before"+user);
       await this.updateUserSelectionStatus(user, true);
+      console.log("user status after"+user);
       this.alertState = true;
       this.showAlertNotif("Le profil de " + user.name + " a été sélectionné !");
     }
+    this.updateHtmlWithConfig();
   }
 
   async updateUserSelectionStatus(user: User, selected: boolean): Promise<void> {
@@ -310,7 +319,7 @@ export class MonProfilComponent {
 
     setTimeout(async () => {
       try {
-        await this.userService.deleteUser(user.id || '');
+        await this.userService.deleteUser(user.id || '', user.configuration.id || '');
         this.users = this.users.filter(u => u.id !== user.id);
         this.alertState = true;
         this.showAlertNotif("L'utilisateur a bien été supprimé !");
@@ -386,4 +395,6 @@ export class MonProfilComponent {
   toggleAuthenticate() {
     this.authService.toggleAuthenticate();
   }
+
+  protected readonly document = document;
 }

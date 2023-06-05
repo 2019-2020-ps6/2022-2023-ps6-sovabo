@@ -5,6 +5,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 import { CommonService } from '../../../service/updateMessenger.service';
 import {Location} from "@angular/common";
 import {compareNumbers} from "@angular/compiler-cli/src/version_helpers";
+import {User} from "../../../models/user.model";
+import {ConfigurationModel} from "../../../models/configuration.model";
+import {debounceTime} from "rxjs";
+import {UserService} from "../../../service/user.service";
 
 
 
@@ -24,13 +28,15 @@ export class ConfigVisionComponent {
   contrasteTroubleEnable: boolean = false;
 
   fontSelected : string = this.jeuxCouleursService.getFontSelectedString();
+  user = this.userService.getUserCourant();
 
   constructor(private jeuxCouleursService: JeuxCouleursService,
               private router: Router,
               private route: ActivatedRoute,
-              private Service: CommonService) {}
+              private Service: CommonService, private userService: UserService) {}
 
   ngOnInit(): void {
+    console.log(this.user?.configuration.jeuCouleur);
     this.jeuxCouleursEnable = this.jeuxCouleursService.IsVisionColorActivated();
     this.contrasteTroubleEnable = this.jeuxCouleursService.IsAttentionColorActivated();
     this.fontSelected = this.jeuxCouleursService.getFontSelectedString();
@@ -94,31 +100,43 @@ export class ConfigVisionComponent {
 
 
   //appel lors du click sur le bouton de choix de vision
-  toggleJeuxCouleurs(event: Event | null) {
+  async toggleJeuxCouleurs(event: Event | null) {
     //si un event est passé en paramètre
     if (event != null) {
       //on récupère l'élément html ciblé par l'event
-        const target = event?.currentTarget as HTMLElement;
+      const target = event?.currentTarget as HTMLElement;
       //on recup l'id du boutton (l'id dépends du trouble)
-        const value = target.id;
+      const value = target.id;
 
-        if(this.jeuxCouleursService.getVisionColorSelectedString()==value){
-          this.jeuxCouleursService.setVisionColor(-1);
-          this.jeuxCouleursService.changeColor(document);
-        }
-        else {
-          switch (value) {
-            case this.jeuxCouleursService.listTrouble[0]:
-              this.jeuxCouleursService.setVisionColor(0);
-              this.jeuxCouleursService.changeColor(document);
-              break;
-            case this.jeuxCouleursService.listTrouble[1]:
-              this.jeuxCouleursService.setVisionColor(1);
-              this.jeuxCouleursService.changeColor(document);
-              break;
-          }
+      if (this.jeuxCouleursService.getVisionColorSelectedString() == value) {
+        this.jeuxCouleursService.setVisionColor(-1);
+        this.jeuxCouleursService.changeColor(document);
+      } else {
+        switch (value) {
+          case this.jeuxCouleursService.listTrouble[0]:
+            this.jeuxCouleursService.setVisionColor(0);
+            this.jeuxCouleursService.changeColor(document);
+            break;
+          case this.jeuxCouleursService.listTrouble[1]:
+            this.jeuxCouleursService.setVisionColor(1);
+            this.jeuxCouleursService.changeColor(document);
+            break;
         }
       }
+
+      if (this.user) {
+        console.log("USER OK");
+        let userId = (this.user as User).id!;
+        let configId = (this.user.configuration as ConfigurationModel).id!;
+
+        const config = await this.userService.getUserConfiguration(userId);
+        config.jeuCouleur = this.jeuxCouleursService.getVisionColorSelected();
+
+        await this.userService.updateConfiguration(configId, config);
+        this.user.configuration = config;
+        await this.userService.updateUser(this.user, userId);
+      }
+    }
   }
 
 
@@ -140,12 +158,24 @@ export class ConfigVisionComponent {
     if(event){
       this.jeuxCouleursService.changeSampleFont(event,document);
     }
-
   }
 
-  fontChangerConfirmation(){
+  async fontChangerConfirmation() {
     this.jeuxCouleursService.isDefaultActive = false;
     this.jeuxCouleursService.changeFont(document);
+
+    if (this.user) {
+      console.log("USER OK");
+      let userId = (this.user as User).id!;
+      let configId = (this.user.configuration as ConfigurationModel).id!;
+
+      const config = await this.userService.getUserConfiguration(userId);
+      config.police = this.jeuxCouleursService.getFontSelectedString();
+
+      await this.userService.updateConfiguration(configId, config);
+      this.user.configuration = config;
+      await this.userService.updateUser(this.user, userId);
+    }
   }
 
   fontSizeUpdate(nb: number | undefined) {

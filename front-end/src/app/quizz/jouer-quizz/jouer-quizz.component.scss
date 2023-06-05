@@ -10,23 +10,22 @@
   text-align: center;
   padding: 10px 3%;
 
-  width: fit-content;
+  width: 100%;
   height: fit-content;
   overflow: auto;
 }
 
 .svg {
-  height: auto;
-  width: auto;
+  height: 100%;
+  width: 100%;
 }
 
-.text-line{
-  stroke: #212529;
-  stroke-width: 2px;
+text{
 }
+
+
 
 .question-text {
-
   font-weight: bold;
   font-size: 3.2em;
   white-space: nowrap;
@@ -48,6 +47,13 @@
   text-shadow: none;
 }
 
+.text-line{
+  height: 100%;
+  width: 100%;
+  stroke: #212529;
+  stroke-width: 2px;
+}
+
 .text-line text {
   stroke-dasharray: 500;
   stroke-dashoffset: 500;
@@ -56,8 +62,8 @@
 
 @media (min-width: 600px) {
   svg {
-    height: 100px;
-    width: fit-content;
+    height: max-content;
+    width: max-content;
   }
 }
 
@@ -411,28 +417,29 @@ label {
     bottom : -40%;
   }
   10%, 100% {
-    bottom : -3%;
+    bottom : 0%;
   }
 }
 
-.animatorWithAnimationsON {
+.animatorContainer {
   position: absolute;
-  height: 33vh;
-  width: 31vh;
+  height: 40vh;
+  width: 38vh;
   left: 1%;
-  bottom: -40%;
+  bottom: 0%
+}
+
+.animator-relative {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+
+.animatorWithAnimationsON {
   animation-name: animatorFadeIn;
   animation-duration: 5s;
   animation-fill-mode: forwards;
   animation-iteration-count: infinite;
-}
-
-.animatorWithAnimationsOFF {
-  position: absolute;
-  height: 33vh;
-  width: 31vh;
-  left: 1%;
-  bottom: -3%;
 }
 
 @keyframes fadeIn {
@@ -462,7 +469,7 @@ label {
 
 #bubble1 {
   position: absolute;
-  top: 64vh;
+  top: 62vh;
   left: 6vw;
   height: 1vw;
   width: 1vw;
@@ -471,7 +478,7 @@ label {
 
 #bubble2 {
   position: absolute;
-  top: 57vh;
+  top: 55vh;
   left: 3.5vw;
   height: 1.5vw;
   width: 1.5vw;
@@ -480,7 +487,7 @@ label {
 
 #bubble3 {
   position: absolute;
-  top: 49vh;
+  top: 47vh;
   left: 2vw;
   height: 2vw;
   width: 2vw;
@@ -489,7 +496,7 @@ label {
 
 #bubble4 {
   position: absolute;
-  top: 39vh;
+  top: 37vh;
   left: 2.3vw;
   height: 2.5vw;
   width: 2.5vw;
@@ -498,7 +505,7 @@ label {
 
 #bubble5 {
   position: absolute;
-  top: 29vh;
+  top: 27vh;
   left: 5vw;
   height: 3vw;
   width: 3vw;

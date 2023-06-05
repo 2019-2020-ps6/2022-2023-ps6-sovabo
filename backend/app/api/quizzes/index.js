@@ -32,6 +32,7 @@ router.post('/', (req, res) => {
     const quiz = Quiz.create({ ...req.body })
     res.status(201).json(quiz)
   } catch (err) {
+    console.error("Error occurred: ", err);
     manageAllErrors(res, err)
   }
 })
@@ -41,6 +42,7 @@ router.put('/:quizId', (req, res) => {
     res.status(200).json(Quiz.update(req.params.quizId, req.body))
   } catch (err) {
     manageAllErrors(res, err)
+    console.log(err)
   }
 })
 

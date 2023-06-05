@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
+import {UserService} from "../../../service/user.service";
 
 @Component({
   selector: 'app-btn-clickable-frame-background',
@@ -8,7 +9,14 @@ import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
 })
 export class BtnClickableFrameBackgroundComponent {
 
-  constructor(private jeuxCouleursService: JeuxCouleursService){}
+  constructor(private jeuxCouleursService: JeuxCouleursService, private userService: UserService){
+    this.userService.currentUser$.subscribe(user => {
+      if (user) {
+        this.contrasteTroubleEnable = user.configuration.contraste;
+
+      }
+    });
+  }
   contrasteTroubleEnable :boolean = this.jeuxCouleursService.getVisionAttentionStatus();
 
   ngOnChanges() {

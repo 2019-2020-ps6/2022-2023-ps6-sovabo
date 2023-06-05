@@ -7,7 +7,7 @@
       <div class="question-bubble fontSizeCanChange fontStyleCanChange">
         <svg class="text-line" *ngIf="animations">
           <text [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}"
-                class="question-text fontStyleCanChange" x="50%" y="40%" text-anchor="middle" dominant-baseline="middle">{{getQuestion()}}</text>
+                id="question-animation" class="question-text fontStyleCanChange" x="50%" y="40%" text-anchor="middle" dominant-baseline="middle">{{getQuestion()}}</text>
         </svg>
           <p id="question_sentence" *ngIf="!animations" [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}" class="question-text fontStyleCanChange fontSizeCanChange fontColorToChange">{{getQuestion()}}</p>
         <div class="timer">{{ timeRemaining }} s</div>
@@ -51,7 +51,7 @@
     <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble3" *ngIf="getAnimateur()" [ngStyle]="{'animation-duration' : getDelay()*(25) + 's', 'animation-delay' : getDelay()*(13/4) + 's'}"></div>
     <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble4" *ngIf="getAnimateur()" [ngStyle]="{'animation-duration' : getDelay()*(25) + 's', 'animation-delay' : getDelay()*(15/4) + 's'}"></div>
     <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble5" *ngIf="getAnimateur()" [ngStyle]="{'animation-duration' : getDelay()*(25) + 's', 'animation-delay' : getDelay()*(9/2) + 's'}"></div>
-    <div class="animatorContainer" *ngIf="getAnimateur()">
-      <img [src]="'../../../assets/Images/Animateurs/'+getAnimateur()" alt="Image animateur" [ngClass]="getAnimations() ? 'animatorWithAnimationsON' : 'animatorWithAnimationsOFF'" [ngStyle]="{'animation-duration' : (getDelay()*(25) + 's')}">
+    <div class="animatorContainer" [ngClass]="getAnimations() ? 'animatorWithAnimationsON' : 'animatorWithAnimationsOFF'" *ngIf="getAnimateur()" [ngStyle]="{'animation-duration' : (getDelay()*(25) + 's')}">
+      <img [src]="'../../../assets/Images/Animateurs/'+getAnimateurPath()" alt="Image animateur" class="animator-relative">
     </div>
   </div>
