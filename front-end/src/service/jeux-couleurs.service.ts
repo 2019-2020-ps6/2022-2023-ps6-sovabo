@@ -16,6 +16,7 @@ export class JeuxCouleursService {
   //La font par défaut est Nunito
   listFont = ["Arial","Andale Mono","Comic Sans MS", "Nunito"];
 
+  //BOOLEAN SUR LES JEUX DE COULEURS
   private visionColorActivated = false;
   private colorSelected :number = -1;
   private fontSelected: string = this.listFont[3];
@@ -77,7 +78,6 @@ export class JeuxCouleursService {
   getAttentionColorStatusSubject(): BehaviorSubject<boolean> {return this._attentionColorActivated;}
 
   setAttentionColor(value: boolean){
-    console.log('setAttentionColor: ' + value);
     this._attentionColorActivated.next(value);
   }
 
@@ -97,6 +97,17 @@ export class JeuxCouleursService {
 
   setFont(value: number){
     this.fontSelected=this.listFont[value];
+  }
+
+  setFontWithString(value: string | undefined){
+    if(value==this.listFont[3]){this.isDefaultActive=true;}
+    else{this.isDefaultActive=false;}
+    
+    this.listTrouble.forEach(fontInList =>{
+      if(fontInList==value){
+        this.fontSelected=fontInList;
+      }
+    })
   }
 
   getVisionColorSelected(): number {return this.colorSelected;}
@@ -321,5 +332,21 @@ export class JeuxCouleursService {
   toggleVisionAttentionStatus() {
     let currentStatus = this._attentionColorActivated;
     this.setAttentionColor(!currentStatus);
+  }
+
+
+  updateDoc(document: Document){
+    console.log(this.userService.getUserCourant()?.configuration.police);
+    this.userService.currentUser$.subscribe(user => {
+      if (user) {
+        this.colorSelected = user.configuration.jeuCouleur;
+        this.setFontWithString(user.configuration.police);
+        this._attentionColorActivated.next(user.configuration.contraste);
+      }
+    });
+
+    this.changeFontSize(document);
+    this.changeFont(document);
+    this.changeColor(document);
   }
 }

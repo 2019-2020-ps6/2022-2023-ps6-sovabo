@@ -48,6 +48,13 @@ export class MonProfilComponent {
   constructor(private jeuxCouleursService: JeuxCouleursService,
               public userService: UserService,
               private authService: AuthService) {
+    this.userService.currentUser$.subscribe(user => {
+      if (user) {
+        this.jeuxCouleursService.setVisionColor(user.configuration.jeuCouleur);
+        this.jeuxCouleursService.setAttentionColor(user.configuration.contraste);
+        this.jeuxCouleursService.setFontWithString(user.configuration.police);
+      }
+    });
   }
 
   async ngOnInit(): Promise<void> {
@@ -85,14 +92,11 @@ export class MonProfilComponent {
 
 
   ngAfterContentChecked(){
-
   }
 
 
   updateHtmlWithConfig(){
-    this.jeuxCouleursService.changeFontSize(document);
-    this.jeuxCouleursService.changeFont(document);
-    this.jeuxCouleursService.changeColor(document);
+    this.jeuxCouleursService.updateDoc(document);
   }
 
 
@@ -293,9 +297,7 @@ export class MonProfilComponent {
         }
       }
       this.userService.setUserCourant(user);
-      console.log("user status before"+user);
       await this.updateUserSelectionStatus(user, true);
-      console.log("user status after"+user);
       this.alertState = true;
       this.showAlertNotif("Le profil de " + user.name + " a été sélectionné !");
     }
