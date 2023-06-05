@@ -122,6 +122,7 @@
   background: transparent; /* Fond transparent */
   font-size: 2vw;
   font-weight: bold;
+  color: rgb(50, 50, 50);
   outline: none; /* Suppression de la mise en évidence lors du focus */
 }
 
@@ -165,8 +166,9 @@ textarea {
   outline: none; /* Suppression de la mise en évidence lors du focus */
 }
 
-.textCategorie{
+.textDescription{
   font-size: 2vw;
+  color: rgb(50, 50, 50);
 }
 
 .iconeTriangle{
@@ -211,6 +213,7 @@ textarea {
   font-weight: bold;
   outline: none;
   width: 100%;
+  color: rgb(50, 50, 50);
 }
 
 .reponses-question{
@@ -244,6 +247,7 @@ textarea {
   font-weight: bold;
   outline: none;
   width: 100%;
+  color: rgb(50, 50, 50);
   text-align: center;
   pointer-events: all;
 }

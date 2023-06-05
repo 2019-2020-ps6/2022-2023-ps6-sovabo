@@ -6,6 +6,7 @@
     <app-btn-clickable-frame-background (click)="toggleAuthenticate()" class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
   </div>
 
+  <form>
     <div class="contenu-creation-quiz fontStyleCanChange fontSizeCanChange">
       <div class="conteneur-caracteristiques-quiz">
         <div class="caracteristiques-quiz">
@@ -26,7 +27,7 @@
             <input [ngClass]="this.contrasteTroubleEnable ? 'inputStyleContrastOn' : 'inputStyleContrastOff'" class="fontStyleCanChange fontSizeCanChange fontColorToChange" type="text" placeholder="Titre du quiz…" [(ngModel)]="titreQuiz" name="titreQuiz" required/>
           </div>
           <div class="description-quiz">
-            <span [ngClass]="this.contrasteTroubleEnable ? 'inputStyleContrastOn' : 'inputStyleContrastOff'" class="textCategorie fontStyleCanChange fontSizeCanChange"><strong >Description</strong></span>
+            <span [ngClass]="this.contrasteTroubleEnable ? 'inputStyleContrastOn' : 'inputStyleContrastOff'" class="textDescription fontStyleCanChange fontSizeCanChange"><strong >Description</strong></span>
             <textarea [(ngModel)]="descriptionQuiz" name="descriptionQuiz" required></textarea>
           </div>
         </div>
@@ -62,6 +63,7 @@
       <button [ngClass]="this.contrasteTroubleEnable ? 'boutonValiderContrastOn' : 'boutonValiderContrastOff'" class="bouton_valider fontStyleCanChange fontSizeCanChange" (click)="submitAndRedirect()">VALIDER</button>
 
     </div>
+  </form>
 
 </div>
 
