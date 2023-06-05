@@ -120,6 +120,10 @@ export class ConfigVisionComponent {
             this.jeuxCouleursService.setVisionColor(1);
             this.jeuxCouleursService.changeColor(document);
             break;
+          case this.jeuxCouleursService.listTrouble[2]:
+            this.jeuxCouleursService.setVisionColor(-1);
+            this.jeuxCouleursService.changeColor(document);
+            break;
         }
       }
 

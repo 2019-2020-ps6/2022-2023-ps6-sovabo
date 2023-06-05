@@ -12,7 +12,7 @@ export class JeuxCouleursService {
   private _attentionColorActivated = new BehaviorSubject<boolean>(false);
 
   //option trouble de la vision
-  listTrouble = ["DEUTERANOMALIE","TRITANOPIE"];
+  listTrouble = ["DEUTERANOMALIE","TRITANOPIE","AUCUN"];
   //La font par défaut est Nunito
   listFont = ["Arial","Andale Mono","Comic Sans MS", "Nunito"];
 
