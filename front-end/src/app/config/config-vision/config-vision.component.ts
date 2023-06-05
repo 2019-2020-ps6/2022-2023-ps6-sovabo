@@ -136,9 +136,6 @@ export class ConfigVisionComponent {
         this.user.configuration = config;
         await this.userService.updateUser(this.user, userId);
       }
-
-      console.log(this.user?.configuration.id);
-      console.log(this.user?.configuration.jeuCouleur);
     }
   }
 
@@ -161,12 +158,24 @@ export class ConfigVisionComponent {
     if(event){
       this.jeuxCouleursService.changeSampleFont(event,document);
     }
-
   }
 
-  fontChangerConfirmation(){
+  async fontChangerConfirmation() {
     this.jeuxCouleursService.isDefaultActive = false;
     this.jeuxCouleursService.changeFont(document);
+
+    if (this.user) {
+      console.log("USER OK");
+      let userId = (this.user as User).id!;
+      let configId = (this.user.configuration as ConfigurationModel).id!;
+
+      const config = await this.userService.getUserConfiguration(userId);
+      config.police = this.jeuxCouleursService.getFontSelectedString();
+
+      await this.userService.updateConfiguration(configId, config);
+      this.user.configuration = config;
+      await this.userService.updateUser(this.user, userId);
+    }
   }
 
   fontSizeUpdate(nb: number | undefined) {

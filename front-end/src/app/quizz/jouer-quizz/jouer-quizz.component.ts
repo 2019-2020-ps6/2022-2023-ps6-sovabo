@@ -251,10 +251,15 @@ export class JouerQuizzComponent implements OnInit {
     return this.jeuxCouleursService.getVisionColorSelected();
   }
 
-  decalageQuestion(): string{
+  decalageQuestion(){
     let questionContainer = document.querySelector('.question-bubble');
     if(questionContainer){
+
       let htmlLocation = document.querySelector("#question_sentence");
+      if(this.animationService.getAnimations().value){
+        htmlLocation = document.querySelector("#question-animation");
+      }
+
       if(htmlLocation){
         let initData = "Q"+(this.currentQuestionIndex+1)+" : " + this.currentQuestion.label;
 
@@ -269,15 +274,25 @@ export class JouerQuizzComponent implements OnInit {
           let finalHTML = ""
           let i=0;
 
-          for(i;i<indexToCut;i++){finalHTML += split[i]+" ";}
-          finalHTML +="<br>";
-          for(i;i<split.length;i++){finalHTML += split[i]+" ";}
+          if(this.animationService.getAnimations().value==true){
+              finalHTML += "<tspan x=\"50%\" y=\"30%\">";
+              for(i;i<indexToCut;i++){finalHTML += split[i]+" ";}
+              finalHTML += "</tspan>";
+              finalHTML += "<tspan x=\"50%\" y=\"65%\">";
+              for(i;i<split.length;i++){finalHTML += split[i]+" ";}
+              finalHTML += "</tspan>";
+          }
+          else{
+            for(i;i<indexToCut;i++){finalHTML += split[i]+" ";}
+            finalHTML +="<br>";
+            for(i;i<split.length;i++){finalHTML += split[i]+" ";}
+          }
+
           initData = finalHTML;
         }
         htmlLocation.innerHTML = initData;
       }
     }
-    return "";
   }
 
 

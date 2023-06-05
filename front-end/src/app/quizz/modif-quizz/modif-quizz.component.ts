@@ -4,6 +4,7 @@ import {QuizService} from "../../../service/quizz.service";
 import {Answer, Question} from "../../../models/question.model";
 import {Quiz} from "../../../models/quizz.model";
 import { Router } from '@angular/router';
+import {AuthService} from "../../../service/authentification.service";
 
 @Component({
   selector: 'app-modif-quizz',
@@ -13,8 +14,11 @@ import { Router } from '@angular/router';
 export class ModifQuizzComponent {
 
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
-
-  constructor(private jeuxCouleursService: JeuxCouleursService, public quizService: QuizService, private router: Router) {
+  showModalAuth: boolean | undefined;
+  correctAccessCode: string | undefined;
+  isAccessing: boolean | undefined;
+  isAppearing: boolean | undefined;
+  constructor(private jeuxCouleursService: JeuxCouleursService, public quizService: QuizService,private authService: AuthService, private router: Router) {
 
   }
   quizCourant: Quiz = this.quizService.getQuizCourant();
@@ -36,6 +40,17 @@ export class ModifQuizzComponent {
 
   ngOnInit() {
     this.loadData().then();
+    this.showModalAuth = !this.authService.getAuthenticationStatus();
+    this.isAppearing = true;
+    this.authService.getCorrectAccessCode().subscribe(code => {
+      this.correctAccessCode = code;
+    });
+
+    if (this.showModalAuth) {
+      setTimeout(() => {
+        this.isAppearing = false;
+      }, 600);
+    }
   }
 
   async loadData() {
@@ -74,10 +89,6 @@ export class ModifQuizzComponent {
         }
       }
     });
-  }
-
-  createQuestion() {
-    this.quizService
   }
 
   ajouterQuestion() {
@@ -269,7 +280,7 @@ export class ModifQuizzComponent {
         desc: this.descriptionQuiz,
         difficulty: this.difficultyQuiz,
         questions: this.associateAnswersToQuestions(),
-        image: "test"
+        image: this.imageURL
         // Ajoutez d'autres propriétés du quiz ici (photo, difficulté, etc.)
       };
 
@@ -286,5 +297,21 @@ export class ModifQuizzComponent {
   async submitAndRedirect() {
     await this.updateQuiz();
     await this.router.navigate(['/liste-quizz']);
+  }
+
+  handleAccessCode(accessCode: string): void {
+    if (accessCode === this.correctAccessCode) {
+      this.authService.toggleAuthenticate();
+      this.isAccessing = true;
+      setTimeout(() => {
+        this.showModalAuth = false;
+      }, 600); // The same duration as your animation
+    } else {
+      alert('Incorrect access code. Please try again.');
+    }
+  }
+
+  toggleAuthenticate() {
+    this.authService.toggleAuthenticate();
   }
 }

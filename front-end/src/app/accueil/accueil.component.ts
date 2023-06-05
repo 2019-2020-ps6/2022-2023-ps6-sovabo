@@ -48,11 +48,10 @@ export class AccueilComponent {
       this.jeuxCouleursService.changeFont(document);
     }
     this.userCourant = this.userService.getUserCourant();
+    this.jeuxCouleursService.changeFontSize(document);
   }
 
   ngAfterContentChecked(){
-    this.jeuxCouleursService.changeFontSize(document);
-    console.log("changeColor");
     this.jeuxCouleursService.changeColor(document);
   }
 
