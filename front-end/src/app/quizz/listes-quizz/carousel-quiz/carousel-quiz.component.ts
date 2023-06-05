@@ -27,7 +27,6 @@ export class CarouselQuizComponent {
 
   ngOnInit(): void {
     this.quizList = this.quizService.getData();
-
     carousel();
   }
 

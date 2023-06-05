@@ -24,11 +24,12 @@ export class ListesQuizzComponent {
   ngAfterViewInit(){
     if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
     else {this.jeuxCouleursService.changeFont(document);}
+    this.jeuxCouleursService.changeFontSize(document);
+    this.jeuxCouleursService.changeColor(document);
   }
 
   ngAfterContentChecked(){
-    this.jeuxCouleursService.changeFontSize(document);
-    this.jeuxCouleursService.changeColor(document);
+
   }
 
   delay(ms: number) {
