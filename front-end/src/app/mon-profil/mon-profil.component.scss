@@ -466,3 +466,24 @@ h1{
   color: black !important;
   text-shadow: none !important;
 }
+
+::-webkit-scrollbar {
+  width: 15px;
+  height: 10%;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  height: 100%;
+  width: 15px;
+  background: rgba(255, 255, 255, 0.62);
+  border-radius: 30px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  width: 15px;
+  height: 15px;
+  background: #c9c9c9;
+  border-radius: 52px;
+}
