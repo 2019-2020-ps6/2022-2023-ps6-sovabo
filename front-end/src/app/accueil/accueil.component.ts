@@ -37,17 +37,22 @@ export class AccueilComponent {
 
   async ngOnInit(): Promise<void> {
     await this.userService.updateAll();
+    this.userCourant = this.userService.getUserCourant();
+    await this.loadConfig();
+
     this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
     this.contrasteTroubleEnable = this.userService.getUserCourant()?.configuration.contraste || false;
     this.animateur = this.userService.getUserCourant()?.configuration.animateur || false;
     this.animation = this.userService.getUserCourant()?.configuration.animation || false;
-    if (this.jeuxCouleursService.isDefaultActive) {
-      this.jeuxCouleursService.collectDefaultStyles();
-    } else {
-      this.jeuxCouleursService.changeFont(document);
-    }
+
     this.userCourant = this.userService.getUserCourant();
-    this.jeuxCouleursService.changeFontSize(document);
+    this.jeuxCouleursService.updateDoc(document);
+  }
+
+  loadConfig(){
+    this.jeuxCouleursService.setFontWithString(this.userService.getUserCourant()?.configuration.police || this.jeuxCouleursService.listTrouble[3]);
+    this.jeuxCouleursService.setVisionColor(this.userService.getUserCourant()?.configuration.jeuCouleur || -1);
+    this.jeuxCouleursService.setAttentionColor(this.userService.getUserCourant()?.configuration.contraste || false);
   }
 
   ngAfterContentChecked(){

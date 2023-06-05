@@ -9,8 +9,9 @@
             <p class="label fontStyleCanChange fontSizeCanChange fontColorToChange" [class]="getVisionColorSelected()" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTextExtrude' : ''" >Jeux de couleurs</p>
         </div>
         <div class="btnContainer">
-            <app-btn-on-off-colors id="DEUTERANOMALIE" (click)="toggleJeuxCouleurs($event)" ></app-btn-on-off-colors>
+            <app-btn-on-off-colors id="DEUTERANOMALIE" (click)="toggleJeuxCouleurs($event)"></app-btn-on-off-colors>
             <app-btn-on-off-colors id="TRITANOPIE" (click)="toggleJeuxCouleurs($event)" ></app-btn-on-off-colors>
+          <app-btn-on-off-colors id="AUCUN" (click)="toggleJeuxCouleurs($event)"></app-btn-on-off-colors>
         </div>
     </div>
 
