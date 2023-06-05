@@ -107,4 +107,8 @@ export class StatistiqueComponent {
       alert('Incorrect access code. Please try again.');
     }
   }
+
+  toggleAuthenticate() {
+    this.authService.toggleAuthenticate();
+  }
 }
