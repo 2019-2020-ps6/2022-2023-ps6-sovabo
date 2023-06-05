@@ -8,8 +8,6 @@ import {User} from "../../../models/user.model";
 import {Action} from "rxjs/internal/scheduler/Action";
 import {ConfigurationModel} from "../../../models/configuration.model";
 import {debounceTime, mergeMap, of, Subscription, tap} from "rxjs";
-import {Simulate} from "react-dom/test-utils";
-import waiting = Simulate.waiting;
 
 @Component({
   selector: 'app-config-attention',
