@@ -173,7 +173,6 @@ export class JeuxCouleursService {
   }
 
   public changeFontSize(document: Document): void {
-    console.log("CALL FONTSIZE");
     this.applyFontSize(document);
   }
 
@@ -205,9 +204,6 @@ export class JeuxCouleursService {
   }
 
   changeColor(document: Document){
-
-    console.log("reload color");
-
     let elements = document.querySelectorAll<HTMLElement>(".fontColorToChange");
 
     for (let i = 0; i < elements.length; i++) {
