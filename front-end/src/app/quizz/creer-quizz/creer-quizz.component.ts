@@ -4,6 +4,7 @@ import {Quiz} from "../../../models/quizz.model"
 import {Question, Answer} from "../../../models/question.model";
 import {QuizService} from "../../../service/quizz.service";
 import {AuthService} from "../../../service/authentification.service";
+import {UserService} from "../../../service/user.service";
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,10 +19,15 @@ export class CreerQuizzComponent {
   correctAccessCode: string | undefined;
   isAccessing: boolean | undefined;
   isAppearing: boolean | undefined;
+  showAlert: boolean = false;
+  alertMessage: string | null = null;
+
+  private userCourant: any;
 
   constructor(private jeuxCouleursService: JeuxCouleursService,
               public quizService: QuizService,
               private authService: AuthService,
+              private userService: UserService,
               private router: Router) {
   }
 
@@ -30,6 +36,10 @@ export class CreerQuizzComponent {
   correctArray: boolean[] = [];
 
   async ngOnInit(): Promise<void> {
+    await this.userService.updateAll();
+    this.userCourant = this.userService.getUserCourant();
+    await this.loadConfig();
+
     this.isAppearing = true;
     for (let i = 0; i < 4; i++) {
       this.correctArray.push(false);
@@ -43,12 +53,14 @@ export class CreerQuizzComponent {
         this.isAppearing = false;
       }, 600);
     }
-    if (this.jeuxCouleursService.isDefaultActive) {
-      this.jeuxCouleursService.collectDefaultStyles();
-    }
-    else {
-      this.jeuxCouleursService.changeFont(document);
-    }
+
+    this.jeuxCouleursService.updateDoc(document);
+  }
+
+  loadConfig(){
+    this.jeuxCouleursService.setFontWithString(this.userService.getUserCourant()?.configuration.police || this.jeuxCouleursService.listTrouble[3]);
+    this.jeuxCouleursService.setVisionColor(this.userService.getUserCourant()?.configuration.jeuCouleur || -1);
+    this.jeuxCouleursService.setAttentionColor(this.userService.getUserCourant()?.configuration.contraste || false);
   }
 
   ngAfterViewInit(){
@@ -233,27 +245,61 @@ export class CreerQuizzComponent {
 
   async createQuiz(): Promise<void> {
     // Récupérer les valeurs du formulaire
-    if (this.titreQuiz && this.descriptionQuiz && this.difficultyQuiz && this.questions && this.reponses && this.imageURL) {
-      const quizData: Partial<Quiz> = {
-        name: this.titreQuiz,
-        desc: this.descriptionQuiz,
-        difficulty: this.difficultyQuiz,
-        questions: this.associateAnswersToQuestions(),
-        image: this.imageURL
-        // Ajoutez d'autres propriétés du quiz ici (photo, difficulté, etc.)
-      };
+    const quizData: Partial<Quiz> = {
+      name: this.titreQuiz,
+      desc: this.descriptionQuiz,
+      difficulty: this.difficultyQuiz,
+      questions: this.associateAnswersToQuestions(),
+      image: this.imageURL
+      // Ajoutez d'autres propriétés du quiz ici (photo, difficulté, etc.)
+    };
 
-      const quiz = await this.quizService.createQuiz(quizData);
+    if (!this.titreQuiz) {
+      this.showAlertNotif("Veuillez saisir un titre pour votre quiz...");
+    } else if (!this.descriptionQuiz) {
+      this.showAlertNotif("Veuillez saisir une description pour votre quiz...");
+    } else if (!this.difficultyQuiz) {
+      this.showAlertNotif("Veuillez renseigner la difficulté estimée du quiz...");
+    } else if (!this.imageURL) {
+      this.showAlertNotif("Veuillez importer une image qui représente votre quiz...");
+    } else if (quizData.questions) {
+      if (quizData.questions.length < 2) {
+        this.showAlertNotif("Veuillez saisir au moins deux questions pour votre quiz...");
+      } else {
+        let isQuizValid = true;
 
-      // Envoyer les données du quiz à votre backend ou effectuer d'autres actions nécessaires
-      console.log(quizData);
+        for (let i = 0; i < quizData.questions.length; i++) {
+          if (quizData.questions[i].label == "") {
+            this.showAlertNotif("Attention, il semblerait que la question " + (i + 1) + " soit vide...");
+            isQuizValid = false;
+            break;
+          } else if (quizData.questions[i].answers.length < 2) {
+            this.showAlertNotif("Veuillez saisir au moins deux réponses pour la question " + (i + 1) + "...");
+            isQuizValid = false;
+            break;
+          } else {
+            for (let j = 0; j < quizData.questions[i].answers.length; j++) {
+              if (quizData.questions[i].answers[j].value == "") {
+                this.showAlertNotif("Attention, il semblerait que la réponse " + (j + 1) + " de la question " + (i + 1) + " soit vide...");
+                isQuizValid = false;
+                break;
+              }
+            }
+          }
+        }
+
+        if (isQuizValid) {
+          const quiz = await this.quizService.createQuiz(quizData);
+          this.toggleAuthenticate();
+          await this.router.navigate(['/liste-quizz']);
+        }
+      }
     }
+
+    // Envoyer les données du quiz à votre backend ou effectuer d'autres actions nécessaires
+    console.log(quizData);
   }
 
-  async submitAndRedirect() {
-    await this.createQuiz();
-    await this.router.navigate(['/liste-quizz']);
-  }
 
   handleAccessCode(accessCode: string): void {
     if (accessCode === this.correctAccessCode) {
@@ -269,5 +315,18 @@ export class CreerQuizzComponent {
 
   toggleAuthenticate() {
     this.authService.toggleAuthenticate();
+  }
+
+  showAlertNotif(message: string) { // Ajoutez le paramètre `message` ici
+    this.alertMessage = message; // Stocker le message dans la propriété `alertMessage`
+    this.showAlert = true;
+    setTimeout(() => {
+      this.showAlert = false;
+      this.alertMessage = null; // Effacez le message une fois l'alerte fermée
+    }, 4000);
+  }
+
+  closeAlert() {
+    this.showAlert = false;
   }
 }

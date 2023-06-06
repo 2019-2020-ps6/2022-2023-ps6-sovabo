@@ -291,11 +291,13 @@ export class ModifQuizzComponent {
 
   async supprimerQuiz() {
     const quiz = await this.quizService.deleteQuiz((this.quizCourant.id));
+    this.toggleAuthenticate();
     await this.router.navigate(['/liste-quizz']);
   }
 
   async submitAndRedirect() {
     await this.updateQuiz();
+    this.toggleAuthenticate();
     await this.router.navigate(['/liste-quizz']);
   }
 
