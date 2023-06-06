@@ -6,9 +6,29 @@ import { Quiz } from '../../../../models/quizz.model';
 import {AnimationsService} from "../../../../service/animations.service";
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
-declare function carousel(): any;
+function carousel() {
+  jQuery(document).ready(function($) {
+    "use strict";
 
-@Component({
+    ($('#customers-testimonials') as any).owlCarousel({
+      nav: false,  // Désactive les boutons de navigation d'Owl Carousel
+      // Les autres options du carousel vont ici
+    });
+
+    // Attachez des gestionnaires d'événements click à vos boutons
+    $(".prev-button").click(function() {
+      $("#customers-testimonials").trigger('prev.owl.carousel');
+    });
+
+    $(".next-button").click(function() {
+      $("#customers-testimonials").trigger('next.owl.carousel');
+    });
+  });
+}
+
+
+
+    @Component({
   selector: 'app-carousel-quiz',
   templateUrl: './carousel-quiz.component.html',
   styleUrls: ['./carousel-quiz.component.scss']
@@ -31,6 +51,13 @@ export class CarouselQuizComponent {
     carousel();
   }
 
+  prevSlide(): void {
+    $(".owl-carousel").trigger('prev.owl.carousel');
+  }
+
+  nextSlide(): void {
+    $(".owl-carousel").trigger('next.owl.carousel');
+  }
 
 
   isAnotherHovered(quiz: Quiz): boolean {
