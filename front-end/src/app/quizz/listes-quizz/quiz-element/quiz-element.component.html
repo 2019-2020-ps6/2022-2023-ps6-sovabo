@@ -10,7 +10,6 @@
             >
               <div class="difficulty-bars">
                 <span class="difficulty-bar" *ngFor="let i of [1, 2, 3, 4, 5]" [style.backgroundColor]="getDifficultyColor(i <= quiz.difficulty ? quiz.difficulty : 0)"></span>
-                <span class="note fontStyleCanChange fontSizeCanChange">{{quiz.difficulty}}/5</span>
               </div>
               <li class="list-inline-item">
                   <span [ngClass]="this.contrasteTroubleEnable ? 'imgContrastUp' : ''"  class="note fontStyleCanChange fontSizeCanChange">{{quiz.difficulty}}/5</span>
