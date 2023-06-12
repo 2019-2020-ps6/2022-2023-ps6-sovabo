@@ -38,7 +38,7 @@ export class JouerQuizzComponent implements OnInit {
   public endTime: number = 0;
   public firstTime: boolean = true;
   public delay: number = 5000;
-  static timeTimer : number = 2;
+  static timeTimer : number = 20;
 
   public timeRemaining: number = JouerQuizzComponent.timeTimer;
   private timerId: any | undefined;
