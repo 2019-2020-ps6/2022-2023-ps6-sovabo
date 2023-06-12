@@ -20,7 +20,7 @@
             <div class="difficulty-bars">
               <span class="note difficulte">DIFFICULTÉ</span>
               <span class="difficulty-bar" *ngFor="let i of [1, 2, 3, 4, 5]" (click)="onClickChangeColor(i)" [style.background-color]="i <= selectedIndex ? currentColor : 'rgba(46, 49, 54, 0.6)'"></span>
-              <span class="note fontStyleCanChange">{{selectedIndex}}/5</span>
+              <span class="note fontStyleCanChange" id="noteDifficulty">{{selectedIndex}}/5</span>
             </div>
           </div>
           <div class="titre-quiz">
