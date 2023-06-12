@@ -4,6 +4,8 @@ import { QuizService } from '../../../service/quizz.service';
 import { Quiz } from '../../../models/quizz.model';
 import {AnimationsService} from "../../../service/animations.service";
 import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
+import {User} from "../../../models/user.model";
+import {UserService} from "../../../service/user.service";
 
 @Component({
   selector: 'app-listes-quizz',
@@ -14,22 +16,28 @@ export class ListesQuizzComponent {
 
   public quizList: Quiz[] = [];
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
-  constructor(private quizService: QuizService, public animationsService: AnimationsService, private jeuxCouleursService: JeuxCouleursService) { }
+  private userCourant: any;
+  constructor(private quizService: QuizService, public animationsService: AnimationsService, private jeuxCouleursService: JeuxCouleursService,private userService: UserService) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    await this.userService.updateAll();
+    this.userCourant = this.userService.getUserCourant();
+    await this.loadConfig();
+
     this.quizList = this.quizService.getData();
-    // console.log(this.animationsService.isAnimated);
+  }
+
+  loadConfig(){
+    this.jeuxCouleursService.setFontWithString(this.userService.getUserCourant()?.configuration.police || this.jeuxCouleursService.listTrouble[3]);
+    this.jeuxCouleursService.setVisionColor(this.userService.getUserCourant()?.configuration.jeuCouleur || -1);
+    this.jeuxCouleursService.setAttentionColor(this.userService.getUserCourant()?.configuration.contraste || false);
   }
 
   ngAfterViewInit(){
-    if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
-    else {this.jeuxCouleursService.changeFont(document);}
-    this.jeuxCouleursService.changeFontSize(document);
-    this.jeuxCouleursService.changeColor(document);
   }
 
   ngAfterContentChecked(){
-
+    this.jeuxCouleursService.updateDoc(document);
   }
 
   delay(ms: number) {

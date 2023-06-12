@@ -43,4 +43,8 @@ export class AnimationsService {
   getAnimations() {
     return this.isAnimated;
   }
+
+  getDelay() {
+    return this.delay;
+  }
 }

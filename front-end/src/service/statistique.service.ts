@@ -20,14 +20,12 @@ export class StatistiqueService {
   public async ajouterMoyenneTimeResponseAuUserCournat(moyenne : number, quizId: string): Promise<void> {
 
     const userCourant = await this.userService.getUserCourant();
-    console.log("ICI");
     if (userCourant) {
       let statCournant
       if(userCourant.listeStatQuizz){
         statCournant = userCourant.listeStatQuizz.find(stat => stat.idQuizz === quizId);
       }
       if(userCourant.id){
-        console.log("AVANT");
         console.log(userCourant.listeStatQuizz); 
           this.updateOrCreateStatQuizz(userCourant, quizId, undefined , moyenne, undefined, undefined);
       }
@@ -40,12 +38,13 @@ export class StatistiqueService {
 
   updateOrCreateStatQuizz(user: User, idQuizz: string, nbMissClicks?: number, timeResponse?: number, resultatQuizz?: number, FreqInteractAnim?: number): void {
     const existingStatQuizz = user.listeStatQuizz?.find(statQuizz => statQuizz.idQuizz === idQuizz);
-    console.log("AVANT");
-    console.log(user.listeStatQuizz); 
     if (existingStatQuizz) {
       // Ajouter les nouvelles données aux champs du StatQuizz existant si elles sont fournies
       if (nbMissClicks !== undefined) {
+        console.log("nbMissClicks");
+        console.log(nbMissClicks);
         existingStatQuizz.nbMissClicks.push(nbMissClicks);
+        console.log(existingStatQuizz.nbMissClicks);
       }
       if (timeResponse !== undefined) {
         existingStatQuizz.timeResponses.push(timeResponse);
@@ -64,6 +63,7 @@ export class StatistiqueService {
         FreqInteractAnim: existingStatQuizz.FreqInteractAnim,
       };
       if(user.id){
+        console.log(user.listeStatQuizz);
         this.userService.updateStatQuizzForUser(user.id,newStatQuizz , idQuizz)
   
       }
@@ -89,6 +89,47 @@ export class StatistiqueService {
     }
 
   }
+
+
+  ajouterNbMissCliqueAuUserCourant(nbMissClicks: number, quizId: string): void {
+    const userCourant = this.userService.getUserCourant();
+    if (userCourant) {
+      let statCournant
+      if(userCourant.listeStatQuizz){
+        statCournant = userCourant.listeStatQuizz.find(stat => stat.idQuizz === quizId);
+      }
+      if(userCourant.id){
+        this.updateOrCreateStatQuizz(userCourant, quizId, nbMissClicks);
+      }
+    }
+  }
+
+  ajouterScoreAuUserCourant(score: number, quizId: string): void {
+    const userCourant = this.userService.getUserCourant();
+    if (userCourant) {
+      let statCournant
+      if(userCourant.listeStatQuizz){
+        statCournant = userCourant.listeStatQuizz.find(stat => stat.idQuizz === quizId);
+      }
+      if(userCourant.id){
+        this.updateOrCreateStatQuizz(userCourant, quizId, undefined , undefined, score);
+      }
+    }
+  }
+
+  ajouterTotalTimeAuUserCourant(totalTime: number, quizId: string): void {
+    const userCourant = this.userService.getUserCourant();
+    if (userCourant) {
+      let statCournant
+      if(userCourant.listeStatQuizz){
+        statCournant = userCourant.listeStatQuizz.find(stat => stat.idQuizz === quizId);
+      }
+      if(userCourant.id){
+        this.updateOrCreateStatQuizz(userCourant, quizId, undefined , totalTime);
+      }
+    }
+  }
+
   
   
   

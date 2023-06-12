@@ -3,16 +3,17 @@
   <p class="titreStyle"> Statistiques du quizz </p>
 
     </div>
-    <div class="container">
-        <div class="row mb-4" *ngFor="let statQuiz of statQuiz">
+    <div class="container containStat">
+        <div class="row mb-4" *ngFor="let statQuiz of statQuiz;let i = index">
               <div class="card">
                 <div class="card-header pb-0">
                   <div class="row">
                     <div class="col-lg-6 col-7">
-                      <h4>{{statQuiz.nameQuizz}}</h4>
+                      <h4>{{ statQuiz.id ? getNameQuizz(statQuiz.idQuizz) : 'Id undefined' }}</h4>
+
                       <p class="text-sm mb-0">
-                        <i class="fa fa-check text-info" aria-hidden="true"></i>
-                        <span class="font-weight-bold ms-1">30 done</span> this month
+                        <!-- <i class="fa fa-check text-info" aria-hidden="true"></i> -->
+                        <!-- <span class="font-weight-bold ms-1">30 done</span> this month -->
                       </p>
                     </div>
                   </div>
@@ -23,76 +24,82 @@
                       <thead>
                         <tr>
                           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">LES STATISTIQUES</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">CHIFFRE</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <td>
+                          <td (click)="openPopup(statQuiz, 'tempsMoyen')" class="tooltip-container" [ngClass]="{'animated': selectedTdIndex === i}">
                             <div class="d-flex px-2 py-1">
                               <div>
                                 <img src="../../assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
                               </div>
                               <div class="d-flex flex-column justify-content-center">
-                                <h6 (click)="openPopup(statQuiz, 'tempsMoyen')" class="mb-0 text-sm" title="voir le graphique">Temps moyen de réponse à une question</h6>
+                                <h6  class="mb-0 text-sm" title="voir le graphique">
+                                  Temps moyen de réponse à une question
+                                  
+                                </h6>
                               </div>
+
                             </div>
+                            <div class="tooltip-text">Clique pour voir le graphique !</div>
+
                           </td>
 
 
                           <td class="align-middle text-center text-sm">
-                            <span class="text-xs font-weight-bold"> {{moyenneTimeReponse}} secondes </span>
+                            <span class="text-xs font-weight-bold"> </span>
                           </td>
 
                         </tr>
                         <tr>
-                            <td>
+                            <td (click)="openPopup(statQuiz, 'nbClicks')" [ngClass]="{'animated': selectedTdIndex === i}">
                               <div class="d-flex px-2 py-1">
                                 <div>
                                   <img src="../../assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
                                 </div>
                                 <div class="d-flex flex-column justify-content-center">
-                                  <h6 (click)="openPopup(statQuiz, 'nbClicks')" class="mb-0 text-sm" title="voir le graphique">Nombre de cliques hors bouton par question</h6>
+                                  <h6 class="mb-0 text-sm" title="voir le graphique">Nombre de cliques hors bouton par question</h6>
                                 </div>
                               </div>
                             </td>
 
                             <td class="align-middle text-center text-sm">
-                              <span class="text-xs font-weight-bold"> 8 </span>
+                              <span class="text-xs font-weight-bold"> </span>
                             </td>
 
                           </tr>
                           <tr>
-                            <td>
+                            <td (click)="openPopup(statQuiz, 'freqIntera')" [ngClass]="{'animated': selectedTdIndex === i}">
                               <div class="d-flex px-2 py-1">
                                 <div>
                                   <img src="../../assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
                                 </div>
                                 <div class="d-flex flex-column justify-content-center">
-                                  <h6 (click)="openPopup(statQuiz, 'freqIntera')" class="mb-0 text-sm" title="voir le graphique">Fréquence d'interactions animateur-utilisateur</h6>
+                                  <h6 class="mb-0 text-sm" title="voir le graphique">Fréquence d'interactions animateur-utilisateur</h6>
                                 </div>
                               </div>
                             </td>
 
                             <td class="align-middle text-center text-sm">
-                              <span class="text-xs font-weight-bold"> 3/min </span>
+                              <span class="text-xs font-weight-bold"> </span>
                             </td>
 
                           </tr>
                           <tr>
-                            <td>
+                            <td (click)="openPopup(statQuiz,'resultat')" [ngClass]="{'animated': selectedTdIndex === i}">
                               <div class="d-flex px-2 py-1">
                                 <div>
                                   <img src="../../assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
                                 </div>
                                 <div class="d-flex flex-column justify-content-center">
-                                  <h6 (click)="openPopup(statQuiz,'resultat')" class="mb-0 text-sm" title="voir le graphique">Résultat du quizz</h6>
+                                  <h6  class="mb-0 text-sm" title="voir le graphique">Résultat du quizz</h6>
                                 </div>
                               </div>
                             </td>
 
                             <td class="align-middle text-center text-sm">
-                              <span class="text-xs font-weight-bold"> 2/2</span>
+                              <span class="text-xs font-weight-bold"></span>
                             </td>
 
                           </tr>
@@ -144,5 +151,3 @@
 
 <script src="http://cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js" defer></script>
     <script src="../../assets/js/chart-area-demo.js" defer></script>
-
-

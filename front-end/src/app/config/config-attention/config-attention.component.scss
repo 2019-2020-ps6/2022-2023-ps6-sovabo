@@ -80,6 +80,19 @@ h1{
   background-clip: text;
 }
 
+.sliderVitesseAnimation {
+  width: 80%;
+}
+
+.textVitesse {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 2.4vh;
+  font-family: "Roboto Mono";
+}
+
 
 //CONTRASTE
 .contrastUpContainer{
