@@ -51,6 +51,7 @@ export class ModifQuizzComponent {
         this.isAppearing = false;
       }, 600);
     }
+    this.jeuxCouleursService.setUpdateDocument(true);
   }
 
   async loadData() {

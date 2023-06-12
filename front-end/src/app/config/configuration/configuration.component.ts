@@ -34,16 +34,14 @@ export class ConfigurationComponent {
         this.isAppearing = false;
       }, 600);
     }
+
+    this.jeuxCouleursService.setUpdateDocument(true);
   }
 
   ngAfterViewInit() {
-    if (this.jeuxCouleursService.isDefaultActive) {
-      this.jeuxCouleursService.collectDefaultStyles();
-    } else {
-      this.jeuxCouleursService.changeFont(document);
-    }
-    this.jeuxCouleursService.changeFontSize(document);
+   this.jeuxCouleursService.updateDoc(document);
   }
+
 
   handleAccessCode(accessCode: string): void {
     if (accessCode === this.correctAccessCode) {

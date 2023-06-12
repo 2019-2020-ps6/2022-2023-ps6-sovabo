@@ -79,13 +79,11 @@ export class ConfigVisionComponent {
     this.adjustLabelFontSize();
     window.addEventListener('resize', () => this.adjustGeneralContainerHeight());
     window.addEventListener('resize', () => this.adjustLabelFontSize());
+    this.jeuxCouleursService.setUpdateDocument(true);
   }
 
   ngAfterViewInit(){
-    if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
-    else {this.jeuxCouleursService.changeFont(document);}
-    this.jeuxCouleursService.changeFontSize(document);
-    this.jeuxCouleursService.changeColor(document);
+    this.jeuxCouleursService.updateDoc(document);
   }
 
   ngOnDestroy(): void {

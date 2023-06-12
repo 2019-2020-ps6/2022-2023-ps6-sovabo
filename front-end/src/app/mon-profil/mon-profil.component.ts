@@ -84,14 +84,14 @@ export class MonProfilComponent {
       }, 600);
     }
 
-    if (this.jeuxCouleursService.isDefaultActive) {this.jeuxCouleursService.collectDefaultStyles();}
-    else {this.jeuxCouleursService.changeFont(document);}
-    this.jeuxCouleursService.changeFontSize(document);
-    this.jeuxCouleursService.changeColor(document);
+    this.jeuxCouleursService.setUpdateDocument(true);
+  }
+  ngAfterContentChecked(){
+    this.jeuxCouleursService.updateDoc(document)
   }
 
-
-  ngAfterContentChecked(){
+  ngOnDestroy(){
+    this.jeuxCouleursService.setUpdateDocument(false);
   }
 
 
