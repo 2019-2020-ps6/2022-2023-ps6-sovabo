@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
+import {ElementRef, Injectable} from '@angular/core';
 import {duotone} from "@fortawesome/fontawesome-svg-core/import.macro";
+import {BehaviorSubject} from "rxjs";
+import {UserService} from "./user.service";
 
 @Injectable({
   providedIn: 'root'
@@ -7,13 +9,14 @@ import {duotone} from "@fortawesome/fontawesome-svg-core/import.macro";
 export class JeuxCouleursService {
 
   //option trouble de l'attention
-  private attentionColorActivated = false;
+  private _attentionColorActivated = new BehaviorSubject<boolean>(false);
 
   //option trouble de la vision
-  listTrouble = ["TRICHROMATIE","DICHROMATISME"];
+  listTrouble = ["DEUTERANOMALIE","TRITANOPIE","AUCUN"];
   //La font par défaut est Nunito
   listFont = ["Arial","Andale Mono","Comic Sans MS", "Nunito"];
 
+  //BOOLEAN SUR LES JEUX DE COULEURS
   private visionColorActivated = false;
   private colorSelected :number = -1;
   private fontSelected: string = this.listFont[3];
@@ -21,21 +24,26 @@ export class JeuxCouleursService {
   private currentFontSize: number  = 2;
   private oldFontSize: number = 2;
 
-  private fontCheck: boolean = false;
+  private level = this.currentFontSize - this.oldFontSize;
+  private coeff = 0.20;
+
   private defaultStyles: Map<string, Map<string, string>> = new Map();
   public isDefaultActive: boolean = true;
 
+  private updateDocument = false;
 
-  getFontCheck(){
-    return this.fontCheck;
+
+  public setUpdateDocument(b: boolean){
+    this.updateDocument = b;
   }
+
+
+
 
   setFontSelectedByDefault(){
     this.fontSelected=this.listFont[3];
   }
-  setFontCheck(state: boolean){
-    this.fontCheck=state;
-  }
+
   getCurrentFontSize(){
     return this.currentFontSize;
   }
@@ -45,7 +53,23 @@ export class JeuxCouleursService {
     this.currentFontSize=nb;
   }
 
-  constructor() {}
+  constructor(private userService: UserService) {
+    this.userService.currentUser$.subscribe(user => {
+      if(user) {
+        this._attentionColorActivated.next(user.configuration.contraste);
+      }
+      else {
+        this._attentionColorActivated.next(false);
+      }
+    });
+
+    this.userService.currentUser$.subscribe(user => {
+      if (user) {
+        this.colorSelected = user.configuration.jeuCouleur;
+        this.fontSelected = user.configuration.police;
+      }
+    });
+  }
 
   getListTrouble(){
     return this.listTrouble;
@@ -56,9 +80,13 @@ export class JeuxCouleursService {
   }
 
   IsVisionColorActivated(): boolean {return this.visionColorActivated;}
-  IsAttentionColorActivated(): boolean {return this.attentionColorActivated;}
+  IsAttentionColorActivated(): boolean {return this._attentionColorActivated.value;}
 
-  setAttentionColor(value: boolean){this.attentionColorActivated=value;}
+  getAttentionColorStatusSubject(): BehaviorSubject<boolean> {return this._attentionColorActivated;}
+
+  setAttentionColor(value: boolean){
+    this._attentionColorActivated.next(value);
+  }
 
   setVisionColor(value: number) {
     //console.log('setJeuxCouleurs: ' + value);
@@ -73,8 +101,20 @@ export class JeuxCouleursService {
     //console.log("FIN SETVISION :"+this.visionColorActivated);
   }
 
+
   setFont(value: number){
     this.fontSelected=this.listFont[value];
+  }
+
+  setFontWithString(value: string){
+    if(value==this.listFont[3]){this.isDefaultActive=true;}
+    else{this.isDefaultActive=false;}
+
+    this.listTrouble.forEach(fontInList =>{
+      if(fontInList==value){
+        this.fontSelected=fontInList;
+      }
+    })
   }
 
   getVisionColorSelected(): number {return this.colorSelected;}
@@ -87,7 +127,7 @@ export class JeuxCouleursService {
         return this.listTrouble[1];
         break;
       default:
-        return "";
+        return "none";
     }
   }
 
@@ -95,7 +135,7 @@ export class JeuxCouleursService {
       return this.fontSelected;
     }
 
-  getVisionAttentionStatus(): boolean{return this.attentionColorActivated;}
+  getVisionAttentionStatus(): boolean{return this._attentionColorActivated.value;}
 
   //UTILS METHODS
   private changeElementFontStyleAndContent(element: HTMLElement, fontIndex: number): void {
@@ -109,13 +149,16 @@ export class JeuxCouleursService {
     return target.id;
   }
 
-  public changeSampleFont(document: Document): void {
-    if (event !== null) {
+  public changeSampleFont(event: Event | null,document: Document): void {
+
+    if(event){
+      //on récupère l'élément html ciblé par l'event
       const target = event?.currentTarget as HTMLElement;
-      const value = this.getButtonId(target);
+      //on recup l'id du boutton (l'id dépends du trouble)
+      const value = target.id;
       const exTxt = document.getElementById("exampleTxt");
 
-      if (exTxt) {
+      if(exTxt){
         switch (value) {
           case "btn_fontChanger1":
             this.changeElementFontStyleAndContent(exTxt, 0);
@@ -126,44 +169,111 @@ export class JeuxCouleursService {
           case "btn_fontChanger3":
             this.changeElementFontStyleAndContent(exTxt, 2);
             break;
+          case "btn_fontChanger4":
+            this.changeElementFontStyleAndContent(exTxt,3);
+            break;
           case "btn_fontReset":
-            this.changeElementFontStyleAndContent(exTxt, 3);
+            this.changeElementFontStyleAndContent(exTxt, 4);
             break;
         }
       }
     }
   }
 
-  private computeFontSizeChange(level: number, coeff: number, originFontSize: string): string {
-    const fontSize = parseFloat(originFontSize);
-    return (fontSize + (level * coeff)) + "px";
+  public computeSize(elem : ElementRef){
+    const originFontSize = window.getComputedStyle(elem.nativeElement, null).getPropertyValue('font-size');
+    let size = parseFloat(originFontSize);
+    return this.computeFontSizeChange(size);
+  }
+
+  private computeFontSizeChange(originFontSize: number): string {
+    return (originFontSize + (this.level * this.coeff * originFontSize)) + "px";
   }
 
   public changeFontSize(document: Document): void {
-    const level = this.currentFontSize - this.oldFontSize;
-    const coeff = 5;
+    this.applyFontSize(document);
+  }
 
-    if (event !== null) {
-      const pList = document.querySelectorAll("p");
+  applyFontSize(document: Document){
+     this.level = this.currentFontSize - this.oldFontSize;
 
-      pList.forEach(elem => {
-        const originFontSize = window.getComputedStyle(elem, null).getPropertyValue('font-size');
-        elem.style.fontSize = this.computeFontSizeChange(level, coeff, originFontSize);
-      });
+    //VIA LE DOM
+    let elements = document.querySelectorAll<HTMLElement>(".fontSizeCanChange, .titreStyle");
+
+    for (let i = 0; i < elements.length; i++) {
+      const originFontSize = window.getComputedStyle(elements[i], null).getPropertyValue('font-size');
+      let size = parseFloat(originFontSize);
+      elements[i].style.fontSize = this.computeFontSizeChange(size);
     }
+
+    //FONT-SIZE passé une fois
+    this.setUpdateDocument(false);
   }
 
 
   changeFont(document: Document) {
-    console.log("changeFont");
-    if(this.fontCheck){
-      this.applyFontToClass(document.getElementsByClassName("fontStyleCanChange"));
+    if(!this.isDefaultActive){
+      this.applyFontToClass(document);
     }
   }
 
-  applyFontToClass(elements: HTMLCollectionOf<Element>) {
+  applyFontToClass(document: Document) {
+    let elements = document.querySelectorAll<HTMLElement>(".fontStyleCanChange");
     for (let i = 0; i < elements.length; i++) {
-      elements[i].setAttribute("style", "font-family: " + this.getFontSelectedString() + " !important");
+      elements[i].style.fontFamily = this.getFontSelectedString();
+    }
+  }
+
+  changeColor(document: Document){
+    let elements = document.querySelectorAll<HTMLElement>(".fontColorToChange");
+
+    for (let i = 0; i < elements.length; i++) {
+      for (let j = 0; j < this.listTrouble.length; j++) {elements[i].classList.remove(this.listTrouble[i]);}
+      elements[i].classList.remove("DEUTERANOMALIE_FONT");
+      elements[i].classList.remove("TRITANOPIE_FONT");
+      elements[i].classList.remove("DEUTERANOMALIE");
+      elements[i].classList.remove("TRITANOPIE");
+      if(elements[i].nodeName=="BODY"){elements[i].style.background= ""}
+    }
+
+    //CAS OU IL N'Y A PAS de JEU DE COULEUR
+    if(this.getVisionColorSelected()==-1){}
+
+    else {
+      //CAS OU LA IL Y A UN JEU DE COULEUR
+      for (let i = 0; i < elements.length; i++) {
+        switch (this.getVisionColorSelectedString()) {
+          case this.listTrouble[0]:
+            if (elements[i].classList.contains("fontColorToChange")) {
+              if(elements[i].classList.contains("answer")){
+                elements[i].classList.remove("answer");
+                elements[i].classList.add("DEUTERANOMALIE_ANSWER");
+              }
+              if(elements[i].classList.contains("wrong-answer")){
+                elements[i].style.color=""
+              }
+              if(elements[i].nodeName=="BODY"){elements[i].style.background= "rgb(75,114,126)"}
+              else{
+                elements[i].classList.add(this.getVisionColorSelectedString());
+                elements[i].classList.add("DEUTERANOMALIE_FONT");
+              }
+            }
+            break;
+          case this.listTrouble[1]:
+            if (elements[i].classList.contains("fontColorToChange")) {
+              if(elements[i].classList.contains("answer")){
+                elements[i].classList.remove("answer");
+                elements[i].classList.add("TRITANOPIE_ANSWER");
+              }
+              if(elements[i].nodeName=="BODY"){elements[i].style.background= "#484848"}
+              else{
+                elements[i].classList.add(this.getVisionColorSelectedString());
+                elements[i].classList.add("TRITANOPIE_FONT");
+              }
+            }
+            break;
+        }
+      }
     }
   }
 
@@ -191,13 +301,12 @@ export class JeuxCouleursService {
 
   // appelez cette fonction lors du chargement de la page
   public collectDefaultStyles(): void {
-    console.log("collectDefaultStyles");
     const allElements = document.getElementsByClassName("fontStyleCanChange");
     for (let i = 0; i < allElements.length; i++) {
       const element = allElements[i];
       const style = window.getComputedStyle(element);
       const stylesMap = this.createStyleMap(style);
-      const classNameWithoutfontStyleCanChange = element.className.replace("fontStyleCanChange", "");
+      const classNameWithoutfontStyleCanChange = element.className.toString().replace("fontStyleCanChange", "");
       this.addDefaultStyles(element.id, classNameWithoutfontStyleCanChange, stylesMap);
     }
   }
@@ -230,6 +339,31 @@ export class JeuxCouleursService {
     }
   }
 
+  toggleVisionAttentionStatus() {
+    let currentStatus = this._attentionColorActivated;
+    this.setAttentionColor(!currentStatus);
+  }
 
 
+  updateDoc(document: Document){
+    this.userService.currentUser$.subscribe(user => {
+      if (user) {
+        this.colorSelected = user.configuration.jeuCouleur;
+        this.setFontWithString(user.configuration.police);
+        this._attentionColorActivated.next(user.configuration.contraste);
+      }
+    });
+
+    if(this.updateDocument){
+      if (this.isDefaultActive) {this.collectDefaultStyles();}
+      else {this.changeFont(document);}
+      this.changeFontSize(document);
+      this.changeColor(document);
+
+      //APRES MODIFICATION -> ON BLOQUE JUSQU'AU CHANGEMENT DE PAGE
+      this.setUpdateDocument(false);
+    }
+
+
+  }
 }

@@ -2,6 +2,7 @@ import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { JeuxCouleursService } from "../../../../service/jeux-couleurs.service";
 import { Subscription } from 'rxjs';
 import { CommonService } from '../../../../service/updateMessenger.service';
+import {UserService} from "../../../../service/user.service";
 
 @Component({
   selector: 'app-btn-on-off-colors',
@@ -16,23 +17,23 @@ export class BtnOnOffColorsComponent {
 
   constructor(
     private jeuxCouleursService: JeuxCouleursService,
-    private Service: CommonService
+    private Service: CommonService,
+    private userService: UserService
+
   ) {
     this.subscriptionName = this.Service.getUpdate().subscribe((message: any) => {
       this.messageReceived = message;
     });
+
+    this.userService.currentUser$.subscribe(user => {
+      if (user) {
+        this.contrasteTroubleEnable = user.configuration.contraste;
+      }
+    });
   }
 
   get buttonClass() {
-    const visionColor = this.getVisionColorSelected();
-    if (visionColor === 0) {
-      return 'TRICHROMATIE';
-    } else if (visionColor === 1) {
-      return 'DICHROMATISME';
-    } else {
-      return '';
-    }
-
+    return this.jeuxCouleursService.getVisionColorSelectedString();
   }
 
 

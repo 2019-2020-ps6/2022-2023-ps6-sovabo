@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
-import { JeuxCouleursService } from 'src/service/jeux-couleurs.service';
-import { AnimateurService } from "../../service/animateur.service";
-import { AnimationsService } from "../../service/animations.service";
+import {Component} from '@angular/core';
+import {JeuxCouleursService} from 'src/service/jeux-couleurs.service';
+import {DomSanitizer} from '@angular/platform-browser';
+import {UserService} from "../../service/user.service";
+import {User} from "../../models/user.model";
+import { BehaviorSubject } from 'rxjs';
+import {AuthService} from "../../service/authentification.service";
 
 @Component({
   selector: 'app-mon-profil',
@@ -9,95 +12,390 @@ import { AnimationsService } from "../../service/animations.service";
   styleUrls: ['./mon-profil.component.scss']
 })
 export class MonProfilComponent {
-  AttentionColorStatus: boolean = false;
+  public userName: string = '';
+  public isCreatingUser: boolean = false;
+  public isModifyAvatar: boolean = true;
+  showAlert: boolean = false;
+  selectedUser: User | undefined;
+  public showPopUp: boolean = false;
+  alertMessage: string | null = null;
+  deleteMode: boolean = false;
+  showModalAvatar = false;
+  public alertState: boolean = true;
+  deletingUsers: string[] = [];
+  showModalAuth: boolean = true;
+  correctAccessCode: string | undefined;
+  isAccessing: boolean | undefined;
+  isAppearing: boolean | undefined;
+
+  avatarImages = [
+    "../../assets/Images/Animateurs/bear/bear-emoji-normal.png.png",
+    "../../assets/Images/Animateurs/cat/cat-emoji-normal.png",
+    "../../assets/Images/Animateurs/black male/male-character-normal.png",
+    "../../assets/Images/Animateurs/white girl/girl-character-normal.png",
+    // Plus d'images...
+  ];
+
+  selectedAvatar = "../../assets/Images/Animateurs/pngegg.png";
+
+
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
-  // Ces valeurs doivent être récupérées depuis le backend
-  email = 'exemple@exemple.com';
-  username = 'nom_utilisateur';
+  public users: User[] = [];
+  public image: HTMLImageElement | undefined;
+  private isModifyingName: Boolean = false;
 
-  isPopupOpen: boolean = false;
-  popupTitle: string = '';
-  newPassword: string = '';
-  newEmail: string = '';
-  newUsername: string = '';
-  newCaregiverCode: string = '';
 
-  constructor(private jeuxCouleursService: JeuxCouleursService, private animateurService: AnimateurService, private animationsService: AnimationsService) {}
-
-  ngOnInit(): void {
-    this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
-    this.jeuxCouleursService.changeFont(document);
-    this.jeuxCouleursService.changeFontSize(document);
+  constructor(private jeuxCouleursService: JeuxCouleursService,
+              public userService: UserService,
+              private authService: AuthService) {
+    this.userService.currentUser$.subscribe(user => {
+      if (user) {
+        this.jeuxCouleursService.setVisionColor(user.configuration.jeuCouleur);
+        this.jeuxCouleursService.setAttentionColor(user.configuration.contraste);
+        this.jeuxCouleursService.setFontWithString(user.configuration.police);
+      }
+    });
   }
 
-  openPopup(title: string) {
-    this.popupTitle = title;
-    this.isPopupOpen = true;
-  }
-
-  submitChanges() {
-    // Implémenter la logique pour enregistrer les modifications selon le titre de la pop-up
-    switch (this.popupTitle) {
-      case 'Changer le mot de passe':
-        // Enregistrer le nouveau mot de passe
-        console.log('Nouveau mot de passe:', this.newPassword);
-        break;
-      case 'Changer l\'adresse email':
-        // Enregistrer la nouvelle adresse email
-        console.log('Nouvelle adresse email:', this.newEmail);
-        break;
-      case 'Changer le nom d\'utilisateur':
-        // Enregistrer le nouveau nom d'utilisateur
-        console.log('Nouveau nom d\'utilisateur:', this.newUsername);
-        break;
-      case 'Créer mon code soignant':
-        // Enregistrer le nouveau code soignant
-        console.log('Nouveau code soignant:', this.newCaregiverCode);
-        break;
+  async ngOnInit(): Promise<void> {
+    this.showModalAvatar = false;
+    this.isAppearing = true;
+    try {
+      const usersFromServer = await this.userService.loadUsersFromServer();
+      this.users = usersFromServer.map(user => ({...user}));
+      for (let user of this.users) {
+        if (user.selected){
+          await this.setUserCourant(user, "onInit");
+        }
+      }
+    }
+    catch (e) {
     }
 
-    // Réinitialiser les champs et fermer la pop-up
-    this.newPassword = '';
-    this.newEmail = '';
-    this.newUsername = '';
-    this.newCaregiverCode = '';
-    this.isPopupOpen = false;
+    this.userService.currentUser$.subscribe(user => {
+      // Faites quelque chose avec l'utilisateur courant
+    });
+    this.authService.getCorrectAccessCode().subscribe(code => {
+      this.correctAccessCode = code;
+    });
+    if (this.showModalAuth) {
+      setTimeout(() => {
+        this.isAppearing = false;
+      }, 600);
+    }
+
+    this.jeuxCouleursService.setUpdateDocument(true);
+  }
+  ngAfterContentChecked(){
+    this.jeuxCouleursService.updateDoc(document)
   }
 
-  cancelChanges() {
-    // Réinitialiser les champs et fermer la pop-up
-    this.newPassword = '';
-    this.newEmail = '';
-    this.newUsername = '';
-    this.newCaregiverCode = '';
-    this.isPopupOpen = false;
+  ngOnDestroy(){
+    this.jeuxCouleursService.setUpdateDocument(false);
   }
 
-  getAnimateur() {
-    return this.animateurService.getAnimateur();
+
+  updateHtmlWithConfig(){
+    this.jeuxCouleursService.updateDoc(document);
   }
 
-  getAnimations() {
-    return this.animationsService.isAnimated;
+
+
+  get randomColor(): string {
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += '0123456789ABCDEF'[Math.floor(Math.random() * 16)];
+    }
+    return color;
   }
 
-  triggerImageUpload() {
-    const imageUpload = document.getElementById('image-upload');
-    if (imageUpload) {
-      imageUpload.click();
+  async toggleEditUserName(user: User): Promise<void> {
+    if (user.name === "") {
+      this.alertState = false;
+      this.showAlertNotif("Vous devez rentrer un nom");
+      return;
+    }
+    user.editing = !user.editing;
+    this.isModifyingName = user.editing;
+    if (!user.editing) {
+      if (await this.userNameAlreadyExists(user.name, user)) {
+        this.alertState = false;
+        this.showAlertNotif("Ce nom est déjà utilisé !");
+        await this.toggleEditUserName(user);
+        return
+      }
+      this.alertState = true;
+      this.showAlertNotif("Votre nom a bien été modifié");
+      this.saveUserName(user);
     }
   }
 
-  getDuration() {
-    return this.animationsService.duration;
+  saveUserName(user: User): void {
+    this.users.map(u => {
+      if (u.id === user.id) {
+        user.name = u.name;
+      }
+      return user;
+    });
+
+    const updatedUser: Partial<User> = {
+      name: user.name,
+      imagePath: user.imagePath,
+      color: user.color,
+      configuration: { ...user.configuration },
+    };
+    const userId = user.id || ''
+    this.userService.updateUser(updatedUser,userId );
   }
 
-  getDelay() {
-    return this.animationsService.delay != undefined ? this.animationsService.delay : 0;
+  getImageNameFromImagePath(imagePath: string): string {
+    if (!imagePath) {
+      return '';
+    }
+    if (imagePath.includes('pngegg')) {
+      return 'pngegg.png';
+    }
+    //keep the last 2 parts of the path
+    const parts = imagePath.split('/');
+    return parts[parts.length - 2] + '/' + parts[parts.length - 1];
+
   }
 
-  changeProfileImage(event: Event) {
-    // Implémenter la logique pour changer l'image de profil
-    console.log(event);
+
+  getImageFromImageName(imageName: string): string {
+    return `../../assets/Images/Animateurs/${imageName}`;
   }
+
+
+  async createUser(): Promise<void> {
+    this.isCreatingUser = true;
+    let imageName = this.getImageNameFromImagePath(this.selectedAvatar);
+    if (this.userName == ""){
+      this.alertState = false;
+      this.showAlertNotif("Vous devez rentrer un nom !");
+      return;
+    }
+
+    if (!await this.userNameAlreadyExists(this.userName)) {
+      try {
+        const newUser: Partial<User> = {
+          name: this.userName,
+          imagePath: imageName,
+          color: this.randomColor,
+          configuration: {
+            animateur: false,
+            animateurImagePath: imageName,
+            animation: false,
+            animationSpeed: "normal",
+            sliderPosition: 0,
+            duration: "00:00:00",
+            contraste: false,
+            jeuCouleur: -1,
+            police: 'Nunito'
+          },
+        };
+
+        const user = await this.userService.createUser(newUser);
+        this.users.push(user);
+
+      } catch (e) {}
+      this.isCreatingUser = false;
+      this.isModifyAvatar = true;
+      this.alertState = true;
+      this.showAlertNotif("L'utilisateur a bien été créé !");
+    }
+    else {
+      this.alertState = false;
+      this.showAlertNotif("Ce nom est déjà utilisé !");
+    }
+  }
+
+  showAlertNotif(message: string) { // Ajoutez le paramètre `message` ici
+    this.alertMessage = message; // Stocker le message dans la propriété `alertMessage`
+    this.showAlert = true;
+    setTimeout(() => {
+      this.showAlert = false;
+      this.alertMessage = null; // Effacez le message une fois l'alerte fermée
+    }, 4000);
+  }
+
+
+  goToCreateUser(): void {
+    this.isCreatingUser = true;
+    this.isModifyAvatar = false;
+    this.deleteMode = false;
+    this.userName = "";
+    this.selectedAvatar = "../../assets/Images/Animateurs/pngegg.png";
+    //find user with editing = true
+    const user = this.users.find(user => user.editing);
+    if (user) {
+      user.editing = false;
+    }
+  }
+
+  cancelCreateUser(): void {
+    this.isCreatingUser = false;
+    this.isModifyAvatar = true;
+  }
+
+  closeAlert() {
+    this.showAlert = false;
+  }
+
+  selectAvatar(img: string) {
+    this.selectedAvatar = img;
+    this.showModalAvatar = false;
+  }
+
+  // @ts-ignore
+  modifyAvatar(img: string) {
+    if (this.selectedUser) {
+      let filename: string = "";
+      // Prenez seulement le nom du fichier à partir de `img`, sans l'extension .png
+      if (img.includes('pngegg')) {
+        filename = 'pngegg.png';
+      }
+      filename = img.split('/').toString();
+      const parts = img.split('/');
+      filename = parts[parts.length - 2] + '/' + parts[parts.length - 1];
+
+
+      const updatedUser: Partial<User> = {
+        name: this.selectedUser.name,
+        imagePath: filename,  // Mettez à jour l'image du profil ici avec le nom du fichier sans l'extension .png
+        color: this.selectedUser.color,
+        configuration: { ...this.selectedUser.configuration },
+      };
+
+      const userId = this.selectedUser.id || '';
+
+
+      // Mettez à jour le chemin de l'image pour l'utilisateur dans la liste d'utilisateurs
+      this.users = this.users.map(user => user.id === this.selectedUser?.id ? { ...user, imagePath: filename } : user);
+      this.userService.updateUser(updatedUser, userId).then(r => {
+        this.showModalAvatar = false;
+        this.alertState = true;
+        this.showAlertNotif("L'avatar a bien été modifié !");
+      });
+    }
+  }
+
+  async setUserCourant(user: User, verif?: String): Promise<void> {
+    if (this.getUserCourant()?.id === user.id && verif !== "onInit") {
+      this.userService.setUserCourant(null);
+      await this.updateUserSelectionStatus(user, false);
+      this.alertState = true;
+      this.showAlertNotif("Le profil de " + user.name + " a été désélectionné !");
+    } else if (verif !== "onInit"){
+      for (let u of this.users) {
+
+        if (u.id !== user.id) {
+          await this.updateUserSelectionStatus(u, false);
+        }
+      }
+      this.userService.setUserCourant(user);
+      await this.updateUserSelectionStatus(user, true);
+      this.alertState = true;
+      this.showAlertNotif("Le profil de " + user.name + " a été sélectionné !");
+    }
+    this.updateHtmlWithConfig();
+  }
+
+  async updateUserSelectionStatus(user: User, selected: boolean): Promise<void> {
+    const updatedUser: Partial<User> = {
+      ...user,
+      selected: selected, // Mettez à jour l'attribut 'selected'
+    };
+    const userId = user.id || '';
+    try {
+      await this.userService.updateUser(updatedUser, userId);
+    } catch (error) {
+    }
+  }
+
+  async deleteUserFromServer(user: User): Promise<void> {
+    if (user.id != null) {
+      this.deletingUsers.push(user.id);
+    }
+
+    setTimeout(async () => {
+      try {
+        await this.userService.deleteUser(user.id || '', user.configuration.id || '');
+        this.users = this.users.filter(u => u.id !== user.id);
+        this.alertState = true;
+        this.showAlertNotif("L'utilisateur a bien été supprimé !");
+        this.deletingUsers = this.deletingUsers.filter(id => id !== user.id); // remove the user from deletingUsers
+      } catch (e) {
+      }
+    }, 300); // Wait for the animation to finish before actually deleting the user
+    this.userService.updateAll();
+  }
+
+
+  openModal(user: User | null) {
+    if(user != null){
+      this.selectedUser = user;
+    }
+    this.showModalAvatar = true;
+  }
+
+// Méthode pour fermer la modal
+  closeModal() {
+    this.showModalAvatar = false;
+  }
+
+  toggleDeleteMode() {
+    if (!this.isCreatingUser && !this.isModifyingName) {
+      this.deleteMode = !this.deleteMode;
+    }
+    else{
+      let modeAcitvated = "";
+      if(this.isCreatingUser){
+        modeAcitvated = "de création !";
+      }
+      if (this.isModifyingName){
+        modeAcitvated = "de modification !";
+      }
+      this.alertState = false;
+      this.showAlertNotif("Vous ne pouvez pas supprimer un utilisateur en cours " + modeAcitvated);
+    }
+  }
+
+  // @ts-ignore
+  private async userNameAlreadyExists(name: string, user?: User) {
+    // If an optional user parameter is provided, exclude it from the search
+    const users = await this.userService.loadUsersFromServer();
+    for (const u of users) {
+      if (u.name === name && u.id !== user?.id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  cancelEditUserName(user: User) {
+    this.isModifyingName = false;
+    user.editing = false;
+  }
+
+  getUserCourant() {
+    return this.userService.getUserCourant();
+  }
+
+  handleAccessCode(accessCode: string): void {
+    if (accessCode === this.correctAccessCode) {
+      this.toggleAuthenticate();
+      this.isAccessing = true;
+      setTimeout(() => {
+        this.showModalAuth = false;
+      }, 600); // The same duration as your animation
+    } else {
+      alert('Incorrect access code. Please try again.');
+    }
+  }
+  toggleAuthenticate() {
+    this.authService.toggleAuthenticate();
+  }
+
+  protected readonly document = document;
 }

@@ -1,6 +1,7 @@
-import {Component, HostListener} from '@angular/core';
+import {Component} from '@angular/core';
 import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
-import {Location} from '@angular/common';
+import {AuthService} from "../../../service/authentification.service";
+import {CodeAcces} from "../../../models/codeAcces.model";
 
 @Component({
   selector: 'app-configuration',
@@ -10,57 +11,51 @@ import {Location} from '@angular/common';
 export class ConfigurationComponent {
   AttentionColorStatus: boolean = false;
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
-  constructor(private jeuxCouleursService: JeuxCouleursService,private location: Location) {}
+  showModalAuth: boolean | undefined;
+  correctAccessCode: string | undefined;
+  isAccessing: boolean | undefined;
+  isAppearing: boolean | undefined;
 
-  lastPage(){
-    this.location.back();
+  constructor(private jeuxCouleursService: JeuxCouleursService,
+              private authService: AuthService) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.AttentionColorStatus = this.jeuxCouleursService.IsAttentionColorActivated();
-    this.changeContrast();
-    if (this.jeuxCouleursService.isDefaultActive) {
-      this.jeuxCouleursService.collectDefaultStyles();
+    this.jeuxCouleursService.changeFont(document);
+    this.showModalAuth = !this.authService.getAuthenticationStatus();
+    this.isAppearing = true;
+    this.authService.getCorrectAccessCode().subscribe(code => {
+      this.correctAccessCode = code;
+    });
+
+    if (this.showModalAuth) {
+      setTimeout(() => {
+        this.isAppearing = false;
+      }, 600);
     }
-    else {
-      this.jeuxCouleursService.changeFont(document);
-    }
-    this.jeuxCouleursService.changeFontSize(document);
+
+    this.jeuxCouleursService.setUpdateDocument(true);
+  }
+
+  ngAfterViewInit() {
+   this.jeuxCouleursService.updateDoc(document);
   }
 
 
-  changeContrast(){
-    let tabContainer = document.querySelectorAll('[id=contrastUpContainer]');
-    let tabText = document.querySelectorAll('[id=contrastUpText]');
-
-    if(this.AttentionColorStatus){
-      if(tabContainer != null){
-        tabContainer.forEach(element => {
-          element.classList.add('contrastUpContainer');
-        });
-      }
-      if(tabText != null){
-        tabText.forEach(element => {
-          element.classList.add('contrastUpText');
-        });
-      }
-    }
-    else{
-      if(tabContainer != null){
-        tabContainer.forEach(element => {
-          element.classList.remove('contrastUpContainer');
-        });
-      }
-      if(tabText != null){
-        tabText.forEach(element => {
-          element.classList.remove('contrastUpText');
-        });
-      }
+  handleAccessCode(accessCode: string): void {
+    if (accessCode === this.correctAccessCode) {
+      this.authService.toggleAuthenticate();
+      this.isAccessing = true;
+      setTimeout(() => {
+        this.showModalAuth = false;
+      }, 600); // The same duration as your animation
+    } else {
+      alert('Incorrect access code. Please try again.');
     }
   }
 
-
-
-
-
+  toggleAuthenticate() {
+    this.authService.toggleAuthenticate();
+  }
 }

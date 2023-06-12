@@ -1,34 +1,36 @@
 <link rel="stylesheet" href="accueil.component.scss">
 
-<body>
-
 
 <div class="container accueilSite">
 
   <div class="leftContainer">
-    <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTitleExtrude' : 'contrastDownTitleExtrude'" >PolyQuiz</h1>
+    <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTitleExtrude' : 'contrastDownTitleExtrude'" class="titreStyle">PolyQuiz</h1>
     <app-btn-clickable-frame-background class="navigation" id="jouer"[routerLink]="['/liste-quizz']">JOUER</app-btn-clickable-frame-background>
   </div>
 
-  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble1" *ngIf="getAnimateur()"></div>
-  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble2" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay() + 's')}"></div>
-  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble3" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(7/4) + 's')}"></div>
-  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble4" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(9/4) + 's')}"></div>
-  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble5" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(11/4) + 's')}"></div>
-  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble6" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(7/2) + 's')}"></div>
-  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="textContainer" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(9/2) + 's')}">
+  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble1" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(2) + 's')}"></div>
+  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble2" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(11/4) + 's')}"></div>
+  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble3" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(13/4) + 's')}"></div>
+  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble4" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(15/4) + 's')}"></div>
+  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble5" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(17/4) + 's')}"></div>
+  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble6" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(19/4) + 's')}"></div>
+  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="textContainer" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(22/4) + 's')}">
     <p>Bienvenue sur Polyquiz !<br>Es-tu prêt à tester tes connaissances ?</p>
   </div>
-  <div class="animatorContainer" *ngIf="getAnimateur()">
-    <img src="../../assets/Images/Animateur_image.png" alt="Image animateur" class="animator-relative">
+  <div class="animatorContainer" [ngClass]="getAnimations() ? 'animatorWithAnimationsON' : 'animatorWithAnimationsOFF'" *ngIf="getAnimateur()" [ngStyle]="{'animation-duration' : (getDelay()*(10/4) + 's')}">
+    <img [src]="'../../assets/Images/Animateurs/'+getAnimateurPath()" alt="Image animateur" class="animator-relative">
   </div>
 
-  <div class="rightContainer">
-    <app-btn-clickable-background class="navigation" [routerLink]="['/configuration']">CONFIGURATION</app-btn-clickable-background>
-    <app-btn-clickable-background class="navigation" [routerLink]="['/mon-profil']">MON PROFIL</app-btn-clickable-background>
-    <app-btn-clickable-background class="navigation" [routerLink]="['/statistiques']">STATISTIQUE</app-btn-clickable-background>
+  <div class="rightContainer" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer' : ''">
+    <app-btn-clickable-background (click)="isAccessible('/configuration')" class="navigation">CONFIGURATION</app-btn-clickable-background>
+    <app-btn-clickable-background id="profils" class="navigation" [routerLink]="['/mon-profil']">PROFILS</app-btn-clickable-background>
+    <app-btn-clickable-background (click)="isAccessible('/statistiques')" class="navigation">STATISTIQUES</app-btn-clickable-background>
+
   </div>
 
 </div>
 
-</body>
+<div *ngIf="showAlert" class="alert alert-danger alert-dismissible fade show user-alert" role="alert">
+  Aucun profil n'est sélectionné, veuillez en créer un ou en sélectionner un existant.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlert()"></button>
+</div>

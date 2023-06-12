@@ -48,6 +48,8 @@ a{
    flex-direction: row  ;
    margin-right: 10vw;
    margin-left: 10vw;
+   overflow-y: auto;
+   height: 70vh;
  }
 
  .quiz{
@@ -76,21 +78,18 @@ a{
    margin-left: 1vw;
  }
 
- .selectionQuiz {
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between;
-   align-items: center;
-   margin: 1vw 20vw 3vw 25vw;
- }
+.selectionQuiz {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  margin: auto;
+}
 
- #dropdownMenu2 {
-   background: rgba(217, 217, 217, 0.4);
-   border: none;
-   color: black;
- }
+.form {
+  width: 100%;
+}
 
-
-
-
+.form-control {
+  width: 100%;
+}
 

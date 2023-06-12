@@ -13,7 +13,7 @@ module.exports = class BaseModel {
     this.schema = Joi.object().keys({ ...schema, id: Joi.string().required() })  // assuming id is now a string
     this.items = []
     this.name = name
-    this.filePath = `${__dirname}/../../database/${this.name.toLowerCase()}.data.json`
+    this.filePath = `${__dirname}/../../database/${process.env.DB_FOLDER ?? ''}${this.name.toLowerCase()}.data.json`
     this.load()
   }
 
@@ -43,8 +43,13 @@ module.exports = class BaseModel {
     return item
   }
 
+
+  
+  
+
   create(obj = {}) {
     const item = { ...obj, id: uuid.v4() };
+    
     if (item.questions) {
       item.questions = item.questions.map((question) => {
         const newQuestion = {
@@ -55,15 +60,15 @@ module.exports = class BaseModel {
         return newQuestion;
       });
     }
-  
+
     const { error } = Joi.validate(item, this.schema);
     if (error) throw new ValidationError(`Create Error : Object ${JSON.stringify(obj)} does not match schema of model ${this.name}`, error);
-  
+
     this.items.push(item);
     this.save();
-  
+
     return item;
-  }
+}
   
 
   

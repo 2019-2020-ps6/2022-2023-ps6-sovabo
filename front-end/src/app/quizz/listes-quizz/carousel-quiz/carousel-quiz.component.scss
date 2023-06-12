@@ -119,3 +119,26 @@ text-align: center;
 .another-hovered {
   filter: blur(5px);
 }
+
+.DEUTERANOMALIE{
+  text-shadow: none !important;
+  background-color: #9999d4;
+}
+.DEUTERANOMALIE_FONT{
+  -webkit-text-fill-color: #ffffff;
+}
+
+.TRITANOPIE{
+  text-shadow: none !important;
+  background-color: #fb5e7e;
+}
+
+.TRITANOPIE_FONT{
+  -webkit-text-fill-color: black;
+}
+.prev-button, .next-button {
+  width: 50px;     /* modifiez cette valeur pour changer la largeur du bouton */
+  height: 50px;    /* modifiez cette valeur pour changer la hauteur du bouton */
+  padding: 10px;   /* modifiez cette valeur pour changer l'espace autour de l'icône à l'intérieur du bouton */
+  margin: 5px;     /* modifiez cette valeur pour changer l'espace autour du bouton entier */
+}

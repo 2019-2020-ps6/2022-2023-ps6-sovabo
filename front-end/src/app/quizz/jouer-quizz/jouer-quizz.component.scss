@@ -2,23 +2,28 @@
   background-color: rgba(226, 226, 226, 0.359);
   border: 2px solid #ccc;
   border-radius: 50px;
+
   margin-top: 2%;
-  margin: auto;
+
+  margin-right: auto;
+  margin-left: auto;
   text-align: center;
   padding: 10px 3%;
-  width: auto;
-  height: 6.2em;
+
+  width: 100%;
+  height: fit-content;
+  overflow: auto;
 }
 
 .svg {
-  height: auto;
-  width: auto;
+  height: 100%;
+  width: 100%;
 }
 
-.text-line{
-  stroke: #212529;
-  stroke-width: 2px;
+text{
 }
+
+
 
 .question-text {
   font-weight: bold;
@@ -42,6 +47,13 @@
   text-shadow: none;
 }
 
+.text-line{
+  height: 100%;
+  width: 100%;
+  stroke: #212529;
+  stroke-width: 2px;
+}
+
 .text-line text {
   stroke-dasharray: 500;
   stroke-dashoffset: 500;
@@ -50,8 +62,8 @@
 
 @media (min-width: 600px) {
   svg {
-    height: 100px;
-    width: 100%;
+    height: max-content;
+    width: max-content;
   }
 }
 
@@ -132,6 +144,64 @@ label {
   background-color: white;
 }
 
+.DEUTERANOMALIE_ANSWER{
+  /*border: 2px solid #ccc;*/
+
+  padding: 10px;
+
+  padding-left: 2%;
+  padding-right: 2%;
+
+  margin: 2%;
+
+  border-radius: 50px;
+
+  text-align: center;
+
+  display: inline-block;
+  width: fit-content;
+  min-width: 40%;
+  height: fit-content;
+
+  box-sizing: border-box;
+}
+.DEUTERANOMALIE_ANSWER:hover{
+  background-color: #a0a1d5;
+}
+
+.DEUTERANOMALIE_SELECTED{
+  background-color: #a0a1d5;
+}
+
+.TRITANOPIE_ANSWER{
+  /*border: 2px solid #ccc;*/
+
+  padding: 10px;
+
+  padding-left: 2%;
+  padding-right: 2%;
+
+  margin: 2%;
+
+  border-radius: 50px;
+
+  text-align: center;
+
+  display: inline-block;
+  width: fit-content;
+  min-width: 40%;
+  height: fit-content;
+
+  box-sizing: border-box;
+}
+.TRITANOPIE_ANSWER:hover{
+  background-color: #faa5b5;
+}
+
+.TRITANOPIE_SELECTED{
+  background-color: #faa5b5;
+}
+
 /* A FINIR */
 .answer input:checked ~ .checkmark{
   background-color: #ccc;
@@ -163,6 +233,36 @@ label {
   height: fit-content;
 }
 
+.TRITANOPIE_check_btn{
+  background-color: #2b83a9;
+  border: 2px solid #ccc;
+  border-radius: 50px;
+  padding: 10px;
+  padding-left: 2%;
+  padding-right: 2%;
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  display: inline-block;
+  width: fit-content;
+  height: fit-content;
+}
+
+.DEUTERANOMALIE_check_btn{
+  background-color: #c6c68e;
+  border: 2px solid #ccc;
+  border-radius: 50px;
+  padding: 10px;
+  padding-left: 2%;
+  padding-right: 2%;
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  display: inline-block;
+  width: fit-content;
+  height: fit-content;
+}
+
 .wrong-answer{
   color: #c00000;
   font-size: 25px;
@@ -179,8 +279,72 @@ label {
   padding-right: 2%;
 }
 
+.TRITANOPIE_wrong-answer{
+  color: #db2152;
+  font-size: 25px;
+  width: fit-content;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  font-weight: bold;
+
+  border-radius: 50px;
+  padding: 10px;
+  padding-top: 20px;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.DEUTERANOMALIE_wrong-answer{
+  color: #43439c;
+  font-size: 25px;
+  width: fit-content;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  font-weight: bold;
+
+  border-radius: 50px;
+  padding: 10px;
+  padding-top: 20px;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
 .good-answer{
   color: #1eff00;
+  font-size: 25px;
+  width: fit-content;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  font-weight: bold;
+
+  border-radius: 50px;
+  padding: 10px;
+  padding-top: 20px;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.DEUTERANOMALIE_good-answer{
+  color: #9e9e36;
+  font-size: 25px;
+  width: fit-content;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  font-weight: bold;
+
+  border-radius: 50px;
+  padding: 10px;
+  padding-top: 20px;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.TRITANOPIE_good-answer{
+  color: #69aed1;
   font-size: 25px;
   width: fit-content;
   margin-right: auto;
@@ -240,7 +404,6 @@ label {
 }
 
 .contrastUpTextExtrude{
-  color: #000000;
   text-shadow: none;
   text-decoration: none;
 }
@@ -254,28 +417,29 @@ label {
     bottom : -40%;
   }
   10%, 100% {
-    bottom : -3%;
+    bottom : 0%;
   }
 }
 
-.animatorWithAnimationsON {
+.animatorContainer {
   position: absolute;
-  height: 33vh;
-  width: 31vh;
+  height: 40vh;
+  width: 38vh;
   left: 1%;
-  bottom: -40%;
+  bottom: 0%
+}
+
+.animator-relative {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+
+.animatorWithAnimationsON {
   animation-name: animatorFadeIn;
   animation-duration: 5s;
   animation-fill-mode: forwards;
   animation-iteration-count: infinite;
-}
-
-.animatorWithAnimationsOFF {
-  position: absolute;
-  height: 33vh;
-  width: 31vh;
-  left: 1%;
-  bottom: -3%;
 }
 
 @keyframes fadeIn {
@@ -305,7 +469,7 @@ label {
 
 #bubble1 {
   position: absolute;
-  top: 64vh;
+  top: 62vh;
   left: 6vw;
   height: 1vw;
   width: 1vw;
@@ -314,7 +478,7 @@ label {
 
 #bubble2 {
   position: absolute;
-  top: 57vh;
+  top: 55vh;
   left: 3.5vw;
   height: 1.5vw;
   width: 1.5vw;
@@ -323,7 +487,7 @@ label {
 
 #bubble3 {
   position: absolute;
-  top: 49vh;
+  top: 47vh;
   left: 2vw;
   height: 2vw;
   width: 2vw;
@@ -332,7 +496,7 @@ label {
 
 #bubble4 {
   position: absolute;
-  top: 39vh;
+  top: 37vh;
   left: 2.3vw;
   height: 2.5vw;
   width: 2.5vw;
@@ -341,7 +505,7 @@ label {
 
 #bubble5 {
   position: absolute;
-  top: 29vh;
+  top: 27vh;
   left: 5vw;
   height: 3vw;
   width: 3vw;
@@ -375,4 +539,25 @@ label {
   font-family: 'Nunito';
   src: url('~src/assets/Fonts/nunito-main/fonts/variable/Nunito[wght].ttf');
 }
+
+
+//GESTION JEU DE COULEUR
+
+.DEUTERANOMALIE{
+  color: #9999d4 !important;
+  text-shadow: none !important;
+}
+.DEUTERANOMALIE_FONT{
+  -webkit-text-fill-color: white;
+}
+
+.TRITANOPIE{
+  color: #fb5e7e !important;
+  text-shadow: none !important;
+}
+
+.TRITANOPIE_FONT{
+  -webkit-text-fill-color: black;
+}
+
 

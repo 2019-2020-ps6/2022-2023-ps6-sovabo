@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="btn-clickable-frame-background.component.scss"/>
 
 <button [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}"
-        class="my-button fontStyleCanChange">
-  <ng-content></ng-content>
+        class="my-button fontStyleCanChange fontSizeCanChange" [class]="buttonClass">
+  <p><ng-content></ng-content></p>
 </button>

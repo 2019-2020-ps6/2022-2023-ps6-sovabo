@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {AnimationsService} from "../../../service/animations.service";
 import {AnimateurService} from "../../../service/animateur.service";
 import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
+import {UserService} from "../../../service/user.service";
 
 @Component({
   selector: 'app-btn-profile',
@@ -14,7 +15,12 @@ export class BtnProfilUserComponent {
 
   ngOnInit(){
   }
-  constructor(private jeuxCouleursService: JeuxCouleursService) {
+  constructor(private jeuxCouleursService: JeuxCouleursService,private userService: UserService) {
+    this.userService.currentUser$.subscribe(user => {
+      if (user) {
+        this.contrasteTroubleEnable = user.configuration.contraste;
+      }
+    });
   }
 
 

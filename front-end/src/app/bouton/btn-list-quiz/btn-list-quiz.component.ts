@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
+import {UserService} from "../../../service/user.service";
 
 @Component({
   selector: 'app-btn-list-quiz',
@@ -7,13 +8,24 @@ import {JeuxCouleursService} from "../../../service/jeux-couleurs.service";
   styleUrls: ['./btn-list-quiz.component.scss']
 })
 export class BtnListQuizComponent {
-  constructor(private jeuxCouleursService: JeuxCouleursService){}
+  contrasteTroubleEnable :boolean = this.jeuxCouleursService.getVisionAttentionStatus();
+  constructor(private jeuxCouleursService: JeuxCouleursService, private userService: UserService){
+    this.userService.currentUser$.subscribe(user => {
+      if (user) {
+        this.contrasteTroubleEnable = user.configuration.contraste;
+      }
+    });
+  }
 
   ngOnInit() {
   }
 
-  contrasteTroubleEnable :boolean = this.jeuxCouleursService.getVisionAttentionStatus();
 
+
+
+  get buttonClass() {
+    return this.jeuxCouleursService.getVisionColorSelectedString();
+  }
 
 
 }

@@ -4,31 +4,43 @@
         <p [ngClass]="this.contrasteTroubleEnable ? 'contrastUpText' : ''" class="titreStyle">{{quiz.name}}</p>
       </div>
 
-      <div class="question-bubble">
+      <div class="question-bubble fontSizeCanChange fontStyleCanChange">
         <svg class="text-line" *ngIf="animations">
           <text [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}"
-                class="question-text fontStyleCanChange" x="50%" y="40%" text-anchor="middle" dominant-baseline="middle">{{ currentQuestion.label }}</text>
+                id="question-animation" class="question-text fontStyleCanChange" x="50%" y="40%" text-anchor="middle" dominant-baseline="middle">{{getQuestion()}}</text>
         </svg>
-          <text *ngIf="!animations" [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}" class="question-text fontStyleCanChange">Q{{currentQuestion.id}} : {{currentQuestion.label}}</text>
+          <p id="question_sentence" *ngIf="!animations" [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}" class="question-text fontStyleCanChange fontSizeCanChange fontColorToChange">{{getQuestion()}}</p>
         <div class="timer">{{ timeRemaining }} s</div>
       </div>
 
-      <div class="answers-container">
-        <div [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer' : ''"  *ngFor="let answer of currentQuestion?.answers; let i = index" class="answer" (click)="selectAnswer($event)">
+      <div class="answers-container fontSizeCanChange fontStyleCanChange">
+        <div [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer' : ''"  *ngFor="let answer of currentQuestion?.answers; let i = index" class="answer fontColorToChange" (click)="selectAnswer($event)">
           <input type="radio" name="answer" id="answer{{ i }}" [(ngModel)]="selectedAnswerIndex" [value]="i" (click)="selectAnswer($event)">
-          <label [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}" for="answer{{ i }}" [class]="animations ? 'animated-label' : ''" class="fontStyleCanChange">{{ answer.value }}</label>
+          <label [ngStyle]="{'animation-duration': animations ? animationDuration : '0s'}" for="answer{{ i }}" [class]="animations ? 'animated-label' : ''" class="fontStyleCanChange fontSizeCanChange fontColorToChange">{{ answer.value }}</label>
         </div>
       </div>
       <div class="check-container">
-        <button [ngStyle]="{'font-family': this.getFontString()}" (click)="validateAnswer()" [disabled]="selectedAnswerIndex == null"  *ngIf="isAnswerCorrect==null" class="check_btn fontStyleCanChange">Valider</button>
-        <button [ngStyle]="{'font-family': this.getFontString()}" *ngIf="isAnswerCorrect != null && currentQuestionIndex != quiz.questions.length -1" [disabled]="isQuizFinished == true" (click)="goToNextQuestion()" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && next_btnContrastOn' : 'next_btnContrastOff'" class="fontStyleCanChange">Question suivante</button>
-        <button [ngStyle]="{'font-family': this.getFontString()}" *ngIf="isQuizFinished" [routerLink]="['/resultat-quizz']" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && next_btnContrastOn' : 'next_btnContrastOff'" class="fontStyleCanChange">Voir les résultats !</button>
+        <button
+          [ngClass]="[this.getVisionColorSelected()==0 ? 'DEUTERANOMALIE_check_btn' : '' ,
+                      this.getVisionColorSelected()==1 ? 'TRITANOPIE_check_btn' : '' ,
+                      this.getVisionColorSelected()==-1 ? 'check_btn' : '']"
+
+          [ngStyle]="{'font-family': this.getFontString()}" (click)="validateAnswer()" [disabled]="selectedAnswerIndex == null"  *ngIf="isAnswerCorrect==null"
+                class="fontStyleCanChange">Valider</button>
+        <button [ngStyle]="{'font-family': this.getFontString()}" class="fontStyleCanChange fontSizeCanChange" *ngIf="isAnswerCorrect != null && currentQuestionIndex != quiz.questions.length -1" [disabled]="isQuizFinished == true" (click)="goToNextQuestion()" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && next_btnContrastOn' : 'next_btnContrastOff'" >Question suivante</button>
+        <button [ngStyle]="{'font-family': this.getFontString()}" class="fontStyleCanChange fontSizeCanChange" *ngIf="isQuizFinished" [routerLink]="['/resultat-quizz']" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer && next_btnContrastOn' : 'next_btnContrastOff'" >Voir les résultats !</button>
       </div>
       <div class="buttons-container fontStyleCanChange">
-        <div *ngIf="isAnswerCorrect == false && selectedAnswerIndex != questionCorrectIndex" class="wrong-answer">
+        <div
+          [ngClass]="[this.getVisionColorSelected()==0 ? 'DEUTERANOMALIE_wrong-answer' : '', this.getVisionColorSelected()==1 ? 'TRITANOPIE_wrong-answer' : '', this.getVisionColorSelected()==-1 ? 'wrong-answer' : '']"
+          *ngIf="isAnswerCorrect == false && selectedAnswerIndex != questionCorrectIndex">
           <p>Mauvaise réponse, la bonne réponse est {{ currentQuestion.answers[questionCorrectIndex].value }}</p>
         </div>
-        <div *ngIf="isAnswerCorrect == true && selectedAnswerIndex != questionCorrectIndex" class="good-answer">
+        <div *ngIf="isAnswerCorrect == true && selectedAnswerIndex != questionCorrectIndex"
+             [ngClass]="[this.getVisionColorSelected()==0 ? 'DEUTERANOMALIE_good-answer' : '',
+                      this.getVisionColorSelected()==1 ? 'TRITANOPIE_good-answer' : '',
+                      this.getVisionColorSelected()==-1 ? 'good-answer' : '']"
+        >
             <p>Bonne réponse ! </p>
         </div>
 
@@ -39,7 +51,7 @@
     <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble3" *ngIf="getAnimateur()" [ngStyle]="{'animation-duration' : getDelay()*(25) + 's', 'animation-delay' : getDelay()*(13/4) + 's'}"></div>
     <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble4" *ngIf="getAnimateur()" [ngStyle]="{'animation-duration' : getDelay()*(25) + 's', 'animation-delay' : getDelay()*(15/4) + 's'}"></div>
     <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" id="bubble5" *ngIf="getAnimateur()" [ngStyle]="{'animation-duration' : getDelay()*(25) + 's', 'animation-delay' : getDelay()*(9/2) + 's'}"></div>
-    <div class="animatorContainer" *ngIf="getAnimateur()">
-      <img src="../../../assets/Images/Animateur_image.png" alt="Image animateur" [ngClass]="getAnimations() ? 'animatorWithAnimationsON' : 'animatorWithAnimationsOFF'" [ngStyle]="{'animation-duration' : (getDelay()*(25) + 's')}">
+    <div class="animatorContainer" [ngClass]="getAnimations() ? 'animatorWithAnimationsON' : 'animatorWithAnimationsOFF'" *ngIf="getAnimateur()" [ngStyle]="{'animation-duration' : (getDelay()*(25) + 's')}">
+      <img [src]="'../../../assets/Images/Animateurs/'+getAnimateurPath()" alt="Image animateur" class="animator-relative">
     </div>
   </div>

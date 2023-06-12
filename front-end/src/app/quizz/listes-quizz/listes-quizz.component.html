@@ -2,7 +2,7 @@
 
   <div class="titrePage">
       <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
-      <a [ngClass]="this.contrasteTroubleEnable ? 'titreStyleContrastOn' : 'titreStyleContrastOff'" > Liste des quizz</a>
+      <a [ngClass]="this.contrasteTroubleEnable ? 'titreStyleContrastOn' : 'titreStyleContrastOff'" >Liste des quizz</a>
 
       <div class="btnCreerConfig">
           <app-btn-list-quiz id="creerQuizz" [routerLink]="['/creer-quizz']">Créer mon quizz</app-btn-list-quiz>
@@ -15,36 +15,19 @@
       </div>
   </div>
   <div class="selectionQuiz">
-    <div class="container">
-      <div class="row height d-flex justify-content-center align-items-center">
-        <div class="col-md-6">
-          <div class="form">
-            <i class="fa fa-search"></i>
-            <input type="text" class="form-control form-input fontStyleCanChange" placeholder="Titre du quiz …">
-            <span class="left-pan"><i class="fa fa-microphone"></i></span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle fontStyleCanChange" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Catégorie
-      </button>
-
-      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-        <button class="dropdown-item" type="button">Action</button>
-        <button class="dropdown-item" type="button">Another action</button>
-        <button class="dropdown-item" type="button">Something else here</button>
+    <div class="row justify-content-center">
+      <div class="form">
+        <input type="text" class="form-control form-input fontStyleCanChange" placeholder="Titre du quiz …">
       </div>
     </div>
   </div>
 
-  <div class="fontStyleCanChange">
-    <div class="quiz-list-container" *ngIf="!animationsService.isAnimated; else carousel"  >
+
+  <div class="fontStyleCanChange fontSizeCanChange">
+    <div class="quiz-list-container" *ngIf="!animationsService.isAnimated.value; else carousel"  >
       <div class="quiz-list">
-        <div class="quiz"  *ngFor="let quiz of quizList">
-          <app-quiz-element [quiz]="quiz" routerLink="/accueil-quiz/{{quiz.id}}"></app-quiz-element>
+        <div class="quiz" *ngFor="let quiz of quizList">
+            <app-quiz-element [quiz]="quiz" routerLink="/accueil-quiz/{{quiz.id}}"></app-quiz-element>
         </div>
       </div>
     </div>

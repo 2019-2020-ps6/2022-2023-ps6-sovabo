@@ -7,8 +7,8 @@
 
 
 body{
-  display: flex;
   background: linear-gradient(90deg, #7C65A9 0%, #96D4CA 100%);
+  display: flex;
   overflow: hidden;
 }
 
@@ -25,17 +25,14 @@ app-root{
   text-shadow: 8px 8px 0 #1E1E1E;
 }
 
-.imgContrastUp{
-  filter: invert(1);
-}
+
 
 .contrastUpContainer{
   background: rgb(200, 200, 200);
 }
 
 .contrastUpText{
-  color: black;
-  text-shadow: none;
+  text-shadow: none!important;
 }
 
 
@@ -54,19 +51,25 @@ app-root{
   font-family: DynaPuff;
   font-size: 11vw;
   font-weight: 700;
-  color: #000000;
+  color: whitesmoke;
   margin-bottom: 5%;
 }
 
 .contrastUpTextExtrude{
   padding: 10px;
-
-  font-family: DynaPuff;
   font-size: 3vw;
   font-weight: 700;
   color: #000000;
   text-shadow: none;
   text-decoration: none;
 }
+
+.INVERT{
+  filter: invert(1);
+}
+
+
+
+
 
 

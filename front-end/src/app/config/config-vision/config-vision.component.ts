@@ -4,6 +4,11 @@ import {ActivatedRoute, Router} from "@angular/router";
 
 import { CommonService } from '../../../service/updateMessenger.service';
 import {Location} from "@angular/common";
+import {compareNumbers} from "@angular/compiler-cli/src/version_helpers";
+import {User} from "../../../models/user.model";
+import {ConfigurationModel} from "../../../models/configuration.model";
+import {debounceTime} from "rxjs";
+import {UserService} from "../../../service/user.service";
 
 
 
@@ -16,19 +21,19 @@ import {Location} from "@angular/common";
 
 
 export class ConfigVisionComponent {
-   listTrouble = this.jeuxCouleursService.getListTrouble();
+  listTrouble = this.jeuxCouleursService.getListTrouble();
   listFont = this.jeuxCouleursService.getListFont();
 
   jeuxCouleursEnable: boolean = false;
   contrasteTroubleEnable: boolean = false;
 
   fontSelected : string = this.jeuxCouleursService.getFontSelectedString();
+  user = this.userService.getUserCourant();
 
   constructor(private jeuxCouleursService: JeuxCouleursService,
               private router: Router,
               private route: ActivatedRoute,
-              private Service: CommonService,
-              private location: Location) {}
+              private Service: CommonService, private userService: UserService) {}
 
   ngOnInit(): void {
     this.jeuxCouleursEnable = this.jeuxCouleursService.IsVisionColorActivated();
@@ -64,25 +69,21 @@ export class ConfigVisionComponent {
 
     //ATTRIBUTION DE LA POLICE APPLIQUEE AU SAMPLE
     count=0;
-    let pSample = document.querySelectorAll("#exampleTxt");
-    // console.log(pSample);
+    let pSample = document.querySelectorAll<HTMLElement>("#exampleTxt");
     pSample.forEach(sample=>{
       sample.innerHTML = this.jeuxCouleursService.getFontSelectedString();
     });
-
-    if (this.jeuxCouleursService.isDefaultActive) {
-      this.jeuxCouleursService.collectDefaultStyles();
-    }
-    else {
-      this.jeuxCouleursService.changeFont(document);
-    }
-    this.jeuxCouleursService.changeFontSize(document);
 
     // Appel de la fonction pour ajuster la hauteur de generalContainer
     this.adjustGeneralContainerHeight();
     this.adjustLabelFontSize();
     window.addEventListener('resize', () => this.adjustGeneralContainerHeight());
     window.addEventListener('resize', () => this.adjustLabelFontSize());
+    this.jeuxCouleursService.setUpdateDocument(true);
+  }
+
+  ngAfterViewInit(){
+    this.jeuxCouleursService.updateDoc(document);
   }
 
   ngOnDestroy(): void {
@@ -90,31 +91,52 @@ export class ConfigVisionComponent {
     window.removeEventListener('resize', () => this.adjustLabelFontSize());
   }
 
-  lastPage(){
-    this.location.back();
+  getVisionColorSelected(){
+    return this.jeuxCouleursService.getVisionColorSelectedString();
   }
 
+
   //appel lors du click sur le bouton de choix de vision
-  toggleJeuxCouleurs(event: Event | null) {
+  async toggleJeuxCouleurs(event: Event | null) {
     //si un event est passé en paramètre
     if (event != null) {
       //on récupère l'élément html ciblé par l'event
-        const target = event?.currentTarget as HTMLElement;
+      const target = event?.currentTarget as HTMLElement;
       //on recup l'id du boutton (l'id dépends du trouble)
-        const value = target.id;
+      const value = target.id;
 
-        if(this.jeuxCouleursService.getVisionColorSelectedString()==value){this.jeuxCouleursService.setVisionColor(-1);}
-        else {
-          switch (value) {
-            case this.jeuxCouleursService.listTrouble[0]:
-              this.jeuxCouleursService.setVisionColor(0);
-              break;
-            case this.jeuxCouleursService.listTrouble[1]:
-              this.jeuxCouleursService.setVisionColor(1);
-              break;
-          }
+      if (this.jeuxCouleursService.getVisionColorSelectedString() == value) {
+        this.jeuxCouleursService.setVisionColor(-1);
+        this.jeuxCouleursService.changeColor(document);
+      } else {
+        switch (value) {
+          case this.jeuxCouleursService.listTrouble[0]:
+            this.jeuxCouleursService.setVisionColor(0);
+            this.jeuxCouleursService.changeColor(document);
+            break;
+          case this.jeuxCouleursService.listTrouble[1]:
+            this.jeuxCouleursService.setVisionColor(1);
+            this.jeuxCouleursService.changeColor(document);
+            break;
+          case this.jeuxCouleursService.listTrouble[2]:
+            this.jeuxCouleursService.setVisionColor(-1);
+            this.jeuxCouleursService.changeColor(document);
+            break;
         }
       }
+
+      if (this.user) {
+        let userId = (this.user as User).id!;
+        let configId = (this.user.configuration as ConfigurationModel).id!;
+
+        const config = await this.userService.getUserConfiguration(userId);
+        config.jeuCouleur = this.jeuxCouleursService.getVisionColorSelected();
+
+        await this.userService.updateConfiguration(configId, config);
+        this.user.configuration = config;
+        await this.userService.updateUser(this.user, userId);
+      }
+    }
   }
 
 
@@ -123,23 +145,36 @@ export class ConfigVisionComponent {
     // send message to subscribers via observable subject
     this.Service.sendUpdate(str);
   }
-  //ACTUALISATION DE LA PAGE
+
   resetParameters(event: Event | null){
     this.jeuxCouleursService.resetStylesToDefault();
     this.jeuxCouleursService.isDefaultActive = true;
     if (event){
-      this.jeuxCouleursService.changeSampleFont(document);
+      this.jeuxCouleursService.changeSampleFont(event,document);
     }
   }
 
-  fontChanger($event: Event) {
-    this.jeuxCouleursService.changeSampleFont(document);
+  fontChanger(event: Event | null) {
+    if(event){
+      this.jeuxCouleursService.changeSampleFont(event,document);
+    }
   }
 
-  fontChangerConfirmation(){
+  async fontChangerConfirmation() {
     this.jeuxCouleursService.isDefaultActive = false;
-    this.jeuxCouleursService.setFontCheck(true);
     this.jeuxCouleursService.changeFont(document);
+
+    if (this.user) {
+      let userId = (this.user as User).id!;
+      let configId = (this.user.configuration as ConfigurationModel).id!;
+
+      const config = await this.userService.getUserConfiguration(userId);
+      config.police = this.jeuxCouleursService.getFontSelectedString();
+
+      await this.userService.updateConfiguration(configId, config);
+      this.user.configuration = config;
+      await this.userService.updateUser(this.user, userId);
+    }
   }
 
   fontSizeUpdate(nb: number | undefined) {
@@ -147,11 +182,10 @@ export class ConfigVisionComponent {
       this.jeuxCouleursService.setCurrentFontSize(nb);
       this.jeuxCouleursService.changeFontSize(document);
     }
-    else{}
   }
 
 
-  getFontSize(){
+  getStringFontSize(){
     switch (this.jeuxCouleursService.getCurrentFontSize()){
       case 1:
         return "petite";
@@ -188,4 +222,6 @@ export class ConfigVisionComponent {
       label.style.fontSize = `${fontSize}px`;
     });
   }
+
+  protected readonly document = document;
 }

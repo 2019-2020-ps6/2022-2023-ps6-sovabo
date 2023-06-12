@@ -35,6 +35,8 @@ import { BtnFontComponent } from './bouton/btn-vision/btn-font/btn-font.componen
 import { SliderFontSizeComponent } from './slider/slider-font-size/slider-font-size.component';
 import { BtnOnOffContrastComponent } from './bouton/btn-on-off/btn-on-off-contrast/btn-on-off-contrast.component';
 import {BtnProfilUserComponent} from "./bouton/btn-profile/btn-profile.component";
+import {AdaptFontDirective} from "../directives/AdaptFontDirective";
+import { AccessCodeModalComponent } from './access-code-modal/access-code-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,7 +68,9 @@ import {BtnProfilUserComponent} from "./bouton/btn-profile/btn-profile.component
     BtnOnOffColorsComponent,
     BtnFontComponent,
     SliderFontSizeComponent,
-    BtnOnOffContrastComponent
+    BtnOnOffContrastComponent,
+    AdaptFontDirective,
+    AccessCodeModalComponent
   ],
   imports: [
     BrowserModule,

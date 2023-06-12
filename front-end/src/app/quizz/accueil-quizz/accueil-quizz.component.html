@@ -2,10 +2,10 @@
 
   <div class="header">
     <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
-    <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubbleTextContainer" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(4) + 's')}">
+    <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubbleTextContainer" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(20/4) + 's')}">
       <p fontStyleCanChange>Alors comme ça, tu penses être incollable sur <span style="text-transform: lowercase;">{{quiz.name}}</span> ?</p>
     </div>
-    <app-btn-clickable-frame-background class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
+    <app-btn-clickable-frame-background class="navigation" id="retour" [routerLink]="['/liste-quizz']" >RETOUR</app-btn-clickable-frame-background>
   </div>
 
   <div class="infoQuiz" [ngClass]="getAnimateur() ? 'gridWithAnimateur' : 'gridWithoutAnimateur'">
@@ -14,8 +14,8 @@
       <img [src]="quiz.image" class="img-fluid" />
       <div class="btnModifierQuiz">
         <app-btn-list-quiz id="modifierQuizz" [routerLink]="['/modif-quizz']">
-          <div [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer' : ''" class="modifyContainer">
-            <span [ngClass]="this.contrasteTroubleEnable ? 'contrastUpText && modifyText' : 'modifyText'" >Modifier le quiz</span>
+          <div class="modifyContainer">
+            <span [ngClass]="this.contrasteTroubleEnable ? 'contrastUpText modifyText' : 'modifyText'" >Modifier le quiz</span>
           </div>
         </app-btn-list-quiz>
       </div>
@@ -25,29 +25,29 @@
       <p [ngClass]="this.contrasteTroubleEnable ? 'contrastUpText' : ''" class="titreStyle">{{quiz.name}}</p>
       <div class="infoComplementaire">
         <div class="nbrTentatives">
-          <span class="fontStyleCanChange" id="textTentative">NOMBRE DE TENTATIVES<br>EFFECTUÉES : 2</span>
+          <span class="fontStyleCanChange fontSizeCanChange" id="textTentative">{{quiz.desc}}</span>
         </div>
         <div class="difficulty">
-          <span class="fontStyleCanChange" id="textDifficulty">DIFFICULTÉ :</span>
+          <span class="fontStyleCanChange fontSizeCanChange" id="textDifficulty">DIFFICULTÉ :</span>
             <div class="difficulty-bars">
               <span class="difficulty-bar" *ngFor="let i of [1, 2, 3, 4, 5]" [style.backgroundColor]="getDifficultyColor(i <= quiz.difficulty ? quiz.difficulty : 0)"></span>
-              <span class="note fontStyleCanChange">{{quiz.difficulty}}/5</span>
+              <span class="note fontStyleCanChange fontSizeCanChange">{{quiz.difficulty}}/5</span>
             </div>
         </div>
       </div>
       <app-btn-clickable-frame-background routerLink="/jouer-quiz/{{quiz.id}}" (click)="resetScore()" class="btnJouer">JOUER</app-btn-clickable-frame-background>
     </div>
 
-    <div class="animatorContainer" *ngIf="getAnimateur()">
-      <img src="../../../assets/Images/Animateur_image.png" alt="Image animateur" class="animator-relative">
+    <div class="animatorContainer" [ngClass]="getAnimations() ? 'animatorWithAnimationsON' : 'animatorWithAnimationsOFF'" *ngIf="getAnimateur()" [ngStyle]="{'animation-duration' : (getDelay()*(10/4) + 's')}">
+      <img [src]="'../../../assets/Images/Animateurs/'+getAnimateurPath()" alt="Image animateur" class="animator-relative">
     </div>
   </div>
 
-  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubble1" *ngIf="getAnimateur()"></div>
-  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubble2" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay() + 's')}"></div>
-  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubble3" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(7/4) + 's')}"></div>
-  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubble4" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(9/4) + 's')}"></div>
-  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubble5" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(3) + 's')}"></div>
+  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubble1" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(2) + 's')}"></div>
+  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubble2" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(11/4) + 's')}"></div>
+  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubble3" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(13/4) + 's')}"></div>
+  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubble4" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(15/4) + 's')}"></div>
+  <div [ngClass]="getAnimations() ? 'bubbleAnimationsON' : 'bubbleAnimationsOFF'" class="bubble5" *ngIf="getAnimateur()" [ngStyle]="{'animation-delay' : (getDelay()*(17/4) + 's')}"></div>
 
 </div>
 

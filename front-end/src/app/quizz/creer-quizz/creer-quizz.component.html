@@ -2,44 +2,78 @@
 
   <div class="header">
     <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
-    <p [ngClass]="this.contrasteTroubleEnable ? 'titreStyleContrastOn' : 'titreStyleContrastOff'" >Créer mon quizz</p>
-    <app-btn-clickable-frame-background class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
+    <p [ngClass]="this.contrasteTroubleEnable ? 'titreStyleContrastOn' : 'titreStyleContrastOff'" class="fontSizeCanChange">Créer mon quizz</p>
+    <app-btn-clickable-frame-background (click)="toggleAuthenticate()" class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
   </div>
 
-  <div class="contenu-creation-quiz">
-    <div class="caracteristiques-quiz">
-      <div class="image-quiz">
-        <img class="iconeImage" src="../../assets/Images/Icone_image_detour.png">
+  <form>
+    <div class="contenu-creation-quiz fontStyleCanChange fontSizeCanChange">
+      <div class="conteneur-caracteristiques-quiz">
+        <div class="caracteristiques-quiz">
+          <div class="conteneur_image_difficulte">
+            <div id="image-quiz-id" class="image-quiz">
+              <label for="recup-fichier">
+                <img class="iconeImage" src="../../assets/Images/Logo_image.png">
+              </label>
+              <input id="recup-fichier" type="file" (change)="afficherFichier()" />
+            </div>
+            <div class="difficulty-bars">
+              <span class="note difficulte">DIFFICULTÉ</span>
+              <span class="difficulty-bar" *ngFor="let i of [1, 2, 3, 4, 5]" (click)="onClickChangeColor(i)" [style.background-color]="i <= selectedIndex ? currentColor : 'rgba(46, 49, 54, 0.6)'"></span>
+              <span class="note fontStyleCanChange">{{selectedIndex}}/5</span>
+            </div>
+          </div>
+          <div class="titre-quiz">
+            <input [ngClass]="this.contrasteTroubleEnable ? 'inputStyleContrastOn' : 'inputStyleContrastOff'" class="fontStyleCanChange fontSizeCanChange fontColorToChange" type="text" placeholder="Titre du quiz…" [(ngModel)]="titreQuiz" name="titreQuiz" required/>
+          </div>
+          <div class="description-quiz">
+            <span [ngClass]="this.contrasteTroubleEnable ? 'inputStyleContrastOn' : 'inputStyleContrastOff'" class="textDescription fontStyleCanChange fontSizeCanChange"><strong >Description</strong></span>
+            <textarea [(ngModel)]="descriptionQuiz" name="descriptionQuiz" required></textarea>
+          </div>
+        </div>
       </div>
-      <div class="titre-quiz"><span class="textTitre"><strong>Titre du quiz…</strong></span></div>
-      <div class="categorie-quiz"><span class="textCategorie"><strong>Catégorie</strong></span>
-        <img class="iconeTriangle" src="../../assets/Images/Icone_triangle_detour.png">
+
+      <div class="conteneur-questions">
+        <div class="question" *ngFor="let question of questionsQuiz; let i = index">
+          <div class="titre-question">
+            <input [ngClass]="this.contrasteTroubleEnable ? 'inputStyleContrastOn' : 'inputStyleContrastOff'" class="fontStyleCanChange fontSizeCanChange" type="text" placeholder="Question {{ i + 1 }} : ..." [(ngModel)]="questions[i]" name="question_{{i}}" required/>
+          </div>
+          <div class="reponses-question">
+            <div class="reponse" *ngFor="let reponse of reponsesQuiz[i]; let j = index">
+              <input [ngClass]="this.contrasteTroubleEnable ? 'inputStyleContrastOn' : 'inputStyleContrastOff'" class="fontStyleCanChange fontSizeCanChange" type="text" placeholder="Réponse {{ j + 1 }}" [(ngModel)]="reponses[i][j]" name="reponse_{{i}}_{{j}}" required/>
+              <div class="reponse-bubble uncheked" (click)="selectionnerBonneReponse(i, j)">
+              </div>
+            </div>
+            <div class="ajout" *ngIf="reponsesQuiz[i].length < 4" (click)="ajouterReponse(i)">
+              <span class="textAjout"><strong>+</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="question-supplementaire">
+          <div class="boutonPlus" (click)="ajouterQuestion()">
+            <span class="textBoutonPlus"><strong>+</strong></span>
+          </div>
+          <div class="ajouterQuestion">
+            <span class="textAjouterQuestion"><strong>Ajouter une question supplémentaire</strong></span>
+          </div>
+        </div>
       </div>
+
+      <button [ngClass]="this.contrasteTroubleEnable ? 'boutonValiderContrastOn' : 'boutonValiderContrastOff'" class="bouton_valider fontStyleCanChange fontSizeCanChange" (click)="createQuiz()">VALIDER</button>
+
     </div>
+  </form>
 
-    <div class="question1">
-      <div class="titre-question1"><span class="textTitreQuestion1"><strong>Question 1 : …</strong></span></div>
-      <div class="reponses-question1">
-        <div class="reponse1"><span class="textReponse1"><strong>Réponse 1</strong></span></div>
-        <div class="reponse2"><span class="textReponse2"><strong>Réponse 2</strong></span></div>
-        <div class="ajout"><span class="textAjout"><strong>+</strong></span></div>
-      </div>
-    </div>
+</div>
 
-    <div class="question2">
-      <div class="titre-question2"><span class="textTitreQuestion1"><strong>Question 2 : …</strong></span></div>
-      <div class="reponses-question2">
-        <div class="reponse1"><span class="textReponse1"><strong>Réponse 1</strong></span></div>
-        <div class="reponse2"><span class="textReponse2"><strong>Réponse 2</strong></span></div>
-        <div class="ajout"><span class="textAjout"><strong>+</strong></span></div>
-      </div>
-    </div>
+<!-- Pop-up pour le code d'acces -->
+<app-access-code-modal *ngIf="showModalAuth"
+                       (enteredAccessCode)="handleAccessCode($event)"
+                       [isAccessing]="isAccessing" [isAppearing]="isAppearing">
+</app-access-code-modal>
 
-    <div class="question-supplementaire">
-      <div class="boutonPlus"><span class="textBoutonPlus"><strong>+</strong></span></div>
-      <div class="ajouterQuestion"><span class="textAjouterQuestion"><strong>Ajouter une question supplémentaire</strong></span></div>
-    </div>
-
-  </div>
-
+<div *ngIf="showAlert" class="alert alert-danger alert-dismissible fade show user-alert" role="alert">
+  {{alertMessage}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlert()"></button>
 </div>

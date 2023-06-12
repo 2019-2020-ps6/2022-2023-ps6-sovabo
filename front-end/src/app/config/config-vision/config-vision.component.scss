@@ -46,7 +46,7 @@ header {
 
   .colorExample{
     scale: 80%;
-    width: 70%;
+    width: 80%;
     border-radius: 100px;
     background: linear-gradient(90deg, #f3f3f3 -4.73%, #ffe5e5 100%);
     box-shadow: inset 5px -5px 4px rgba(0, 0, 0, 0.25),
@@ -135,21 +135,21 @@ app-btn-font{
 
 //CONTRASTE
 .contrastUpContainer{
-  background: rgb(200, 200, 200);
+  background: rgb(150, 150, 150, 0.75)!important;
 }
 
 .contrastUpTextExtrude{
-  background: black;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  background: black!important;
+  -webkit-background-clip: text!important;
+  -webkit-text-fill-color: transparent!important;
+  background-clip: text!important;
 }
 
 .contrastUpTitleExtrude{
+  color: whitesmoke;
   font-family: DynaPuff;
   font-size: 9vw;
   font-weight: 700;
-  color: #000000;
   text-shadow: none;
   //margin: 0 0 0 22%;
 }
@@ -157,12 +157,23 @@ app-btn-font{
 
 
 //MODIFICATION DES BOUTONS
-#TRICHROMATIE{
-  //background: black;
+
+.DEUTERANOMALIE{
+  color: #9999d4 !important;
+  text-shadow: none !important;
+}
+.DEUTERANOMALIE_FONT{
+  -webkit-text-fill-color: white;
 }
 
-#DICHROMATISME{
-  //background: black;
+.TRITANOPIE{
+  color: #fb5e7e !important;
+  text-shadow: none !important;
 }
+
+.TRITANOPIE_FONT{
+  -webkit-text-fill-color: black;
+}
+
 
 

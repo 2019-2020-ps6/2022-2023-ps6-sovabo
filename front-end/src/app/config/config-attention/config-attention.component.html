@@ -1,25 +1,32 @@
 <header>
   <h1 [ngClass]="this.contrasteTroubleEnable ? 'contrastUpTitleExtrude' : ''" class="titreStyle">PolyQuiz</h1>
-  <app-btn-clickable-background onclick="history.go(-1);">RETOUR</app-btn-clickable-background>
+  <app-btn-clickable-background [routerLink]="['/configuration']">RETOUR</app-btn-clickable-background>
 </header>
 
 <div class="container">
 
   <div [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer' : 'animateurContainer'" class="animateurContainer">
-    <p class="label fontStyleCanChange" [ngClass]="{'contrastUpTextExtrude' : this.contrasteTroubleEnable}">Animateur</p>
+    <p class="label fontStyleCanChange fontColorToChange" [ngClass]="{'contrastUpTextExtrude' : this.contrasteTroubleEnable}">Animateur</p>
     <app-btn-on-off-animateur (click)="toggleAnimateur()"></app-btn-on-off-animateur>
-    <img *ngIf="animateur" src="./assets/Images/Animateur_image.png" alt="Image animateur" id="imageAnimateur">
-  </div>
+    <img *ngIf="animateur" [src]="userAnimateurImg" alt="Image animateur" id="imageAnimateur">
+</div>
+
 
   <div  [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}" class="fontStyleCanChange animationContainer">
-    <p class="label fontStyleCanChange" [ngClass]="{'contrastUpTextExtrude' : this.contrasteTroubleEnable}">Animations</p>
+    <p class="label fontStyleCanChange fontColorToChange" [ngClass]="{'contrastUpTextExtrude' : this.contrasteTroubleEnable}">Animations</p>
     <app-btn-on-off-animations (click)="toggleAnimations()"></app-btn-on-off-animations>
-    <p class="label fontStyleCanChange" *ngIf="animations"  [ngClass]="{'contrastUpTextExtrude' : this.contrasteTroubleEnable}">Vitesse <br> Animations</p>
-    <app-sliderAnimationDuration *ngIf="animations" class="app-slider"></app-sliderAnimationDuration>
+    <p class="label fontStyleCanChange fontColorToChange" *ngIf="animations"  [ngClass]="{'contrastUpTextExtrude' : this.contrasteTroubleEnable}">Vitesse <br> Animations</p>
+    <div class="sliderVitesseAnimation">
+      <div class="textVitesse">
+        <span *ngIf="animations" class="textLent">Lent</span>
+        <span *ngIf="animations" class="textRapide">Rapide</span>
+      </div>
+      <app-sliderAnimationDuration *ngIf="animations" class="app-slider"></app-sliderAnimationDuration>
+    </div>
   </div>
 
   <div  [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}" class="couleurContainer">
-    <p class="label fontStyleCanChange" [ngClass]="{'contrastUpTextExtrude' : this.contrasteTroubleEnable}"> Meilleur <br> Contraste </p>
+    <p class="label fontStyleCanChange fontColorToChange" [ngClass]="{'contrastUpTextExtrude' : this.contrasteTroubleEnable}"> Augmenter <br> Contraste </p>
     <app-btn-on-off-contrast (click)="toggleContrastColor($event)"></app-btn-on-off-contrast>
   </div>
 
