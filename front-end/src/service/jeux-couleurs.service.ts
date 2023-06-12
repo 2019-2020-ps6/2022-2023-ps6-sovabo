@@ -25,7 +25,7 @@ export class JeuxCouleursService {
   private oldFontSize: number = 2;
 
   private level = this.currentFontSize - this.oldFontSize;
-  private coeff = 0.05;
+  private coeff = 0.20;
 
   private defaultStyles: Map<string, Map<string, string>> = new Map();
   public isDefaultActive: boolean = true;
