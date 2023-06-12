@@ -4,8 +4,9 @@
 	<div class="container">
     <div class="row">
       <div class="col-sm-12" >
+        <svg class="prev-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path></svg>
+        <svg class="next-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.1714 12.0007L8.22168 7.05093L9.63589 5.63672L15.9999 12.0007L9.63589 18.3646L8.22168 16.9504L13.1714 12.0007Z"></path></svg>
         <div id="customers-testimonials"  class="owl-carousel ">
-
             <!--TESTIMONIAL 1 -->
           <div class="item quiz" *ngFor="let quiz of quizList" routerLink="/accueil-quiz/{{quiz.id}}">
               <div class="card"
@@ -19,8 +20,10 @@
                   <h1 class="card-title"><a>{{quiz.name}}</a></h1>
                   <ul class="list-unstyled list-inline mb-0">
                     <li class="list-inline-item me-0">
-                        <fa-icon class="star-icon" [icon]="quizStar" *ngFor="let i of [].constructor(quiz.difficulty)"></fa-icon>
-                        <span class="note fontStyleCanChange fontSizeCanChange">{{quiz.difficulty}}/5 (413)</span>
+                      <div class="difficulty-bars">
+                        <span class="difficulty-bar" *ngFor="let i of [1, 2, 3, 4, 5]" [style.backgroundColor]="getDifficultyColor(i <= quiz.difficulty ? quiz.difficulty : 0)"></span>
+                      </div>
+                        <span class="note fontStyleCanChange fontSizeCanChange">{{quiz.difficulty}}/5</span>
                     </li>
                   </ul>
                   <h4><p class="card-theme fontStyleCanChange fontSizeCanChange">

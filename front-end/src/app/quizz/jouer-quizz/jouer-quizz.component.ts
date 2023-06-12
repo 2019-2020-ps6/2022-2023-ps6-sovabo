@@ -46,6 +46,8 @@ export class JouerQuizzComponent implements OnInit {
   userCourant: any;
   private clickListener: ((event: Event) => void) | undefined;
   public clicksOutsideButtons: number = 0;
+  public quizStartTime: number = 0;
+  public quizEndTime: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -60,6 +62,7 @@ export class JouerQuizzComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.loadConfig();
+    this.quizStartTime = Date.now();
     this.timerId = undefined;
   this.quiz = this.quizService.getQuizCourant();
   try {
@@ -78,7 +81,6 @@ export class JouerQuizzComponent implements OnInit {
       const targetElement = event.target as HTMLElement;
       if (targetElement.tagName.toLowerCase() !== 'button') {
         this.clicksOutsideButtons++;
-        console.log('Clics en dehors des boutons : ', this.clicksOutsideButtons);
       }
     };
     document.addEventListener('click', this.clickListener);
@@ -110,6 +112,22 @@ export class JouerQuizzComponent implements OnInit {
     if (this.currentQuestionIndex === this.quiz.questions.length - 1) {
       this.statistiquesService.ajouterMoyenneTimeResponseAuUserCournat(this.calculerMoyenne(), this.quiz.id);
       this.isQuizFinished = true;
+      this.statistiquesService.ajouterScoreAuUserCourant( this.quizService.getScore(),this.quiz.id);
+      this.statistiquesService.ajouterNbMissCliqueAuUserCourant(this.clicksOutsideButtons, this.quiz.id);
+
+      this.quizEndTime = Date.now();
+      const totalTime = (this.quizEndTime - this.quizStartTime) / 1000; // durée en secondes
+      console.log("totalTime : " + totalTime);
+
+      const freqTimeAnim = totalTime/(this.animationService.getDelay()*25)+1;
+      
+      let freqTimeAnimNumber = Number(freqTimeAnim.toFixed(2));
+      console.log("freqTimeAnim : " + freqTimeAnimNumber);
+
+      console.log("freqTimeAnimNumber : " + freqTimeAnim);
+      console.log("delay : "+this.animationService.getDelay()*25);
+      //this.statistiquesService.ajouterTotalTimeAuUserCourant(totalTime, this.quiz.id); // stocker le temps total
+    //...
     }
   }
 
@@ -174,24 +192,27 @@ export class JouerQuizzComponent implements OnInit {
     this.endTime = Date.now();
     const timeTaken = (this.endTime - this.startTime) / 1000;
     this.valueTime.push(timeTaken);
-    this.checkWin();
     if (!selectedAnswer) {
       this.isAnswerCorrect = false;
       return;
     }
     if (selectedAnswer.isCorrect) {
+      console.log('Bonne réponse !');
       this.isAnswerCorrect = true;
       this.quizService.addScore();
+      console.log(this.quizService.getScore());
     } else {
       this.isAnswerCorrect = false;
     }
     this.selectedAnswerIndex = null;
+    this.checkWin();
+
 
     // Vérifier si la question suivante doit être affichée automatiquement
     if (!this.isLastQuestion && !this.isAnswerValidated) {
       this.timerId = setTimeout(() => { // Stocker l'ID du minuteur pour l'annuler si nécessaire
         this.goToNextQuestion();
-      }, 100000);
+      }, 5000);
     }
     this.isAnswerValidated = true; // Marquer la réponse comme validée
   }

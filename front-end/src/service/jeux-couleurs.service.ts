@@ -25,7 +25,7 @@ export class JeuxCouleursService {
   private oldFontSize: number = 2;
 
   private level = this.currentFontSize - this.oldFontSize;
-  private coeff = 0.20;
+  private coeff = 0.05;
 
   private defaultStyles: Map<string, Map<string, string>> = new Map();
   public isDefaultActive: boolean = true;
@@ -191,7 +191,7 @@ export class JeuxCouleursService {
   }
 
   public changeFontSize(document: Document): void {
-      this.applyFontSize(document);
+    this.applyFontSize(document);
   }
 
   applyFontSize(document: Document){
@@ -346,7 +346,6 @@ export class JeuxCouleursService {
 
 
   updateDoc(document: Document){
-    console.log("BOOLEAN DOCUMENT :"+this.updateDocument);
     this.userService.currentUser$.subscribe(user => {
       if (user) {
         this.colorSelected = user.configuration.jeuCouleur;

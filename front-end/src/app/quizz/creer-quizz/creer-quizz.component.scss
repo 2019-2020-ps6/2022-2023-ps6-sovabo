@@ -122,6 +122,7 @@
   background: transparent; /* Fond transparent */
   font-size: 2vw;
   font-weight: bold;
+  color: rgb(50, 50, 50);
   outline: none; /* Suppression de la mise en évidence lors du focus */
 }
 
@@ -165,8 +166,9 @@ textarea {
   outline: none; /* Suppression de la mise en évidence lors du focus */
 }
 
-.textCategorie{
+.textDescription{
   font-size: 2vw;
+  color: rgb(50, 50, 50);
 }
 
 .iconeTriangle{
@@ -211,6 +213,7 @@ textarea {
   font-weight: bold;
   outline: none;
   width: 100%;
+  color: rgb(50, 50, 50);
 }
 
 .reponses-question{
@@ -244,6 +247,7 @@ textarea {
   font-weight: bold;
   outline: none;
   width: 100%;
+  color: rgb(50, 50, 50);
   text-align: center;
   pointer-events: all;
 }
@@ -378,6 +382,12 @@ textarea {
   background: rgb(200, 200, 200);
 }
 
+.alert {
+  position: absolute;
+  bottom: 1%;
+  left: 8%;
+}
+
 
 //GESTION JEU COULEUR
 .DEUTERANOMALIE{
@@ -402,4 +412,25 @@ textarea {
 
 .TRITANOPIE_FONT{
   -webkit-text-fill-color: black !important;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+  height: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  width: 15px;
+  height: 15px;
+  background: rgba(255, 255, 255, 0.62);
+  border-radius: 30px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  width: 15px;
+  height: 15px;
+  background: #c4c4c4;
+  border-radius: 52px;
 }
