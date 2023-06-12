@@ -52,6 +52,7 @@ export class CreerQuizzComponent {
       }, 600);
     }
 
+    this.jeuxCouleursService.setUpdateDocument(true);
     this.jeuxCouleursService.updateDoc(document);
   }
 

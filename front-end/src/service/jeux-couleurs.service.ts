@@ -25,10 +25,17 @@ export class JeuxCouleursService {
   private oldFontSize: number = 2;
 
   private level = this.currentFontSize - this.oldFontSize;
-  private coeff = 0.05;
+  private coeff = 0.20;
 
   private defaultStyles: Map<string, Map<string, string>> = new Map();
   public isDefaultActive: boolean = true;
+
+  private updateDocument = false;
+
+
+  public setUpdateDocument(b: boolean){
+    this.updateDocument = b;
+  }
 
 
 
@@ -184,7 +191,7 @@ export class JeuxCouleursService {
   }
 
   public changeFontSize(document: Document): void {
-    this.applyFontSize(document);
+      this.applyFontSize(document);
   }
 
   applyFontSize(document: Document){
@@ -198,6 +205,9 @@ export class JeuxCouleursService {
       let size = parseFloat(originFontSize);
       elements[i].style.fontSize = this.computeFontSizeChange(size);
     }
+
+    //FONT-SIZE passé une fois
+    this.setUpdateDocument(false);
   }
 
 
@@ -336,6 +346,7 @@ export class JeuxCouleursService {
 
 
   updateDoc(document: Document){
+    console.log("BOOLEAN DOCUMENT :"+this.updateDocument);
     this.userService.currentUser$.subscribe(user => {
       if (user) {
         this.colorSelected = user.configuration.jeuCouleur;
@@ -344,9 +355,16 @@ export class JeuxCouleursService {
       }
     });
 
-    if (this.isDefaultActive) {this.collectDefaultStyles();}
-    else {this.changeFont(document);}
-    this.changeFontSize(document);
-    this.changeColor(document);
+    if(this.updateDocument){
+      if (this.isDefaultActive) {this.collectDefaultStyles();}
+      else {this.changeFont(document);}
+      this.changeFontSize(document);
+      this.changeColor(document);
+
+      //APRES MODIFICATION -> ON BLOQUE JUSQU'AU CHANGEMENT DE PAGE
+      this.setUpdateDocument(false);
+    }
+
+
   }
 }

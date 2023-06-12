@@ -43,6 +43,7 @@ export class ConfigAttentionComponent {
     this.user = this.getUserCourant();
     await this.loadConfig();
     this.contrasteTroubleEnable = this.jeuxCouleursService.getVisionAttentionStatus();
+    this.jeuxCouleursService.setUpdateDocument(true);
   }
 
   ngOnDestroy() {

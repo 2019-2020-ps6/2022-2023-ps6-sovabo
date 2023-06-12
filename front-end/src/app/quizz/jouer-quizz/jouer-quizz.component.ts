@@ -84,6 +84,7 @@ export class JouerQuizzComponent implements OnInit {
     document.addEventListener('click', this.clickListener);
 
     this.userCourant = this.userService.getUserCourant();
+    this.jeuxCouleursService.setUpdateDocument(true);
   }
 
   loadConfig() {

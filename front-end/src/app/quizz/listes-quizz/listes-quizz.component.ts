@@ -25,6 +25,7 @@ export class ListesQuizzComponent {
     await this.loadConfig();
 
     this.quizList = this.quizService.getData();
+    this.jeuxCouleursService.setUpdateDocument(true);
   }
 
   loadConfig(){
