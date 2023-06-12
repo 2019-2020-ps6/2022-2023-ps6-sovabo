@@ -54,6 +54,7 @@ export class AccueilQuizzComponent {
     this.quiz = this.quizService.getQuizById(id);
     this.quizService.setQuizCourant(this.quiz);
     this.userCourant = this.userService.getUserCourant();
+    this.jeuxCouleursService.setUpdateDocument(true);
     this.jeuxCouleursService.updateDoc(document);
   }
 

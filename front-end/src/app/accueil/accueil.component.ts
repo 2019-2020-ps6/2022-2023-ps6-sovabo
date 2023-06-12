@@ -46,7 +46,9 @@ export class AccueilComponent {
     this.animation = this.userService.getUserCourant()?.configuration.animation || false;
 
     this.userCourant = this.userService.getUserCourant();
-    this.jeuxCouleursService.updateDoc(document);
+
+    //deverouille l'update
+    this.jeuxCouleursService.setUpdateDocument(true);
   }
 
   loadConfig(){
@@ -56,7 +58,7 @@ export class AccueilComponent {
   }
 
   ngAfterContentChecked(){
-    this.jeuxCouleursService.changeColor(document);
+    this.jeuxCouleursService.updateDoc(document);
   }
 
   getAnimateur() {
