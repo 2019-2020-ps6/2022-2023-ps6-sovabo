@@ -3,6 +3,8 @@ function carousel(){
     "use strict";
     //  TESTIMONIALS CAROUSEL HOOK
     $('#customers-testimonials').owlCarousel({
+        nav: true,
+        navText: ['<i class="fa fa-caret-left"></i>', '<i class="fa fa-caret-right"></i>'],
         loop: false,
         center: true,
         items: 3,
@@ -20,7 +22,10 @@ function carousel(){
           },
           1170: {
             items: 3
-          }
+          },
+          1200: {
+            items: 3
+          },
         }
     });
 });

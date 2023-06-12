@@ -25,7 +25,7 @@
       <p [ngClass]="this.contrasteTroubleEnable ? 'contrastUpText' : ''" class="titreStyle">{{quiz.name}}</p>
       <div class="infoComplementaire">
         <div class="nbrTentatives">
-          <span class="fontStyleCanChange fontSizeCanChange" id="textTentative">NOMBRE DE TENTATIVES<br>EFFECTUÉES : 2</span>
+          <span class="fontStyleCanChange fontSizeCanChange" id="textTentative">{{quiz.desc}}</span>
         </div>
         <div class="difficulty">
           <span class="fontStyleCanChange fontSizeCanChange" id="textDifficulty">DIFFICULTÉ :</span>

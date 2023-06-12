@@ -9,7 +9,6 @@ import {Action} from "rxjs/internal/scheduler/Action";
 import {ConfigurationModel} from "../../../models/configuration.model";
 import {debounceTime, mergeMap, of, Subscription, tap} from "rxjs";
 
-
 @Component({
   selector: 'app-config-attention',
   templateUrl: './config-attention.component.html',
