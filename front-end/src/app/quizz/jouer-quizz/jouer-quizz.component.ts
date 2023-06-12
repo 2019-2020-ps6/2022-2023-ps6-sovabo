@@ -38,7 +38,9 @@ export class JouerQuizzComponent implements OnInit {
   public endTime: number = 0;
   public firstTime: boolean = true;
   public delay: number = 5000;
-  public timeRemaining: number = 20;
+  static timeTimer : number = 2;
+
+  public timeRemaining: number = JouerQuizzComponent.timeTimer;
   private timerId: any | undefined;
   private currentFont: string = this.jeuxCouleursService.getFontSelectedString();
   public contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
@@ -108,7 +110,11 @@ export class JouerQuizzComponent implements OnInit {
   }
 
   checkWin() {
+    console.log('JE SUIS DANS CHECK WIN');
+
     if (this.currentQuestionIndex === this.quiz.questions.length - 1) {
+      console.log('JE MET ISQUIZFINISHED A TRUE');
+
       this.statistiquesService.ajouterMoyenneTimeResponseAuUserCournat(this.calculerMoyenne(), this.quiz.id);
       this.isQuizFinished = true;
       this.statistiquesService.ajouterScoreAuUserCourant( this.quizService.getScore(),this.quiz.id);
@@ -116,15 +122,11 @@ export class JouerQuizzComponent implements OnInit {
 
       this.quizEndTime = Date.now();
       const totalTime = (this.quizEndTime - this.quizStartTime) / 1000; // durée en secondes
-      console.log("totalTime : " + totalTime);
 
       const freqTimeAnim = totalTime/(this.animationService.getDelay()*25)+1;
       
       let freqTimeAnimNumber = Number(freqTimeAnim.toFixed(2));
-      console.log("freqTimeAnim : " + freqTimeAnimNumber);
 
-      console.log("freqTimeAnimNumber : " + freqTimeAnim);
-      console.log("delay : "+this.animationService.getDelay()*25);
       //this.statistiquesService.ajouterTotalTimeAuUserCourant(totalTime, this.quiz.id); // stocker le temps total
     //...
     }
@@ -135,7 +137,7 @@ export class JouerQuizzComponent implements OnInit {
       if (this.timeRemaining > 0) {
         this.timeRemaining--;
       } else {
-        this.timeRemaining = 20;
+        this.timeRemaining = JouerQuizzComponent.timeTimer;
         if (this.timerId !== undefined) {
           clearInterval(this.timerId);
           this.timerId = undefined;
@@ -145,6 +147,7 @@ export class JouerQuizzComponent implements OnInit {
           if (!this.isLastQuestion && !this.isAnswerValidated) {
             setTimeout(() => {
               this.goToNextQuestion();
+              
             }, 5000);
           }
         }
@@ -185,26 +188,26 @@ export class JouerQuizzComponent implements OnInit {
   }
 
   validateAnswer() {
+    console.log('JE SUIS DANS VALIDER');
     this.validateAnswerBool = true;
     const selectedAnswer = this.currentQuestion?.answers[this.selectedAnswerIndex ?? -1];
     clearTimeout(this.timerId);
     this.endTime = Date.now();
     const timeTaken = (this.endTime - this.startTime) / 1000;
     this.valueTime.push(timeTaken);
+    this.checkWin();
+
     if (!selectedAnswer) {
       this.isAnswerCorrect = false;
       return;
     }
     if (selectedAnswer.isCorrect) {
-      console.log('Bonne réponse !');
       this.isAnswerCorrect = true;
       this.quizService.addScore();
-      console.log(this.quizService.getScore());
     } else {
       this.isAnswerCorrect = false;
     }
     this.selectedAnswerIndex = null;
-    this.checkWin();
 
 
     // Vérifier si la question suivante doit être affichée automatiquement
@@ -217,6 +220,8 @@ export class JouerQuizzComponent implements OnInit {
   }
 
   goToNextQuestion() {
+    console.log('JE SUIS DANS GO TO NEXT QUESTION');
+
     this.validateAnswerBool = false;
     clearTimeout(this.timerId); // Annuler le minuteur en cours s'il existe
     if (!this.firstTime) {
@@ -228,6 +233,8 @@ export class JouerQuizzComponent implements OnInit {
       this.firstTime = false;
       this.startTime = Date.now();
     }
+
+
     this.currentQuestionIndex++;
     this.currentQuestion = this.quiz.questions[this.currentQuestionIndex];
     this.questionCorrectIndex = this.getCorrectAnswerIndex(this.currentQuestion);
@@ -238,7 +245,7 @@ export class JouerQuizzComponent implements OnInit {
     this.isAnswerValidated = false; // Réinitialiser le statut de validation
     // Vérifier si la réponse a été validée avant de passer à la question suivante
     if (!this.isAnswerValidated) {
-      this.timeRemaining=20;
+      this.timeRemaining=JouerQuizzComponent.timeTimer;
       this.startTimer();
     }
 
