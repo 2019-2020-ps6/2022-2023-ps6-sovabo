@@ -4,8 +4,8 @@ import { ConfigVisionFixture } from 'src/app/config/config-vision/config-vision.
 import {timeout} from "rxjs";
 
 // https://playwright.dev/docs/locators
-test.describe('configVision page display', () => {
-  test('Jeux De Couleur [DEFAULT] Test', async({page}) =>{
+test.describe('configVision Jeu Couleur', () => {
+  test('[DEFAULT COLOR] Test', async({page}) =>{
     await test.step('[ACTION] Change Style to DEFAULT', async () =>{
       //ON CHANGE LE STYLE EN DEFAULT
       await page.goto(configVisionUrl);
@@ -29,7 +29,7 @@ test.describe('configVision page display', () => {
       expect(styleInitial).toBe('linear-gradient(261.58deg, rgba(178, 0, 0, 0.5) -77.61%, rgba(124, 101, 169, 0.5) 143.35%)');
     });
   })
-  test('Jeux De Couleur [DEUTERANOMALIE] Test', async ({ page }) => {
+  test('[DEUTERANOMALIE COLOR] Test', async ({ page }) => {
     let cvf = new ConfigVisionFixture(page);
 
     await test.step('[ACTION] Change Style to DEUTERANOMALIE', async () =>{
@@ -126,7 +126,7 @@ test.describe('configVision page display', () => {
      await page.click(boutonAUCUN, {timeout: 2000});
    });
   });
-  test('Jeu De Couleur [TRITANOPIE] Test', async({page}) =>{
+  test('[TRITANOPIE COLOR] Test', async({page}) =>{
     let cvf = new ConfigVisionFixture(page);
 
     await test.step('[ACTION] Change Style to TRITANOPIE', async () =>{
@@ -227,4 +227,16 @@ test.describe('configVision page display', () => {
       await page.close();
     });
   })
+});
+
+test.describe('configVision Font', () =>{
+  test('[DEFAULT FONT] Test', async ({page})=>{
+    await test.step('[ACTION] Set Default Font', async()=>{
+      await page.goto(configVisionUrl);
+
+      const boutonReset = 'btn_fontReset>button'
+      await page.click(boutonReset);
+    })
+
+  });
 });
