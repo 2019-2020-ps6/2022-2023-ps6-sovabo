@@ -10,6 +10,8 @@ import {UserService} from "../../../../service/user.service";
   styleUrls: ['./btn-on-off-colors.component.scss']
 })
 export class BtnOnOffColorsComponent {
+  i: number = 0;
+
   isOn: boolean = false;
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
   messageReceived: any;
@@ -47,5 +49,15 @@ export class BtnOnOffColorsComponent {
 
   getVisionColorSelected() {
     return this.jeuxCouleursService.getVisionColorSelected();
+  }
+
+  static uniqueID :number = 0;
+  generateUniqueID() {
+    return BtnOnOffColorsComponent.uniqueID++;
+  }
+
+  getRandom(){
+    let max = 1000
+    return Math.random()*max ;
   }
 }
