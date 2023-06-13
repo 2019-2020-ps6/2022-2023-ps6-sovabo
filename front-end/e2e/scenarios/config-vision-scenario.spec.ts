@@ -6,6 +6,7 @@ import {timeout} from "rxjs";
 // https://playwright.dev/docs/locators
 test.describe('configVision page display', () => {
   test('Jeux De Couleur Test', async ({ page }) => {
+    let cvf = new ConfigVisionFixture(page);
     await test.step('Default Theme', async () => {
       let cvf = new ConfigVisionFixture(page);
       await page.goto(configVisionUrl);
@@ -21,21 +22,30 @@ test.describe('configVision page display', () => {
     });
 
     await test.step('Changes to DEUTERANOMALIE', async () => {
-      let cvf = new ConfigVisionFixture(page);
       await page.goto(configVisionUrl);
       // Sélecteur CSS pour le bouton
       const bouton = '#DEUTERANOMALIE>button';
 
       //on clique sur le bouton
       await page.click(bouton, {timeout: 2000});
+    });
 
-      var styleDeuteranomalie = await page.$eval(bouton, function (el){
-        return getComputedStyle(el).backgroundColor
+    await test.step('Check Changes BTN Color', async () =>{
+      const boutonsColor = 'app-btn-on-off-colors>button';
+      const boutonsFont = 'app-btn-font>button';
+      var styleDeuteranomalie_btn_color = await page.$eval(boutonsColor, function (el){
+        return getComputedStyle(el).backgroundColor;
       });
-      expect(styleDeuteranomalie).toBe(cvf.getDeuteranomalieColorBtn());
 
-      await page.close();
-    })
+      var styleDeuteranomalie_btn_font = await page.$eval(boutonsFont, function (el){
+        return getComputedStyle(el).backgroundColor;
+      })
+
+      expect(styleDeuteranomalie_btn_color).toBe(cvf.getDeuteranomalieColorBtn());
+      expect(styleDeuteranomalie_btn_font).toBe(cvf.getDeuteranomalieColorBtn());
+    });
+
+
 
   });
 });

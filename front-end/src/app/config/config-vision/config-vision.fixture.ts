@@ -14,8 +14,13 @@ export class ConfigVisionFixture extends E2EComponentFixture {
     }
   }
 
+  //PARTIE DEUTERANOMALIE
   getDeuteranomalieColorBtn(){
     return this.hexToRGB('#805ad0',null);
+  }
+
+  getDeuteranomalieColorLabel(){
+    return this.hexToRGB('',null);
   }
   getDefaultBackgroundReturn(){
     return 'rgba(0, 0, 0, 0)';
