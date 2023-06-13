@@ -1,4 +1,6 @@
 import { E2EComponentFixture } from "e2e/e2e-component.fixture";
+import { test, expect } from '@playwright/test';
+
 
 export class JouerQuizzFixture extends E2EComponentFixture {
   quizName: string;
@@ -45,11 +47,11 @@ export class JouerQuizzFixture extends E2EComponentFixture {
   }
 
   getNextQuestionButton() {
-    return this.page.locator('.buttons-container button:not(.check-container button)');
+    return this.page.locator('#nextQuestion');
   }
 
   getResultsButton() {
-    return this.page.locator('.buttons-container button[routerLink="/resultat-quizz"]');
+    return this.page.locator('#resultQuizz');
   }
 
   getWrongAnswerMessage() {
@@ -72,10 +74,13 @@ export class JouerQuizzFixture extends E2EComponentFixture {
     return await timerElement.textContent();
   }
 
-  async selectAnswerByIndex(index: any) {
-    const answerButtons = await this.getAnswerButtons().elementHandles();
-    return answerButtons[index].click();
-  }
+  async selectAnswerByIndexAndClick(index: number) {
+
+    const answerButtons = await this.page.locator(`#answer${index}`);
+    answerButtons.nth(0).click();
+    answerButtons.nth(1).click();
+    return answerButtons;
+}
 
   async getNextButtonDisabledStatus() {
     const nextButton = this.getNextQuestionButton();
