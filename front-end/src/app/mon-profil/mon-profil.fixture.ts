@@ -27,10 +27,12 @@ export class MonProfilFixture extends E2EComponentFixture {
   }
 
   async getCardFromUser(name: string) {
-    const card = await this.page.locator('.card:has(h5:has-text("Test"))');
-    if (!card) throw new Error(`No card found with name ${name}`);
+    const selector = `.card:has(h5:has-text('${name}'))`;
+    const card = await this.page.locator(selector);
+    if (!(await card.count())) throw new Error(`No card found with name ${name}`);
     return card;
   }
+
 
   async getCardCreatingUser() {
       return await this.page.locator('.creating-card');
@@ -48,7 +50,7 @@ export class MonProfilFixture extends E2EComponentFixture {
 
   async getUserSVG(name?:string) {
     if (!name) return this.page.locator('.user-svg');
-    return this.page.locator('.card:has(h5:has-text("Test")) .user-svg')
+    return this.page.locator(`.card:has(h5:has-text('${name}')) .user-svg`)
   }
 
   async modifyAvatar() {
