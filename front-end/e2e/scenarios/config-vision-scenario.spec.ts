@@ -33,19 +33,28 @@ test.describe('configVision page display', () => {
     await test.step('Check Changes BTN Color', async () =>{
       const boutonsColor = 'app-btn-on-off-colors>button';
       const boutonsFont = 'app-btn-font>button';
+      const boutonsClickableBackground = 'app-btn-clickable-background>button';
+      const boutonsClickableFrameBackground = 'app-btn-clickable-frame-background>button';
+
       var styleDeuteranomalie_btn_color = await page.$eval(boutonsColor, function (el){
         return getComputedStyle(el).backgroundColor;
       });
 
       var styleDeuteranomalie_btn_font = await page.$eval(boutonsFont, function (el){
         return getComputedStyle(el).backgroundColor;
-      })
+      });
 
-      expect(styleDeuteranomalie_btn_color).toBe(cvf.getDeuteranomalieColorBtn());
-      expect(styleDeuteranomalie_btn_font).toBe(cvf.getDeuteranomalieColorBtn());
+      var styleDeuteranomalie_btn_background = await page.$eval(boutonsClickableBackground, function(el){
+        return getComputedStyle(el).backgroundColor;
+      });
+
+      var styleDeuteranomalie_btn_frame_background = await page.$eval(boutonsClickableFrameBackground, function(el){
+        return getComputedStyle(el).backgroundColor;
+      });
+
+      expect(styleDeuteranomalie_btn_color).toBe(cvf.getDeuteranomalieColorBtn());expect(styleDeuteranomalie_btn_font).toBe(cvf.getDeuteranomalieColorBtn());
+      expect(styleDeuteranomalie_btn_background).toBe(cvf.getDeuteranomalieColorBtn());
+      expect(styleDeuteranomalie_btn_frame_background).toBe(cvf.getDeuteranomalieColorBtn());
     });
-
-
-
   });
 });
