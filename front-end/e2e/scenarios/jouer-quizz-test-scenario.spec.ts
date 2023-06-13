@@ -75,7 +75,7 @@ test.describe('Jouer Quizz', () => {
 
 
                 await test.step(`Select an answer and validate`, async () => {
-                    const selectButton = await jouerQuizzFixture.selectAnswerByIndexAndClick(0);
+                    const selectButton = await jouerQuizzFixture.selectAnswerByIndexAndClick(2);
                     expect(selectButton.nth(1)).toBeVisible();
                     const validateButton = await jouerQuizzFixture.getValidateButton();
                     expect(validateButton).toBeVisible();
@@ -90,6 +90,14 @@ test.describe('Jouer Quizz', () => {
 
                     const selectButton2 = await jouerQuizzFixture.selectAnswerByIndexAndClick(0);
                     expect(selectButton2.nth(1)).toBeVisible();
+
+                    await validateButton.click();
+
+                    await nextButton.click();
+
+
+                    const selectButton3 = await jouerQuizzFixture.selectAnswerByIndexAndClick(3);
+                    expect(selectButton3.nth(1)).toBeVisible();
 
                     await validateButton.click();
 
