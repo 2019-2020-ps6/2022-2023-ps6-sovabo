@@ -1,12 +1,12 @@
 import { test, expect } from '@playwright/test';
-import { creerQuizUrl } from '../e2e.config';
+import { creationQuizUrl } from "../e2e.config";
 import { CreerQuizFixture } from '../../src/app/quizz/creer-quizz/creer-quizz.fixture';
 import { AccessCodeModalFixture } from '../../src/app/access-code-modal/access-code-modal.fixture';
 
 test.describe('Test de création de quiz', () => {
 
   test('Fonctionnalité de bases de la page', async ({ page }) => {
-    await page.goto(creerQuizUrl);
+    await page.goto(creationQuizUrl);
 
     const creerQuizFixture = new CreerQuizFixture(page);
     await expect(page).toHaveURL("http://localhost:4200/creer-quizz");
@@ -22,7 +22,7 @@ test.describe('Test de création de quiz', () => {
       await creerQuizFixture.clickButtonRetour();
       await expect(page).toHaveURL("http://localhost:4200/liste-quizz")
 
-      await page.goto(creerQuizUrl);
+      await page.goto(creationQuizUrl);
       const accessCodeModalFixture = new AccessCodeModalFixture(page);
 
       await accessCodeModalFixture.getAccessCodeInput();
@@ -39,7 +39,7 @@ test.describe('Test de création de quiz', () => {
   });
 
   test("Remplissage et création d'un quiz classique", async ({ page }) => {
-    await page.goto(creerQuizUrl);
+    await page.goto(creationQuizUrl);
 
     const creerQuizFixture = new CreerQuizFixture(page);
     const accessCodeModalFixture = new AccessCodeModalFixture(page);
