@@ -37,7 +37,7 @@
                   <div class="user-title" [ngClass]="{'editing': user.editing}">
 
                     <h5 [ngClass]="{'user-name-delete-mode':deleteMode}" class="user-name fontStyleCanChange fontSizeCanChange" *ngIf="!user.editing">{{ user.name }}</h5>
-                    <input class="fontStyleCanChange fontSizeCanChange" type="text" [(ngModel)]="user.name" *ngIf="user.editing">
+                    <input class="fontStyleCanChange fontSizeCanChange userName" type="text" [(ngModel)]="user.name" *ngIf="user.editing">
                     <button class="edit-button" (click)="toggleEditUserName(user)">
                       <svg class="user-svg" *ngIf="!user.editing" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.7574 2.99666L14.7574 4.99666H5V18.9967H19V9.2393L21 7.2393V19.9967C21 20.5489 20.5523 20.9967 20 20.9967H4C3.44772 20.9967 3 20.5489 3 19.9967V3.99666C3 3.44438 3.44772 2.99666 4 2.99666H16.7574ZM20.4853 2.09717L21.8995 3.51138L12.7071 12.7038L11.2954 12.7062L11.2929 11.2896L20.4853 2.09717Z"></path></svg>
                     </button>
@@ -52,7 +52,7 @@
           </ng-container>
           <div class="col mb-3" *ngIf="isCreatingUser">
             <form (ngSubmit)="createUser()">
-              <div class="card">
+              <div class="card creating-card">
                 <div class="backGround" [ngStyle]="{'background-color': '#633719'}"></div>
                 <div class="card-body text-center">
                     <img [src]="selectedAvatar" style="width:150px;height:160px;margin-top:-75px" alt="User" class="img-fluid rounded-circle mb-3 avatarUser">
@@ -78,7 +78,7 @@
 <!-- Pop-up pour le choix de l'avatar -->
 
 <div class="popup" [class.show]="showModalAvatar">
-  <div class="popup-content" *ngIf="isCreatingUser">
+  <div class="popup-content selectAvatar" *ngIf="isCreatingUser">
     <button type="button" class="close-button" (click)="closeModal()">&times;</button>
     <h3>Choisis ton animateur !</h3>
     <div class="row">
@@ -88,7 +88,7 @@
     </div>
   </div>
 
-  <div class="popup-content" *ngIf="isModifyAvatar">
+  <div class="popup-content modifyAvatar" *ngIf="isModifyAvatar">
     <button type="button" class="close-button" (click)="closeModal()">&times;</button>
     <h3>Choisis ton animateur !</h3>
     <div class="row">
