@@ -64,4 +64,22 @@ export class ConfigVisionFixture extends E2EComponentFixture {
       return 'none';
     }
 
+  //*************************//
+  //**PARTIE TRITANOPIE**//
+  //************************//
+
+  getTritanopieColorBtn(){
+    return this.hexToRGB('#fb5e7e',null);
+  }
+  getTritanopieColorBackground(){
+    return 'rgb(72, 72, 72)';
+  }
+  getTritanopieColorLabel(){
+    return this.hexToRGB(this.colourNameToHex('black'),null);
+  }
+
+  getTritanopieLabelTextShadow(){
+    return 'none';
+  }
+
 }

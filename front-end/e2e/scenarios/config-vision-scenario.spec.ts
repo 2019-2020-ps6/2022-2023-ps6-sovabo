@@ -5,8 +5,17 @@ import {timeout} from "rxjs";
 
 // https://playwright.dev/docs/locators
 test.describe('configVision page display', () => {
-  test('Jeux De Couleur Test', async ({ page }) => {
-    let cvf = new ConfigVisionFixture(page);
+  test('Jeux De Couleur [DEFAULT] Test', async({page}) =>{
+    await test.step('[ACTION] Change Style to DEFAULT', async () =>{
+      //ON CHANGE LE STYLE EN DEFAULT
+      await page.goto(configVisionUrl);
+      // Sélecteur CSS pour le bouton
+      const boutonDEFAULT = '#AUCUN>button';
+
+      //on clique sur le bouton
+      await page.click(boutonDEFAULT, {timeout: 2000});
+    });
+
     await test.step('[CHECK] Default Theme', async () => {
       let cvf = new ConfigVisionFixture(page);
       await page.goto(configVisionUrl);
@@ -18,8 +27,10 @@ test.describe('configVision page display', () => {
         return getComputedStyle(el).backgroundImage
       });
       expect(styleInitial).toBe('linear-gradient(261.58deg, rgba(178, 0, 0, 0.5) -77.61%, rgba(124, 101, 169, 0.5) 143.35%)');
-
     });
+  })
+  test('Jeux De Couleur [DEUTERANOMALIE] Test', async ({ page }) => {
+    let cvf = new ConfigVisionFixture(page);
 
     await test.step('[ACTION] Change Style to DEUTERANOMALIE', async () =>{
       //ON CHANGE LE STYLE EN DEUTERANOMALIE
@@ -106,7 +117,7 @@ test.describe('configVision page display', () => {
     });
 
    await test.step('[ACTION] Change style to Default', async ()=>{
-     //ON CHANGE LE STYLE EN DEUTERANOMALIE
+     //ON CHANGE LE STYLE EN DEFAULT
      await page.goto(configVisionUrl);
      // Sélecteur CSS pour le bouton
      const boutonAUCUN = '#AUCUN>button';
@@ -114,11 +125,106 @@ test.describe('configVision page display', () => {
      //on clique sur le bouton
      await page.click(boutonAUCUN, {timeout: 2000});
    });
-
-   await test.step('[ACTION] Closing page', async()=>{
-     await page.close();
-   });
-
-
   });
+  test('Jeu De Couleur [TRITANOPIE] Test', async({page}) =>{
+    let cvf = new ConfigVisionFixture(page);
+
+    await test.step('[ACTION] Change Style to TRITANOPIE', async () =>{
+      //ON CHANGE LE STYLE EN DEUTERANOMALIE
+      await page.goto(configVisionUrl);
+      // Sélecteur CSS pour le bouton
+      const boutonTRITANOPIE = '#TRITANOPIE>button';
+
+      //on clique sur le bouton
+      await page.click(boutonTRITANOPIE, {timeout: 2000});
+    });
+
+    await test.step('[CHECK] Check Changes BTN Color', async () =>{
+      const boutonsColor = 'app-btn-on-off-colors>button';
+      const boutonsFont = 'app-btn-font>button';
+      const boutonsClickableBackground = 'app-btn-clickable-background>button';
+      const boutonsClickableFrameBackground = 'app-btn-clickable-frame-background>button';
+
+      var styleTritanopie_btn_color = await page.$eval(boutonsColor, function (el){
+        return getComputedStyle(el).backgroundColor;
+      });
+
+      var styleTritanopie_btn_font = await page.$eval(boutonsFont, function (el){
+        return getComputedStyle(el).backgroundColor;
+      });
+
+      var styleTritanopie_btn_background = await page.$eval(boutonsClickableBackground, function(el){
+        return getComputedStyle(el).backgroundColor;
+      });
+
+      var styleTritanopie_btn_frame_background = await page.$eval(boutonsClickableFrameBackground, function(el){
+        return getComputedStyle(el).backgroundColor;
+      });
+
+      expect(styleTritanopie_btn_color).toBe(cvf.getTritanopieColorBtn());expect(styleTritanopie_btn_font).toBe(cvf.getTritanopieColorBtn());
+      expect(styleTritanopie_btn_background).toBe(cvf.getTritanopieColorBtn());
+      expect(styleTritanopie_btn_frame_background).toBe(cvf.getTritanopieColorBtn());
+    });
+
+    await test.step('[CHECK] Check Changes BTN Text Style', async () =>{
+      const boutonsColor = 'app-btn-on-off-colors>button';
+      const boutonsFont = 'app-btn-font>button';
+      const boutonsClickableBackground = 'app-btn-clickable-background>button';
+      const boutonsClickableFrameBackground = 'app-btn-clickable-frame-background>button';
+
+      var styleTritanopie_btn_color = await page.$eval(boutonsColor, function (el){
+        return getComputedStyle(el).textShadow;
+      });
+
+      var styleTritanopie_btn_font = await page.$eval(boutonsFont, function (el){
+        return getComputedStyle(el).textShadow;
+      });
+
+      var styleTritanopie_btn_background = await page.$eval(boutonsClickableBackground, function(el){
+        return getComputedStyle(el).textShadow;
+      });
+
+      var styleTritanopie_btn_frame_background = await page.$eval(boutonsClickableFrameBackground, function(el){
+        return getComputedStyle(el).textShadow;
+      });
+
+      expect(styleTritanopie_btn_color).toBe(cvf.getTritanopieLabelTextShadow());expect(styleTritanopie_btn_font).toBe(cvf.getTritanopieLabelTextShadow());
+      expect(styleTritanopie_btn_background).toBe(cvf.getTritanopieLabelTextShadow());
+      expect(styleTritanopie_btn_frame_background).toBe(cvf.getTritanopieLabelTextShadow());
+    });
+
+    await test.step('[CHECK] Check Changes LABEL Color', async () =>{
+      const pElements = '.label';
+
+      var styleTritanopie_label = await page.$eval(pElements, function(el){
+        return getComputedStyle(el).webkitTextFillColor;
+      });
+
+      expect(styleTritanopie_label).toBe(cvf.getTritanopieColorLabel());
+    });
+
+    await test.step('[CHECK] Check Changes BODY Background Color', async () =>{
+      const body = 'body';
+
+      var styleTritanopie_bodyBackground = await page.$eval(body, function(el){
+        return getComputedStyle(el).backgroundColor;
+      });
+
+      expect(styleTritanopie_bodyBackground).toBe(cvf.getTritanopieColorBackground());
+    });
+
+    await test.step('[ACTION] Change style to Default', async ()=>{
+      //ON CHANGE LE STYLE EN DEFAULT
+      await page.goto(configVisionUrl);
+      // Sélecteur CSS pour le bouton
+      const boutonAUCUN = '#AUCUN>button';
+
+      //on clique sur le bouton
+      await page.click(boutonAUCUN, {timeout: 2000});
+    });
+
+    await test.step('[ACTION] Closing page', async()=>{
+      await page.close();
+    });
+  })
 });
