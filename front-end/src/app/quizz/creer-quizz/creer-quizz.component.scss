@@ -252,7 +252,7 @@ textarea {
   pointer-events: all;
 }
 
-.uncheked::before {
+.uncheked {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -270,7 +270,7 @@ textarea {
   height: 5vh;
 }
 
-.checked::before {
+.checked {
   display: flex;
   flex-direction: column;
   justify-content: center;
