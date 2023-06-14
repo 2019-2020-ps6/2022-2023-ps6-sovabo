@@ -38,7 +38,7 @@ export class JouerQuizzComponent implements OnInit {
   public endTime: number = 0;
   public firstTime: boolean = true;
   public delay: number = 5000;
-  static timeTimer : number = 20;
+  static timeTimer : number = 150;
 
   public timeRemaining: number = JouerQuizzComponent.timeTimer;
   private timerId: any | undefined;
@@ -157,6 +157,7 @@ export class JouerQuizzComponent implements OnInit {
   }
 
   selectAnswer(event: Event | null) {
+    console.log('JE SUIS DANS SELECT ANSWER'); 
     if (event != null) {
       const target = event?.currentTarget as HTMLElement;
 
