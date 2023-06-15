@@ -18,7 +18,7 @@ RUN npm install
 #COPIER LE FRONT-END ( avec application dockerignore )
 COPY --chown=node:node . .
 
-RUN sed -i "s|<backend>|${BACKEND_URL}|g" ./src/config/server.config.ts
+#RUN sed -i "s|<backend>|${BACKEND_URL}|g" ./src/config/server.config.ts
 
 #ON BUILD LA VERSION FINALE DU FRONT-END
 RUN npm run build --prod
