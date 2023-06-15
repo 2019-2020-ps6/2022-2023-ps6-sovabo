@@ -1,42 +1,30 @@
 services:
-  #service frontend
   frontend:
-    #directives de construction du conteneur
-    build: 
+    build:
       context: ./front-end/
-      #path du dockerfile et nom du dockerfile
       dockerfile: Dockerfile
-    #port mapping -> port local:port conteneur  
+      args:
+        - BACKEND_URL=http://backend:9428
     ports:
-      - '8080:4200'
-    #notion de depandance : on attend que le back est bien lancé, sinon on ne lance pas le front  
+      - '8080:80'
     depends_on:
       backend:
         condition: service_healthy
     networks:
       - app-network
 
-  #service backend
   backend:
-    #construction du conteneur
     build:
       context: ./backend/
-      #path du dockerfile et nom du dockerfile
       dockerfile: Dockerfile
-    #mappage des ports -> port local:port conteneur
-    ports:
-      - '9428:9428'
-    #directive reseau -> on lui dit qu'il fait partit du reseau 'app-network'
     networks:
       - app-network
-    #directive healthcheck -> on donne les directives de la commande à faire pour savoir si le conteneur RUN correctement 
     healthcheck:
       test: curl -f http://localhost:9428/api/status | grep "ok" || exit 1
-      interval: 10s
+      interval: 5s
       timeout: 10s
-      retries: 5  
+      retries: 5
 
-#CREATION DE RESEAU
 networks:
   app-network:
     driver: bridge

@@ -6,6 +6,6 @@ export const httpOptionsBase = {
   })
 };
 
-export const serverUrl = 'http://localhost:4200/';
-export const serverBack = 'http://localhost:9428/api/';
+export const serverUrl = 'http://localhost:8080/';
+export const serverBack = '<backend>/api/';
 
