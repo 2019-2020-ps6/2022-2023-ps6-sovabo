@@ -20,6 +20,8 @@ RUN npm install
 #COPIER LE FRONT-END
 COPY --chown=node:node . .
 
+# RUN mkdir -p /var/lib/xyz c'est nul
+
 EXPOSE 9428
 
 #RUN chown -R node:node /home/node/app

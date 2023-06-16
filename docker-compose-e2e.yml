@@ -4,7 +4,7 @@ services:
       context: ./front-end/
       dockerfile: Dockerfile
       args:
-        - BACKEND_URL="http://localhost:9428"
+        - BACKEND_URL="http://backend:9428"
     ports:
       - '8080:80'
     depends_on:
@@ -20,18 +20,29 @@ services:
     networks:
       - app-network
     volumes:
-      - databaseBackVol:/home/node/app/database
+      - databaseTestVol:/home/node/app/database
     healthcheck:
       test: curl -f http://localhost:9428/api/status | grep "ok" || exit 1
       interval: 5s
       timeout: 10s
       retries: 5
+  
+  test:
+    build:
+      context: ./front-end/
+      dockerfile: Dockerfile-e2e
+    volumes:
+    - reportTestVol:/home/node/app/test-results
+    - reportResultTestVol:/home/node/app/playwright-report
 
 networks:
   app-network:
     driver: bridge
   
 volumes:
-  databaseBackVol:
+  databaseTestVol:
+  reportTestVol:
+  reportResultTestVol:
+
 
 

@@ -1,0 +1,16 @@
+FROM mcr.microsoft.com/playwright:v1.34.0-jammy
+
+
+USER pwuser
+
+WORKDIR /home/node/app
+
+COPY --chown=pwuser:pwuser *.json .
+
+RUN mkdir test-results playwright-report
+
+RUN ls -la
+
+RUN npm install
+
+ENTRYPOINT ["npx", "playwright", "test", "--config", "playwright.config.e2e.ts"]

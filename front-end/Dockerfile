@@ -1,21 +1,24 @@
 FROM node:18.16.0-alpine3.17 as build
 
+ARG BACKEND_URL
+
+
 #GESTION DES FICHIERS
 #ON SE PLACE DANS LE WORKDIR
-
 USER node
 WORKDIR /home/node/app
 
 # Copie les fichiers package.json et package-lock.json (s'il existe)
 COPY --chown=node:node *.json . 
 
+# substitute <BACKEND> in server.config.ts
+
 RUN npm install
 
 #COPIER LE FRONT-END ( avec application dockerignore )
 COPY --chown=node:node . .
 
-#ON OUVRE LE PORT 4200 A L'EXTERIEUR
-EXPOSE 4200
+#RUN sed -i "s|<backend>|${BACKEND_URL}|g" ./src/config/server.config.ts
 
 #ON BUILD LA VERSION FINALE DU FRONT-END
 RUN npm run build --prod
