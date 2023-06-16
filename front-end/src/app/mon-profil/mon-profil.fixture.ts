@@ -1,5 +1,6 @@
 import {E2EComponentFixture} from "e2e/e2e-component.fixture";
 import {Locator} from "@playwright/test";
+import {timeout} from "rxjs";
 
 export class MonProfilFixture extends E2EComponentFixture {
   getTitle() {
@@ -75,4 +76,15 @@ export class MonProfilFixture extends E2EComponentFixture {
     return this.page.getByRole('button', { name: 'ANNULER' });
   }
 
+  async unselectProfil() {
+    if (await this.page.isVisible('text=Selectionné')) {
+      return this.page.locator('text=Selectionné').click();
+    }
+    return Promise.resolve();
+  }
+
+  async getAlert(alertMessage: string, alertType: string) {
+    const alert = await this.page.locator(`.alert-${alertType}`);
+    return alert.locator(`text=${alertMessage}`);
+  }
 }
