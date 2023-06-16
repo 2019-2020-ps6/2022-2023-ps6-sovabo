@@ -1,10 +1,12 @@
 import { test, expect } from '@playwright/test';
-import {configVisionUrl, testUrl} from 'e2e/e2e.config';
+import {accueilUrl, configVisionUrl, testUrl, configUrl} from 'e2e/e2e.config';
 import { ConfigVisionFixture } from 'src/app/config/config-vision/config-vision.fixture'
 import {timeout} from "rxjs";
+import {AccueilFixture} from "../../src/app/accueil/accueil-fixture";
 
 // https://playwright.dev/docs/locators
 test.describe('configVision Jeu Couleur', () => {
+  /*
   test('[DEFAULT COLOR] Test', async({page}) =>{
     await test.step('[ACTION] Change Style to DEFAULT', async () =>{
       //ON CHANGE LE STYLE EN DEFAULT
@@ -227,16 +229,81 @@ test.describe('configVision Jeu Couleur', () => {
       await page.close();
     });
   })
-});
+  */
+  test('[FONT] Test', async ({page})=>{
+    let cvf = new ConfigVisionFixture(page);
+    await page.goto(configVisionUrl);
+    await test.step('[CHECK] Check Default Font', async()=>{
+      const fontLabel = '.label'
+      const fontBtn = '.fontStyleCanChange'
+      var defaultFontLabel = await page.$eval(fontLabel, function (el){
+        return getComputedStyle(el).fontFamily;
+      });
+      var defaultFontBtn = await page.$eval(fontBtn, function (el){
+        return getComputedStyle(el).fontFamily;
+      });
+      expect(defaultFontLabel).toMatch(cvf.defaultLabeltFont());
+      expect(defaultFontBtn).toMatch(cvf.defaultBtntFont());
+    });
 
-test.describe('configVision Font', () =>{
-  test('[DEFAULT FONT] Test', async ({page})=>{
-    await test.step('[ACTION] Set Default Font', async()=>{
-      await page.goto(configVisionUrl);
+    const random = (Math.floor(Math.random()*3))+1;
+    await test.step('[ACTION] Set custom font', async()=>{
+      //on clique sur l'une des font de manière aléatoire
+      await page.click('#btn_fontChanger'+random,{timeout: 2000});
+      await page.click('#fontChangerConfirmation');
+    });
 
-      const boutonReset = 'btn_fontReset>button'
-      await page.click(boutonReset);
-    })
+    await test.step('[CHECK] Custom Font is correctly apply', async()=>{
+      const fontLabel = '.label'
+      const fontBtn = '.fontStyleCanChange'
 
+      var customFontLabel = await page.$eval(fontLabel, function (el){
+        return getComputedStyle(el).fontFamily;
+      });
+      var customFontBtn = await page.$eval(fontBtn, function (el){
+        return getComputedStyle(el).fontFamily;
+      });
+
+      switch (random){
+        case 1:
+          expect(customFontLabel).toMatch(cvf.arialCustomFont());
+          expect(customFontBtn).toMatch(cvf.arialCustomFont());
+          break;
+        case 2:
+          expect(customFontLabel).toMatch(cvf.andaleCustomFont());
+          expect(customFontBtn).toMatch(cvf.andaleCustomFont());
+          break;
+        case 3:
+          expect(customFontLabel).toMatch(cvf.comicCustomFont());
+          expect(customFontBtn).toMatch(cvf.comicCustomFont());
+          break;
+        case 4:
+          expect(customFontLabel).toMatch(cvf.nunitoCustomFont());
+          expect(customFontBtn).toMatch(cvf.nunitoCustomFont());
+          break;
+      };
+    });
   });
+
+  test('[FONT SIZE] Test', async({page})=>{
+  });
+  /*test('[FONT] Test', async ({page})=>{
+    let af = new AccueilFixture(page);
+    test.step('[ACTION] Navigation jusqu\'à ConfigurationVision', async()=>{
+      page.goto(accueilUrl);
+      let btnConfigs = af.getConfigurationBtn();
+      btnConfigs.click();
+      /* NE FONCTIONNE PAS CHEZ MOI
+      await page.getByRole('button', { name: 'CONFIGURATION' }).click({timeout: 2000});
+      await page.waitForURL(configUrl);
+      let input = 'form>input';
+      await page.fill(input,'1234');
+      let submit = 'form>button';
+      await page.click(submit);
+    });
+    let cvf = new ConfigVisionFixture(page);
+
+  });*/
 });
+
+

@@ -1,4 +1,5 @@
 import { E2EComponentFixture } from "e2e/e2e-component.fixture";
+import { JeuxCouleursService } from "src/service/jeux-couleurs.service";
 
 export class ConfigVisionFixture extends E2EComponentFixture {
 
@@ -81,5 +82,30 @@ export class ConfigVisionFixture extends E2EComponentFixture {
   getTritanopieLabelTextShadow(){
     return 'none';
   }
+
+  //*************************//
+  //*****PARTIE FONT*********//
+  //************************//
+
+  defaultLabeltFont(){
+    return 'Nunito';
+  }
+  defaultBtntFont(){
+    return 'Roboto Mono';
+  }
+
+  arialCustomFont(){
+    return 'Arial';
+  }
+  andaleCustomFont(){
+    return 'Andale Mono';
+  }
+  comicCustomFont(){
+    return 'Comic Sans MS';
+  }
+  nunitoCustomFont(){
+    return 'Nunito';
+  }
+
 
 }

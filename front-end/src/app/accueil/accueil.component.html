@@ -22,9 +22,9 @@
   </div>
 
   <div class="rightContainer" [ngClass]="this.contrasteTroubleEnable ? 'contrastUpContainer' : ''">
-    <app-btn-clickable-background (click)="isAccessible('/configuration')" class="navigation">CONFIGURATION</app-btn-clickable-background>
+    <app-btn-clickable-background (click)="isAccessible('/configuration')"  id='configs' class="navigation">CONFIGURATION</app-btn-clickable-background>
     <app-btn-clickable-background id="profils" class="navigation" [routerLink]="['/mon-profil']">PROFILS</app-btn-clickable-background>
-    <app-btn-clickable-background (click)="isAccessible('/statistiques')" class="navigation">STATISTIQUES</app-btn-clickable-background>
+    <app-btn-clickable-background (click)="isAccessible('/statistiques')" id='stats' class="navigation">STATISTIQUES</app-btn-clickable-background>
 
   </div>
 
