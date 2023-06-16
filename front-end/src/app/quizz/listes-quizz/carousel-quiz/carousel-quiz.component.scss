@@ -142,3 +142,23 @@ text-align: center;
   padding: 10px;   /* modifiez cette valeur pour changer l'espace autour de l'icône à l'intérieur du bouton */
   margin: 5px;     /* modifiez cette valeur pour changer l'espace autour du bouton entier */
 }
+
+.nav-button{
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  height: 10%;
+  width: 10%;
+}
+
+.prev-button {
+  left: -1%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.next-button {
+  right: -1%;
+  top: 50%;
+  transform: translateY(-50%);
+}
