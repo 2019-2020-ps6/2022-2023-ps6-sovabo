@@ -35,7 +35,6 @@ test.describe('Jouer Quizz', () => {
                 });
 
                 await test.step(`Questions text visible and not empty`, async () => {
-                    await page.waitForTimeout(2000); // Attend 2 secondes
                     await page.waitForSelector('#question-animation', { state: 'visible' });
 
                     
@@ -50,32 +49,78 @@ test.describe('Jouer Quizz', () => {
                     expect(isVisible).toBeTruthy();
                     expect(innerText).toBeTruthy();
                 });
+
+                await test.step(`Answer buttons are visible`, async () => {
+                    const answerButtons = await jouerQuizzFixture.getAnswerButtons().elementHandles();
+                    for(const button of answerButtons){
+                      expect(await button.isVisible()).toBeTruthy();
+                    }
+                  });
+
+
+                await test.step(`Validate button is visible`, async () => {
+                    const validateButton = await jouerQuizzFixture.getValidateButton();
+                    expect(await validateButton.isVisible()).toBeTruthy();
+                });
+
+                await test.step(`Quiz title should be not empty`, async () => {
+                    const title = await jouerQuizzFixture.getQuizTitle();
+                    expect(title).toBeTruthy();
+                });
+
+                await test.step(`Timer should be visible and not empty`, async () => {
+                    const timer = await jouerQuizzFixture.getTimer();
+                    expect(timer).toBeTruthy();
+                });
+
+
+                await test.step(`Select an answer and validate`, async () => {
+                    const selectButton = await jouerQuizzFixture.selectAnswerByIndexAndClick(2);
+                    expect(selectButton.nth(1)).toBeVisible();
+                    const validateButton = await jouerQuizzFixture.getValidateButton();
+                    expect(validateButton).toBeVisible();
+
+                    await validateButton.click();
+
+                    const nextButton = await jouerQuizzFixture.getNextQuestionButton();
+                    expect(nextButton).toBeVisible();
+
+
+                    await nextButton.click();
+
+                    const selectButton2 = await jouerQuizzFixture.selectAnswerByIndexAndClick(0);
+                    expect(selectButton2.nth(1)).toBeVisible();
+
+                    await validateButton.click();
+
+                    await nextButton.click();
+
+
+                    const selectButton3 = await jouerQuizzFixture.selectAnswerByIndexAndClick(3);
+                    expect(selectButton3.nth(1)).toBeVisible();
+
+                    await validateButton.click();
+
+                    const resultButton = await jouerQuizzFixture.getResultsButton();
+                    expect(resultButton).toBeVisible();
+
+                    await resultButton.click();
+                });
             } else {
                 console.log('Le bouton Jouer n\'a pas été trouvé.');
             }
         } else {
             console.log('Aucune carte de quiz n\'a été trouvée.');
         }
+
+
+        
     });
 });
 
 
 
-
-        // await test.step(`Questions text visible and not empty`, async () => {
-        //     const questionText = await jouerQuizzFixture.getQuestionText();
-        //     const isVisible = await questionText.isVisible();
-        //     const innerText = await questionText.innerText();
-        //     expect(isVisible).toBeTruthy();
-        //     expect(innerText).toBeTruthy();
-        // });
-
-    //     await test.step(`Answer buttons are visible`, async () => {
-    //         const answerButtons = await jouerQuizzFixture.getAnswerButtons().elementHandles();
-    //         for(const button of answerButtons){
-    //           expect(await button.isVisible()).toBeTruthy();
-    //         }
-    //       });
+    //     
 
     //     await test.step(`Validate button is visible`, async () => {
     //         const validateButton = await jouerQuizzFixture.getValidateButton();
