@@ -22,8 +22,8 @@
                     <li class="list-inline-item me-0">
                       <div class="difficulty-bars">
                         <span class="difficulty-bar" *ngFor="let i of [1, 2, 3, 4, 5]" [style.backgroundColor]="getDifficultyColor(i <= quiz.difficulty ? quiz.difficulty : 0)"></span>
-                      </div>
                         <span class="note fontStyleCanChange fontSizeCanChange">{{quiz.difficulty}}/5</span>
+                      </div>
                     </li>
                   </ul>
                   <h4><p class="card-theme fontStyleCanChange fontSizeCanChange">
