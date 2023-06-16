@@ -170,9 +170,17 @@ h1{
   cursor: pointer;
 }
 
-.user-svg{
+.user-svg {
+  cursor: pointer;
   position: relative;
   left: 40%;
   top: 0;
 }
+
+.user-svg:hover {
+  background: radial-gradient(circle, #dee0e3, #b8bcd4);
+  border-radius: 25%;
+}
+
+
 
