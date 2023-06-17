@@ -1,8 +1,8 @@
 
-export const testUrl = 'http://localhost:4200';
-export const profilUrl = 'http://localhost:4200/mon-profil';
-export const accueilUrl = 'http://localhost:4200/accueil';
 export const serverUrl = 'http://localhost:4200/';
-export const creationQuizUrl = 'http://localhost:4200/creer-quizz'
 
 export const configVisionUrl = serverUrl.concat('/configurationVision');
+export const creationQuizUrl = serverUrl.concat('/creer-quizz');
+export const accueilUrl = serverUrl.concat('/accueil');
+export const profilUrl = serverUrl.concat('/mon-profil');
+export const testUrl = serverUrl.concat('/');

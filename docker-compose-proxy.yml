@@ -4,10 +4,15 @@ services:
       context: ./front-end/
       dockerfile: Dockerfile
       args:
-        - BACKEND_URL="http://backend:9428"
+        - BACKEND_URL=localhost\/back\/
     depends_on:
       backend:
         condition: service_healthy
+    healthcheck:
+      test: curl -f http://localhost
+      interval: 5s
+      timeout: 10s
+      retries: 3
     networks:
       - app-network
 
@@ -24,26 +29,39 @@ services:
       interval: 5s
       timeout: 10s
       retries: 5
+      
   
-  test:
+  # test:
+  #   build:
+  #     context: ./front-end/
+  #     dockerfile: Dockerfile-e2e
+  #   volumes:
+  #   - reportTestVol:/home/node/app/test-results
+  #   - reportResultTestVol:/home/node/app/playwright-report
+  
+  # nginx:
+  #   image: nginx:1.19.6-alpine
+  #   ports:
+  #     - '80:80'
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/nginx.conf
+  #   depends_on:
+  #     - frontend
+  #   networks:
+  #     - app-network
+
+  apache:
     build:
-      context: ./front-end/
-      dockerfile: Dockerfile-e2e
-    volumes:
-    - reportTestVol:/home/node/app/test-results
-    - reportResultTestVol:/home/node/app/playwright-report
-  
-  nginx:
-    image: nginx:1.19.6-alpine
+      context: .
+      dockerfile: Dockerfile-apache
     ports:
       - '80:80'
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - frontend
+      - backend
     networks:
       - app-network
-
+  
 networks:
   app-network:
     driver: bridge

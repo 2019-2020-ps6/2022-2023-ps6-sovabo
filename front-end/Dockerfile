@@ -18,11 +18,11 @@ RUN npm install
 #COPIER LE FRONT-END ( avec application dockerignore )
 COPY --chown=node:node . .
 
-#RUN sed -i "s|<backend>|${BACKEND_URL}|g" ./src/config/server.config.ts
+RUN sed -i "s/localhost:9428/${BACKEND_URL}/g" ./src/config/server.config.ts
 
 #ON BUILD LA VERSION FINALE DU FRONT-END
-RUN npm run build --prod
-
+#RUN npm run build --prod 
+RUN npm run build:prod
 ##############################################
 #ON CREE UN NOUVEL ENVIRONNEMENT POUR NGINX
 FROM nginx:1.21.1-alpine
