@@ -4,9 +4,9 @@ services:
       context: ./front-end/
       dockerfile: Dockerfile
       args:
-        - BACKEND_URL="backend:9428"
+        - BACKEND_URL=backend:9428
     # ports:
-    #   - '8080:80'
+    #     - '8080:80'
     depends_on:
       backend:
         condition: service_healthy
@@ -32,10 +32,15 @@ services:
       context: ./front-end/
       dockerfile: Dockerfile-e2e
       args:
-        - FRONTEND_URL="http://frontend:8080"
+        - FRONTEND_URL=http:\/\/frontend:80
     volumes:
     - reportTestVol:/home/node/app/test-results
     - reportResultTestVol:/home/node/app/playwright-report
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - app-network
 
 networks:
   app-network:

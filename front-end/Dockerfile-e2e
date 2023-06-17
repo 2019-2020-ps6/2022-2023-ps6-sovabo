@@ -9,7 +9,7 @@ COPY --chown=pwuser:pwuser ./ .
 #RUN mkdir test-results playwright-report
 
 ARG FRONTEND_URL
-RUN sed -i "s|http://localhost:4200/|${FRONTEND_URL}|g" ./e2e/e2e.config.ts
+RUN sed -i "s/http:\/\/localhost:4200\//${FRONTEND_URL}/g" ./e2e/e2e.config.ts
 
 
 RUN ls -la
