@@ -124,8 +124,6 @@ test.describe('Jouer Quizz', () => {
                   expect(styleDeuteranomalieAnswerChecked).toMatch(cvf.hexToRGB('#a0a1d5',null));
 
 
-
-
                     expect(validateButton).toBeVisible();
 
                     await validateButton.click();
