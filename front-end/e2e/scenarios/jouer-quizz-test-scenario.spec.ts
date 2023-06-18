@@ -7,7 +7,7 @@ import {timeout} from "rxjs";
 
 test.describe('Jouer Quizz', () => {
 
-    test('lancement de la page jouer quizz', async ({ page }) => {
+    test('lancement de la page jouer quizz avec le bon user', async ({ page }) => {
         let urlListQuiz = serverUrl+'liste-quizz';
         await page.goto(urlListQuiz);
         const quizElement = await page.$('.quiz');

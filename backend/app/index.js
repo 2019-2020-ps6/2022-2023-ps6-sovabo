@@ -16,8 +16,6 @@ const deleteAllData = () => {
   logger.info('Données supprimées avec succès.')
 }
 
-// deleteAllData();
-
 const codeAcces = () => {
   CodeAccesModel.create({ code: '1234' })
   logger.info('Code Accès créé avec succès.')
@@ -34,6 +32,7 @@ async function createSampleData() {
       sliderPosition: 50,
       duration: '00:05:00',
       contraste: true,
+      jeuCouleur: -1,
     })
 
     const config2 = ConfigurationModel.create({
@@ -44,28 +43,28 @@ async function createSampleData() {
       sliderPosition: 30,
       duration: '00:10:00',
       contraste: false,
+      jeuCouleur: 0,
     })
 
     // Création de deux objets User
-    const user1 = userModel.createUser({
+    userModel.createUser({
       name: 'John Doe',
-      imagePath: 'path/to/image1.jpg',
+      imagePath: 'bear/bear-emoji-normal.png.png',
       color: '#ffffff',
       configuration: config1,
+      selected: false,
     })
 
-    const user2 = userModel.createUser({
+    userModel.createUser({
       name: 'Jane Smith',
-      imagePath: 'path/to/image2.jpg',
+      imagePath: 'cat/cat-emoji-normal.png',
       color: '#ff0000',
       configuration: config2,
+      selected: true,
     })
 
-
-
-
     // Création de deux objets Quiz
-    const quiz1 = QuizModel.create({
+    QuizModel.create({
       hovered: false,
       name: 'Quiz sur les capitales',
       desc: 'Testez vos connaissances sur les capitales du monde.',
@@ -116,7 +115,7 @@ async function createSampleData() {
       image: 'https://www.actualitix.com/wp-content/uploads/2017/08/carte-capitales-du-monde.jpg',
     })
 
-    const quiz2 = QuizModel.create({
+    QuizModel.create({
       hovered: false,
       name: 'Quiz de mathématiques',
       desc: 'Testez vos compétences en mathématiques avec ce quiz.',
@@ -169,6 +168,7 @@ async function createSampleData() {
 
     QuizModel.save()
     ConfigurationModel.save()
+    userModel.save()
 
     console.log('Échantillons de données créés avec succès !')
   } catch (error) {
@@ -177,7 +177,7 @@ async function createSampleData() {
 }
 
 
-// createSampleData();
+deleteAllData()
 codeAcces()
 createSampleData()
 
