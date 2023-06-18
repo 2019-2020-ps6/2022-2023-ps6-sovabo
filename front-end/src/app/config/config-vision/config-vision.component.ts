@@ -40,7 +40,6 @@ export class ConfigVisionComponent {
     this.contrasteTroubleEnable = this.jeuxCouleursService.IsAttentionColorActivated();
     this.fontSelected = this.jeuxCouleursService.getFontSelectedString();
 
-    // console.log(this.fontSelected);
 
     //ATTRIBUTION DU NOM DES BOUTONS JEUX DE COULEUR
     let tabJeuDeCouleur = document.querySelectorAll("app-btn-on-off-colors");

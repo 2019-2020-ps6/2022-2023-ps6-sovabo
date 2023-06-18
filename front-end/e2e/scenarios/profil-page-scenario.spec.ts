@@ -58,7 +58,7 @@ test.describe('Different tests pour la page profils', () => {
       expect(await page.isVisible('.selectAvatar')).toBe(true);
       await monProfilFixture.modifyAvatar();
       expect(await page.isVisible('.selectAvatar')).toBe(false);
-      await expect(page.locator('.creating-card .avatarUser')).toHaveAttribute('src', '../../assets/Images/Animateurs/bear/bear-emoji-normal.png.png');
+      await expect(page.locator('.creating-card .avatarUser')).toHaveAttribute('src', './assets/Images/Animateurs/bear/bear-emoji-normal.png.png');
 
       const buttonValider = await monProfilFixture.getBtnValider();
       await buttonValider.click();

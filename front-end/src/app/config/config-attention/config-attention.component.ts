@@ -172,7 +172,7 @@ export class ConfigAttentionComponent {
   }
 
   getImageFromImageName(imageName: string): string {
-    return `../../assets/Images/Animateurs/${imageName}`;
+    return `./assets/Images/Animateurs/${imageName}`;
   }
 
 

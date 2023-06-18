@@ -36,14 +36,10 @@ function createChart(statQuiz, statQuestion){
 
 
   if(statQuestion != null){
-    console.log("dedans");
-    console.log(statQuestion);
     switch(statQuestion) {
       case 'tempsMoyen':
         dataToLoad = statQuiz.timeResponses;
         labelToLoad = "Temps moyen de réponse (en secondes) ";
-        console.log("dans if");
-        console.log(dataToLoad);
         break;
       case 'nbClicks':
         dataToLoad = statQuiz.nbMissClicks;
@@ -62,9 +58,7 @@ function createChart(statQuiz, statQuestion){
         return;
     }
   }
-  console.log(dataToLoad);
   var ctx = document.getElementById("myAreaChart");
-  console.log(statQuiz);
   let myLineChart;
   if(ctx) {
     myLineChart = new Chart(ctx, {

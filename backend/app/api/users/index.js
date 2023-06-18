@@ -6,9 +6,7 @@ const router = new Router()
 
 router.get('/', (req, res) => {
   try {
-    console.log('users')
     const users = User.get()
-    console.log('users2')
 
     res.status(200).json(users)
   } catch (err) {
@@ -19,7 +17,6 @@ router.get('/', (req, res) => {
 //get configuration from idUser
 router.get('/:userId/configuration', (req, res) => {
   try {
-    console.log('config from user')
     const configuration = User.getConfiguration(req.params.userId)
     res.status(200).json(configuration)
   } catch (err) {
@@ -64,11 +61,7 @@ router.get('/:userId', (req, res) => {
 
 router.post('/', (req, res) => {
   try {
-    console.log("ici")
-
     const user = User.createUser(req.body)
-    console.log("ici2")
-
     res.status(201).json(user)
   } catch (err) {
     manageAllErrors(res, err)
