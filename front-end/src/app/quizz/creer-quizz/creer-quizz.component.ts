@@ -273,12 +273,22 @@ export class CreerQuizzComponent {
             isQuizValid = false;
             break;
           } else {
+            let existReponseValide = false;
             for (let j = 0; j < quizData.questions[i].answers.length; j++) {
               if (quizData.questions[i].answers[j].value == "") {
                 this.showAlertNotif("Attention, il semblerait que la réponse " + (j + 1) + " de la question " + (i + 1) + " soit vide...");
                 isQuizValid = false;
                 break;
+              } else if(quizData.questions[i].answers[j].isCorrect == true) {
+                existReponseValide = true;
               }
+            }
+            if(!existReponseValide) {
+              this.showAlertNotif("Veuillez sélectionner au moins une bonne réponse la question " + (i + 1));
+              isQuizValid = false;
+              break;
+            } else if(isQuizValid == false) {
+              break;
             }
           }
         }

@@ -93,6 +93,16 @@ test.describe('Test de création de quiz', () => {
 
       const quizCree = await page.getByText('Quiz de test');
       await expect(quizCree).toBeVisible();
+
+      await page.click('text=Quiz de test');
+      await page.click('text=Modifier le quiz');
+
+      const accessCodeModalFixture = new AccessCodeModalFixture(page);
+      await accessCodeModalFixture.getAccessCodeInput();
+
+      await page.click('text=SUPPRIMER');
+
+      await expect(page).toHaveURL("http://localhost:4200/liste-quizz");
     });
 
     await test.step('Bouton home fonctionnel', async () => {
