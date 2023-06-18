@@ -6,7 +6,6 @@ const buildServer = require('./build-server.js')
 const logger = require('./utils/logger.js')
 const { Configuration } = require('./models/index.js')
 const CodeAccesModel = require('./models/codeAcces.model.js')
-const { Answer } = require('./models')
 
 const deleteAllData = () => {
   QuizModel.deleteAll()
@@ -116,6 +115,31 @@ async function createSampleData() {
             {
               type: 'text',
               value: 'Madrido',
+              isCorrect: false,
+            },
+          ],
+        },
+        {
+          label: 'Quelle est la capitale de la Belgique ?',
+          answers: [
+            {
+              type: 'text',
+              value: 'Paris',
+              isCorrect: true,
+            },
+            {
+              type: 'text',
+              value: 'Londres',
+              isCorrect: false,
+            },
+            {
+              type: 'text',
+              value: 'Berlin',
+              isCorrect: false,
+            },
+            {
+              type: 'text',
+              value: 'Bruxelle',
               isCorrect: false,
             },
           ],

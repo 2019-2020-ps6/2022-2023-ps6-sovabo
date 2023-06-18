@@ -1,5 +1,6 @@
 import { E2EComponentFixture } from "e2e/e2e-component.fixture";
 import { test, expect } from '@playwright/test';
+import { QuizService } from "../../../service/quizz.service";
 
 
 export class JouerQuizzFixture extends E2EComponentFixture {
@@ -10,6 +11,7 @@ export class JouerQuizzFixture extends E2EComponentFixture {
     super(page);
     this.quizName = quizName;
   }
+
   getTitle() {
     return this.page.getByRole('heading', { name: /{{quiz.name}}/ }); // Remplacez {{quiz.name}} par la valeur réelle
   }
