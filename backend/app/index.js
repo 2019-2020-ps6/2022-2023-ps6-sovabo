@@ -88,6 +88,11 @@ async function createSampleData() {
               value: 'Berlin',
               isCorrect: false,
             },
+            {
+              type: 'text',
+              value: 'Venise',
+              isCorrect: false,
+            },
           ],
         },
         {
@@ -106,6 +111,11 @@ async function createSampleData() {
             {
               type: 'text',
               value: 'Athènes',
+              isCorrect: false,
+            },
+            {
+              type: 'text',
+              value: 'Madrido',
               isCorrect: false,
             },
           ],
@@ -139,6 +149,11 @@ async function createSampleData() {
               value: '3',
               isCorrect: false,
             },
+            {
+              type: 'text',
+              value: '8',
+              isCorrect: false,
+            },
           ],
         },
         {
@@ -157,6 +172,11 @@ async function createSampleData() {
             {
               type: 'text',
               value: '8',
+              isCorrect: false,
+            },
+            {
+              type: 'text',
+              value: '40',
               isCorrect: false,
             },
           ],

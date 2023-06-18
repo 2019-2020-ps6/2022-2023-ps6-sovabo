@@ -98,9 +98,6 @@ export class MonProfilComponent {
   updateHtmlWithConfig(){
     this.jeuxCouleursService.updateDoc(document);
   }
-
-
-
   get randomColor(): string {
     let color = '#';
     for (let i = 0; i < 6; i++) {
