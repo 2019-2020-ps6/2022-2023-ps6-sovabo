@@ -29,14 +29,14 @@ export class MonProfilComponent {
   isAppearing: boolean | undefined;
 
   avatarImages = [
-    "../../assets/Images/Animateurs/bear/bear-emoji-normal.png.png",
-    "../../assets/Images/Animateurs/cat/cat-emoji-normal.png",
-    "../../assets/Images/Animateurs/black male/male-character-normal.png",
-    "../../assets/Images/Animateurs/white girl/girl-character-normal.png",
+    "./assets/Images/Animateurs/bear/bear-emoji-normal.png.png",
+    "./assets/Images/Animateurs/cat/cat-emoji-normal.png",
+    "./assets/Images/Animateurs/black male/male-character-normal.png",
+    "./assets/Images/Animateurs/white girl/girl-character-normal.png",
     // Plus d'images...
   ];
 
-  selectedAvatar = "../../assets/Images/Animateurs/pngegg.png";
+  selectedAvatar = "./assets/Images/Animateurs/pngegg.png";
 
 
   contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
@@ -163,7 +163,7 @@ export class MonProfilComponent {
 
 
   getImageFromImageName(imageName: string): string {
-    return `../../assets/Images/Animateurs/${imageName}`;
+    return `./assets/Images/Animateurs/${imageName}`;
   }
 
 
@@ -225,7 +225,7 @@ export class MonProfilComponent {
     this.isModifyAvatar = false;
     this.deleteMode = false;
     this.userName = "";
-    this.selectedAvatar = "../../assets/Images/Animateurs/pngegg.png";
+    this.selectedAvatar = "./assets/Images/Animateurs/pngegg.png";
     //find user with editing = true
     const user = this.users.find(user => user.editing);
     if (user) {

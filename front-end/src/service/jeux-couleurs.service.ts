@@ -89,7 +89,6 @@ export class JeuxCouleursService {
   }
 
   setVisionColor(value: number) {
-    //console.log('setJeuxCouleurs: ' + value);
     if(value<0){
       this.colorSelected=-1;
       this.visionColorActivated=false;
@@ -98,7 +97,6 @@ export class JeuxCouleursService {
       this.colorSelected=value;
       this.visionColorActivated=true;
     }
-    //console.log("FIN SETVISION :"+this.visionColorActivated);
   }
 
 

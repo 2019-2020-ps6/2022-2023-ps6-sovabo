@@ -7,9 +7,7 @@ const router = new Router()
 
 router.get('/', (req, res) => {
   try {
-    console.log("ici");
     const configurations = Configuration.get()
-    console.log("configurations");
     res.status(200).json(configurations)
   } catch (err) {
     manageAllErrors(res, err)

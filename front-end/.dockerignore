@@ -1,0 +1,15 @@
+<<<<<<< HEAD
+# .dockerignore
+=======
+>>>>>>> af06bc92c9a85b202901163c417875e744983fc8
+node_modules/
+.angular/
+npm-debug.log
+Dockerfile*
+.dockerignore
+.git
+<<<<<<< HEAD
+.gitignore
+=======
+.gitignore
+>>>>>>> af06bc92c9a85b202901163c417875e744983fc8

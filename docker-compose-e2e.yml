@@ -1,0 +1,55 @@
+services:
+  frontend:
+    build:
+      context: ./front-end/
+      dockerfile: Dockerfile
+      args:
+        - BACKEND_URL=backend:9428
+    # ports:
+    #     - '8080:80'
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile
+    networks:
+      - app-network
+    volumes:
+      - databaseTestVol:/home/node/app/database
+    healthcheck:
+      test: curl -f http://localhost:9428/api/status | grep "ok" || exit 1
+      interval: 5s
+      timeout: 10s
+      retries: 5
+  
+  test:
+    build:
+      context: ./front-end/
+      dockerfile: Dockerfile-e2e
+      args:
+        - FRONTEND_URL=http:\/\/frontend:80
+    volumes:
+    - reportTestVol:/home/node/app/test-results
+    - reportResultTestVol:/home/node/app/playwright-report
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+  
+volumes:
+  databaseTestVol:
+  reportTestVol:
+  reportResultTestVol:
+
+
+
