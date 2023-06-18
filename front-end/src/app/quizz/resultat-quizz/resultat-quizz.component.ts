@@ -43,7 +43,7 @@ export class ResultatQuizzComponent {
   }
 
   getAnimateurPath() {
-    return this.userCourant.imagePath;
+    return `./assets/Images/Animateurs/${this.userService.getUserCourant()?.imagePath}`;
   }
 
   getAnimations() {

@@ -23,10 +23,10 @@ export class ConfigAttentionComponent {
   showModalAvatar: boolean = false;
 
   avatarImages = [
-    "../../../assets/Images/Animateurs/bear/bear-emoji-normal.png.png",
-    "../../../assets/Images/Animateurs/cat/cat-emoji-normal.png",
-    "../../../assets/Images/Animateurs/black male/male-character-normal.png",
-    "../../../assets/Images/Animateurs/white girl/girl-character-normal.png",
+    "./bear/bear-emoji-normal.png.png",
+    "./cat/cat-emoji-normal.png",
+    "./black male/male-character-normal.png",
+    "./white girl/girl-character-normal.png",
     // Plus d'images...
   ];
 
@@ -181,7 +181,7 @@ export class ConfigAttentionComponent {
   }
 
   getImageFromImageName(imageName: string): string {
-    return `../../assets/Images/Animateurs/${imageName}`;
+    return `./assets/Images/Animateurs/${imageName}`;
   }
 
 
@@ -201,7 +201,6 @@ export class ConfigAttentionComponent {
     if (this.user) {
       // Récupère la configuration actuelle de l'utilisateur
       let userId = (this.user as User).id!;
-      let configId = (this.user.configuration as ConfigurationModel).id!;
       this.user.imagePath = newAvatar;
 
       await this.userService.updateUser(this.user, userId);

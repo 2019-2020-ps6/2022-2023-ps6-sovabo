@@ -1,6 +1,5 @@
 import {E2EComponentFixture} from "e2e/e2e-component.fixture";
 import {Locator} from "@playwright/test";
-import {timeout} from "rxjs";
 
 export class MonProfilFixture extends E2EComponentFixture {
   getTitle() {

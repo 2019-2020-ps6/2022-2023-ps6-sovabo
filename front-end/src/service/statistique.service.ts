@@ -26,13 +26,12 @@ export class StatistiqueService {
         statCournant = userCourant.listeStatQuizz.find(stat => stat.idQuizz === quizId);
       }
       if(userCourant.id){
-        console.log(userCourant.listeStatQuizz); 
           this.updateOrCreateStatQuizz(userCourant, quizId, undefined , moyenne, undefined, undefined);
       }
     }
   }
 
-  
+
 
 
 
@@ -41,10 +40,7 @@ export class StatistiqueService {
     if (existingStatQuizz) {
       // Ajouter les nouvelles données aux champs du StatQuizz existant si elles sont fournies
       if (nbMissClicks !== undefined) {
-        console.log("nbMissClicks");
-        console.log(nbMissClicks);
         existingStatQuizz.nbMissClicks.push(nbMissClicks);
-        console.log(existingStatQuizz.nbMissClicks);
       }
       if (timeResponse !== undefined) {
         existingStatQuizz.timeResponses.push(timeResponse);
@@ -63,9 +59,7 @@ export class StatistiqueService {
         FreqInteractAnim: existingStatQuizz.FreqInteractAnim,
       };
       if(user.id){
-        console.log(user.listeStatQuizz);
         this.userService.updateStatQuizzForUser(user.id,newStatQuizz , idQuizz)
-  
       }
     } else {
       // Créer un nouveau StatQuizz avec les champs obligatoires fournis et les autres champs vides
@@ -76,15 +70,15 @@ export class StatistiqueService {
         resultatQuizz: resultatQuizz !== undefined ? [resultatQuizz] : [],
         FreqInteractAnim: FreqInteractAnim !== undefined ? [FreqInteractAnim] : [],
       };
-  
+
       if (!user.listeStatQuizz) {
         user.listeStatQuizz = [];
       }
-  
+
       user.listeStatQuizz.push(newStatQuizz);
       if(user.id){
         this.userService.updateStatQuizzForUser(user.id,newStatQuizz , idQuizz)
-  
+
       }
     }
 
@@ -130,8 +124,8 @@ export class StatistiqueService {
     }
   }
 
-  
-  
-  
+
+
+
 
 }

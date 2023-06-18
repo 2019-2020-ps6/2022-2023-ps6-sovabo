@@ -21,7 +21,6 @@ class QuizModel extends BaseModel {
   create(obj = {}) {
     const item = { ...obj, id: uuid.v4() };
 
-    console.log('item', item);
 
     //item.statQuiz = StatQuizzModel.createStatQuizz();
 

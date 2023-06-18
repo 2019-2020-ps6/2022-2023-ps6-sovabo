@@ -111,10 +111,8 @@ export class JouerQuizzComponent implements OnInit {
   }
 
   checkWin() {
-    console.log('JE SUIS DANS CHECK WIN');
 
     if (this.currentQuestionIndex === this.quiz.questions.length - 1) {
-      console.log('JE MET ISQUIZFINISHED A TRUE');
 
       this.statistiquesService.ajouterMoyenneTimeResponseAuUserCournat(this.calculerMoyenne(), this.quiz.id);
       this.isQuizFinished = true;
@@ -125,7 +123,7 @@ export class JouerQuizzComponent implements OnInit {
       const totalTime = (this.quizEndTime - this.quizStartTime) / 1000; // durée en secondes
 
       const freqTimeAnim = totalTime/(this.animationService.getDelay()*25)+1;
-      
+
       let freqTimeAnimNumber = Number(freqTimeAnim.toFixed(2));
 
       //this.statistiquesService.ajouterTotalTimeAuUserCourant(totalTime, this.quiz.id); // stocker le temps total
@@ -148,7 +146,7 @@ export class JouerQuizzComponent implements OnInit {
           if (!this.isLastQuestion && !this.isAnswerValidated) {
             setTimeout(() => {
               this.goToNextQuestion();
-              
+
             }, 5000);
           }
         }
@@ -157,7 +155,6 @@ export class JouerQuizzComponent implements OnInit {
   }
 
   selectAnswer(event: Event | null) {
-    console.log('JE SUIS DANS SELECT ANSWER'); 
     if (event != null) {
       const target = event?.currentTarget as HTMLElement;
 
@@ -190,7 +187,6 @@ export class JouerQuizzComponent implements OnInit {
   }
 
   validateAnswer() {
-    console.log('JE SUIS DANS VALIDER');
     this.validateAnswerBool = true;
     const selectedAnswer = this.currentQuestion?.answers[this.selectedAnswerIndex ?? -1];
     clearTimeout(this.timerId);
@@ -222,7 +218,6 @@ export class JouerQuizzComponent implements OnInit {
   }
 
   goToNextQuestion() {
-    console.log('JE SUIS DANS GO TO NEXT QUESTION');
 
     this.validateAnswerBool = false;
     clearTimeout(this.timerId); // Annuler le minuteur en cours s'il existe

@@ -93,7 +93,6 @@ export class UserService {
   }
 
   public updateAll(): Promise<void> {
-    // console.log(this.loadUsersFromServer());
     return new Promise<void>((resolve) => {
       this.setUserCourant(null);
       this.loadUsersFromServer().then(users => {

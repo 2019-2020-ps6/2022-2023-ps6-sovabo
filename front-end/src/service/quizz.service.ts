@@ -54,13 +54,9 @@ export class QuizService {
 
     setQuizCourant(quiz : any){
       this.quizCourant = quiz;
-      console.log("dans setQuizCourant");
-      console.log(this.quizCourant);
     }
 
     getQuizCourant(): Quiz{
-      console.log("dans getQuizCourant");
-      console.log(this.quizCourant);
       return this.quizCourant;
     }
 
