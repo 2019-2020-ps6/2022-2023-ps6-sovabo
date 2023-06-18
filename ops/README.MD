@@ -51,10 +51,6 @@ En faisant un grep 'ok', on vérifie que l'état retourné est 'ok' donc fonctio
 
 Pour lancer l'application, il suffit de se diriger dans le dossier /ops qui est à la racine du projet et éxecuter la commande : ``./run.sh``
 Le lien permettant d'accéder à l'application est le suivant : http://localhost/front/
-Le ServerName sovabojesuisbg.com n'est pas fonctionnel.
-
-
-
-
-
-
+Le ServerName sovabojesuisbg.com n'est pas fonctionnel car il faut modifier le fichier hosts de la machine hôte pour pouvoir y accéder. 
+Cela est dû au fait que le serveur apache écoute sur le port 80 et que le port 80 est déjà utilisé par le serveur apache de la machine hôte. 
+Il faudrait donc changer le port d'écoute du serveur apache de la machine hôte pour pouvoir accéder à l'application via le nom de domaine sovabojesuisbg.com
