@@ -20,6 +20,15 @@ export class ConfigAttentionComponent {
   animateur: boolean | undefined;
   userAnimateurImg: string = '';
   user = this.userService.getUserCourant();
+  showModalAvatar: boolean = false;
+
+  avatarImages = [
+    "../../../assets/Images/Animateurs/bear/bear-emoji-normal.png.png",
+    "../../../assets/Images/Animateurs/cat/cat-emoji-normal.png",
+    "../../../assets/Images/Animateurs/black male/male-character-normal.png",
+    "../../../assets/Images/Animateurs/white girl/girl-character-normal.png",
+    // Plus d'images...
+  ];
 
   //type de trouble de la vision
   contrasteTroubleEnable: boolean = false;
@@ -178,5 +187,28 @@ export class ConfigAttentionComponent {
 
   private getUserCourant() {
     return this.userService.getUserCourant();
+  }
+
+  openModal() {
+    this.showModalAvatar = true;
+  }
+
+  closeModal() {
+    this.showModalAvatar = false;
+  }
+
+  async modifyAvatar(newAvatar: string) {
+    if (this.user) {
+      // Récupère la configuration actuelle de l'utilisateur
+      let userId = (this.user as User).id!;
+      let configId = (this.user.configuration as ConfigurationModel).id!;
+      this.user.imagePath = newAvatar;
+
+      await this.userService.updateUser(this.user, userId);
+
+      this.userAnimateurImg = this.getImageFromImageName(newAvatar);
+
+      this.closeModal();
+    }
   }
 }
