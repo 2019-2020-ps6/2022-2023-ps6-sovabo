@@ -43,4 +43,8 @@ export class QuizElementComponent {
     }
   }
 
+  getDifficultyQuiz() {
+    return this.quiz.difficulty;
+  }
+
 }

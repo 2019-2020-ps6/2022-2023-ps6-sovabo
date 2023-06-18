@@ -23,6 +23,5 @@ export class AccessCodeModalComponent {
 
   onSubmit(): void {
     this.enteredAccessCode.emit(this.accessCode);
-    console.log(this.isAccessing, this.isAppearing);
   }
 }

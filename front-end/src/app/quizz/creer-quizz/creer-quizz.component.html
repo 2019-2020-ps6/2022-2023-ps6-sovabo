@@ -3,7 +3,7 @@
   <div class="header">
     <app-btn-polyquiz-text id="polyquizHome"></app-btn-polyquiz-text>
     <p [ngClass]="this.contrasteTroubleEnable ? 'titreStyleContrastOn' : 'titreStyleContrastOff'" class="fontSizeCanChange">Créer mon quizz</p>
-    <app-btn-clickable-frame-background (click)="toggleAuthenticate()" class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>
+    <app-btn-clickable-frame-background (click)="toggleAuthenticate()" class="navigation" id="retour" [routerLink]="['/liste-quizz']">RETOUR</app-btn-clickable-frame-background>
   </div>
 
   <form>
@@ -13,18 +13,18 @@
           <div class="conteneur_image_difficulte">
             <div id="image-quiz-id" class="image-quiz">
               <label for="recup-fichier">
-                <img class="iconeImage" src="../../assets/Images/Logo_image.png">
+                <img class="iconeImage" src="./assets/Images/Logo_image.png">
               </label>
               <input id="recup-fichier" type="file" (change)="afficherFichier()" />
             </div>
             <div class="difficulty-bars">
               <span class="note difficulte">DIFFICULTÉ</span>
               <span class="difficulty-bar" *ngFor="let i of [1, 2, 3, 4, 5]" (click)="onClickChangeColor(i)" [style.background-color]="i <= selectedIndex ? currentColor : 'rgba(46, 49, 54, 0.6)'"></span>
-              <span class="note fontStyleCanChange">{{selectedIndex}}/5</span>
+              <span class="note fontStyleCanChange" id="noteDifficulty">{{selectedIndex}}/5</span>
             </div>
           </div>
           <div class="titre-quiz">
-            <input [ngClass]="this.contrasteTroubleEnable ? 'inputStyleContrastOn' : 'inputStyleContrastOff'" class="fontStyleCanChange fontSizeCanChange fontColorToChange" type="text" placeholder="Titre du quiz…" [(ngModel)]="titreQuiz" name="titreQuiz" required/>
+            <input [ngClass]="this.contrasteTroubleEnable ? 'inputStyleContrastOn' : 'inputStyleContrastOff'" class="fontStyleCanChange fontSizeCanChange" type="text" placeholder="Titre du quiz…" [(ngModel)]="titreQuiz" name="titreQuiz" required/>
           </div>
           <div class="description-quiz">
             <span [ngClass]="this.contrasteTroubleEnable ? 'inputStyleContrastOn' : 'inputStyleContrastOff'" class="textDescription fontStyleCanChange fontSizeCanChange"><strong >Description</strong></span>
@@ -40,11 +40,11 @@
           </div>
           <div class="reponses-question">
             <div class="reponse" *ngFor="let reponse of reponsesQuiz[i]; let j = index">
-              <input [ngClass]="this.contrasteTroubleEnable ? 'inputStyleContrastOn' : 'inputStyleContrastOff'" class="fontStyleCanChange fontSizeCanChange" type="text" placeholder="Réponse {{ j + 1 }}" [(ngModel)]="reponses[i][j]" name="reponse_{{i}}_{{j}}" required/>
-              <div class="reponse-bubble uncheked" (click)="selectionnerBonneReponse(i, j)">
+              <input bind-attr.data-testid="'reponse-'+i+'-'+j" [ngClass]="this.contrasteTroubleEnable ? 'inputStyleContrastOn' : 'inputStyleContrastOff'" class="fontStyleCanChange fontSizeCanChange" type="text" placeholder="Réponse {{ j + 1 }}" [(ngModel)]="reponses[i][j]" name="reponse_{{i}}_{{j}}" required/>
+              <div bind-attr.data-testid="'reponseBubble-'+i+'-'+j" class="reponse-bubble uncheked" (click)="selectionnerBonneReponse(i, j)">
               </div>
             </div>
-            <div class="ajout" *ngIf="reponsesQuiz[i].length < 4" (click)="ajouterReponse(i)">
+            <div class="ajout" *ngIf="reponsesQuiz[i].length < 4" (click)="ajouterReponse(i)" bind-attr.data-testid="'boutonAjouterReponse-' +i">
               <span class="textAjout"><strong>+</strong></span>
             </div>
           </div>

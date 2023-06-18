@@ -60,7 +60,6 @@ export class ModifQuizzComponent {
     this.difficultyQuiz = this.quizCourant.difficulty;
     this.imageURL = this.quizCourant.image;
     this.listeObjetsQuestion = await this.quizService.loadQuestionsFromQuiz(this.quizCourant.id);
-    console.log(this.listeObjetsQuestion)
     for(let i = 0; i < this.listeObjetsQuestion.length; i++) {
       this.questions.push(this.listeObjetsQuestion[i].label);
       let temporaryListeQuestions: string[] = [];
@@ -99,7 +98,6 @@ export class ModifQuizzComponent {
     this.reponses.push([]);
 
     this.correctArray.push(false, false)
-    console.log(this.correctArray)
   }
 
   ajouterReponse(index: number) {
@@ -126,9 +124,6 @@ export class ModifQuizzComponent {
         nombreReponses -= this.reponsesQuiz[i].length;
       }
     }
-
-    console.log(this.correctArray);
-
   }
 
   selectionnerBonneReponse(questionIndex: number, reponseIndex: number) {
@@ -165,7 +160,6 @@ export class ModifQuizzComponent {
     }
     reponsesElements[positionReponse].classList.add('checked');
     this.correctArray[positionReponse] = true;
-    console.log(this.correctArray);
   }
 
   afficherFichier() {
@@ -260,7 +254,6 @@ export class ModifQuizzComponent {
         }
         listeQuestions.push(<Question>question);
       } else {
-        console.log("Tout va bien");
         const question: Partial<Question> = {
           label: this.questions[i],
           answers: this.convertReponsesToAnswer(i),
@@ -269,7 +262,6 @@ export class ModifQuizzComponent {
         listeQuestions.push(<Question>question);
       }
     }
-    console.log(listeQuestions);
     return listeQuestions;
   }
 
@@ -285,7 +277,6 @@ export class ModifQuizzComponent {
         // Ajoutez d'autres propriétés du quiz ici (photo, difficulté, etc.)
       };
 
-      console.log(quizData);
       const quiz = await this.quizService.updateQuiz(quizData, this.quizCourant.id);
     }
   }

@@ -5,6 +5,7 @@ import { QuizService } from '../../../../service/quizz.service';
 import { Quiz } from '../../../../models/quizz.model';
 import {AnimationsService} from "../../../../service/animations.service";
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import {JeuxCouleursService} from "../../../../service/jeux-couleurs.service";
 
 function carousel() {
   jQuery(document).ready(function($) {
@@ -40,8 +41,10 @@ export class CarouselQuizComponent {
   public quizList: Quiz[] = [];
   quizStar = faStar;
 
+  quiz!: Quiz;
 
-  constructor(private quizService: QuizService, public animationsService: AnimationsService) { }
+  contrasteTroubleEnable: boolean = this.jeuxCouleursService.getVisionAttentionStatus();
+  constructor(private quizService: QuizService, public animationsService: AnimationsService, private jeuxCouleursService: JeuxCouleursService) { }
 
 
 
@@ -84,4 +87,8 @@ export class CarouselQuizComponent {
       return '#ff0000'; // Rouge
     }
   }
+  getDifficultyQuiz() {
+    return this.quiz.difficulty;
+  }
+
 }

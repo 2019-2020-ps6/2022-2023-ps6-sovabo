@@ -34,7 +34,7 @@ export class StatistiqueComponent implements OnInit{
     { name: 'Statistique 4', param: 'param4' },
     { name: 'Statistique 5', param: 'param5' },
     { name: 'Statistique 6', param: 'param6' },
-    
+
     // Ajoutez autant de types de stats que nécessaire
   ];
 
@@ -91,12 +91,7 @@ export class StatistiqueComponent implements OnInit{
 
   openPopup(statQuiz: StatQuizz, stat: String): void {
     // Pass statQuiz to your createChart function
-    console.log(stat);
-    console.log("statQuiz");
-    console.log(statQuiz);
-
     this.myLineChart = createChart(statQuiz, stat);
-    console.log(this.myLineChart);
 
     const popupElement = document.getElementById("popup");
     if (popupElement) {

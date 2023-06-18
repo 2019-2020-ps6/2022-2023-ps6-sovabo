@@ -75,7 +75,6 @@ export class CreerQuizzComponent {
     this.reponses.push([]);
 
     this.correctArray.push(false, false)
-    console.log(this.correctArray)
   }
 
   ajouterReponse(index: number) {
@@ -102,9 +101,6 @@ export class CreerQuizzComponent {
         nombreReponses -= this.reponsesQuiz[i].length;
       }
     }
-
-    console.log(this.correctArray);
-
   }
 
   selectionnerBonneReponse(questionIndex: number, reponseIndex: number) {
@@ -145,7 +141,6 @@ export class CreerQuizzComponent {
     }
     reponsesElements[positionReponse].classList.add('checked');
     this.correctArray[positionReponse] = true;
-    console.log(this.correctArray);
   }
 
   afficherFichier() {
@@ -240,7 +235,6 @@ export class CreerQuizzComponent {
       }
       listeQuestions.push(<Question>question);
     }
-    console.log(listeQuestions);
     return listeQuestions;
   }
 
@@ -279,12 +273,22 @@ export class CreerQuizzComponent {
             isQuizValid = false;
             break;
           } else {
+            let existReponseValide = false;
             for (let j = 0; j < quizData.questions[i].answers.length; j++) {
               if (quizData.questions[i].answers[j].value == "") {
                 this.showAlertNotif("Attention, il semblerait que la réponse " + (j + 1) + " de la question " + (i + 1) + " soit vide...");
                 isQuizValid = false;
                 break;
+              } else if(quizData.questions[i].answers[j].isCorrect == true) {
+                existReponseValide = true;
               }
+            }
+            if(!existReponseValide) {
+              this.showAlertNotif("Veuillez sélectionner au moins une bonne réponse la question " + (i + 1));
+              isQuizValid = false;
+              break;
+            } else if(isQuizValid == false) {
+              break;
             }
           }
         }
@@ -298,7 +302,6 @@ export class CreerQuizzComponent {
     }
 
     // Envoyer les données du quiz à votre backend ou effectuer d'autres actions nécessaires
-    console.log(quizData);
   }
 
 

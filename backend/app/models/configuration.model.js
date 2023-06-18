@@ -20,7 +20,6 @@ class Configuration extends BaseModel {
   }
 
   create(obj = {}) {
-    console.log("ici config");
     const defaults = {
       animateur: false,
       animateurImagePath: '',
