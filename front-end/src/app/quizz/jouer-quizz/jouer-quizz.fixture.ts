@@ -87,4 +87,6 @@ export class JouerQuizzFixture extends E2EComponentFixture {
     return await nextButton.getAttribute('disabled');
   }
 
+
+
 }

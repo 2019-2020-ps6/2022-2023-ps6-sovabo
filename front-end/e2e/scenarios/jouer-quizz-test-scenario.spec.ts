@@ -2,6 +2,8 @@ import { test, expect } from '@playwright/test';
 
 import { JouerQuizzFixture } from '../../src/app/quizz/jouer-quizz/jouer-quizz.fixture';
 import { serverUrl } from '../e2e.config';
+import {ConfigVisionFixture} from "../../src/app/config/config-vision/config-vision.fixture";
+import {timeout} from "rxjs";
 
 test.describe('Jouer Quizz', () => {
 
@@ -9,7 +11,7 @@ test.describe('Jouer Quizz', () => {
         let urlListQuiz = serverUrl+'liste-quizz';
         await page.goto(urlListQuiz);
         const quizElement = await page.$('.quiz');
-        
+
         if (quizElement) { // Ajoutez cette vérification
             await quizElement.click();
 
@@ -24,7 +26,7 @@ test.describe('Jouer Quizz', () => {
                 let urlJouer = page.url();
 
                 //create all fixtures
-                const jouerQuizzFixture = new JouerQuizzFixture(page,"fa9112c9-743c-4ba7-ac7f-2f0569b79609");
+                const jouerQuizzFixture = new JouerQuizzFixture(page,"9f40749f-eec0-496d-b1d9-f49e9de7418b");
 
                 await expect(page).toHaveURL(urlJouer);
 
@@ -37,7 +39,7 @@ test.describe('Jouer Quizz', () => {
                 await test.step(`Questions text visible and not empty`, async () => {
                     await page.waitForSelector('#question-animation', { state: 'visible' });
 
-                    
+
                     const questionText = await jouerQuizzFixture.getQuestionText();
                     const isVisible = await questionText.isVisible();
 
@@ -73,11 +75,57 @@ test.describe('Jouer Quizz', () => {
                     expect(timer).toBeTruthy();
                 });
 
+              var cvf = new ConfigVisionFixture(page);
+                await test.step('Configurations are correctly applyed (Animation AND Deutranomalie)', async()=>{
+                  //animation correcte ? SI OUI, la question est dans des balises svg>text afin d'appliquer une animation dessus
+                  const animationAreOn = page.locator('svg>text');
+                  expect(animationAreOn).toBeTruthy();
+
+                  const bodySelector = "body";
+
+                  var bodyBackground = await page.$eval(bodySelector, function (el) {
+                    return getComputedStyle(el).backgroundColor
+                  });
+                  expect(bodyBackground).toBe('rgb(75, 114, 126)');
+
+                  var styleSelector = '.fontStyleCanChange .animated-label';
+                  var styleAnswerColor = await page.$eval(styleSelector, function (el) {
+                    return getComputedStyle(el).webkitTextFillColor
+                  });
+                  expect(styleAnswerColor).toMatch(cvf.hexToRGB(cvf.colourNameToHex('white'),null));
+
+                })
+
 
                 await test.step(`Select an answer and validate`, async () => {
-                    const selectButton = await jouerQuizzFixture.selectAnswerByIndexAndClick(2);
+                  const index = 2;
+                    const selectButton = await jouerQuizzFixture.selectAnswerByIndexAndClick(index);
+
+                  await page.evaluate(async() => {
+                    await new Promise(function(resolve) {
+                      setTimeout(resolve, 2000)
+                    });
+                  });
+
                     expect(selectButton.nth(1)).toBeVisible();
+
                     const validateButton = await jouerQuizzFixture.getValidateButton();
+
+                    const validateButtonSelector = '.check-container button';
+                    var styleDeuteranomalieCheckedButton = await page.$eval(validateButtonSelector, function (el) {
+                      return getComputedStyle(el).backgroundColor;
+                    });
+                    expect(styleDeuteranomalieCheckedButton).toMatch(cvf.hexToRGB('#c6c68e',null));
+
+                  const answerChecked = '.DEUTERANOMALIE_SELECTED';
+                  var styleDeuteranomalieAnswerChecked = await page.$eval(answerChecked, function (el) {
+                    return getComputedStyle(el).backgroundColor;
+                  });
+                  expect(styleDeuteranomalieAnswerChecked).toMatch(cvf.hexToRGB('#a0a1d5',null));
+
+
+
+
                     expect(validateButton).toBeVisible();
 
                     await validateButton.click();
@@ -114,13 +162,14 @@ test.describe('Jouer Quizz', () => {
         }
 
 
-        
+
     });
 });
 
 
 
-    //     
+
+    //
 
     //     await test.step(`Validate button is visible`, async () => {
     //         const validateButton = await jouerQuizzFixture.getValidateButton();
@@ -133,18 +182,18 @@ test.describe('Jouer Quizz', () => {
     //         const title = await jouerQuizzFixture.getQuizTitle();
     //         expect(title).toBeTruthy();
     //     });
-        
+
     //     await test.step(`Timer should be visible and not empty`, async () => {
     //         const timer = await jouerQuizzFixture.getTimer();
     //         expect(timer).toBeTruthy();
     //     });
-        
+
     //     await test.step(`Select an answer and validate`, async () => {
     //         await jouerQuizzFixture.selectAnswerByIndex(0);
     //         const validateButton = await jouerQuizzFixture.getValidateButton();
     //         await validateButton.click();
     //     });
-        
+
     //     await test.step(`Next question button should be enabled`, async () => {
     //         const isDisabled = await jouerQuizzFixture.getNextButtonDisabledStatus();
     //         expect(isDisabled).toBeFalsy();
