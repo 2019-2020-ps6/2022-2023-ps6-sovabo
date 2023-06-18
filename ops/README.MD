@@ -50,6 +50,9 @@ En faisant un grep 'ok', on vérifie que l'état retourné est 'ok' donc fonctio
 ## Lancement de l'application
 
 Pour lancer l'application, il suffit de se diriger dans le dossier /ops qui est à la racine du projet et éxecuter la commande : ``./run.sh``
+Le lien permettant d'accéder à l'application est le suivant : http://localhost/front/
+Le ServerName sovabojesuisbg.com n'est pas fonctionnel.
+
 
 
 
