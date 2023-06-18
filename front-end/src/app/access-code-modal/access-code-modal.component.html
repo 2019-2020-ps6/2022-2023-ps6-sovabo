@@ -3,7 +3,7 @@
     <h2>ENTRER CODE D'ACCÈS</h2>
     <form (ngSubmit)="onSubmit()">
       <input type="password" [(ngModel)]="accessCode" name="accessCode" required autofocus>
-      <button [class]="buttonClass" class="fontStyleCanChange fontSizeCanChange" type="submit" [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}">Submit</button>
+      <button [class]="buttonClass" class="fontStyleCanChange fontSizeCanChange" type="submit" [ngClass]="{'contrastUpContainer' : this.contrasteTroubleEnable}">Valider</button>
     </form>
   </div>
   <app-btn-clickable-frame-background [class.button-accessing]="isAccessing" [class.button-appearing]="isAppearing" class="navigation" id="retour" onclick="history.go(-1);">RETOUR</app-btn-clickable-frame-background>

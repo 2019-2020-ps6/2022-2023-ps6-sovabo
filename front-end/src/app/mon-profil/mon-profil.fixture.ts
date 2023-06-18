@@ -1,5 +1,6 @@
 import {E2EComponentFixture} from "e2e/e2e-component.fixture";
 import {Locator} from "@playwright/test";
+import {timeout} from "rxjs";
 
 export class MonProfilFixture extends E2EComponentFixture {
   getTitle() {
@@ -27,10 +28,12 @@ export class MonProfilFixture extends E2EComponentFixture {
   }
 
   async getCardFromUser(name: string) {
-    const card = await this.page.locator('.card:has(h5:has-text("Test"))');
-    if (!card) throw new Error(`No card found with name ${name}`);
+    const selector = `.card:has(h5:has-text('${name}'))`;
+    const card = await this.page.locator(selector);
+    if (!(await card.count())) throw new Error(`No card found with name ${name}`);
     return card;
   }
+
 
   async getCardCreatingUser() {
       return await this.page.locator('.creating-card');
@@ -48,7 +51,7 @@ export class MonProfilFixture extends E2EComponentFixture {
 
   async getUserSVG(name?:string) {
     if (!name) return this.page.locator('.user-svg');
-    return this.page.locator('.card:has(h5:has-text("Test")) .user-svg')
+    return this.page.locator(`.card:has(h5:has-text('${name}')) .user-svg`)
   }
 
   async modifyAvatar() {
@@ -73,4 +76,15 @@ export class MonProfilFixture extends E2EComponentFixture {
     return this.page.getByRole('button', { name: 'ANNULER' });
   }
 
+  async unselectProfil() {
+    if (await this.page.isVisible('text=Selectionné')) {
+      return this.page.locator('text=Selectionné').click();
+    }
+    return Promise.resolve();
+  }
+
+  async getAlert(alertMessage: string, alertType: string) {
+    const alert = await this.page.locator(`.alert-${alertType}`);
+    return alert.locator(`text=${alertMessage}`);
+  }
 }
